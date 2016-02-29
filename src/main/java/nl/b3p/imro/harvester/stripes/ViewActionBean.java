@@ -16,11 +16,16 @@
  */
 package nl.b3p.imro.harvester.stripes;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
+import nl.b3p.imro.harvester.entities.Gebruiker;
+import org.stripesstuff.stripersist.Stripersist;
 
 /**
  *
@@ -41,7 +46,7 @@ public class ViewActionBean implements ActionBean{
 
     @DefaultHandler
     public Resolution view(){
-
+        EntityManager em = Stripersist.getEntityManager();
         return new ForwardResolution("/WEB-INF/jsp/view.jsp");
     }
 

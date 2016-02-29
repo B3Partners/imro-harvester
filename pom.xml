@@ -20,10 +20,50 @@
             <artifactId>stripes</artifactId>
             <version>1.6.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>3.6.8.Final</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.stripesstuff</groupId>
+            <artifactId>stripersist</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>3.6.8.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>3.6.8.Final</version>
+        </dependency>
     </dependencies>
 
     <build>
+        <!-- Filter om connectiegegevens niet te committen/deploybaar te maken. Verander src/main/resources/postgres.properties met de juiste connectiegegevens. Format:
+        imro.username=XXX
+        imro.password=XXX
+        imro.url=jdbc:postgresql://localhost:5432/imro
+        -->
+        <filters>
+            <filter>${project.basedir}/src/main/resources/postgres.properties</filter>
+        </filters>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources/META-INF</directory>
+                <targetPath>META-INF</targetPath>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -72,5 +112,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
