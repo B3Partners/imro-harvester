@@ -1,0 +1,88 @@
+/**
+* Geo-OV - applicatie voor het registreren van KAR meldpunten
+*
+* Copyright (C) 2009-2013 B3Partners B.V.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Affero General Public License as
+* published by the Free Software Foundation, either version 3 of the
+* License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU Affero General Public License for more details.
+*
+* You should have received a copy of the GNU Affero General Public License
+* along with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
+html, body {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    font-family: tahoma, helvetica, sans-serif;
+    font-size: 8pt;
+}
+
+input {
+    font-family: tahoma, helvetica, sans-serif;
+    font-size: 8pt;
+}
+
+select {
+    font-family: tahoma, helvetica, sans-serif;
+    font-size: 8pt;
+}
+
+body.editor {
+    width: 100%;
+    min-height: 850px;
+    min-width: 963px;
+}
+
+#header {
+    background-color: #D9E7F8;
+    color: Black;
+    border-bottom: 1px solid #99BCE8;
+    font-size: 12pt;
+    font-weight: bold;
+    height: 30px;
+    padding: 5px;
+    padding-left: 15px;
+}
+
+#headerLinks {
+    float: right;
+    font-size: 10pt;
+}
+
+.headerlink {
+    float: left;
+    border-right: 2px solid #99BCE8;
+    padding-right: 10px;
+    margin-right: 5px;
+    padding-left: 5px;
+}
+
+.headerlink:last-child {
+    border-right: 0px none;
+    margin-right: 0px;
+}
+
+.headerlink:hover {
+    text-decoration: underline;
+}
+
+#headerLinks a {
+    color: black;
+    font-weight: normal;
+    text-decoration: none;
+}
+.viewportcontainer{
+    width: 1000px;
+
+    margin-right: auto;
+    margin-left: auto;
+}
