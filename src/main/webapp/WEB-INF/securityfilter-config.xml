@@ -16,7 +16,7 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>viewer</web-resource-name>
-            <url-pattern>/*</url-pattern>
+            <url-pattern>/action/*</url-pattern>
             <http-method>POST</http-method>
             <http-method>GET</http-method>
         </web-resource-collection>
@@ -39,7 +39,7 @@
 
     <login-config>
         <!-- Zet op BASIC en commentarieer <form-login-config> voor debuggen met veel reloads -->
-        <auth-method>FORM</auth-method>
+        <auth-method>BASIC</auth-method>
         <form-login-config>
             <form-login-page>/login.jsp</form-login-page>
             <form-error-page>/loginerror.jsp</form-error-page>

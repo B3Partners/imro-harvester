@@ -16,14 +16,19 @@
  */
 package nl.b3p.imro.harvester.stripes;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
+import net.sourceforge.stripes.action.After;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.StrictBinding;
 import net.sourceforge.stripes.action.UrlBinding;
+import net.sourceforge.stripes.controller.LifecycleStage;
+import nl.b3p.imro.harvester.entities.HarvestJob;
 import org.stripesstuff.stripersist.Stripersist;
 
 /**
@@ -31,10 +36,18 @@ import org.stripesstuff.stripersist.Stripersist;
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
 @StrictBinding
-@UrlBinding("/action/view")
-public class ViewActionBean implements ActionBean{
+@UrlBinding("/action/beheer/jobs/{event}")
+public class HarvestJobActionBean implements ActionBean{
+
     private ActionBeanContext context;
 
+    private final String JSP_VIEW = "/WEB-INF/jsp/jobs/view.jsp";
+    private final String JSP_EDIT = "/WEB-INF/jsp/jobs/edit.jsp";
+    private final String JSP_ADD = "/WEB-INF/jsp/jobs/add.jsp";
+
+    private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
+
+    // <editor-fold desc="Getters and Setters" defaultstate="collapsed" >
     @Override
     public ActionBeanContext getContext() {
         return context;
@@ -45,10 +58,38 @@ public class ViewActionBean implements ActionBean{
         this.context = context;
     }
 
-    @DefaultHandler
-    public Resolution view(){
-        EntityManager em = Stripersist.getEntityManager();
-        return new ForwardResolution("/WEB-INF/jsp/view.jsp");
+    public List<HarvestJob> getJobs() {
+        return jobs;
     }
 
+    public void setJobs(List<HarvestJob> jobs) {
+        this.jobs = jobs;
+    }
+
+    // </editor-fold>
+
+    @DefaultHandler
+    public Resolution view(){
+        return new ForwardResolution(JSP_VIEW);
+    }
+
+    public Resolution add(){
+        return new ForwardResolution(JSP_ADD);
+        
+    }
+
+    public Resolution save(){
+        return new ForwardResolution(JSP_VIEW);
+    }
+
+    public Resolution edit(){
+        return new ForwardResolution(JSP_EDIT);
+    }
+
+
+    @After(stages = LifecycleStage.EventHandling)
+    private void createLists(){
+        EntityManager em = Stripersist.getEntityManager();
+        jobs = em.createQuery("From HarvestJob", HarvestJob.class).getResultList();
+    }
 }

@@ -14,57 +14,41 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package nl.b3p.imro.harvester.entities;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
- * Klasse beschrijft een rol en definieert standaard rollen.
  *
- * @author Chris
+ * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
 @Entity
-public class Role {
-    /**
-     * beheerder rol
-     */
-    public static final String BEHEERDER = "beheerder";
-    /**
-     * gebruiker rol
-     */
-    public static final String GEBRUIKER = "gebruiker";
-
+public class HarvestJob {
 
     @Id
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    private String role;
+    private String url;
 
-    /**
-     * @return the id
-     */
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
-    /**
-     * @return the role
-     */
-    public String getRole() {
-        return role;
+
+    public String getUrl() {
+        return url;
     }
 
-    /**
-     * @param role the role to set
-     */
-    public void setRole(String role) {
-        this.role = role;
+    public void setUrl(String url) {
+        this.url = url;
     }
+
+    
 }
