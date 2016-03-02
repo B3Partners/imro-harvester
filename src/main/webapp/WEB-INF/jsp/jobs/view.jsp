@@ -21,18 +21,25 @@
             <table class="table table-hover table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>id</th><th>URL</th>
+                        <th>id</th><th>URL</th><th>Bewerken</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach var="job" items="${actionBean.jobs}">
                         <tr>
-                            <td><c:out value="${job.id}"/></td><td class="col-md-1"><c:out value="${job.url}"/></td>
+                            <td><c:out value="${job.id}"/></td>
+                            <td class="col-md-1"><c:out value="${job.url}"/></td>
+                            <td>
+                                <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="edit"><stripes:param name="job" value="${job.id}"/></stripes:url>" class="btn btn-info">Bewerk</a>
+                                <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="delete"><stripes:param name="job" value="${job.id}"/></stripes:url>"  class="btn btn-danger">Verwijder</a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
         </div>
+
+        <a class="btn btn-success">Toevoegen</a>
 
         <script>
             var currentpage = 'harvestjobs';
