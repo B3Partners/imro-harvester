@@ -13,5 +13,9 @@
     </head>
     <body>
         <h1>Edit The Jobs!</h1>
+
+        <script>
+            var currentpage = 'harvestjobs';
+        </script>
     </body>
 </html>

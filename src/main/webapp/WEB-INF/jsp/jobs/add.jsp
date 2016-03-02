@@ -13,5 +13,8 @@
     </head>
     <body>
         <h1>Add The Jobs!</h1>
+        <script>
+        //    var currentpage = 'harvestjobs';
+        </script>
     </body>
 </html>

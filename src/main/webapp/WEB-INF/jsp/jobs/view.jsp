@@ -20,5 +20,9 @@
         <c:forEach var="job" items="${actionBean.jobs}">
             <c:out value="${job.id}"/> - <c:out value="${job.url}"/>
         </c:forEach>
+
+        <script>
+            var currentpage = 'harvestjobs';
+        </script>
     </stripes:layout-component>
 </stripes:layout-render>

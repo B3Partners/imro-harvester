@@ -1,6 +1,11 @@
 <%@ page language="java" %>
 <%@ page isErrorPage="true" %>
 
-<h1>Foutmelding</h1>
+<div class="page-header">
+    <h1>Foutmesadfsdflding</h1>
+</div>
 <p>
-<h3><%=exception.getMessage() %></h3>
+
+<div class="alert alert-danger" role="alert">
+    <h3><%=exception.getMessage()%></h3>
+</div>

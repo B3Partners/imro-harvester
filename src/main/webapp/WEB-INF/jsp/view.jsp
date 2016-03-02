@@ -1,17 +1,23 @@
-<%-- 
-    Document   : view.jsp
-    Created on : Feb 29, 2016, 1:24:29 PM
-    Author     : Meine Toonen <meinetoonen@b3partners.nl>
---%>
-
+<%@include file="/WEB-INF/jsp/taglibs.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
+<%@page errorPage="/WEB-INF/jsp/commons/errorpage.jsp" %>
+
+<stripes:layout-render name="/WEB-INF/jsp/commons/siteTemplate.jsp">
+
+    <stripes:layout-component name="head">
+
+    </stripes:layout-component>
+
+    <stripes:layout-component name="headerlinks" >
+        <%@include file="/WEB-INF/jsp/commons/headerlinks.jsp" %>
+
+    </stripes:layout-component>
+
+    <stripes:layout-component name="content">
         <h1>Hello World!</h1>
-    </body>
-</html>
+
+        <script>
+            var currentpage = 'home';
+        </script>
+    </stripes:layout-component>
+</stripes:layout-render>
