@@ -18,6 +18,15 @@
             <param-name>Extension.Packages</param-name>
             <param-value>org.stripesstuff.stripersist</param-value>
         </init-param>
+        
+        <init-param>
+            <param-name>LocalizationBundleFactory.ErrorMessageBundle</param-name>
+            <param-value>ViewerResources</param-value>
+        </init-param>
+        <init-param>
+            <param-name>LocalizationBundleFactory.FieldNameBundle</param-name>
+            <param-value>ViewerResources</param-value>
+        </init-param>
     </filter>
    
     <filter>
@@ -65,8 +74,14 @@
         <url-pattern>/action/*</url-pattern>
     </servlet-mapping>
 
+
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>ViewerResources</param-value>
+    </context-param>
+    
     <welcome-file-list>
-        <welcome-file>View.action</welcome-file>
+        <welcome-file>action/view</welcome-file>
     </welcome-file-list>
 
 </web-app>
