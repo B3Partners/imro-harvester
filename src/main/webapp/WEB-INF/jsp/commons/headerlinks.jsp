@@ -20,14 +20,6 @@
 <%@include file="/WEB-INF/jsp/taglibs.jsp" %>
 <%@page errorPage="/WEB-INF/jsp/commons/errorpage.jsp" %>
 
-<%--div id="header">
-    <div id="headerLinks">
-        <div class="headerlink">
-            <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.ViewActionBean"/>">Hoofdpagina</a>
-        </div>
-    </div>
-    <div id="headerTitle">IMRO Harvester</div>
-</div--%>
 <nav class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
