@@ -22,7 +22,6 @@
         </web-resource-collection>
         <auth-constraint>
             <role-name>gebruiker</role-name>
-            <role-name>vervoerder</role-name>
             <role-name>beheerder</role-name>
         </auth-constraint>
     </security-constraint>
@@ -44,7 +43,7 @@
         <form-login-config>
             <form-login-page>/login.jsp</form-login-page>
             <form-error-page>/loginerror.jsp</form-error-page>
-            <form-default-page>/index.jsp</form-default-page>
+            <form-default-page>/View.action</form-default-page>
         </form-login-config>
     </login-config>
 
