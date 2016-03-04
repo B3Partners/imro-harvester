@@ -72,22 +72,34 @@ public class Processor {
         return new URL(url);
     }
 
-    protected List<URL> getPlannen(URL manifest) throws JAXBException, MalformedURLException, URISyntaxException{
+    protected List<URL> getPlannen(URL manifestUrl) throws JAXBException, MalformedURLException, URISyntaxException{
         List<URL> urls = new ArrayList<URL>();
-        File file = new File(manifest.toURI());
-        JAXBContext jaxbContext = JAXBContext.newInstance(nl.geonovum.stri._2012._2.Manifest.class,nl.geonovum.stri._2012._1.Manifest.class);
+        File file = new File(manifestUrl.toURI());
+        JAXBContext jaxbContext = JAXBContext.newInstance(nl.geonovum.stri._2012._1.Manifest.class,nl.geonovum.stri._2012._2.Manifest.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         Object m =  jaxbUnmarshaller.unmarshal(file);
-        int a = 0;
-        /*List<Dossier> dossiers = m.getDossier();
-        for (Dossier dossier : dossiers) {
-            List<Plan> plannen = dossier.getPlan();
-            for (Plan plan : plannen) {
-                urls.add(new URL(plan.getGeleideFormulier()));
+
+        // Support two versions of the manifest. Sadly, almost the same, but namespaces in xsd differ.
+        if(m instanceof nl.geonovum.stri._2012._1.Manifest){
+            nl.geonovum.stri._2012._1.Manifest manifest = (nl.geonovum.stri._2012._1.Manifest)m;
+            List<nl.geonovum.stri._2012._1.Dossier> dossiers = manifest.getDossier();
+            for (nl.geonovum.stri._2012._1.Dossier dossier : dossiers) {
+                List<nl.geonovum.stri._2012._1.Dossier.Plan> plannen = dossier.getPlan();
+                for (nl.geonovum.stri._2012._1.Dossier.Plan plan : plannen) {
+                    urls.add(new URL(plan.getGeleideFormulier()));
+                }
             }
-        }*/
-      //  System.out.println(customer);
+        } else if (m instanceof nl.geonovum.stri._2012._2.Manifest) {
+            nl.geonovum.stri._2012._2.Manifest manifest = (nl.geonovum.stri._2012._2.Manifest) m;
+            List<nl.geonovum.stri._2012._2.Dossier> dossiers = manifest.getDossier();
+            for (nl.geonovum.stri._2012._2.Dossier dossier : dossiers) {
+                List<nl.geonovum.stri._2012._2.Dossier.Plan> plannen = dossier.getPlan();
+                for (nl.geonovum.stri._2012._2.Dossier.Plan plan : plannen) {
+                    urls.add(new URL(plan.getGeleideFormulier()));
+                }
+            }
+        }
         return urls;
     }
 
