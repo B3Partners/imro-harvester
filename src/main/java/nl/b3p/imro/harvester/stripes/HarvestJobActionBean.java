@@ -28,6 +28,8 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.StrictBinding;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.controller.LifecycleStage;
+import net.sourceforge.stripes.validation.Validate;
+import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import org.stripesstuff.stripersist.Stripersist;
 
@@ -46,6 +48,11 @@ public class HarvestJobActionBean implements ActionBean{
     private final String JSP_ADD = "/WEB-INF/jsp/jobs/add.jsp";
 
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
+
+    @ValidateNestedProperties(
+            @Validate(field = "url")
+    )
+    private HarvestJob job = new HarvestJob();
 
     // <editor-fold desc="Getters and Setters" defaultstate="collapsed" >
     @Override
@@ -66,6 +73,14 @@ public class HarvestJobActionBean implements ActionBean{
         this.jobs = jobs;
     }
 
+    public HarvestJob getJob() {
+        return job;
+    }
+
+    public void setJob(HarvestJob job) {
+        this.job = job;
+    }
+
     // </editor-fold>
 
     @DefaultHandler
@@ -79,6 +94,9 @@ public class HarvestJobActionBean implements ActionBean{
     }
 
     public Resolution save(){
+        EntityManager em = Stripersist.getEntityManager();
+        em.persist(job);
+        em.getTransaction().commit();
         return new ForwardResolution(JSP_VIEW);
     }
 

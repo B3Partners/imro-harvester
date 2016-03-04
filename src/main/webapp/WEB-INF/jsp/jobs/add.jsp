@@ -14,6 +14,10 @@
 
         <stripes:layout-component name="content">
         <h1>Add The Jobs!</h1>
+        <stripes:form   beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean">
+            <stripes:text name="job.url"/>
+            <stripes:submit name="save"/><stripes:reset name="reset"/>
+        </stripes:form>
 
         <script>
             var currentpage = 'harvestjobs';
