@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>nl.b3p.imro</groupId>
+    <artifactId>harvester</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>imro-harvester</name>
+    <url>https://github.com/B3Partners/imro-harvester</url>
+    <prerequisites>
+        <maven>3.2.5</maven>
+    </prerequisites>
+    <scm>
+        <connection>scm:git:git@github.com:flamingo-mc/flamingo.git</connection>
+        <developerConnection>scm:git:git@github.com:flamingo-mc/flamingo.git</developerConnection>
+        <url>https://github.com/flamingo-mc/flamingo.git</url>
+        <tag>HEAD</tag>
+    </scm>
+    <distributionManagement>
+        <repository>
+            <id>repo.b3p.nl</id>
+            <name>B3Partners releases repository</name>
+            <url>http://repo.b3p.nl/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>repo.b3p.nl</id>
+            <name>B3Partners snapshots repository</name>
+            <url>http://repo.b3p.nl/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <licenses>
+        <license>
+            <distribution>repo</distribution>
+            <name>GNU Affero General Public License v3.0</name>
+            <comments>For any parts of the Flamingo codebase</comments>
+            <url>https://raw.githubusercontent.com/flamingo-geocms/flamingo/master/LICENSE.txt</url>
+        </license>
+    </licenses>
+    <modules>
+        <module>imro-harvester-web</module>
+    </modules>
+    <developers>
+        <developer>
+            <name>Meine Toonen</name>
+            <email>meinetoonen@b3partners.nl</email>
+            <organization>B3Partners B.V.</organization>
+            <organizationUrl>http://www.b3partners.nl</organizationUrl>
+        </developer>
+    </developers>
+</project>
