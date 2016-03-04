@@ -1,20 +1,22 @@
-<%-- 
-    Document   : view
-    Created on : Mar 2, 2016, 12:27:16 PM
-    Author     : Meine Toonen <meinetoonen@b3partners.nl>
---%>
-
+<%@include file="/WEB-INF/jsp/taglibs.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
+<%@page errorPage="/WEB-INF/jsp/commons/errorpage.jsp" %>
+
+<stripes:layout-render name="/WEB-INF/jsp/commons/siteTemplate.jsp">
+
+    <stripes:layout-component name="head">
+        <title>Voeg job toe</title>
+    </stripes:layout-component>
+
+    <stripes:layout-component name="headerlinks" >
+        <%@include file="/WEB-INF/jsp/commons/headerlinks.jsp" %>
+    </stripes:layout-component>
+
+        <stripes:layout-component name="content">
         <h1>Add The Jobs!</h1>
+
         <script>
-        //    var currentpage = 'harvestjobs';
+            var currentpage = 'harvestjobs';
         </script>
-    </body>
-</html>
+        </stripes:layout-component>
+</stripes:layout-render>

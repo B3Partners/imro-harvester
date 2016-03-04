@@ -5,7 +5,7 @@
 <stripes:layout-render name="/WEB-INF/jsp/commons/siteTemplate.jsp">
 
     <stripes:layout-component name="head">
-
+        <title>Bewerk job</title>
     </stripes:layout-component>
 
     <stripes:layout-component name="headerlinks" >

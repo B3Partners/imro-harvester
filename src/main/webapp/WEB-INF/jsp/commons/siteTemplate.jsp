@@ -33,7 +33,6 @@
             <link rel="stylesheet" type="text/css" href="${contextPath}/styles/harvester.css">
             <link href="${contextPath}/styles/bootstrap-theme.min.css" rel="stylesheet">
             <link href="${contextPath}/styles/bootstrap.min.css" rel="stylesheet">
-        <title></title>
         <stripes:layout-component name="head"/>        
     </head>
     <body class="editor" id="editorBody">

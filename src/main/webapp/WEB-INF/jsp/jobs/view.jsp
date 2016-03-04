@@ -6,7 +6,7 @@
 <stripes:layout-render name="/WEB-INF/jsp/commons/siteTemplate.jsp">
 
     <stripes:layout-component name="head">
-
+        <title>Bekijk de jobs</title>
     </stripes:layout-component>
 
     <stripes:layout-component name="headerlinks" >
@@ -39,7 +39,7 @@
             </table>
         </div>
 
-        <a class="btn btn-success">Toevoegen</a>
+        <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="add"/>" class="btn btn-success">Toevoegen</a>
 
         <script>
             var currentpage = 'harvestjobs';
