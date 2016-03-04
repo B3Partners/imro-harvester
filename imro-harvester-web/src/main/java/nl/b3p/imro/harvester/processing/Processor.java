@@ -27,8 +27,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import nl.b3p.imro.harvester.entities.HarvestJob;
-import nl.b3p.imro.stri10.Dossier;
-import nl.b3p.imro.stri10.Dossier.Plan;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -77,7 +75,7 @@ public class Processor {
     protected List<URL> getPlannen(URL manifest) throws JAXBException, MalformedURLException, URISyntaxException{
         List<URL> urls = new ArrayList<URL>();
         File file = new File(manifest.toURI());
-        JAXBContext jaxbContext = JAXBContext.newInstance(nl.b3p.imro.stri10.Manifest.class,nl.b3p.imro.stri20.Manifest.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(nl.geonovum.stri._2012._2.Manifest.class,nl.geonovum.stri._2012._1.Manifest.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         Object m =  jaxbUnmarshaller.unmarshal(file);
