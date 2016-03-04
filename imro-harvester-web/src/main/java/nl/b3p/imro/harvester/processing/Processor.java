@@ -29,7 +29,6 @@ import javax.xml.bind.Unmarshaller;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import nl.b3p.imro.stri10.Dossier;
 import nl.b3p.imro.stri10.Dossier.Plan;
-import nl.b3p.imro.stri10.Manifest;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -76,19 +75,20 @@ public class Processor {
     }
 
     protected List<URL> getPlannen(URL manifest) throws JAXBException, MalformedURLException, URISyntaxException{
+        List<URL> urls = new ArrayList<URL>();
         File file = new File(manifest.toURI());
-        JAXBContext jaxbContext = JAXBContext.newInstance(Manifest.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(nl.b3p.imro.stri10.Manifest.class,nl.b3p.imro.stri20.Manifest.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        Manifest m = (Manifest) jaxbUnmarshaller.unmarshal(file);
-        List<Dossier> dossiers = m.getDossier();
-        List<URL> urls = new ArrayList<URL>();
+        Object m =  jaxbUnmarshaller.unmarshal(file);
+        int a = 0;
+        /*List<Dossier> dossiers = m.getDossier();
         for (Dossier dossier : dossiers) {
             List<Plan> plannen = dossier.getPlan();
             for (Plan plan : plannen) {
                 urls.add(new URL(plan.getGeleideFormulier()));
             }
-        }
+        }*/
       //  System.out.println(customer);
         return urls;
     }
