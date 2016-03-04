@@ -16,28 +16,56 @@
  */
 package nl.b3p.imro.harvester.processing;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import nl.b3p.imro.harvester.entities.HarvestJob;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 /**
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
 public class Processor {
+    private Integer timeout;
+
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
 
     public Processor(List<HarvestJob> jobs) {
-        this.jobs = jobs;
+        this(jobs, 30000);
     }
+
+    public Processor(List<HarvestJob> jobs, Integer timeout) {
+        this.jobs = jobs;
+        this.timeout = timeout;
+    }
+
 
     public void process(){
-        
     }
 
-    protected URL getManifest(HarvestJob job){
-        return null;
+    protected URL getManifest(HarvestJob job) throws IOException{
+        URL u = new URL(job.getUrl());
+        Document doc = Jsoup.parse(u, timeout);
+        return getManifest(doc);
+    }
+
+    protected URL getManifest(File f ) throws IOException{
+        Document doc = Jsoup.parse(f, "UTF-8");
+        return getManifest(doc);
+    }
+
+    private URL getManifest(Document doc) throws MalformedURLException{
+        Elements els = doc.select("a.external");
+        Element link = els.first();
+        String url = link.attr("href");
+        return new URL(url);
     }
 
     protected List<URL> getPlannen(URL manifest){

@@ -16,7 +16,12 @@
  */
 package nl.b3p.imro.harvester.processing;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
@@ -49,17 +54,28 @@ public class ProcessorTest {
 
 
     /**
-     * Test of getManifest method, of class Processer.
+     * Test of getManifest method, of class Processor.
      */
     @Test
-    public void testGetManifest() throws MalformedURLException {
+    public void testGetManifestFile() throws MalformedURLException, IOException, URISyntaxException {
         URL expResult = new URL("http://www.gisnet.nl/ruimtelijkeplannen/AaenHunze/manifest_IMRO2012.xml");
-        URL result = instance.getManifest(job);
+        File f = new File (new URL(job.getUrl()).toURI());
+        URL result = instance.getManifest(f);
+        assertEquals(expResult, result);
+    }
+    /*
+     * Test of getManifest method, of class Processor.
+     */
+    @Test
+    public void testGetManifestUrl() throws MalformedURLException, IOException, URISyntaxException {
+        URL expResult = new URL("http://www.gisnet.nl/ruimtelijkeplannen/AaenHunze/manifest_IMRO2012.xml");
+        File f = new File (new URL(job.getUrl()).toURI());
+        URL result = instance.getManifest(f);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of getPlannen method, of class Processer.
+     * Test of getPlannen method, of class Processor.
      */
     @Test
     public void testGetPlannen() {

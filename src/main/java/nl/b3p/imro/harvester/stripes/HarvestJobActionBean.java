@@ -17,6 +17,7 @@
 package nl.b3p.imro.harvester.stripes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
 import net.sourceforge.stripes.action.ActionBean;
@@ -31,6 +32,7 @@ import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import nl.b3p.imro.harvester.entities.HarvestJob;
+import nl.b3p.imro.harvester.processing.Processor;
 import org.stripesstuff.stripersist.Stripersist;
 
 /**
@@ -112,8 +114,9 @@ public class HarvestJobActionBean implements ActionBean{
     }
 
     public Resolution run(){
-        
-        return new ForwardResolution(JSP_EDIT);
+        Processor p = new Processor(Collections.singletonList(job));
+        p.process();
+        return new ForwardResolution(JSP_VIEW);
     }
 
     @After(stages = LifecycleStage.EventHandling)
