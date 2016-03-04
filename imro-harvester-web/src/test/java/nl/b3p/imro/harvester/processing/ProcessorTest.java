@@ -79,11 +79,22 @@ public class ProcessorTest {
      * Test of getPlannen method, of class Processor.
      */
     @Test
-    public void testGetPlannen() throws JAXBException, MalformedURLException, URISyntaxException {
+    public void testGetPlannenManifestV1() throws JAXBException, MalformedURLException, URISyntaxException {
         System.out.println("getPlannen");
         URL u = this.getClass().getResource("manifestaaenhunze.xml");
         List<URL> result = instance.getPlannen(u);
         assertEquals(160, result.size());
+    }
+
+    /**
+     * Test of getPlannen method, of class Processor.
+     */
+    @Test
+    public void testGetPlannenManifestV2() throws JAXBException, MalformedURLException, URISyntaxException {
+        System.out.println("getPlannen");
+        URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
+        List<URL> result = instance.getPlannen(u);
+        assertEquals(2, result.size());
     }
 
 }
