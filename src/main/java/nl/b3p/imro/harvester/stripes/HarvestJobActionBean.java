@@ -45,13 +45,13 @@ public class HarvestJobActionBean implements ActionBean{
 
     private final String JSP_VIEW = "/WEB-INF/jsp/jobs/view.jsp";
     private final String JSP_EDIT = "/WEB-INF/jsp/jobs/edit.jsp";
-    private final String JSP_ADD = "/WEB-INF/jsp/jobs/add.jsp";
 
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
 
-    @ValidateNestedProperties(
+    @Validate
+    @ValidateNestedProperties({
             @Validate(field = "url")
-    )
+    })
     private HarvestJob job = new HarvestJob();
 
     // <editor-fold desc="Getters and Setters" defaultstate="collapsed" >
@@ -89,8 +89,15 @@ public class HarvestJobActionBean implements ActionBean{
     }
 
     public Resolution add(){
-        return new ForwardResolution(JSP_ADD);
+        return new ForwardResolution(JSP_EDIT);
         
+    }
+
+    public Resolution delete(){
+        EntityManager em = Stripersist.getEntityManager();
+        em.remove(job);
+        em.getTransaction().commit();
+        return new ForwardResolution(JSP_VIEW);
     }
 
     public Resolution save(){

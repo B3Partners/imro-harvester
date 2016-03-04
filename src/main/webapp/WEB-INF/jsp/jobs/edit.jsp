@@ -5,16 +5,20 @@
 <stripes:layout-render name="/WEB-INF/jsp/commons/siteTemplate.jsp">
 
     <stripes:layout-component name="head">
-        <title>Bewerk job</title>
+        <title>Voeg job toe</title>
     </stripes:layout-component>
 
     <stripes:layout-component name="headerlinks" >
         <%@include file="/WEB-INF/jsp/commons/headerlinks.jsp" %>
-
     </stripes:layout-component>
 
         <stripes:layout-component name="content">
-        <h1>Edit The Jobs!</h1>
+        <h1>Add The Jobs!</h1>
+        <stripes:form   beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean">
+            <stripes:hidden name="job" value="${job.id}"/>
+            <stripes:text name="job.url"/>
+            <stripes:submit name="save"/><stripes:reset name="reset"/>
+        </stripes:form>
 
         <script>
             var currentpage = 'harvestjobs';
