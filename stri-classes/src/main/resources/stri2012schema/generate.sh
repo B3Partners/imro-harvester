@@ -1,0 +1,1 @@
+xjc -d ../../java/ -p nl.b3p.imro.stri STRI2012.xsd

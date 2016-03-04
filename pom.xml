@@ -38,6 +38,7 @@
     </licenses>
     <modules>
         <module>imro-harvester-web</module>
+        <module>stri-classes</module>
     </modules>
     <developers>
         <developer>
