@@ -1,0 +1,574 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+	
+
+
+
+
+
+
+
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+	
+
+	
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="nl">
+	<head>
+	   	
+	   	
+
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1 ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="text/css" http-equiv="Content-Style-Type">
+<meta content="text/javascript" http-equiv="Content-Script-Type">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<meta content="must-revalidate,no-cache,max-age=0" http-equiv="Cache-Control">
+<meta name="description" content="ruimtelijkeplannen.nl, systeem van het Ministerie van I&M voor bestemmingsplannen: Zoekplan, zoek locatie, zoek op kaart">
+<meta name="keywords" content="bestemmingsplan, bestemmingsplannen, VROM, I&M">
+
+	<title>Ruimtelijkeplannen.nl</title>
+	<meta name="title" content="Ruimtelijkeplannen" />
+
+<meta name="language" content="nl" />
+<meta name="description" content="ruimtelijkeplannen.nl">
+
+<link rel="shortcut icon" href="/web-theme2.0/images/template/favicon.ico">
+<link rel="stylesheet" type="text/css" href="/web-theme2.0/css/template/chromemenu.css" />
+<link rel="stylesheet" type="text/css" href="/web-theme2.0/css/template/chromestyle.css" />
+<link href="/web-theme2.0/css/template/template.css" rel="stylesheet" type="text/css" media="all" />
+<!--[if IE]>
+	<link href="/web-theme2.0/css/template/chromemenu_ie.css" type="text/css" rel="stylesheet">
+<![endif]-->
+<!--[if IE 7]>
+	<link href="/web-theme2.0/css/template/template_ie7.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/web-theme2.0/css/template/chromemenu_ie7.css" type="text/css" rel="stylesheet">
+<![endif]-->
+<!--[if IE 8]>
+	<link href="/web-theme2.0/css/template/chromemenu_ie8.css" type="text/css" rel="stylesheet">
+<![endif]-->
+
+<link rel="stylesheet" href="/web-theme2.0/css/ui-lightness/jquery-ui-1.8.21.custom.css" type="text/css" media="screen" />
+<!-- for basic web functionality -->
+<script type="text/javascript" src="/web-theme2.0/js/template/jquery-1.7.2.debug.js"></script>
+
+<script src="/web-theme2.0/js/jquery-ui-1.8.21.custom.min.js" type="text/javascript"></script>
+<script src="/web-theme2.0/js/jquery-ui-1.8.12.min.js" type="text/javascript"></script>
+
+<!-- for dropdown menu -->
+<script type="text/javascript" src="/web-theme2.0/js/template/chrome.js"></script>
+
+<script type="text/javascript" src="/web-theme2.0/js/roo.js"></script>
+<script type="text/javascript" src="/web-theme2.0/js/jquery.cookie.js"></script>
+
+	   	
+		<title></title>
+		
+        <link href="/web-theme2.0/css/template/relateddocs.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/web-theme2.0/css/template/printdocs.css" rel="stylesheet" type="text/css" media="print" />
+		
+		<link href="/web-theme2.0/css/roi/roi_main.css" rel="stylesheet" type="text/css" media="all" />
+		<!--[if lt IE 8]>
+			<link href="/web-theme2.0/css/roi/roi_ie.css" type="text/css" rel="stylesheet">
+		<![endif]-->
+		<link rel="stylesheet" href="/web-theme2.0/css/ui-lightness/jquery-ui-1.8.21.custom.css" type="text/css" media="screen" />
+		<script type="text/javascript" src="/web-theme2.0/js/jquery-ui-1.8.21.custom.min.js"></script>
+	
+	
+		
+	</head>
+	<body onload="">
+		<div id="pagina" class=" prof">
+
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/web-theme2.0/css/storingenpopup.css" type="text/css" rel="stylesheet"/>
+
+<div id="popupstoringen" class="popup">
+  <div class="content">
+	<p><img src="/web-roo/content/popup/logo.bmp"><br/><center><font color="#f00"><b>Ruimtelijkeplannen.nl niet beschikbaar op 5 en 6 maart</font></b></center><br/><font color="#4bbcda" size="2" face="Verdana"></p><p>In verband met onderhoudswerkzaamheden is de voorziening Ruimtelijkeplannen.nl en bijbehorende services van vrijdagavond 4 maart 18.00 uur tot en met zondag 6 maart (zolang noodzakelijk) niet beschikbaar. Ruimtelijke plannen die op vrijdag 4 maart worden aangeboden, worden met de harvest van 5 op 6 maart verwerkt. Op maandag 7 maart is de dienst weer gewoon beschikbaar.<br/>Excuses voor het ongemak.</p>
+
+	<div class="knoppen">
+		<a onclick="popupStoringOff(filedate);return false;" class="button" href="#">Ik heb de melding gelezen</a>
+	</div>
+  </div>
+	<script>
+		var filedate = '1456388914000' ;
+
+		if($.cookie('storingen') !== filedate) {
+			$('#popupstoringen').show();
+		} else {
+			$('#popupstoringen').hide();
+		}
+		function popupStoringOff(timestamp) {
+			$('#popupstoringen').hide();
+			$.cookie('storingen', timestamp,{"expires":365, path: '/' });
+
+		}
+	</script>
+</div>
+	
+
+
+ 
+
+			
+
+
+
+
+
+
+
+<div id="header">
+	<div id="topheaderwrapper">
+		<div id="header_left">
+			<a href="http://www.ruimtelijkeplannen.nl/web-roo/roo/index_p"><img class="logo" src="/web-theme2.0/images/template/logo.bmp"></a>
+		</div>
+
+		<div id="header_right">
+			<div style="padding-top: 30px;">
+				
+				
+						        Professionals
+						        <span style="color: darkgray">|</span>
+					<a href="http://www.ruimtelijkeplannen.nl/web-roo/roo/index_pa" style="text-decoration: none;"><span style="color: #df7f4d; font-size: 12px; font-weight: normal;">Ga naar particulieren</span></a>
+				
+			</div>
+		</div>
+	</div>
+
+	<div id="menu">
+		<div id="menuwrapper">
+			<div class="chromestyle " id="chromemenu">
+				
+				<ul>
+					<li class="first"><a href="http://www.ruimtelijkeplannen.nl/web-roo/roo/index_p">Home</a></li>
+					<li class="bekijken"><a href="#" rel="dropmenu1"><img src="/web-theme2.0/images/template/s.gif"></a></li>
+					
+						<li class="plaatsen"><a href="#" rel="dropmenu2"><img src="/web-theme2.0/images/template/s.gif"></a></li>
+						<li class="afnemen"><a href="#" rel="dropmenu3"><img src="/web-theme2.0/images/template/s.gif"></a></li>
+					
+				</ul>
+			</div>
+
+			<div id="dropmenu1" class="dropmenudiv">
+				<a href="http://www.ruimtelijkeplannen.nl/web-roo/roo/bestemmingsplannen_p?tabFilter=JURIDISCH" onclick="setTabActive('JURIDISCH');"><span>Bestemmingsplannen</span></a> <a
+					href="http://www.ruimtelijkeplannen.nl/web-roo/roo/bestemmingsplannen_p?tabFilter=VISIE" onclick="setTabActive('VISIE');"><span>Structuurvisies</span></a> <a
+					href="http://www.ruimtelijkeplannen.nl/web-roo/roo/bestemmingsplannen_p?tabFilter=INSTRUCTIE" onclick="setTabActive('INSTRUCTIE');"><span>Algemene regels overheden</span></a>
+				
+					<a href="/web-roi/"><span>Index Internet Publicatie</span></a>
+				
+				
+					<a href="http://www.ruimtelijkeplannen.nl/web-roo/attn/attenderingsService_p"><span>Attenderingsservice</span></a>
+				
+			</div>
+
+			
+				<!--2nd drop down menu -->
+				<div id="dropmenu2" class="dropmenudiv">
+					<a href="http://www.ruimtelijkeplannen.nl/web-roo/roo/bronhouders_p"><span>Informatie voor Bronhouders</span></a> <a href="/web-roi/index/update/?"><span>Inloggen Index</span></a> <a href="/validator/"><span>Validator</span></a>
+				</div>
+				<!--3th drop down menu -->
+				<div id="dropmenu3" class="dropmenudiv">
+					<a href="http://www.ruimtelijkeplannen.nl/web-roo/roo/iva_p"><span>Informatie voor Afnemers</span></a> <a class="last" href="/web-roi/"><span>Index Internet Publicatie</span></a>
+				</div>
+			
+
+			<div class="chromestyle" id="chromemenu2">
+				<ul>
+					<li><a href="http://www.ruimtelijkeplannen.nl/web-roo/roo/help_p" >Help</a></li>
+					<li><a href="http://www.ruimtelijkeplannen.nl/web-roo/roo/faq_p">FAQ</a></li>
+					<li style="padding-right: 0px;"><a href="http://www.ruimtelijkeplannen.nl/web-roo/roo/contact_p">Contact</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="grijzebalk"></div>
+	</div>
+
+	<script type="text/javascript">
+		cssdropdown.startchrome("chromemenu");
+	</script>
+</div>
+
+	
+			
+		
+		
+
+		
+	        <div id="linkerkolom" class="">
+				
+		<div class="container">
+			
+
+
+
+
+<div class="linkerkolomheader">
+	
+		
+		Hoofdstukken
+	
+</div>
+<div class="linkerkolomcontent">
+	
+				<div id="contenttoc">
+					<ul>
+						<li onclick="window.location='/web-roi/index/?';">
+							<a class="icon report" href="/web-roi/index/?">Terug naar index</a>
+						</li>
+					</ul>
+				</div>
+			
+</div>
+		</div>
+	
+	        </div>
+        
+          
+		
+	        <div id="rechterkolom"  class="">
+				
+		<div class="container">
+			
+
+
+
+
+
+<div class="rechterkolomheader">Inloggen</div>
+<div class="rechterkolomcontent">
+	<form action="../j_security_check" name="loginForm" method="post" autocomplete="off"  >
+		<div>
+			<p>U kunt hier inloggen om het afgeschermde gedeelte van de Index Internet Publicatie te benaderen.
+		</div>
+		<div class="prop">
+			<label for="j_username">Gebruikersnaam</label> <input type="text" maxlength="32" name="j_username" />
+		</div>
+		<div class="prop">
+			<label for="j_password">Wachtwoord</label> <input type="password" maxlength="32" name="j_password" />
+		</div>
+		<div>
+			<p>Wanneer u uw wachtwoord bent vergeten, stuur dan een email naar de beheerder.</p>
+		</div>
+		<div class="buttons">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<input type="reset" value="Wissen" class="CRbuttonbase CR_button CRbuttonreset btn_left "   
+	
+	
+	
+/>
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+<input type="submit" value="Inloggen" class="CRbuttonbase CR_button CRbuttonarrow btn_left "   
+	
+	
+	
+/>
+			<div class="clear"></div>
+		</div>
+		<div>
+			<p><a href="http://www.ruimtelijkeplannen.nl/web-roo/docs/bronhouders/2010_Kadaster_Instructie_en_format_voor_accountaanvragen_Index.pdf" target="_blank">Aanvragen account</a></p>
+		</div>
+	</form>
+</div>
+
+			
+
+
+
+
+
+
+
+
+
+
+
+<div class="rechterkolomheader">Downloads</div>
+<div id="downloads">
+	<table>
+		
+		
+		
+		
+		
+			<tr>	
+				<td>
+					<a href="http://www.ruimtelijkeplannen.nl/web-roo/docs/DNO_Ruimtelijkeplannen.pdf" target="_blank">Diensten Niveau Overeenkomst</a>
+				</td>				
+			</tr>
+		
+		
+			<tr>
+				<td>
+					<a href="http://www.ruimtelijkeplannen.nl/web-roo/docs/bronhouders/Stappenplan_bronhouders_RO-Online.pdf" target="_blank">Stappenplan bronhouders</a>
+				</td>
+			</tr>
+		
+		
+			<tr>
+				<td>
+					<a href="http://www.ruimtelijkeplannen.nl/web-roo/docs/bronhouders/Werkinstructie_Valide_Digitale_Plannen.pdf" target="_blank">Werkinstructie Valide Digitale Plannen</a>
+				</td>
+			</tr>
+		
+		
+	</table>
+</div>
+
+
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div class="rechterkolomheader">Links</div>
+
+<div id="links">
+	<table>
+		
+		
+			<tr>
+				<td><a href="http://www.rijksoverheid.nl/onderwerpen/ruimtelijke-ordening-en-gebiedsontwikkeling/ruimtelijke-ordening" target="_blank">Wet ruimtelijke ordening</a></td>
+			</tr>
+		
+		
+			<tr>
+				<td><a href="http://www.geonovum.nl/dossiers/rostandaarden" target="_blank">RO Standaarden</a></td>
+			</tr>
+		
+		
+		
+			<tr>
+				<td><a href="http://www.geonovum.nl" target="_blank">Geonovum</a></td>
+			</tr>
+		
+		
+			<tr>
+				<td><a href="http://www.rijksoverheid.nl/ministeries/ienm" target="_blank">IenM</a></td>
+			</tr>
+		
+		
+			<tr>
+				<td><a href="http://www.ipo.nl/" target="_blank">IPO</a></td>
+			</tr>
+		
+		
+			<tr>
+				<td><a href="http://www.kadaster.nl" target="_blank">Kadaster</a></td>
+			</tr>
+		
+		
+			<tr>
+				<td><a href="http://www.vng.nl" target="_blank">VNG</a></td>
+			</tr>
+		
+		
+		
+		<tr>
+			<td class="print"><a href="#" onclick="window.print();">Print deze pagina</a></td>
+		</tr>
+	</table>
+</div>
+		</div>
+
+		<!-- For login error handling -->
+	
+		
+		
+		
+		
+		
+		<!-- For login error handling -->
+		
+	
+	        </div>
+        
+
+        <div id="middenkolom"  class="">
+			
+		<div id="content" class="container">
+	
+			<div class="listview">
+				<h1>Het  manifest van bronhouder: Gemeente Aa en Hunze</h1>
+	
+				<p>Dit manifest direct bekijken: <br/>
+				<a href="" class="external" target="_blank"></a></p>
+
+				<p>Dit manifest bevat de volgende plannen, klik op de planId om de details van het plan te bekijken:</p>
+	
+				<div class="error">
+					
+						Onbekende fout bij ophalen van het manifest
+					
+				</div>
+	
+				
+			</div>
+		</div>
+	
+	
+		<script type="text/javascript">
+
+			$(function() {
+				$('tbody.planContent').hide();
+				
+				$('thead.planHeader').click(function(event) {
+					
+					var surroundingTable = $(this).parent();
+					
+					var planContent = surroundingTable.find('>tbody.planContent');
+					
+					var planid = planContent.attr('id');
+					
+					if( planContent.is(':hidden')) {
+						
+						$(this).find('th').addClass('expanded');
+						
+						// Open it
+						planContent.show();
+						
+					}
+					else {
+						$(this).find('th').removeClass('expanded');
+						
+						// close it
+						planContent.hide();
+					}
+				});
+			});
+		</script>
+	
+	
+			<div class="clear"></div>
+		</div>
+          
+		
+
+
+
+
+
+
+
+
+
+ <div id="content-footer">
+     <span style="padding-top: 5px;">
+         <a href="http://www.ruimtelijkeplannen.nl/web-roo/roo/over_p.jsp" style="color: gray;">Over Ruimtelijkeplannen.nl</a> | 
+         <a href="http://www.ruimtelijkeplannen.nl/web-roo/roo/releasenotes_p.jsp" style="color: gray;">Release notes</a>
+     </span>
+ </div>
+ 
+ 
+
+<script src="/web-theme2.0/js/alert-window.js" type="text/javascript"></script>
+<div title="Informatie" id="alertMessageContainer" style="display:none; padding: 0px; background-color: #ffffff;">
+
+	<div id="alertMessage"></div>
+
+	<div id="buttons">
+		<button id="alert_btn_ok" onclick="closeAlertWindow();">OK</button>
+	</div>
+</div>
+ 
+ 
+	
+		</div>
+	</body>
+</html>
+

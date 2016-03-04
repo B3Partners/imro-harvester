@@ -111,6 +111,9 @@ public class HarvestJobActionBean implements ActionBean{
         return new ForwardResolution(JSP_EDIT);
     }
 
+    public Resolution run(){
+        return new ForwardResolution(JSP_EDIT);
+    }
 
     @After(stages = LifecycleStage.EventHandling)
     private void createLists(){
