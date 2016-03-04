@@ -29,12 +29,12 @@ import org.junit.Before;
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
-public class ProcesserTest {
+public class ProcessorTest {
 
-    public ProcesserTest() {
+    public ProcessorTest() {
     }
 
-    private Processer instance = null;
+    private Processor instance = null;
     private HarvestJob job = null;
 
     @Before
@@ -44,7 +44,7 @@ public class ProcesserTest {
         URL u = this.getClass().getResource("testaaenhunze.html");
         //"https://www.ruimtelijkeplannen.nl/web-roi/index/showManifest?organizationId=aaenhunze&striVersion=STRI2008"
         job.setUrl(u.toString());
-        instance = new Processer(Collections.singletonList(job));
+        instance = new Processor(Collections.singletonList(job));
     }
 
 

@@ -112,6 +112,7 @@ public class HarvestJobActionBean implements ActionBean{
     }
 
     public Resolution run(){
+        
         return new ForwardResolution(JSP_EDIT);
     }
 

@@ -25,10 +25,10 @@ import nl.b3p.imro.harvester.entities.HarvestJob;
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
-public class Processer {
+public class Processor {
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
 
-    public Processer(List<HarvestJob> jobs) {
+    public Processor(List<HarvestJob> jobs) {
         this.jobs = jobs;
     }
 
