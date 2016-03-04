@@ -25,6 +25,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
+import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -78,7 +79,7 @@ public class ProcessorTest {
      * Test of getPlannen method, of class Processor.
      */
     @Test
-    public void testGetPlannen() {
+    public void testGetPlannen() throws JAXBException, MalformedURLException, URISyntaxException {
         System.out.println("getPlannen");
         URL u = this.getClass().getResource("manifestaaenhunze.xml");
         List<URL> result = instance.getPlannen(u);
