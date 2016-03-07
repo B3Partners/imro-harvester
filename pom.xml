@@ -39,6 +39,7 @@
     <modules>
         <module>imro-harvester-web</module>
         <module>stri-classes</module>
+        <module>imro-classes</module>
     </modules>
     <developers>
         <developer>
