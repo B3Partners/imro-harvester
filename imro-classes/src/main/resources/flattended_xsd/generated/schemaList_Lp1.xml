@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+   <rootSchema schemaLocation="D:/IMRO2012-v1.3.1/20120209-IMRO2012-Schema-Lokaal/IMRO2012.xsd"
+               namespace="http://www.geonovum.nl/imro/2012/1.1"/>
+   <import schemaLocation="D:/IMRO2012-v1.3.1/gml/3.2.1/gml.xsd"
+           importingNamespace="http://www.geonovum.nl/imro/2012/1.1"
+           namespace="http://www.opengis.net/gml/3.2"
+           processed="no"/>
+   <import schemaLocation="D:/IMRO2012-v1.3.1/gmlsfProfile/2.0/gmlsfLevels.xsd"
+           importingNamespace="http://www.geonovum.nl/imro/2012/1.1"
+           namespace="http://www.opengis.net/gmlsf/2.0"
+           processed="no"/>
+   <include schemaLocation="D:/IMRO2012-v1.3.1/20120209-IMRO2012-Schema-Lokaal/functieaanduidingen.xsd"
+            namespace="http://www.geonovum.nl/imro/2012/1.1"
+            processed="no"/>
+   <include schemaLocation="D:/IMRO2012-v1.3.1/20120209-IMRO2012-Schema-Lokaal/matrixsymboolcode.xsd"
+            namespace="http://www.geonovum.nl/imro/2012/1.1"
+            processed="no"/>
+</schema>

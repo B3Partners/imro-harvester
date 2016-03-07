@@ -1,0 +1,18 @@
+	<xs:simpleType name="NilReasonEnumeration">
+		<xs:union>
+			<xs:simpleType>
+				<xs:restriction base="string">
+					<xs:enumeration value="inapplicable"/>
+					<xs:enumeration value="missing"/>
+					<xs:enumeration value="template"/>
+					<xs:enumeration value="unknown"/>
+					<xs:enumeration value="withheld"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="string">
+					<xs:pattern value="other:\w{2,}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>

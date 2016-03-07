@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:gmlsf="http://www.opengis.net/gmlsf/2.0"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.opengis.net/gmlsf/2.0"
+        elementFormDefault="qualified"
+        version="2.0.0">
+   <annotation>
+		    <documentation>
+         Compliance levels schema for Simple features GML 3.2 Profile
+         Copyright (c) 2011 Open Geospatial Consortium.
+      </documentation>
+	  </annotation>
+</schema>
