@@ -73,6 +73,10 @@
             <groupId>nl.b3p.imro</groupId>
             <artifactId>imro-classes</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -95,7 +99,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>hibernate3-maven-plugin</artifactId>
-                <version>3.1-SNAPSHOT</version>
+                <version>3.0</version>
                 <executions>
                     <execution>
                         <id>schema-export</id>
@@ -107,6 +111,24 @@
                                 </classpath>
                                 <hbm2ddl export="false" drop="false" create="true" outputfilename="schemaexport.sql" format="true">
                                     <jpaconfiguration persistenceUnit="imroPU" />
+                                </hbm2ddl>
+                            </hibernatetool>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-schema-export</id>
+                        <phase>generate-test-resources</phase>
+                        <configuration>
+                            <hibernatetool destdir="${project.build.outputDirectory}/ddlscripts">
+                                <classpath>
+                                    <path location="target" />
+                                </classpath>
+                                <!-- voor de unit tests met HSQLDB -->
+                                <hbm2ddl export="true" drop="true" create="true" outputfilename="hsqldb-schema-export.sql" format="true">
+                                    <jpaconfiguration persistenceUnit="imro-hsqldb" />
                                 </hbm2ddl>
                             </hibernatetool>
                         </configuration>

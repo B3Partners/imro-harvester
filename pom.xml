@@ -13,6 +13,7 @@
     <properties>
         <harvester.version>1.0-SNAPSHOT</harvester.version>
         <hibernate.version>3.6.10.Final</hibernate.version>
+        <hsqldb.version>2.3.3</hsqldb.version>
     </properties>
     <scm>
         <connection>scm:git:git@github.com:B3Partners/imro-harvester.git</connection>
@@ -87,6 +88,11 @@
                 <groupId>nl.b3p.imro</groupId>
                 <artifactId>imro-classes</artifactId>
                 <version>${harvester.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>${hsqldb.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
