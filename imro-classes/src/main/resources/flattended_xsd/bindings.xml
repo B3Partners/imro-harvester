@@ -5,9 +5,9 @@
 		<javaType name="java.util.Calendar" xmlType="xsd:dateTime" parseMethod="javax.xml.bind.DatatypeConverter.parseDateTime" printMethod="javax.xml.bind.DatatypeConverter.printDateTime"/>
 	</globalBindings>
 	<bindings schemaLocation="./finalized/IMRO2012_resolved.xsd">
-		<schemaBindings>
+		<!--schemaBindings>
 			<package name="nl.b3p.harvester.imro2012"/>
-		</schemaBindings>
+		</schemaBindings-->
 		<bindings node="/xsd:schema">
 			<!--
 				attributen worden via jaxb bindings niet omgezet naar objecten.
