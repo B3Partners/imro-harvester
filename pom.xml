@@ -90,6 +90,11 @@
                 <version>${harvester.version}</version>
             </dependency>
             <dependency>
+                <groupId>nl.b3p.imro</groupId>
+                <artifactId>imro-persistence</artifactId>
+                <version>${harvester.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.hsqldb</groupId>
                 <artifactId>hsqldb</artifactId>
                 <version>${hsqldb.version}</version>
@@ -120,6 +125,7 @@
         <module>imro-harvester-web</module>
         <module>stri-classes</module>
         <module>imro-classes</module>
+        <module>imro-persistence</module>
     </modules>
     <developers>
         <developer>

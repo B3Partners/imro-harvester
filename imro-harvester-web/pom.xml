@@ -74,6 +74,10 @@
             <artifactId>imro-classes</artifactId>
         </dependency>
         <dependency>
+            <groupId>nl.b3p.imro</groupId>
+            <artifactId>imro-persistence</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
         </dependency>
