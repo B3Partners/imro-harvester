@@ -1,2 +1,2 @@
-# imro-harvester
-Project om imro 2012 plannen in te lezen, en om te zetten naar een postgis database.
+# imro-harvester-web
+Webapplicatie om de harvester aan te sturen en te configureren
