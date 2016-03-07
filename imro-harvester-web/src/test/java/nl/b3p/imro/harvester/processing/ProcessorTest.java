@@ -43,7 +43,7 @@ public class ProcessorTest {
     private HarvestJob job = null;
 
     @Before
-    public void initTests(){
+    public void initTests() {
         job = new HarvestJob();
 
         URL u = this.getClass().getResource("testaaenhunze.html");
@@ -52,61 +52,79 @@ public class ProcessorTest {
         instance = new Processor(Collections.singletonList(job));
     }
 
-
     /**
      * Test of getManifest method, of class Processor.
      */
     @Test
-    public void testGetManifestFile() throws MalformedURLException, IOException, URISyntaxException {
-        URL expResult = new URL("http://www.gisnet.nl/ruimtelijkeplannen/AaenHunze/manifest_IMRO2012.xml");
-        File f = new File (new URL(job.getUrl()).toURI());
-        URL result = instance.getManifest(f);
-        assertEquals(expResult, result);
+    public void testGetManifestFile() {
+        try {
+            URL expResult = new URL("http://www.gisnet.nl/ruimtelijkeplannen/AaenHunze/manifest_IMRO2012.xml");
+            File f = new File(new URL(job.getUrl()).toURI());
+            URL result = instance.getManifest(f);
+            assertEquals(expResult, result);
+        } catch (Exception e) {
+            fail("Exception occured: " + e.getLocalizedMessage());
+        }
     }
     /*
      * Test of getManifest method, of class Processor.
      */
+
     @Test
-    public void testGetManifestUrl() throws MalformedURLException, IOException, URISyntaxException {
-        URL expResult = new URL("http://www.gisnet.nl/ruimtelijkeplannen/AaenHunze/manifest_IMRO2012.xml");
-        File f = new File (new URL(job.getUrl()).toURI());
-        URL result = instance.getManifest(f);
-        assertEquals(expResult, result);
+    public void testGetManifestUrl() {
+        try {
+            URL expResult = new URL("http://www.gisnet.nl/ruimtelijkeplannen/AaenHunze/manifest_IMRO2012.xml");
+            File f = new File(new URL(job.getUrl()).toURI());
+            URL result = instance.getManifest(f);
+            assertEquals(expResult, result);
+        } catch (Exception e) {
+            fail("Exception occured: " + e.getLocalizedMessage());
+        }
     }
 
     /**
      * Test of getPlannen method, of class Processor.
      */
     @Test
-    public void testGetPlannenManifestV1() throws JAXBException, MalformedURLException, URISyntaxException {
-        System.out.println("getPlannen");
-        URL u = this.getClass().getResource("manifestaaenhunze.xml");
-        List<URL> result = instance.getPlannen(u);
-        assertEquals(160, result.size());
+    public void testGetPlannenManifestV1() {
+        try {
+            System.out.println("getPlannen");
+            URL u = this.getClass().getResource("manifestaaenhunze.xml");
+            List<URL> result = instance.getPlannen(u);
+            assertEquals(160, result.size());
+        } catch (Exception e) {
+            fail("Exception occured: " + e.getLocalizedMessage());
+        }
     }
 
     /**
      * Test of getPlannen method, of class Processor.
      */
     @Test
-    public void testGetPlannenManifestV2() throws JAXBException, MalformedURLException, URISyntaxException {
-        System.out.println("getPlannen");
-        URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
-        List<URL> result = instance.getPlannen(u);
-        assertEquals(2, result.size());
-    }
+    public void testGetPlannenManifestV2() {
+        try {
+            System.out.println("getPlannen");
+            URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
+            List<URL> result = instance.getPlannen(u);
+            assertEquals(2, result.size());
+        } catch (Exception e) {
+            fail("Exception occured: " + e.getLocalizedMessage());
+        }
 
+    }
 
     /**
      * Test of parsePlan method, of class Processor.
      */
     @Test
-    public void testParsePlan() throws JAXBException, URISyntaxException {
-        System.out.println("parsePlan");
-        URL u = this.getClass().getResource("NL.IMRO.9999.vergunning0001-0001.gml");
-        Object o = instance.parsePlan(u);
-        assertNotNull(o);
-        
+    public void testParsePlan() {
+        try {
+            System.out.println("parsePlan");
+            URL u = this.getClass().getResource("NL.IMRO.9999.vergunning0001-0001.gml");
+            Object o = instance.parsePlan(u);
+            assertNotNull(o);
+        } catch (Exception e) {
+            fail("Exception occured: " + e.getLocalizedMessage());
+        }
     }
-
 }
