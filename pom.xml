@@ -10,12 +10,86 @@
     <prerequisites>
         <maven>3.2.5</maven>
     </prerequisites>
+    <properties>
+        <harvester.version>1.0-SNAPSHOT</harvester.version>
+        <hibernate.version>3.6.10.Final</hibernate.version>
+    </properties>
     <scm>
-        <connection>scm:git:git@github.com:flamingo-mc/flamingo.git</connection>
-        <developerConnection>scm:git:git@github.com:flamingo-mc/flamingo.git</developerConnection>
-        <url>https://github.com/flamingo-mc/flamingo.git</url>
+        <connection>scm:git:git@github.com:B3Partners/imro-harvester.git</connection>
+        <developerConnection>scm:git:git@github.com:B3Partners/imro-harvester.git</developerConnection>
+        <url>https://github.com/B3Partners/imro-harvester</url>
         <tag>HEAD</tag>
     </scm>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>net.sourceforge.stripes</groupId>
+                <artifactId>stripes</artifactId>
+                <version>1.6.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mchange</groupId>
+                <artifactId>c3p0</artifactId>
+                <version>0.9.5.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-c3p0</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.stripesstuff</groupId>
+                <artifactId>stripersist</artifactId>
+                <version>1.0.3</version>
+            </dependency>
+            <dependency>
+                <groupId>securityfilter</groupId>
+                <artifactId>securityfilter</artifactId>
+                <version>2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>jstl</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>1.8.3</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+            </dependency>
+            <dependency>
+                <groupId>nl.b3p.imro</groupId>
+                <artifactId>stri-classes</artifactId>
+                <version>${harvester.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nl.b3p.imro</groupId>
+                <artifactId>imro-classes</artifactId>
+                <version>${harvester.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <distributionManagement>
         <repository>
             <id>repo.b3p.nl</id>
