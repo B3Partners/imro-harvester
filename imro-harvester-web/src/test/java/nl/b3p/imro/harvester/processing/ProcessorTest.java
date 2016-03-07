@@ -18,8 +18,6 @@ package nl.b3p.imro.harvester.processing;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -27,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
+import nl.geonovum.imro._2012._1.FeatureCollectionIMROType;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -95,6 +94,19 @@ public class ProcessorTest {
         URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
         List<URL> result = instance.getPlannen(u);
         assertEquals(2, result.size());
+    }
+
+
+    /**
+     * Test of parsePlan method, of class Processor.
+     */
+    @Test
+    public void testParsePlan() throws JAXBException, URISyntaxException {
+        System.out.println("parsePlan");
+        URL u = this.getClass().getResource("NL.IMRO.9999.vergunning0001-0001.gml");
+        Object o = instance.parsePlan(u);
+        assertNotNull(o);
+        
     }
 
 }

@@ -85,6 +85,12 @@
             <artifactId>stri-classes</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>nl.b3p.imro</groupId>
+            <artifactId>imro-classes</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -37,6 +37,7 @@ import org.jsoup.select.Elements;
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
 public class Processor {
+
     private Integer timeout;
 
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
@@ -50,22 +51,21 @@ public class Processor {
         this.timeout = timeout;
     }
 
-
-    public void process(){
+    public void process() {
     }
 
-    protected URL getManifest(HarvestJob job) throws IOException{
+    protected URL getManifest(HarvestJob job) throws IOException {
         URL u = new URL(job.getUrl());
         Document doc = Jsoup.parse(u, timeout);
         return getManifest(doc);
     }
 
-    protected URL getManifest(File f ) throws IOException{
+    protected URL getManifest(File f) throws IOException {
         Document doc = Jsoup.parse(f, "UTF-8");
         return getManifest(doc);
     }
 
-    private URL getManifest(Document doc) throws MalformedURLException{
+    private URL getManifest(Document doc) throws MalformedURLException {
         Elements els = doc.select("a.external");
         Element link = els.first();
         String url = link.attr("href");
@@ -101,6 +101,18 @@ public class Processor {
             }
         }
         return urls;
+    }
+
+    protected Object parsePlan(URL u) throws JAXBException, URISyntaxException {
+        Object o = null;
+        File file = new File(u.toURI());
+
+        JAXBContext jaxbContext = JAXBContext.newInstance("nl.geonovum.imro._2012._1");
+
+        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        o = jaxbUnmarshaller.unmarshal(file);
+
+        return o;
     }
 
 }
