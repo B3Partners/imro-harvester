@@ -3,6 +3,10 @@
 
     <persistence-unit name="imroPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>nl.b3p.imro.harvester.entities.Gebruiker</class>
+        <class>nl.b3p.imro.harvester.entities.Role</class>
+        <class>nl.b3p.imro.harvester.entities.HarvestJob</class>
+        <class>nl.b3p.imro.harvester.entities.imro.Bestemmingsplan</class>
         <properties>
 
             <property name="hibernate.connection.url" value="${imro.url}" />
@@ -12,7 +16,9 @@
 
             <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>
             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+
+           <property name="hibernate.dialect" value="org.hibernate.spatial.dialect.postgis.PostgisDialect"/>
+            
             <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
             <property name="hibernate.c3p0.max_size" value="100"/>
             <property name="hibernate.c3p0.timeout" value="60"/>
@@ -21,10 +27,8 @@
         </properties>
     </persistence-unit>
 
-     <persistence-unit name="imro-hsqldb" transaction-type="RESOURCE_LOCAL">
-        <!-- de hsqldb in-memory of file database wordt gebruikt voor unit tests. -->
+     <!--persistence-unit name="imro-hsqldb" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <!--mapping-file>META-INF/orm-hsqldb.xml</mapping-file-->
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.format_sql" value="true"/>
@@ -35,5 +39,5 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:./target/unittest-hsqldb/db;shutdown=true"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
         </properties>
-    </persistence-unit>
+    </persistence-unit-->
 </persistence>

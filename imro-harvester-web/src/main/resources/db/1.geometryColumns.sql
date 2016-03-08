@@ -1,0 +1,1 @@
+select addgeometrycolumn ('public','bestemmingsplan','geometrie',28992,'MULTIPOLYGON',2);

@@ -24,9 +24,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.Unmarshaller;
 import nl.b3p.imro.harvester.entities.HarvestJob;
+import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
+import nl.geonovum.imro._2012._1.FeatureCollectionIMROType;
+import nl.geonovum.imro._2012._1.NEN3610IDType;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -103,16 +108,41 @@ public class Processor {
         return urls;
     }
 
-    protected Object parsePlan(URL u) throws JAXBException, URISyntaxException {
-        Object o = null;
+    protected Bestemmingsplan parsePlan(URL u) throws JAXBException, URISyntaxException {
         File file = new File(u.toURI());
 
         JAXBContext jaxbContext = JAXBContext.newInstance("nl.geonovum.imro._2012._1");
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        o = jaxbUnmarshaller.unmarshal(file);
+        JAXBIntrospector insp = jaxbContext.createJAXBIntrospector();
+        JAXBElement o = (JAXBElement)jaxbUnmarshaller.unmarshal(file);
 
-        return o;
+        Object value = o.getValue();
+        FeatureCollectionIMROType fc = (FeatureCollectionIMROType) value;
+        Bestemmingsplan bp = processBestemmingsplan(fc, insp);
+        return bp;
+    }
+
+    private Bestemmingsplan processBestemmingsplan(FeatureCollectionIMROType fc, JAXBIntrospector inspector){
+        Bestemmingsplan bp = new Bestemmingsplan();
+        List<FeatureCollectionIMROType.FeatureMember> members = fc.getFeatureMember();
+        for (FeatureCollectionIMROType.FeatureMember member : members) {
+            Object o = member.getAbstractFeature().getValue();
+            if(o instanceof nl.geonovum.imro._2012._1.GebiedsaanduidingType){
+                int b = 0;
+            }else if(o instanceof nl.geonovum.imro._2012._1.BestemmingsplangebiedType) {
+                int b = 0;
+                nl.geonovum.imro._2012._1.BestemmingsplangebiedType bpgt = (nl.geonovum.imro._2012._1.BestemmingsplangebiedType)o;
+                bp.setTypePlan(bpgt.getTypePlan().value());
+                NEN3610IDType id= bpgt.getIdentificatie().getNEN3610ID();
+                String identificatie = id.getNamespace() + "." + id.getLokaalID() + "-" + id.getVersie();
+                bp.setIdentificatie(identificatie);
+            }else{
+                int i = 0;
+            }
+        }
+
+        return bp;
     }
 
 }

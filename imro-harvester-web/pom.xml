@@ -81,6 +81,15 @@
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-spatial</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgis</groupId>
+            <artifactId>postgis-jdbc</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -122,7 +131,7 @@
                             <goal>run</goal>
                         </goals>
                     </execution>
-                    <execution>
+                    <!--execution>
                         <id>test-schema-export</id>
                         <phase>generate-test-resources</phase>
                         <configuration>
@@ -130,7 +139,6 @@
                                 <classpath>
                                     <path location="target" />
                                 </classpath>
-                                <!-- voor de unit tests met HSQLDB -->
                                 <hbm2ddl export="true" drop="true" create="true" outputfilename="hsqldb-schema-export.sql" format="true">
                                     <jpaconfiguration persistenceUnit="imro-hsqldb" />
                                 </hbm2ddl>
@@ -139,7 +147,7 @@
                         <goals>
                             <goal>run</goal>
                         </goals>
-                    </execution>
+                    </execution-->
                 </executions>
             </plugin>
             <plugin>
@@ -189,4 +197,11 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>Hibernate Spatial repo</id>
+            <url>http://www.hibernatespatial.org/repository</url>
+        </repository>
+    </repositories>
 </project>
