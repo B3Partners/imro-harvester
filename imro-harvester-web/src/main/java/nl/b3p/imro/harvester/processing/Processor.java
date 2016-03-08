@@ -23,19 +23,22 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.RollbackException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.Unmarshaller;
 import nl.b3p.imro.harvester.entities.HarvestJob;
-import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.geonovum.imro._2012._1.FeatureCollectionIMROType;
-import nl.geonovum.imro._2012._1.NEN3610IDType;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.stripesstuff.stripersist.Stripersist;
 
 /**
  *
@@ -43,9 +46,10 @@ import org.jsoup.select.Elements;
  */
 public class Processor {
 
+    private static final Log log = LogFactory.getLog(Processor.class);
     private Integer timeout;
-
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
+    private IMROParseFactory factory = new IMROParseFactory();
 
     public Processor(List<HarvestJob> jobs) {
         this(jobs, 30000);
@@ -57,6 +61,38 @@ public class Processor {
     }
 
     public void process() {
+        EntityManager em = Stripersist.getEntityManager();
+        for (HarvestJob job : jobs) {
+            try {
+                URL manifestUrl = getManifest(job);
+                List<URL> planUrls = getPlanURLs(manifestUrl);
+                for (URL planUrl : planUrls) {
+                    try {
+                        List<Object> plannen = parsePlan(planUrl);
+                        if (!em.getTransaction().isActive()) {
+                            em.getTransaction().begin();
+                        }
+                        for (Object plan : plannen) {
+                            em.persist(plan);
+                        }
+                        em.getTransaction().commit();
+                    } catch (JAXBException ex) {
+                        log.error("Cannot parse url " + planUrl, ex);
+                    } catch (URISyntaxException ex) {
+                        log.error("Error concerning URI:", ex);
+                    } catch (RollbackException e) {
+                        log.error("Cannot save entity in plan " + planUrl, e);
+                        em.getTransaction().rollback();
+                    }
+                }
+            } catch (JAXBException ex) {
+                log.error("Cannot parse manifest/dossier for job " + job.getId() + " - " + job.getUrl(), ex);
+            } catch (URISyntaxException ex) {
+                log.error("Cannot get manifest for HarvestJob " + job.getId() + " - " + job.getUrl(), ex);
+            } catch (IOException ex) {
+                log.error("Cannot get manifest url for HarvestJob " + job.getId() + " - " + job.getUrl(), ex);
+            }
+        }
     }
 
     protected URL getManifest(HarvestJob job) throws IOException {
@@ -77,17 +113,22 @@ public class Processor {
         return new URL(url);
     }
 
-    protected List<URL> getPlannen(URL manifestUrl) throws JAXBException, MalformedURLException, URISyntaxException{
+    protected List<URL> getPlanURLs(URL manifestUrl) throws JAXBException, MalformedURLException, URISyntaxException {
         List<URL> urls = new ArrayList<URL>();
-        File file = new File(manifestUrl.toURI());
-        JAXBContext jaxbContext = JAXBContext.newInstance(nl.geonovum.stri._2012._1.Manifest.class,nl.geonovum.stri._2012._2.Manifest.class);
+        File file = null;
+        try {
+            file = new File(manifestUrl.toURI());
+        } catch (Exception e) {
+            file = new File(manifestUrl.getPath());
+        }
+        JAXBContext jaxbContext = JAXBContext.newInstance(nl.geonovum.stri._2012._1.Manifest.class, nl.geonovum.stri._2012._2.Manifest.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        Object m =  jaxbUnmarshaller.unmarshal(file);
+        Object m = jaxbUnmarshaller.unmarshal(manifestUrl);
 
         // Support two versions of the manifest. Sadly, almost the same, but namespaces in xsd differ.
-        if(m instanceof nl.geonovum.stri._2012._1.Manifest){
-            nl.geonovum.stri._2012._1.Manifest manifest = (nl.geonovum.stri._2012._1.Manifest)m;
+        if (m instanceof nl.geonovum.stri._2012._1.Manifest) {
+            nl.geonovum.stri._2012._1.Manifest manifest = (nl.geonovum.stri._2012._1.Manifest) m;
             List<nl.geonovum.stri._2012._1.Dossier> dossiers = manifest.getDossier();
             for (nl.geonovum.stri._2012._1.Dossier dossier : dossiers) {
                 List<nl.geonovum.stri._2012._1.Dossier.Plan> plannen = dossier.getPlan();
@@ -108,41 +149,32 @@ public class Processor {
         return urls;
     }
 
-    protected Bestemmingsplan parsePlan(URL u) throws JAXBException, URISyntaxException {
-        File file = new File(u.toURI());
+    protected List<Object> parsePlan(URL u) throws JAXBException, URISyntaxException {
+      //  File file = new File(u.toURI());
 
         JAXBContext jaxbContext = JAXBContext.newInstance("nl.geonovum.imro._2012._1");
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         JAXBIntrospector insp = jaxbContext.createJAXBIntrospector();
-        JAXBElement o = (JAXBElement)jaxbUnmarshaller.unmarshal(file);
+        JAXBElement o = (JAXBElement) jaxbUnmarshaller.unmarshal(u);
 
         Object value = o.getValue();
         FeatureCollectionIMROType fc = (FeatureCollectionIMROType) value;
-        Bestemmingsplan bp = processBestemmingsplan(fc, insp);
+        List<Object> bp = processFeatureCollection(fc, insp);
         return bp;
     }
 
-    private Bestemmingsplan processBestemmingsplan(FeatureCollectionIMROType fc, JAXBIntrospector inspector){
-        Bestemmingsplan bp = new Bestemmingsplan();
+    private List<Object> processFeatureCollection(FeatureCollectionIMROType fc, JAXBIntrospector inspector) {
+        List<Object> objs = new ArrayList<Object>();
         List<FeatureCollectionIMROType.FeatureMember> members = fc.getFeatureMember();
         for (FeatureCollectionIMROType.FeatureMember member : members) {
             Object o = member.getAbstractFeature().getValue();
-            if(o instanceof nl.geonovum.imro._2012._1.GebiedsaanduidingType){
-                int b = 0;
-            }else if(o instanceof nl.geonovum.imro._2012._1.BestemmingsplangebiedType) {
-                int b = 0;
-                nl.geonovum.imro._2012._1.BestemmingsplangebiedType bpgt = (nl.geonovum.imro._2012._1.BestemmingsplangebiedType)o;
-                bp.setTypePlan(bpgt.getTypePlan().value());
-                NEN3610IDType id= bpgt.getIdentificatie().getNEN3610ID();
-                String identificatie = id.getNamespace() + "." + id.getLokaalID() + "-" + id.getVersie();
-                bp.setIdentificatie(identificatie);
-            }else{
-                int i = 0;
+            Object parsed = factory.parse(o);
+            if (parsed != null) {
+                objs.add(parsed);
             }
         }
-
-        return bp;
+        return objs;
     }
 
 }

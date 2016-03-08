@@ -86,7 +86,7 @@ public class ProcessorTest {
         try {
             System.out.println("getPlannen");
             URL u = this.getClass().getResource("manifestaaenhunze.xml");
-            List<URL> result = instance.getPlannen(u);
+            List<URL> result = instance.getPlanURLs(u);
             assertEquals(160, result.size());
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
@@ -101,7 +101,7 @@ public class ProcessorTest {
         try {
             System.out.println("getPlannen");
             URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
-            List<URL> result = instance.getPlannen(u);
+            List<URL> result = instance.getPlanURLs(u);
             assertEquals(2, result.size());
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
@@ -117,8 +117,9 @@ public class ProcessorTest {
         try {
             System.out.println("parsePlan");
             URL u = this.getClass().getResource("2012.gml");
-            Object o = instance.parsePlan(u);
+            List<Object> o = instance.parsePlan(u);
             assertNotNull(o);
+            assertNotEquals(0, o.size());
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
         }
@@ -128,18 +129,23 @@ public class ProcessorTest {
      * Test of parsePlan method, of class Processor.
      */
     @Test
-    public void testParsePlanInhoud() {
+    public void testParsePlanInhoudBestemmingsplan() {
         try {
             System.out.println("parsePlanInhoud");
             URL u = this.getClass().getResource("2012.gml");
-            Bestemmingsplan bp = instance.parsePlan(u);
-            
-            assertNotNull(bp);
-            
-            assertEquals("bestemmingsplan",bp.getTypePlan());
-            assertEquals("NL.IMRO.0297.BGBBP20140020-OW01",bp.getIdentificatie());
+            List<Object> o = instance.parsePlan(u);
+            assertNotNull(o);
+            for (Object obj : o) {
+                if(obj instanceof Bestemmingsplan){
+                    Bestemmingsplan bp = (Bestemmingsplan)obj;
+                    assertEquals("bestemmingsplan", bp.getTypePlan());
+                    assertEquals("NL.IMRO.0297.BGBBP20140020-OW01", bp.getIdentificatie());
+                }
+            }
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
         }
     }
+
+
 }
