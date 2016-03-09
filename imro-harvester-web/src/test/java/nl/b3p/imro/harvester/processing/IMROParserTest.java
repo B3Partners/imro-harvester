@@ -7,9 +7,6 @@ package nl.b3p.imro.harvester.processing;
 
 import java.net.URL;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -53,10 +50,9 @@ public class IMROParserTest {
     @Test
     public void testParseGML_URL()  {
         try {
-            System.out.println("parseGML");
+            System.out.println("testParseGML_URL");
             URL u = null;
             IMROParser instance = new IMROParser();
-            List<Object> expResult = null;
             List<Object> result = instance.parseGML(new URL("http://files.b3p.nl/imroharvester/NL.IMRO.0297.BGBBP20140020-OW01.gml"));
             assertEquals(1, result.size());
         } catch (Exception ex) {
