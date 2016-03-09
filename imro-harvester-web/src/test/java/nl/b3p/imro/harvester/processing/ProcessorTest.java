@@ -76,10 +76,10 @@ public class ProcessorTest {
     public void testParseGeleideformulieren(){
            try {
             URL expResult = new URL("http://files.b3p.nl/imroharvester/NL.IMRO.0297.BGBBP20140020-OW01.gml");
-            List<URL> result = instance.parseGeleideformulieren(Collections.singletonList(new URL("http://files.b3p.nl/imroharvester/g_NL.IMRO.0297.BGBBP20140020-OW01.xml")));
+            List<Geleideformulier> result = instance.retrieveGeleideformulieren(Collections.singletonList(new URL("http://files.b3p.nl/imroharvester/g_NL.IMRO.0297.BGBBP20140020-OW01.xml")));
 
             assertEquals(1, result.size());
-            assertEquals(expResult, result.get(0));
+            assertEquals(expResult, result.get(0).getGML());
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
         }
@@ -89,11 +89,11 @@ public class ProcessorTest {
      * Test of getPlannen method, of class Processor.
      */
     @Test
-    public void testGetPlannenManifesSTRItV1() {
+    public void testGetPlannenManifestSTRItV1() {
         try {
             System.out.println("testGetPlannenManifestV1");
            // URL u = this.getClass().getResource("manifestaaenhunze.xml");
-            List<URL> result = instance.getPlanURLs(new URL(job.getUrl()));
+            List<URL> result = instance.getGeleideformulierURLSFromManifest(new URL(job.getUrl()));
             assertEquals(1, result.size());
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
@@ -109,7 +109,7 @@ public class ProcessorTest {
             fail("Not yet implemented");
             System.out.println("testGetPlannenManifestV2");
             URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
-            List<URL> result = instance.getPlanURLs(u);
+            List<URL> result = instance.getGeleideformulierURLSFromManifest(u);
             assertEquals(2, result.size());
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
