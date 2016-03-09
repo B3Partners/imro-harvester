@@ -17,6 +17,7 @@
 package nl.b3p.imro.harvester.entities.imro;
 
 import com.vividsolutions.jts.geom.MultiPolygon;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,7 +52,7 @@ public class Bestemmingsplan {
 
     private String besluitnummer;
 
-@Column(name = "geometrie", columnDefinition="geometry")
+    @Column(name = "geometrie", columnDefinition="geometry")
     private MultiPolygon geometrie;
 
     public int getId() {
