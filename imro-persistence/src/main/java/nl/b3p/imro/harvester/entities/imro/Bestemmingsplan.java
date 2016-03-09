@@ -51,6 +51,7 @@ public class Bestemmingsplan {
 
     private String besluitnummer;
 
+@Column(name = "geometrie", columnDefinition="geometry")
     private MultiPolygon geometrie;
 
     public int getId() {

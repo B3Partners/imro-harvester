@@ -17,15 +17,11 @@
 package nl.b3p.imro.harvester.processing;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
-import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
-import nl.geonovum.imro._2012._1.FeatureCollectionIMROType;
+import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -90,7 +86,7 @@ public class ProcessorTest {
         try {
             System.out.println("getPlannen");
             URL u = this.getClass().getResource("manifestaaenhunze.xml");
-            List<URL> result = instance.getPlannen(u);
+            List<URL> result = instance.getPlanURLs(u);
             assertEquals(160, result.size());
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
@@ -105,7 +101,7 @@ public class ProcessorTest {
         try {
             System.out.println("getPlannen");
             URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
-            List<URL> result = instance.getPlannen(u);
+            List<URL> result = instance.getPlanURLs(u);
             assertEquals(2, result.size());
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
@@ -120,11 +116,36 @@ public class ProcessorTest {
     public void testParsePlan() {
         try {
             System.out.println("parsePlan");
-            URL u = this.getClass().getResource("NL.IMRO.9999.vergunning0001-0001.gml");
-            Object o = instance.parsePlan(u);
+            URL u = this.getClass().getResource("2012.gml");
+            List<Object> o = instance.parsePlan(u);
             assertNotNull(o);
+            assertNotEquals(0, o.size());
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
         }
     }
+
+    /**
+     * Test of parsePlan method, of class Processor.
+     */
+    @Test
+    public void testParsePlanInhoudBestemmingsplan() {
+        try {
+            System.out.println("parsePlanInhoud");
+            URL u = this.getClass().getResource("2012.gml");
+            List<Object> o = instance.parsePlan(u);
+            assertNotNull(o);
+            for (Object obj : o) {
+                if(obj instanceof Bestemmingsplan){
+                    Bestemmingsplan bp = (Bestemmingsplan)obj;
+                    assertEquals("bestemmingsplan", bp.getTypePlan());
+                    assertEquals("NL.IMRO.0297.BGBBP20140020-OW01", bp.getIdentificatie());
+                }
+            }
+        } catch (Exception e) {
+            fail("Exception occured: " + e.getLocalizedMessage());
+        }
+    }
+
+
 }
