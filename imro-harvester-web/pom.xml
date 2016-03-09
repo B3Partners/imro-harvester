@@ -137,7 +137,7 @@
                     </execution>
                     <!--execution>
                         <id>test-schema-export</id>
-                        <phase>generate-test-resources</phase>
+                        <phase>process-test-classes</phase>
                         <configuration>
                             <hibernatetool destdir="${project.build.outputDirectory}/ddlscripts">
                                 <classpath>

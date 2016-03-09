@@ -147,19 +147,6 @@
         <module>imro-classes</module>
         <module>imro-persistence</module>
     </modules>
-
-    <repositories>
-        <repository>
-            <id>Hibernate Spatial repo</id>
-            <url>http://www.hibernatespatial.org/repository</url>
-        </repository>
-        <repository>
-            <id>repo.b3p.nl</id>
-            <name>B3Partners public repository</name>
-            <url>http://repo.b3p.nl/nexus/content/repositories/public/</url>
-        </repository>
-
-    </repositories>
     <developers>
         <developer>
             <name>Meine Toonen</name>

@@ -13,12 +13,71 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.vividsolutions</groupId>
             <artifactId>jts</artifactId>
         </dependency>
     </dependencies>
+    <build>
+
+        <!--filters>
+            <filter>${project.basedir}/src/main/resources/postgres.properties</filter>
+        </filters>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources/META-INF</directory>
+                <targetPath>META-INF</targetPath>
+                <filtering>true</filtering>
+            </resource>
+        </resources-->
+        <plugins>
+            <!--plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>hibernate3-maven-plugin</artifactId>
+                <version>3.0</version>
+                <executions>
+                    <execution>
+                        <id>schema-export</id>
+                        <phase>process-classes</phase>
+                        <configuration>
+                            <hibernatetool destdir="${project.build.directory}/ddlscripts">
+                                <classpath>
+                                    <path location="target" />
+                                </classpath>
+                                <hbm2ddl export="false" drop="false" create="true" outputfilename="schemaexport.sql" format="true">
+                                    <jpaconfiguration persistenceUnit="imroPU" />
+                                </hbm2ddl>
+                            </hibernatetool>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-schema-export</id>
+                        <phase>generate-test-resources</phase>
+                        <configuration>
+                            <hibernatetool destdir="${project.build.outputDirectory}/ddlscripts">
+                                <classpath>
+                                    <path location="target" />
+                                </classpath>
+                                <hbm2ddl export="true" drop="true" create="true" outputfilename="hsqldb-schema-export.sql" format="true">
+                                    <jpaconfiguration persistenceUnit="imro-hsqldb" />
+                                </hbm2ddl>
+                            </hibernatetool>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin-->
+        </plugins>
+    </build>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
