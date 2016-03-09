@@ -26,12 +26,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.RollbackException;
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.Unmarshaller;
 import nl.b3p.imro.harvester.entities.HarvestJob;
-import nl.geonovum.imro._2012._1.FeatureCollectionIMROType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
@@ -49,7 +46,7 @@ public class Processor {
     private static final Log log = LogFactory.getLog(Processor.class);
     private Integer timeout;
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
-    private IMROParseFactory factory = new IMROParseFactory();
+    private IMROParser parser = new IMROParser();
 
     public Processor(List<HarvestJob> jobs) {
         this(jobs, 30000);
@@ -70,7 +67,8 @@ public class Processor {
                 
                 for (Geleideformulier geleideformulier : geleideformulieren) {
                     try {
-                        List<Object> plannen = parsePlan(geleideformulier);
+                        List<Object> plannen = parser.parseGML(geleideformulier);
+                        
                         if (!em.getTransaction().isActive()) {
                             em.getTransaction().begin();
                         }
@@ -98,6 +96,7 @@ public class Processor {
         }
     }
 
+    // <editor-fold desc="Manifest ophaalmethods" defaultstate="Collapsed">
     protected URL getManifest(HarvestJob job) throws IOException {
         if(job.getType() == null || job.getType() == HarvestJob.HarvestJobType.DIRECT){
             return new URL(job.getUrl());
@@ -119,7 +118,9 @@ public class Processor {
         String url = link.attr("href");
         return new URL(url);
     }
+    // </editor-fold>
 
+    // <editor-fold desc="Geleideformulier verwerk methodes" defaultstate="collapsed">
     protected List<URL> getGeleideformulierURLSFromManifest(URL manifestUrl) throws JAXBException, MalformedURLException{
         List<URL> geleideformulieren = new ArrayList<URL>();
         JAXBContext jaxbContext = JAXBContext.newInstance(nl.geonovum.stri._2012._1.Manifest.class, nl.geonovum.stri._2012._2.Manifest.class);
@@ -199,36 +200,6 @@ public class Processor {
         }
         return urls;
     }
-
-    protected List<Object> parsePlan(Geleideformulier geleideformulier) throws JAXBException, URISyntaxException, MalformedURLException {
-        return parsePlan(geleideformulier.getGML());
-    }
-
-    protected List<Object> parsePlan(URL u) throws JAXBException{
-         //  File file = new File(u.toURI());
-        JAXBContext jaxbContext = JAXBContext.newInstance("nl.geonovum.imro._2012._1");
-
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        JAXBIntrospector insp = jaxbContext.createJAXBIntrospector();
-        JAXBElement o = (JAXBElement) jaxbUnmarshaller.unmarshal(u);
-
-        Object value = o.getValue();
-        FeatureCollectionIMROType fc = (FeatureCollectionIMROType) value;
-        List<Object> bp = processFeatureCollection(fc, insp);
-        return bp;
-    }
-
-    private List<Object> processFeatureCollection(FeatureCollectionIMROType fc, JAXBIntrospector inspector) {
-        List<Object> objs = new ArrayList<Object>();
-        List<FeatureCollectionIMROType.FeatureMember> members = fc.getFeatureMember();
-        for (FeatureCollectionIMROType.FeatureMember member : members) {
-            Object o = member.getAbstractFeature().getValue();
-            Object parsed = factory.parse(o);
-            if (parsed != null) {
-                objs.add(parsed);
-            }
-        }
-        return objs;
-    }
-
+    // </editor-fold>
+    
 }

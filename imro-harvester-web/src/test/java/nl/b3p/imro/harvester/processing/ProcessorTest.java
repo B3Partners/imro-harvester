@@ -117,45 +117,6 @@ public class ProcessorTest {
 
     }
 
-    /**
-     * Test of parsePlan method, of class Processor.
-     */
-    @Test
-    public void testParsePlan() {
-        try {
-            System.out.println("parsePlan");
-            URL u = this.getClass().getResource("2012.gml");
-            List<Object> o = instance.parsePlan(u);
-            assertNotNull(o);
-            assertNotEquals(0, o.size());
-        } catch (Exception e) {
-            fail("Exception occured: " + e.getLocalizedMessage());
-        }
-    }
-
-    /**
-     * Test of parsePlan method, of class Processor.
-     */
-    @Test
-    public void testParsePlanInhoudBestemmingsplan() {
-        try {
-            System.out.println("parsePlanInhoud");
-            URL u = this.getClass().getResource("2012.gml");
-            List<Object> o = instance.parsePlan(u);
-            assertNotNull(o);
-            Bestemmingsplan bp = null;
-            for (Object obj : o) {
-                if(obj instanceof Bestemmingsplan){
-                    bp = (Bestemmingsplan)obj;
-                }
-            }
-            assertNotNull(bp);
-            assertEquals("bestemmingsplan", bp.getTypePlan());
-            assertEquals("NL.IMRO.0297.BGBBP20140020-OW01", bp.getIdentificatie());
-        } catch (Exception e) {
-            fail("Exception occured: " + e.getLocalizedMessage());
-        }
-    }
 
 
 }
