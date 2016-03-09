@@ -3,6 +3,10 @@
 
     <persistence-unit name="imroPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>nl.b3p.imro.harvester.entities.Gebruiker</class>
+        <class>nl.b3p.imro.harvester.entities.Role</class>
+        <class>nl.b3p.imro.harvester.entities.HarvestJob</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
 
             <property name="hibernate.connection.url" value="${imro.url}" />
@@ -21,19 +25,4 @@
         </properties>
     </persistence-unit>
 
-     <persistence-unit name="imro-hsqldb" transaction-type="RESOURCE_LOCAL">
-        <!-- de hsqldb in-memory of file database wordt gebruikt voor unit tests. -->
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <!--mapping-file>META-INF/orm-hsqldb.xml</mapping-file-->
-        <properties>
-            <property name="hibernate.archive.autodetection" value="class"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
-            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:./target/unittest-hsqldb/db;shutdown=true"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
-        </properties>
-    </persistence-unit>
 </persistence>

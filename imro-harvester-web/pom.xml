@@ -124,13 +124,12 @@
                     </execution>
                     <execution>
                         <id>test-schema-export</id>
-                        <phase>generate-test-resources</phase>
+                        <phase>process-test-classes</phase>
                         <configuration>
                             <hibernatetool destdir="${project.build.outputDirectory}/ddlscripts">
                                 <classpath>
                                     <path location="target" />
                                 </classpath>
-                                <!-- voor de unit tests met HSQLDB -->
                                 <hbm2ddl export="true" drop="true" create="true" outputfilename="hsqldb-schema-export.sql" format="true">
                                     <jpaconfiguration persistenceUnit="imro-hsqldb" />
                                 </hbm2ddl>
