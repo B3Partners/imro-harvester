@@ -72,6 +72,19 @@ public class ProcessorTest {
         }
     }
 
+    @Test
+    public void testParseGeleideformulieren(){
+           try {
+            URL expResult = new URL("http://files.b3p.nl/imroharvester/NL.IMRO.0297.BGBBP20140020-OW01.gml");
+            List<URL> result = instance.parseGeleideformulieren(Collections.singletonList(new URL("http://files.b3p.nl/imroharvester/g_NL.IMRO.0297.BGBBP20140020-OW01.xml")));
+
+            assertEquals(1, result.size());
+            assertEquals(expResult, result.get(0));
+        } catch (Exception e) {
+            fail("Exception occured: " + e.getLocalizedMessage());
+        }
+    }
+
     /**
      * Test of getPlannen method, of class Processor.
      */
