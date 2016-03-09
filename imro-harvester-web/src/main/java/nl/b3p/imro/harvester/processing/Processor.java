@@ -77,11 +77,14 @@ public class Processor {
                         }
                         em.getTransaction().commit();
                     } catch (JAXBException ex) {
-                        log.error("Cannot parse url " + planUrl, ex);
+                        log.error("Cannot parse url " + planUrl);
+                        log.debug(ex);
                     } catch (URISyntaxException ex) {
-                        log.error("Error concerning URI:", ex);
+                        log.error("Error concerning URI:");
+                        log.debug(ex);
                     } catch (RollbackException e) {
-                        log.error("Cannot save entity in plan " + planUrl, e);
+                        log.error("Cannot save entity in plan " + planUrl);
+                        log.debug(e);
                         em.getTransaction().rollback();
                     }
                 }
@@ -96,9 +99,13 @@ public class Processor {
     }
 
     protected URL getManifest(HarvestJob job) throws IOException {
-        URL u = new URL(job.getUrl());
-        Document doc = Jsoup.parse(u, timeout);
-        return getManifest(doc);
+        if(job.getType() == HarvestJob.HarvestJobType.DIRECT){
+            return new URL(job.getUrl());
+        }else{
+            URL u = new URL(job.getUrl());
+            Document doc = Jsoup.parse(u, timeout);
+            return getManifest(doc);
+        }
     }
 
     protected URL getManifest(File f) throws IOException {
