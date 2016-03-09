@@ -16,7 +16,7 @@
  */
 package nl.b3p.imro.harvester.processing;
 
-import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
@@ -39,29 +39,24 @@ public class ProcessorTest {
     private HarvestJob job = null;
 
     @Before
-    public void initTests() {
+    public void initTests() throws MalformedURLException {
         job = new HarvestJob();
 
-        URL u = this.getClass().getResource("testaaenhunze.html");
+        URL u = new URL("http://files.b3p.nl/imroharvester/manifest.xml");
+        //URL u = this.getClass().getResource("testaaenhunze.html");
         //"https://www.ruimtelijkeplannen.nl/web-roi/index/showManifest?organizationId=aaenhunze&striVersion=STRI2008"
         job.setUrl(u.toString());
         instance = new Processor(Collections.singletonList(job));
     }
 
-    /**
-     * Test of getManifest method, of class Processor.
-     */
     @Test
-    public void testGetManifestFile() {
-        try {
-            URL expResult = new URL("http://www.gisnet.nl/ruimtelijkeplannen/AaenHunze/manifest_IMRO2012.xml");
-            File f = new File(new URL(job.getUrl()).toURI());
-            URL result = instance.getManifest(f);
-            assertEquals(expResult, result);
-        } catch (Exception e) {
-            fail("Exception occured: " + e.getLocalizedMessage());
-        }
+    public void testRun(){
+        job = new HarvestJob();
+        job.setUrl("https://www.ruimtelijkeplannen.nl/web-roi/index/showManifest?organizationId=zaltbommel&striVersion=STRI2008");
+        instance = new Processor(Collections.singletonList(job));
+        instance.process();
     }
+
     /*
      * Test of getManifest method, of class Processor.
      */
@@ -69,9 +64,8 @@ public class ProcessorTest {
     @Test
     public void testGetManifestUrl() {
         try {
-            URL expResult = new URL("http://www.gisnet.nl/ruimtelijkeplannen/AaenHunze/manifest_IMRO2012.xml");
-            File f = new File(new URL(job.getUrl()).toURI());
-            URL result = instance.getManifest(f);
+            URL expResult = new URL("http://files.b3p.nl/imroharvester/manifest.xml");
+            URL result = instance.getManifest(job);
             assertEquals(expResult, result);
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
@@ -82,12 +76,12 @@ public class ProcessorTest {
      * Test of getPlannen method, of class Processor.
      */
     @Test
-    public void testGetPlannenManifestV1() {
+    public void testGetPlannenManifesSTRItV1() {
         try {
-            System.out.println("getPlannen");
-            URL u = this.getClass().getResource("manifestaaenhunze.xml");
-            List<URL> result = instance.getPlanURLs(u);
-            assertEquals(160, result.size());
+            System.out.println("testGetPlannenManifestV1");
+           // URL u = this.getClass().getResource("manifestaaenhunze.xml");
+            List<URL> result = instance.getPlanURLs(new URL(job.getUrl()));
+            assertEquals(1, result.size());
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
         }
@@ -99,7 +93,8 @@ public class ProcessorTest {
     @Test
     public void testGetPlannenManifestV2() {
         try {
-            System.out.println("getPlannen");
+            fail("Not yet implemented");
+            System.out.println("testGetPlannenManifestV2");
             URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
             List<URL> result = instance.getPlanURLs(u);
             assertEquals(2, result.size());

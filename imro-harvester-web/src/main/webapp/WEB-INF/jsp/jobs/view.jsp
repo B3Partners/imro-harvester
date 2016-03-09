@@ -21,7 +21,7 @@
             <table class="table table-hover table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>id</th><th>URL</th><th>Bewerken</th>
+                        <th>id</th><th>URL</th><th>Type</th><th>Bewerken</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +29,7 @@
                         <tr>
                             <td><c:out value="${job.id}"/></td>
                             <td class="col-md-1"><c:out value="${job.url}"/></td>
+                            <td class="col-md-1"><c:out value="${job.type}"/></td>
                             <td>
                                 <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="edit"><stripes:param name="job" value="${job.id}"/></stripes:url>" class="btn btn-info">Bewerk</a>
                                 <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="delete"><stripes:param name="job" value="${job.id}"/></stripes:url>"  class="btn btn-danger">Verwijder</a>

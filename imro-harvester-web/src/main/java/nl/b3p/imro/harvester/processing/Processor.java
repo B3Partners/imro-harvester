@@ -99,7 +99,7 @@ public class Processor {
     }
 
     protected URL getManifest(HarvestJob job) throws IOException {
-        if(job.getType() == HarvestJob.HarvestJobType.DIRECT){
+        if(job.getType() == null || job.getType() == HarvestJob.HarvestJobType.DIRECT){
             return new URL(job.getUrl());
         }else{
             URL u = new URL(job.getUrl());
@@ -121,13 +121,7 @@ public class Processor {
     }
 
     protected List<URL> getPlanURLs(URL manifestUrl) throws JAXBException, MalformedURLException, URISyntaxException {
-        List<URL> urls = new ArrayList<URL>();
-        File file = null;
-        try {
-            file = new File(manifestUrl.toURI());
-        } catch (Exception e) {
-            file = new File(manifestUrl.getPath());
-        }
+        List<URL> geleideformulieren = new ArrayList<URL>();
         JAXBContext jaxbContext = JAXBContext.newInstance(nl.geonovum.stri._2012._1.Manifest.class, nl.geonovum.stri._2012._2.Manifest.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -140,7 +134,7 @@ public class Processor {
             for (nl.geonovum.stri._2012._1.Dossier dossier : dossiers) {
                 List<nl.geonovum.stri._2012._1.Dossier.Plan> plannen = dossier.getPlan();
                 for (nl.geonovum.stri._2012._1.Dossier.Plan plan : plannen) {
-                    urls.add(new URL(plan.getGeleideFormulier()));
+                    geleideformulieren.add(new URL(plan.getGeleideFormulier()));
                 }
             }
         } else if (m instanceof nl.geonovum.stri._2012._2.Manifest) {
@@ -149,9 +143,40 @@ public class Processor {
             for (nl.geonovum.stri._2012._2.Dossier dossier : dossiers) {
                 List<nl.geonovum.stri._2012._2.Dossier.Plan> plannen = dossier.getPlan();
                 for (nl.geonovum.stri._2012._2.Dossier.Plan plan : plannen) {
-                    urls.add(new URL(plan.getGeleideFormulier()));
+                    geleideformulieren.add(new URL(plan.getGeleideFormulier()));
                 }
             }
+        }
+        List<URL> planUrls = parseGeleideformulieren(geleideformulieren);
+        return planUrls;
+    }
+
+    protected List<URL> parseGeleideformulieren(List<URL> geleidenformulieren) throws JAXBException, MalformedURLException{
+        List<URL> urls = new ArrayList<URL>();
+        JAXBContext jaxbContext = JAXBContext.newInstance(nl.geonovum.stri._2012._1.GeleideFormulier.class, nl.geonovum.stri._2012._2.GeleideFormulier.class);
+
+        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+        for (URL geleidenformulierURL : geleidenformulieren) {
+            Object geleideformulierObject = jaxbUnmarshaller.unmarshal(geleidenformulierURL);
+            // Support two versions of the manifest. Sadly, almost the same, but namespaces in xsd differ.
+            if (geleideformulierObject instanceof nl.geonovum.stri._2012._1.GeleideFormulier) {
+                nl.geonovum.stri._2012._1.GeleideFormulier geleideformulier = (nl.geonovum.stri._2012._1.GeleideFormulier) geleideformulierObject;
+                nl.geonovum.stri._2012._1.Plan.Onderdelen onderdelen = geleideformulier.getPlan().getOnderdelen();
+                String basisurl = onderdelen.getBasisURL();
+                String gml = onderdelen.getIMRO();
+                URL u = new URL (basisurl + gml);
+                urls.add(u);
+
+            } else if (geleideformulierObject instanceof nl.geonovum.stri._2012._2.GeleideFormulier) {
+                nl.geonovum.stri._2012._2.GeleideFormulier geleideformulier = (nl.geonovum.stri._2012._2.GeleideFormulier) geleideformulierObject;
+                nl.geonovum.stri._2012._2.Plan.Onderdelen onderdelen = geleideformulier.getPlan().getOnderdelen();
+                String basisurl = onderdelen.getBasisURL();
+                String gml = onderdelen.getGML();
+                URL u = new URL (basisurl + gml);
+                urls.add(u);
+            }
+
         }
         return urls;
     }
