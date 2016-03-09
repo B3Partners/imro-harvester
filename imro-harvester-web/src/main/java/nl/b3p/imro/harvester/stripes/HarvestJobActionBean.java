@@ -52,7 +52,8 @@ public class HarvestJobActionBean implements ActionBean{
 
     @Validate
     @ValidateNestedProperties({
-            @Validate(field = "url")
+            @Validate(field = "url"),
+            @Validate(field = "type")
     })
     private HarvestJob job = new HarvestJob();
 

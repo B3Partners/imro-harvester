@@ -17,6 +17,10 @@
         <stripes:form   beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean">
             <stripes:hidden name="job" value="${job.id}"/>
             <stripes:text name="job.url"/>
+            <stripes:select name="job.type">
+                <stripes:option value="">Select One</stripes:option>
+                <stripes:options-enumeration label="value" enum="nl.b3p.imro.harvester.entities.HarvestJob.HarvestJobType"/>
+            </stripes:select>
             <stripes:submit name="save"/><stripes:reset name="reset"/>
         </stripes:form>
 

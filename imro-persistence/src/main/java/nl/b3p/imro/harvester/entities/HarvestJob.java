@@ -17,6 +17,8 @@
 package nl.b3p.imro.harvester.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,6 +36,9 @@ public class HarvestJob {
 
     private String url;
 
+    @Enumerated(EnumType.STRING)
+    private HarvestJob.HarvestJobType type;
+
     public int getId() {
         return id;
     }
@@ -49,4 +54,43 @@ public class HarvestJob {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public HarvestJobType getType() {
+        return type;
+    }
+
+    public void setType(HarvestJobType type) {
+        this.type = type;
+    }
+
+
+    public enum HarvestJobType {
+        RUIMTELIJKEPLANNENSCRAPER("roonline"),
+        DIRECT("direct");
+
+        private final String value;
+
+        HarvestJobType(String v) {
+            value = v;
+        }
+
+        public String value() {
+            return value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public static HarvestJob.HarvestJobType fromValue(String v) {
+            for (HarvestJob.HarvestJobType c : HarvestJob.HarvestJobType.values()) {
+                if (c.value.equals(v)) {
+                    return c;
+                }
+            }
+            throw new IllegalArgumentException(v);
+        }
+
+    }
+
 }
