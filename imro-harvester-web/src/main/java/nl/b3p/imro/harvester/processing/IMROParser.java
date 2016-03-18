@@ -16,6 +16,8 @@
  */
 package nl.b3p.imro.harvester.processing;
 
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.MultiPolygon;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -29,6 +31,7 @@ import javax.xml.bind.Unmarshaller;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.geonovum.imro._2012._1.FeatureCollectionIMROType;
 import nl.geonovum.imro._2012._1.NEN3610IDType;
+import org.w3c.dom.Element;
 
 /**
  *
@@ -36,12 +39,11 @@ import nl.geonovum.imro._2012._1.NEN3610IDType;
  */
 public class IMROParser {
 
-
     protected List<Object> parseGML(Geleideformulier geleideformulier) throws JAXBException, URISyntaxException, MalformedURLException {
         return parseGML(geleideformulier.getGML());
     }
 
-    protected List<Object> parseGML(URL u) throws JAXBException{
+    protected List<Object> parseGML(URL u) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance("nl.geonovum.imro._2012._1");
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -69,26 +71,50 @@ public class IMROParser {
         return objs;
     }
 
-    private Object parseFeatureMember(Object o){
+    private Object parseFeatureMember(Object o) {
         Object obj = null;
         if (o instanceof nl.geonovum.imro._2012._1.GebiedsaanduidingType) {
         } else if (o instanceof nl.geonovum.imro._2012._1.BestemmingsplangebiedType) {
             obj = parseImro2012Bestemmingsplan(o);
         } else {
         }
-        
+
         return obj;
     }
 
     protected Bestemmingsplan parseImro2012Bestemmingsplan(Object o) {
         Bestemmingsplan bp = new Bestemmingsplan();
         nl.geonovum.imro._2012._1.BestemmingsplangebiedType bpgt = (nl.geonovum.imro._2012._1.BestemmingsplangebiedType) o;
-        bp.setTypePlan(bpgt.getTypePlan().value());
+
         NEN3610IDType id = bpgt.getIdentificatie().getNEN3610ID();
         String identificatie = id.getNamespace() + "." + id.getLokaalID() + "-" + id.getVersie();
+
+        bp.setTypePlan(bpgt.getTypePlan().value());
         bp.setIdentificatie(identificatie);
+        try {
+            GeometryConverter gc = new GeometryConverter();
+            MultiPolygon g = gc.convertMultiPolygonGeometry(bpgt.getGeometrie());
+            bp.setGeometrie(g);
+            int b = 0;
+        } catch (Exception e) {
+            int a = 0;
+        }
         return bp;
     }
 
+    protected Geometry parseGeometry(Element e) {
+        /* URL url = TestData.getResource(this, "states.xml");
+         InputStream in = url.openStream();
+
+         GML gml = new GML(Version.GML3);
+         SimpleFeatureIterator iter = gml.decodeFeatureIterator(in);
+
+         int count = 0;
+         while (iter.hasNext()) {
+         SimpleFeature feature = iter.next();
+         count++;
+         }*/
+        return null;
+    }
 
 }
