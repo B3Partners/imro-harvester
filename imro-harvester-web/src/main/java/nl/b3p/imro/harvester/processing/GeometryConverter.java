@@ -12,6 +12,7 @@ import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.geom.PrecisionModel;
 import com.vividsolutions.jts.simplify.DouglasPeuckerSimplifier;
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import javax.xml.parsers.ParserConfigurationException;
@@ -33,8 +34,8 @@ import org.xml.sax.SAXException;
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
-
 public class GeometryConverter {
+
     protected final static Log log = LogFactory.getLog(GeometryConverter.class);
 
     private final static double DISTANCE_TOLERANCE = 0.001;
@@ -55,75 +56,73 @@ public class GeometryConverter {
         gml3Config.getContext().registerComponentInstance(gf);
         gml3Config.getContext().registerComponentInstance(arcParameters);
 
-        
         parser = new Parser(gml3Config);
         this.geometryFactory = gf;
     }
 
     public MultiPolygon convertMultiPolygonGeometry(Element geometry)
-            throws  IOException,  ParserConfigurationException,   SAXException,   TransformerException {
+            throws IOException, ParserConfigurationException, SAXException, TransformerException {
         if (geometry != null) {
             Geometry resultGeometry = convertGeometry(geometry);
 
-            if (resultGeometry instanceof MultiPolygon)
+            if (resultGeometry instanceof MultiPolygon) {
                 return (MultiPolygon) resultGeometry;
-            else if (resultGeometry instanceof Polygon)
-                return geometryFactory.createMultiPolygon(new Polygon[] { (Polygon)resultGeometry } );
-          
-             //   throw new ROConversionException("geometry not a Polygon or MultiPolygon: " + resultGeometry.getClass());
-        }
-        return null;
-    }
-/*
-    public MultiLineString convertMultiLineStringGeometry(Node geometry)
-            throws  IOException, SAXException, ParserConfigurationException {
-        if (geometry != null) {
-            Geometry resultGeometry = convertGeometryImpl(geometry);
+            } else if (resultGeometry instanceof Polygon) {
+                return geometryFactory.createMultiPolygon(new Polygon[]{(Polygon) resultGeometry});
+            }
 
-            if (resultGeometry instanceof MultiLineString)
-                return (MultiLineString) resultGeometry;
-            else if (resultGeometry instanceof LineString)
-                return geometryFactory.createMultiLineString(new LineString[] { (LineString)resultGeometry });
-           
-               // throw new ROConversionException("geometry not a LineString or MultiLineString: " + resultGeometry.getClass());
+            //   throw new ROConversionException("geometry not a Polygon or MultiPolygon: " + resultGeometry.getClass());
         }
         return null;
     }
-*/
+    /*
+     public MultiLineString convertMultiLineStringGeometry(Node geometry)
+     throws  IOException, SAXException, ParserConfigurationException {
+     if (geometry != null) {
+     Geometry resultGeometry = convertGeometryImpl(geometry);
+
+     if (resultGeometry instanceof MultiLineString)
+     return (MultiLineString) resultGeometry;
+     else if (resultGeometry instanceof LineString)
+     return geometryFactory.createMultiLineString(new LineString[] { (LineString)resultGeometry });
+
+     // throw new ROConversionException("geometry not a LineString or MultiLineString: " + resultGeometry.getClass());
+     }
+     return null;
+     }
+     */
+
     private Geometry convertGeometry(Element elem)
             throws IOException, SAXException, ParserConfigurationException, TransformerException {
         if (!(elem instanceof org.w3c.dom.Element)) {
-         //   throw new ROConversionException("gml org.w3c.node is not an org.w3c.Element");
+            throw new IllegalArgumentException("gml org.w3c.node is not an org.w3c.Element");
         }
-        if (elem != null) {
             // TODO: maybe convert node directly to a source / inputsource / reader / stream for parser.
-            // instead of JDOM detour.
-          // org.jdom.Element elem = new DOMBuilder().build((org.w3c.dom.Element) geometry);
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        // instead of JDOM detour.
+        // org.jdom.Element elem = new DOMBuilder().build((org.w3c.dom.Element) geometry);
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
-            StreamResult result = new StreamResult(new StringWriter());
-            DOMSource source = new DOMSource(elem);
-            transformer.transform(source, result);
+        StreamResult result = new StreamResult(new StringWriter());
+        DOMSource source = new DOMSource(elem);
+        transformer.transform(source, result);
 
-            String gmlString = result.getWriter().toString();
-            //String gmlString = "";
-            Object parsedObject = parser.parse(new StringReader(gmlString));
+        String gmlString = result.getWriter().toString();
+        //String gmlString = "";
+        Object parsedObject = parser.parse(new StringReader(gmlString));
 
-            if (parsedObject instanceof Geometry) {
-                Geometry geom = (Geometry)parsedObject;
-                if (!geom.isValid()) {
-                    geom = geom.buffer(0.0);
-                    log.debug("Geometry is invalid. Made valid by buffering with 0");
-                }
-                // arcs can have nodes that are on the same point (28992; 3 digit precision): simplify
-                Geometry simplGeom = DouglasPeuckerSimplifier.simplify(geom, DISTANCE_TOLERANCE);
-                return simplGeom;
-            } else {
-              //  throw new ROConversionException("geometry not instanceof Geometry: " + parsedObject.getClass());
+        if (parsedObject instanceof Geometry) {
+            Geometry geom = (Geometry) parsedObject;
+            if (!geom.isValid()) {
+                geom = geom.buffer(0.0);
+                log.debug("Geometry is invalid. Made valid by buffering with 0");
             }
+            // arcs can have nodes that are on the same point (28992; 3 digit precision): simplify
+            Geometry simplGeom = DouglasPeuckerSimplifier.simplify(geom, DISTANCE_TOLERANCE);
+            return simplGeom;
+        } else {
+            throw new InvalidClassException(parsedObject.getClass().getCanonicalName(), "Parsed object not of class Geometry.");
         }
-        return null;
     }
 
 }
