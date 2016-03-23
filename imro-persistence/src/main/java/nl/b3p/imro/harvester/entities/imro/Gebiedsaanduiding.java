@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -28,6 +29,17 @@ public class Gebiedsaanduiding {
     private MultiPolygon geometrie;
 
     private String naam;
+
+    private String typePlanObject;
+
+    private String gebiedsaanduidinggroep;
+
+    private String artikelnummer;
+
+    private String verwijzing;
+
+    @ManyToOne
+    private Bestemmingsplan bestemmingsplan;
 
     public int getId() {
         return id;
@@ -61,5 +73,44 @@ public class Gebiedsaanduiding {
         this.naam = naam;
     }
 
+    public String getTypePlanObject() {
+        return typePlanObject;
+    }
+
+    public void setTypePlanObject(String typePlanObject) {
+        this.typePlanObject = typePlanObject;
+    }
+
+    public String getGebiedsaanduidinggroep() {
+        return gebiedsaanduidinggroep;
+    }
+
+    public void setGebiedsaanduidinggroep(String gebiedsaanduidinggroep) {
+        this.gebiedsaanduidinggroep = gebiedsaanduidinggroep;
+    }
+
+    public String getArtikelnummer() {
+        return artikelnummer;
+    }
+
+    public void setArtikelnummer(String artikelnummer) {
+        this.artikelnummer = artikelnummer;
+    }
+
+    public String getVerwijzing() {
+        return verwijzing;
+    }
+
+    public void setVerwijzing(String verwijzing) {
+        this.verwijzing = verwijzing;
+    }
+
+    public Bestemmingsplan getBestemmingsplan() {
+        return bestemmingsplan;
+    }
+
+    public void setBestemmingsplan(Bestemmingsplan bestemmingsplan) {
+        this.bestemmingsplan = bestemmingsplan;
+    }
     
 }

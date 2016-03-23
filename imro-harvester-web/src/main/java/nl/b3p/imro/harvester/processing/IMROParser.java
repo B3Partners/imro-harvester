@@ -37,7 +37,7 @@ import nl.geonovum.imro._2012._1.NEN3610IDType;
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
 public class IMROParser {
-
+    private static GeometryConverter gc = new GeometryConverter();
     protected List<Object> parseGML(Geleideformulier geleideformulier) throws JAXBException, URISyntaxException, MalformedURLException {
         return parseGML(geleideformulier.getGML());
     }
@@ -73,6 +73,7 @@ public class IMROParser {
     private Object parseFeatureMember(Object o) {
         Object obj = null;
         if (o instanceof nl.geonovum.imro._2012._1.GebiedsaanduidingType) {
+            obj = parseImro2012Gebiedsaanduiding(o);
         } else if (o instanceof nl.geonovum.imro._2012._1.BestemmingsplangebiedType) {
             obj = parseImro2012Bestemmingsplan(o);
         } else {
@@ -83,18 +84,20 @@ public class IMROParser {
 
     private Gebiedsaanduiding parseImro2012Gebiedsaanduiding(Object o) {
         Gebiedsaanduiding gba = new Gebiedsaanduiding();
-
         nl.geonovum.imro._2012._1.GebiedsaanduidingType ga = (nl.geonovum.imro._2012._1.GebiedsaanduidingType) o;
 
         String identificatie = getIdentificatie(ga.getIdentificatie().getNEN3610ID());
         
         gba.setNaam(ga.getNaam());
         gba.setIdentificatie(identificatie);
+        gba.setArtikelnummer(ga.getArtikelnummer());
+        gba.setGebiedsaanduidinggroep(ga.getGebiedsaanduidinggroep().value());
+        gba.setTypePlanObject(ga.getTypePlanobject().value());
+        gba.setVerwijzing(ga.getVerwijzingNaarTekstInfo().getTekstReferentieBP().getVerwijzingNaarTekst());
         try {
-            GeometryConverter gc = new GeometryConverter();
             MultiPolygon g = gc.convertMultiPolygonGeometry(ga.getGeometrie());
             gba.setGeometrie(g);
-            int b = 0;
+            
         } catch (Exception e) {
         }
         

@@ -41,7 +41,7 @@ public class IMROParserTest {
         geleideformulier.setIdentificatie("NL.IMRO.0297.BGBBP20140020-OW01");
         
         List<Object> result = instance.parseGML(geleideformulier);
-        assertEquals(1, result.size());
+        assertEquals(7, result.size());
     }
 
     /**
@@ -54,7 +54,7 @@ public class IMROParserTest {
             URL u = null;
             IMROParser instance = new IMROParser();
             List<Object> result = instance.parseGML(new URL("http://files.b3p.nl/imroharvester/NL.IMRO.0297.BGBBP20140020-OW01.gml"));
-            assertEquals(1, result.size());
+            assertEquals(7, result.size());
         } catch (Exception ex) {
             fail("Exception occured " +ex.getLocalizedMessage());
         }
