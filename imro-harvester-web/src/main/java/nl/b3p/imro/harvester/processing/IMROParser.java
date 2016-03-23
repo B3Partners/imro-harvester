@@ -47,17 +47,17 @@ public class IMROParser {
         JAXBContext jaxbContext = JAXBContext.newInstance("nl.geonovum.imro._2012._1");
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        JAXBIntrospector insp = jaxbContext.createJAXBIntrospector();
+
         JAXBElement o = (JAXBElement) jaxbUnmarshaller.unmarshal(u);
 
         Object value = o.getValue();
 
         FeatureCollectionIMROType fc = (FeatureCollectionIMROType) value;
-        List<Object> bp = processFeatureCollection(fc, insp);
+        List<Object> bp = processFeatureCollection(fc);
         return bp;
     }
 
-    private List<Object> processFeatureCollection(FeatureCollectionIMROType fc, JAXBIntrospector inspector) {
+    private List<Object> processFeatureCollection(FeatureCollectionIMROType fc) {
         List<Object> objs = new ArrayList<Object>();
         List<FeatureCollectionIMROType.FeatureMember> members = fc.getFeatureMember();
         for (FeatureCollectionIMROType.FeatureMember member : members) {

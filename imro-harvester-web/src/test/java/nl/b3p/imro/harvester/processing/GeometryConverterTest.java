@@ -6,11 +6,16 @@
 package nl.b3p.imro.harvester.processing;
 
 import com.vividsolutions.jts.geom.MultiPolygon;
-import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.net.URL;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import static org.jsoup.nodes.Document.OutputSettings.Syntax.xml;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,13 +24,16 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 /**
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
 public class GeometryConverterTest {
-
+    private GeometryConverter instance = new GeometryConverter();
+    
     public GeometryConverterTest() {
     }
 
@@ -68,5 +76,36 @@ public class GeometryConverterTest {
         //fail("The test case is a prototype.");
     }
 
+   // @Test
+    public void testGebiedsaanduiding() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
+        URL url = this.getClass().getResource("2012.gml");
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        Document doc = db.parse(url.openStream());
+        XPath xPath = XPathFactory.newInstance().newXPath();
+        Node node = (Node)xPath.evaluate("/FeatureCollectionIMRO/featureMember/Gebiedsaanduiding/geometrie", doc, XPathConstants.NODE);
+        Element el = (Element)node;
+        Object mp = instance.convertMultiPolygonGeometry(el);
+        assertNotNull(mp);
+        assertTrue(mp instanceof MultiPolygon);
+    }
+
+    @Test
+    public void testBestemmingsplangebied() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
+        URL url = this.getClass().getResource("2012.gml");
+      //  URL url = new URL ("http://files.b3p.nl/imroharvester/NL.IMRO.0297.BGBBP20140020-OW01.gml");
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        dbf.setNamespaceAware(false);
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        Document doc = db.parse(url.openStream());
+        XPath xPath = XPathFactory.newInstance().newXPath();
+        Node node = (Node)xPath.evaluate("/FeatureCollectionIMRO/featureMember/Bestemmingsplangebied/geometrie", doc, XPathConstants.NODE);
+        Element el = (Element)node;
+        
+        Object mp = instance.convertMultiPolygonGeometry(el);
+        assertNotNull(mp);
+        assertTrue(mp instanceof MultiPolygon);
+        int a = 0;
+    }
 
 }

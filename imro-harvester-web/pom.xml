@@ -25,17 +25,17 @@
             <artifactId>stripes</artifactId>
         </dependency>
         <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <!--dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-c3p0</artifactId>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -85,10 +85,14 @@
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-spatial</artifactId>
-        </dependency>
+            <dependency>
+                <groupId>org.hibernatespatial</groupId>
+                <artifactId>hibernate-spatial</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernatespatial</groupId>
+                <artifactId>hibernate-spatial-postgis</artifactId>
+            </dependency>
         <dependency>
             <groupId>org.postgis</groupId>
             <artifactId>postgis-jdbc</artifactId>
@@ -102,6 +106,19 @@
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-xml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jdom</groupId>
+            <artifactId>jdom</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-epsg-hsql</artifactId>
+        </dependency>
+        <dependency>
+                <groupId>org.geotools.xsd</groupId>
+            <artifactId>gt-xsd-core</artifactId>
         </dependency>
     </dependencies>
 

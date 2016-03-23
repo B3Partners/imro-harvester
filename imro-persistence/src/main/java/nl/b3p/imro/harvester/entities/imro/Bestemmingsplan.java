@@ -22,6 +22,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import org.hibernate.annotations.Type;
 
 /**
  *
@@ -52,7 +53,7 @@ public class Bestemmingsplan {
 
     private String besluitnummer;
 
-    @Column(name = "geometrie", columnDefinition="geometry")
+    @org.hibernate.annotations.Type(type="org.hibernatespatial.GeometryUserType")
     private MultiPolygon geometrie;
 
     public int getId() {
