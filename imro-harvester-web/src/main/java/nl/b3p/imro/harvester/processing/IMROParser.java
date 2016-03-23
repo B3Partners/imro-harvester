@@ -25,27 +25,32 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.Unmarshaller;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
-import nl.geonovum.imro._2012._1.FeatureCollectionIMROType;
-import nl.geonovum.imro._2012._1.NEN3610IDType;
+import nl.b3p.imro._2012._1.FeatureCollectionIMROType;
+import nl.b3p.imro._2012._1.NEN3610IDType;
 
 /**
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
 public class IMROParser {
-    private static GeometryConverter gc = new GeometryConverter();
+    private static GeometryConverter gc;
+    private JAXBContext context20121;
+
+    public IMROParser() throws JAXBException{
+        context20121 = JAXBContext.newInstance("nl.geonovum.imro._2012._1");
+        gc = new GeometryConverter();
+    }
+
+
     protected List<Object> parseGML(Geleideformulier geleideformulier) throws JAXBException, URISyntaxException, MalformedURLException {
         return parseGML(geleideformulier.getGML());
     }
 
     protected List<Object> parseGML(URL u) throws JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance("nl.geonovum.imro._2012._1");
-
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        Unmarshaller jaxbUnmarshaller = context20121.createUnmarshaller();
 
         JAXBElement o = (JAXBElement) jaxbUnmarshaller.unmarshal(u);
 
@@ -72,9 +77,9 @@ public class IMROParser {
 
     private Object parseFeatureMember(Object o) {
         Object obj = null;
-        if (o instanceof nl.geonovum.imro._2012._1.GebiedsaanduidingType) {
+        if (o instanceof nl.b3p.imro._2012._1.GebiedsaanduidingType) {
             obj = parseImro2012Gebiedsaanduiding(o);
-        } else if (o instanceof nl.geonovum.imro._2012._1.BestemmingsplangebiedType) {
+        } else if (o instanceof nl.b3p.imro._2012._1.BestemmingsplangebiedType) {
             obj = parseImro2012Bestemmingsplan(o);
         } else {
         }
@@ -84,7 +89,7 @@ public class IMROParser {
 
     private Gebiedsaanduiding parseImro2012Gebiedsaanduiding(Object o) {
         Gebiedsaanduiding gba = new Gebiedsaanduiding();
-        nl.geonovum.imro._2012._1.GebiedsaanduidingType ga = (nl.geonovum.imro._2012._1.GebiedsaanduidingType) o;
+        nl.b3p.imro._2012._1.GebiedsaanduidingType ga = (nl.b3p.imro._2012._1.GebiedsaanduidingType) o;
 
         String identificatie = getIdentificatie(ga.getIdentificatie().getNEN3610ID());
         
@@ -106,7 +111,7 @@ public class IMROParser {
 
     protected Bestemmingsplan parseImro2012Bestemmingsplan(Object o) {
         Bestemmingsplan bp = new Bestemmingsplan();
-        nl.geonovum.imro._2012._1.BestemmingsplangebiedType bpgt = (nl.geonovum.imro._2012._1.BestemmingsplangebiedType) o;
+        nl.b3p.imro._2012._1.BestemmingsplangebiedType bpgt = (nl.b3p.imro._2012._1.BestemmingsplangebiedType) o;
 
         String identificatie = getIdentificatie(bpgt.getIdentificatie().getNEN3610ID());
         bp.setTypePlan(bpgt.getTypePlan().value());

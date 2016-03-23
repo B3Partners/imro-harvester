@@ -46,15 +46,16 @@ public class Processor {
     private static final Log log = LogFactory.getLog(Processor.class);
     private Integer timeout;
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
-    private IMROParser parser = new IMROParser();
+    private IMROParser parser;
 
-    public Processor(List<HarvestJob> jobs) {
+    public Processor(List<HarvestJob> jobs) throws JAXBException {
         this(jobs, 30000);
     }
 
-    public Processor(List<HarvestJob> jobs, Integer timeout) {
+    public Processor(List<HarvestJob> jobs, Integer timeout) throws JAXBException {
         this.jobs = jobs;
         this.timeout = timeout;
+        this.parser = new IMROParser();
     }
 
     public void process() {

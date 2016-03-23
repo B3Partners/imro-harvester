@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.xml.bind.JAXBException;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.After;
@@ -114,7 +115,7 @@ public class HarvestJobActionBean implements ActionBean{
         return new ForwardResolution(JSP_EDIT);
     }
 
-    public Resolution run(){
+    public Resolution run() throws JAXBException{
         Processor p = new Processor(Collections.singletonList(job));
         p.process();
         return new ForwardResolution(JSP_VIEW);
