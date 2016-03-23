@@ -63,7 +63,7 @@ public class GeometryConverter {
     public MultiPolygon convertMultiPolygonGeometry(Element geometry)
             throws  IOException,  ParserConfigurationException,   SAXException,   TransformerException {
         if (geometry != null) {
-            Geometry resultGeometry = convertGeometryImpl(geometry);
+            Geometry resultGeometry = convertGeometry(geometry);
 
             if (resultGeometry instanceof MultiPolygon)
                 return (MultiPolygon) resultGeometry;
@@ -90,7 +90,7 @@ public class GeometryConverter {
         return null;
     }
 */
-    private Geometry convertGeometryImpl(Element elem)
+    private Geometry convertGeometry(Element elem)
             throws IOException, SAXException, ParserConfigurationException, TransformerException {
         if (!(elem instanceof org.w3c.dom.Element)) {
          //   throw new ROConversionException("gml org.w3c.node is not an org.w3c.Element");
@@ -112,21 +112,12 @@ public class GeometryConverter {
 
             if (parsedObject instanceof Geometry) {
                 Geometry geom = (Geometry)parsedObject;
-                log.debug("Original geometry: " + geom.toText());
-                log.debug("geom.isValid(): " + geom.isValid());
-                Geometry bufferedGeom = geom;
                 if (!geom.isValid()) {
-                    bufferedGeom = geom.buffer(0.0);
+                    geom = geom.buffer(0.0);
+                    log.debug("Geometry is invalid. Made valid by buffering with 0");
                 }
-                log.debug("Converted geometry: " + bufferedGeom.toText());
                 // arcs can have nodes that are on the same point (28992; 3 digit precision): simplify
                 Geometry simplGeom = DouglasPeuckerSimplifier.simplify(geom, DISTANCE_TOLERANCE);
-                //Geometry simplGeom = TopologyPreservingSimplifier.simplify(geom, DISTANCE_TOLERANCE);
-                log.debug("Simplified geometry: " + simplGeom.toText());
-                //if (!geom.toText().equals(simplGeom.toText()) && simplifierCounter < SIMPLIFIED_COUNTER_MAX) {
-                    //log.error("GEOM simplify useful!\norig: " + geom.toText() + "\nbuff: " + bufferedGeom.toText() + "\nsmpl: " + simplGeom.toText());
-                    //simplifierCounter++;
-                //}
                 return simplGeom;
             } else {
               //  throw new ROConversionException("geometry not instanceof Geometry: " + parsedObject.getClass());
