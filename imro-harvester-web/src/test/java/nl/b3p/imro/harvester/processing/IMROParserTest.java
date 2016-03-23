@@ -7,6 +7,7 @@ package nl.b3p.imro.harvester.processing;
 
 import java.net.URL;
 import java.util.List;
+import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -25,7 +26,7 @@ public class IMROParserTest {
     }
 
     @Before
-    public void beforeTest(){
+    public void beforeTest() throws JAXBException{
         instance = new IMROParser();
     }
 

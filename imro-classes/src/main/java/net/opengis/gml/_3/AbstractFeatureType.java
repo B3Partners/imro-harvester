@@ -13,16 +13,16 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
-import nl.geonovum.imro._2012._1.FeatureCollectionIMROType;
-import nl.geonovum.imro._2012._1.GeoObjectType;
-import nl.geonovum.imro._2012._1.GeometrieBesluitobjectAType;
-import nl.geonovum.imro._2012._1.GeometrieBesluitobjectP1Type;
-import nl.geonovum.imro._2012._1.GeometrieBesluitobjectP3Type;
-import nl.geonovum.imro._2012._1.GeometriePlangebiedPType;
-import nl.geonovum.imro._2012._1.GeometriePlangebiedType;
-import nl.geonovum.imro._2012._1.GeometrieStructuurvisieObjectPType;
-import nl.geonovum.imro._2012._1.GeometrieStructuurvisieObjectType;
-import nl.geonovum.imro._2012._1.MetadataIMRObestandType;
+import nl.b3p.imro._2012._1.FeatureCollectionIMROType;
+import nl.b3p.imro._2012._1.GeoObjectType;
+import nl.b3p.imro._2012._1.GeometrieBesluitobjectAType;
+import nl.b3p.imro._2012._1.GeometrieBesluitobjectP1Type;
+import nl.b3p.imro._2012._1.GeometrieBesluitobjectP3Type;
+import nl.b3p.imro._2012._1.GeometriePlangebiedPType;
+import nl.b3p.imro._2012._1.GeometriePlangebiedType;
+import nl.b3p.imro._2012._1.GeometrieStructuurvisieObjectPType;
+import nl.b3p.imro._2012._1.GeometrieStructuurvisieObjectType;
+import nl.b3p.imro._2012._1.MetadataIMRObestandType;
 
 
 /**

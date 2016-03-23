@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
+import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import org.junit.Test;
@@ -39,7 +40,7 @@ public class ProcessorTest {
     private HarvestJob job = null;
 
     @Before
-    public void initTests() throws MalformedURLException {
+    public void initTests() throws MalformedURLException, JAXBException {
         job = new HarvestJob();
 
         URL u = new URL("http://files.b3p.nl/imroharvester/manifest.xml");
@@ -50,7 +51,7 @@ public class ProcessorTest {
     }
 
     @Test
-    public void testRun(){
+    public void testRun() throws JAXBException{
         job = new HarvestJob();
         job.setUrl("https://www.ruimtelijkeplannen.nl/web-roi/index/showManifest?organizationId=zaltbommel&striVersion=STRI2008");
         instance = new Processor(Collections.singletonList(job));

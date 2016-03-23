@@ -40,7 +40,7 @@ public class IMROParser {
     private JAXBContext context20121;
 
     public IMROParser() throws JAXBException{
-        context20121 = JAXBContext.newInstance("nl.geonovum.imro._2012._1");
+        context20121 = JAXBContext.newInstance("nl.b3p.imro._2012._1");
         gc = new GeometryConverter();
     }
 
@@ -102,7 +102,6 @@ public class IMROParser {
         try {
             MultiPolygon g = gc.convertMultiPolygonGeometry(ga.getGeometrie());
             gba.setGeometrie(g);
-            
         } catch (Exception e) {
         }
         

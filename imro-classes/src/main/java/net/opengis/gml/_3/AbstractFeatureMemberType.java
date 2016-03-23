@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractFeatureMemberType")
 @XmlSeeAlso({
-    nl.geonovum.imro._2012._1.FeatureCollectionIMROType.FeatureMember.class
+    nl.b3p.imro._2012._1.FeatureCollectionIMROType.FeatureMember.class
 })
 public abstract class AbstractFeatureMemberType {
 
