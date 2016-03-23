@@ -8,6 +8,8 @@ package nl.b3p.imro.harvester.processing;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
+import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -16,6 +18,8 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import nl.b3p.imro._2012._1.GebiedsaanduidingType;
+import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -53,30 +57,8 @@ public class GeometryConverterTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of convertMultiPolygonGeometry method, of class GeometryConverter.
-     */
-   // @Test
-    public void testConvertMultiPolygonGeometry() throws Exception {
-        System.out.println("convertMultiPolygonGeometry");
 
-
-            URL u = this.getClass().getResource("2012.gml");
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        Document doc = db.parse(u.toURI().toString());
-
-        Element geometry = doc.getDocumentElement();
-        GeometryConverter instance = new GeometryConverter();
-        MultiPolygon expResult = null;
-        MultiPolygon result = instance.convertMultiPolygonGeometry(geometry);
-        assertNotNull(result);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-   // @Test
+    @Test
     public void testGebiedsaanduiding() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
         URL url = this.getClass().getResource("2012.gml");
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -88,6 +70,20 @@ public class GeometryConverterTest {
         Object mp = instance.convertMultiPolygonGeometry(el);
         assertNotNull(mp);
         assertTrue(mp instanceof MultiPolygon);
+    }
+
+    @Test
+    public void testGebiedsaanduidingViaParser() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException, JAXBException {
+        URL url = this.getClass().getResource("2012.gml");
+
+        IMROParser p = new IMROParser();
+        List<Object> os = p.parseGML(url);
+        for (Object o : os) {
+            if(o instanceof Gebiedsaanduiding){
+                Gebiedsaanduiding g = (Gebiedsaanduiding)o;
+                assertNotNull("Geometrie moet gevuld zijn", g.getGeometrie());
+            }
+        }
     }
 
     @Test
