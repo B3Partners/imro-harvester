@@ -16,7 +16,6 @@
  */
 package nl.b3p.imro.harvester.processing;
 
-import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -29,9 +28,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.Unmarshaller;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
+import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.geonovum.imro._2012._1.FeatureCollectionIMROType;
 import nl.geonovum.imro._2012._1.NEN3610IDType;
-import org.w3c.dom.Element;
 
 /**
  *
@@ -82,13 +81,31 @@ public class IMROParser {
         return obj;
     }
 
+    private Gebiedsaanduiding parseImro2012Gebiedsaanduiding(Object o) {
+        Gebiedsaanduiding gba = new Gebiedsaanduiding();
+
+        nl.geonovum.imro._2012._1.GebiedsaanduidingType ga = (nl.geonovum.imro._2012._1.GebiedsaanduidingType) o;
+
+        String identificatie = getIdentificatie(ga.getIdentificatie().getNEN3610ID());
+        
+        gba.setNaam(ga.getNaam());
+        gba.setIdentificatie(identificatie);
+        try {
+            GeometryConverter gc = new GeometryConverter();
+            MultiPolygon g = gc.convertMultiPolygonGeometry(ga.getGeometrie());
+            gba.setGeometrie(g);
+            int b = 0;
+        } catch (Exception e) {
+        }
+        
+        return gba;
+    }
+
     protected Bestemmingsplan parseImro2012Bestemmingsplan(Object o) {
         Bestemmingsplan bp = new Bestemmingsplan();
         nl.geonovum.imro._2012._1.BestemmingsplangebiedType bpgt = (nl.geonovum.imro._2012._1.BestemmingsplangebiedType) o;
 
-        NEN3610IDType id = bpgt.getIdentificatie().getNEN3610ID();
-        String identificatie = id.getNamespace() + "." + id.getLokaalID() + "-" + id.getVersie();
-
+        String identificatie = getIdentificatie(bpgt.getIdentificatie().getNEN3610ID());
         bp.setTypePlan(bpgt.getTypePlan().value());
         bp.setIdentificatie(identificatie);
         try {
@@ -102,19 +119,8 @@ public class IMROParser {
         return bp;
     }
 
-    protected Geometry parseGeometry(Element e) {
-        /* URL url = TestData.getResource(this, "states.xml");
-         InputStream in = url.openStream();
-
-         GML gml = new GML(Version.GML3);
-         SimpleFeatureIterator iter = gml.decodeFeatureIterator(in);
-
-         int count = 0;
-         while (iter.hasNext()) {
-         SimpleFeature feature = iter.next();
-         count++;
-         }*/
-        return null;
+    private String getIdentificatie(NEN3610IDType id){
+        String identificatie = id.getNamespace() + "." + id.getLokaalID() + "-" + id.getVersie();
+        return identificatie;
     }
-
 }
