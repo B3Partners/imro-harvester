@@ -6,6 +6,7 @@
 package nl.b3p.imro.harvester.entities.imro;
 
 import com.vividsolutions.jts.geom.MultiPolygon;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ import javax.persistence.ManyToOne;
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
+@Entity
 public class Dubbelbestemming {
 
     @Id

@@ -129,18 +129,23 @@ public class IMROParserTest {
     @Test
     public void testParseBestemmingsplanInhoud() throws JAXBException {
         System.out.println("testParsePlanInhoudBestemmingsplan");
-        URL u = this.getClass().getResource("2012.gml");
-        List<Object> o = instance.parseGML(u);
-        assertNotNull(o);
-        Bestemmingsplan bp = null;
-        for (Object obj : o) {
-            if (obj instanceof Bestemmingsplan) {
-                bp = (Bestemmingsplan) obj;
-            }
-        }
+
+        URL u = this.getClass().getResource("bestemmingsplangebied.gml");
+
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Bestemmingsplan bp = instance.parseImro2012Bestemmingsplan(gba);
+
         assertNotNull(bp);
         assertEquals("bestemmingsplan", bp.getTypePlan());
         assertEquals("NL.IMRO.0297.BGBBP20140020-OW01", bp.getIdentificatie());
+        assertEquals("gemeentelijke overheid",bp.getBeleidsmatigeVerantwoordelijkeOverheid());
+        assertEquals("gemeente Zaltbommel",bp.getNaamOverheid());
+        assertEquals("0297",bp.getOverheidsCode());
+        assertEquals("Buitengebied Parapluplan Nieuwe Hollandse Waterlinie",bp.getNaam());
+        assertEquals("ontwerp",bp.getPlanstatusInfo());
+        assertEquals("2015-05-19",bp.getPlanstatusInfo());
+
     }
     /**
      * Test of parsePlan method, of class Processor.
