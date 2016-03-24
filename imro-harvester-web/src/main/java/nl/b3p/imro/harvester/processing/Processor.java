@@ -106,9 +106,9 @@ public class Processor {
                     log.error("Cannot get manifest url for HarvestJob " + job.getId() + " - " + job.getUrl(), ex);
                 }
             } catch (IOException ex) {
-                Logger.getLogger(Processor.class.getName()).log(Level.SEVERE, null, ex);
+                log.error("Cannot parse manifest");
             } catch (JAXBException ex) {
-                Logger.getLogger(Processor.class.getName()).log(Level.SEVERE, null, ex);
+                log.error("Cannot unmarshal manifest");
             }
         }
     }
@@ -206,7 +206,7 @@ public class Processor {
                 }
                 urls.add(geleideformulier);
             } catch (JAXBException ex) {
-                log.info("Cannot unmarshal geleideformulier" + geleideformulierURL);
+                log.trace("Cannot unmarshal geleideformulier" + geleideformulierURL);
             }
         }
 
