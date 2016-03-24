@@ -32,6 +32,8 @@ import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro._2012._1.FeatureCollectionIMROType;
 import nl.b3p.imro._2012._1.NEN3610IDType;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
+import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
+import nl.b3p.imro.harvester.entities.imro.ImroEntity;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -93,6 +95,8 @@ public class IMROParser {
             obj = parseImro2012Bestemmingsplan(o);
         } else if(o instanceof nl.b3p.imro._2012._1.DubbelbestemmingType){
             obj = parseImro2012Dubbelbestemming(o);
+        }else if(o instanceof nl.b3p.imro._2012._1.EnkelbestemmingType) {
+         //   obj = parseImro2012Enkelbestemming(o);
         }else{
             log.debug("Unknown type of featuremember when parsing. Class encountered: " + o.getClass().toString());
         }
@@ -163,6 +167,25 @@ public class IMROParser {
         }
 
         return db;
+    }
+
+    protected Enkelbestemming parseImro2012Enkelbestemming(Object o){
+        Enkelbestemming eb = new Enkelbestemming();
+        nl.b3p.imro._2012._1.EnkelbestemmingType ebt = (nl.b3p.imro._2012._1.EnkelbestemmingType) o;
+        String identificatie = getIdentificatie(ebt.getIdentificatie().getNEN3610ID());
+
+        eb.setArtikelnummer(ebt.getArtikelnummer());
+        eb.setBestemmingshoofdgroep(ebt.getBestemmingshoofdgroep().value());
+        eb.setIdentificatie(identificatie);
+        eb.setNaam(ebt.getNaam().getValue());
+        eb.setTypePlanObject(ebt.getTypePlanobject().value());
+        eb.setVerwijzing(ebt.getVerwijzingNaarTekstInfo().getTekstReferentieBP().getVerwijzingNaarTekst());
+        try {
+            MultiPolygon g = gc.convertMultiPolygonGeometry(ebt.getGeometrie());
+            eb.setGeometrie(g);
+        } catch (Exception e) {
+        }
+        return eb;
     }
 
     private String getIdentificatie(NEN3610IDType id){

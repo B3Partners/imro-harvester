@@ -10,10 +10,9 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.xml.bind.JAXBException;
-import nl.b3p.imro._2012._1.FeatureCollectionIMROType;
-import nl.b3p.imro._2012._1.FeatureCollectionIMROType.FeatureMember;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
+import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -122,6 +121,22 @@ public class IMROParserTest {
         assertEquals("Waarde - Nieuwe Hollandse Waterlinie",db.getNaam());
         assertEquals("waarde",db.getBestemmingshoofdgroep());
         assertEquals("2",db.getArtikelnummer());
+    }
+
+    @Test
+    public void testParseEnkelbestemmingInhoud() throws JAXBException {
+        System.out.println("testParseEnkelbestemmingInhoud");
+        URL u = this.getClass().getResource("enkelbestemming.gml");
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Enkelbestemming eb = instance.parseImro2012Enkelbestemming(gba);
+
+        assertNotNull(eb);
+        assertEquals("NL.IMRO.0664.EP3262265634-00", eb.getIdentificatie());
+        assertEquals("enkelbestemming", eb.getTypePlanObject());
+        assertEquals("Tuin",eb.getNaam());
+        assertEquals("tuin",eb.getBestemmingshoofdgroep());
+        assertEquals("3",eb.getArtikelnummer());
     }
 
     /**

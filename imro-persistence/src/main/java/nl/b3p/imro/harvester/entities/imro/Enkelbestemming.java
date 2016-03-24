@@ -6,19 +6,15 @@
 package nl.b3p.imro.harvester.entities.imro;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
 @Entity
-public class Dubbelbestemming extends ImroEntity{
+public class Enkelbestemming extends ImroEntity {
 
     private String bestemmingshoofdgroep;
-
-    @ManyToOne
-    private Bestemmingsplan bestemmingsplan;
 
     public String getBestemmingshoofdgroep() {
         return bestemmingshoofdgroep;
@@ -28,11 +24,5 @@ public class Dubbelbestemming extends ImroEntity{
         this.bestemmingshoofdgroep = bestemmingshoofdgroep;
     }
 
-    public Bestemmingsplan getBestemmingsplan() {
-        return bestemmingsplan;
-    }
-
-    public void setBestemmingsplan(Bestemmingsplan bestemmingsplan) {
-        this.bestemmingsplan = bestemmingsplan;
-    }
+    
 }
