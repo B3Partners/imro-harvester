@@ -17,69 +17,13 @@ import javax.persistence.ManyToOne;
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
 @Entity
-public class Gebiedsaanduiding {
+public class Gebiedsaanduiding extends ImroEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    private String identificatie;
-
-    @org.hibernate.annotations.Type(type = "org.hibernatespatial.GeometryUserType")
-    private MultiPolygon geometrie;
-
-    private String naam;
-
-    private String typePlanObject;
 
     private String gebiedsaanduidinggroep;
 
-    private String artikelnummer;
-
-    private String verwijzing;
-
     @ManyToOne
     private Bestemmingsplan bestemmingsplan;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getIdentificatie() {
-        return identificatie;
-    }
-
-    public void setIdentificatie(String identificatie) {
-        this.identificatie = identificatie;
-    }
-
-    public MultiPolygon getGeometrie() {
-        return geometrie;
-    }
-
-    public void setGeometrie(MultiPolygon geometrie) {
-        this.geometrie = geometrie;
-    }
-
-    public String getNaam() {
-        return naam;
-    }
-
-    public void setNaam(String naam) {
-        this.naam = naam;
-    }
-
-    public String getTypePlanObject() {
-        return typePlanObject;
-    }
-
-    public void setTypePlanObject(String typePlanObject) {
-        this.typePlanObject = typePlanObject;
-    }
 
     public String getGebiedsaanduidinggroep() {
         return gebiedsaanduidinggroep;
@@ -87,22 +31,6 @@ public class Gebiedsaanduiding {
 
     public void setGebiedsaanduidinggroep(String gebiedsaanduidinggroep) {
         this.gebiedsaanduidinggroep = gebiedsaanduidinggroep;
-    }
-
-    public String getArtikelnummer() {
-        return artikelnummer;
-    }
-
-    public void setArtikelnummer(String artikelnummer) {
-        this.artikelnummer = artikelnummer;
-    }
-
-    public String getVerwijzing() {
-        return verwijzing;
-    }
-
-    public void setVerwijzing(String verwijzing) {
-        this.verwijzing = verwijzing;
     }
 
     public Bestemmingsplan getBestemmingsplan() {

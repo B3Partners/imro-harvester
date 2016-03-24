@@ -30,13 +30,7 @@ import javax.persistence.TemporalType;
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
 @Entity
-public class Bestemmingsplan {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    private String identificatie;
+public class Bestemmingsplan extends ImroEntity{
 
     private String typePlan;
 
@@ -46,8 +40,6 @@ public class Bestemmingsplan {
 
     private String overheidsCode;
 
-    private String naam;
-
     private String locatieNaam;
 
     private String planstatusInfo;
@@ -56,25 +48,6 @@ public class Bestemmingsplan {
     private Date planstatusDatum;
 
     private String besluitnummer;
-
-    @org.hibernate.annotations.Type(type="org.hibernatespatial.GeometryUserType")
-    private MultiPolygon geometrie;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getIdentificatie() {
-        return identificatie;
-    }
-
-    public void setIdentificatie(String identificatie) {
-        this.identificatie = identificatie;
-    }
 
     public String getTypePlan() {
         return typePlan;
@@ -108,14 +81,6 @@ public class Bestemmingsplan {
         this.overheidsCode = overheidsCode;
     }
 
-    public String getNaam() {
-        return naam;
-    }
-
-    public void setNaam(String naam) {
-        this.naam = naam;
-    }
-
     public String getLocatieNaam() {
         return locatieNaam;
     }
@@ -138,14 +103,6 @@ public class Bestemmingsplan {
 
     public void setBesluitnummer(String besluitnummer) {
         this.besluitnummer = besluitnummer;
-    }
-
-    public MultiPolygon getGeometrie() {
-        return geometrie;
-    }
-
-    public void setGeometrie(MultiPolygon geometrie) {
-        this.geometrie = geometrie;
     }
 
     public Date getPlanstatusDatum() {
