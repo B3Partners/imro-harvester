@@ -54,15 +54,19 @@ public class IMROParser {
     }
 
     protected List<Object> parseGML(URL u) throws JAXBException {
-        Unmarshaller jaxbUnmarshaller = context20121.createUnmarshaller();
+        FeatureCollectionIMROType fc = getFeatureCollection(u);
+        List<Object> bp = processFeatureCollection(fc);
+        return bp;
+    }
 
+    protected FeatureCollectionIMROType getFeatureCollection(URL u) throws JAXBException{
+        Unmarshaller jaxbUnmarshaller = context20121.createUnmarshaller();
         JAXBElement o = (JAXBElement) jaxbUnmarshaller.unmarshal(u);
 
         Object value = o.getValue();
-
         FeatureCollectionIMROType fc = (FeatureCollectionIMROType) value;
-        List<Object> bp = processFeatureCollection(fc);
-        return bp;
+        
+        return fc;
     }
 
     private List<Object> processFeatureCollection(FeatureCollectionIMROType fc) {
