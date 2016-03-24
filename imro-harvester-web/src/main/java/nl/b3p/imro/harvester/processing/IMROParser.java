@@ -96,7 +96,7 @@ public class IMROParser {
         } else if(o instanceof nl.b3p.imro._2012._1.DubbelbestemmingType){
             obj = parseImro2012Dubbelbestemming(o);
         }else if(o instanceof nl.b3p.imro._2012._1.EnkelbestemmingType) {
-         //   obj = parseImro2012Enkelbestemming(o);
+            obj = parseImro2012Enkelbestemming(o);
         }else{
             log.debug("Unknown type of featuremember when parsing. Class encountered: " + o.getClass().toString());
         }

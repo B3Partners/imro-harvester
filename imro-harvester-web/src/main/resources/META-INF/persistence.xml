@@ -9,6 +9,7 @@
         <class>nl.b3p.imro.harvester.entities.imro.Bestemmingsplan</class>
         <class>nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding</class>
         <class>nl.b3p.imro.harvester.entities.imro.Dubbelbestemming</class>
+        <class>nl.b3p.imro.harvester.entities.imro.Enkelbestemming</class>
     <properties>
 
             <property name="hibernate.connection.url" value="${imro.url}" />

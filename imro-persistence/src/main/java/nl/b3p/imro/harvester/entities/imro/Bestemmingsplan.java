@@ -30,7 +30,18 @@ import javax.persistence.TemporalType;
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
 @Entity
-public class Bestemmingsplan extends ImroEntity{
+public class Bestemmingsplan {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected int id;
+
+    protected String identificatie;
+
+    protected String naam;
+
+    @org.hibernate.annotations.Type(type = "org.hibernatespatial.GeometryUserType")
+    protected MultiPolygon geometrie;
 
     private String typePlan;
 
@@ -48,6 +59,38 @@ public class Bestemmingsplan extends ImroEntity{
     private Date planstatusDatum;
 
     private String besluitnummer;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getIdentificatie() {
+        return identificatie;
+    }
+
+    public void setIdentificatie(String identificatie) {
+        this.identificatie = identificatie;
+    }
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public MultiPolygon getGeometrie() {
+        return geometrie;
+    }
+
+    public void setGeometrie(MultiPolygon geometrie) {
+        this.geometrie = geometrie;
+    }
 
     public String getTypePlan() {
         return typePlan;

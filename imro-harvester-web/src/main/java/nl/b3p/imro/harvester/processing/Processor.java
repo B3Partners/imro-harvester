@@ -96,8 +96,7 @@ public class Processor {
                             log.debug(e);
                             em.getTransaction().rollback();
                         }catch(PersistenceException e){
-                            log.error("Cannot save entity in plan " + geleideformulier);
-                            log.debug(e);
+                            log.error("Cannot save entity in plan " + geleideformulier,e);
                             em.getTransaction().rollback();
                         }
                     }
