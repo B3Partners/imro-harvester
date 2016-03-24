@@ -152,7 +152,10 @@ public class IMROParser {
     }
 
     private String getIdentificatie(NEN3610IDType id){
-        String identificatie = id.getNamespace() + "." + id.getLokaalID() + "-" + id.getVersie();
+        String identificatie = id.getNamespace() + "." + id.getLokaalID();
+        if(id.getVersie()!= null){
+            identificatie += "-" + id.getVersie();
+        }
         return identificatie;
     }
 }

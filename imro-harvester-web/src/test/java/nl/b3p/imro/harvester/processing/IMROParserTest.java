@@ -106,7 +106,7 @@ public class IMROParserTest {
 
     @Test
     public void testParseDubbelbestemmingInhoud() throws JAXBException {
-        System.out.println("testParsePlanInhoudGebiedsaanduiding");
+        System.out.println("testParseDubbelbestemmingInhoud");
         URL u = this.getClass().getResource("2012.gml");
         List<Object> o = instance.parseGML(u);
         assertNotNull(o);
@@ -117,7 +117,7 @@ public class IMROParserTest {
             }
         }
         assertNotNull(db);
-        assertEquals("NL.IMRO00297.DP6313603771-00", db.getIdentificatie());
+        assertEquals("NL.IMRO.0297.DP6313603771-00", db.getIdentificatie());
         assertEquals("dubbelbestemming", db.getTypePlanObject());
         assertEquals("Waarde - Nieuwe Hollandse Waterlinie",db.getNaam());
         assertEquals("waarde",db.getBestemmingshoofdgroep());
