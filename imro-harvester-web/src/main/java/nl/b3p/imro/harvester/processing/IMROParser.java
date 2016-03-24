@@ -54,22 +54,25 @@ public class IMROParser {
     }
 
     protected List<Object> parseGML(URL u) throws JAXBException {
-        FeatureCollectionIMROType fc = getFeatureCollection(u);
+        Object value = unmarshalUrl(u);
+
+        FeatureCollectionIMROType fc = (FeatureCollectionIMROType) value;
         List<Object> bp = processFeatureCollection(fc);
         return bp;
     }
 
-    protected FeatureCollectionIMROType getFeatureCollection(URL u) throws JAXBException{
+    protected Object unmarshalUrl(URL u) throws JAXBException{
         Unmarshaller jaxbUnmarshaller = context20121.createUnmarshaller();
         JAXBElement o = (JAXBElement) jaxbUnmarshaller.unmarshal(u);
 
         Object value = o.getValue();
-        FeatureCollectionIMROType fc = (FeatureCollectionIMROType) value;
         
-        return fc;
+        return value;
     }
 
-    private List<Object> processFeatureCollection(FeatureCollectionIMROType fc) {
+
+
+    protected List<Object> processFeatureCollection(FeatureCollectionIMROType fc) {
         List<Object> objs = new ArrayList<Object>();
         List<FeatureCollectionIMROType.FeatureMember> members = fc.getFeatureMember();
         for (FeatureCollectionIMROType.FeatureMember member : members) {
@@ -83,7 +86,7 @@ public class IMROParser {
         return objs;
     }
 
-    private Object parseFeatureMember(Object o) {
+    protected Object parseFeatureMember(Object o) {
         Object obj = null;
         if (o instanceof nl.b3p.imro._2012._1.GebiedsaanduidingType) {
             obj = parseImro2012Gebiedsaanduiding(o);
@@ -98,7 +101,7 @@ public class IMROParser {
         return obj;
     }
 
-    private Gebiedsaanduiding parseImro2012Gebiedsaanduiding(Object o) {
+    protected Gebiedsaanduiding parseImro2012Gebiedsaanduiding(Object o) {
         Gebiedsaanduiding gba = new Gebiedsaanduiding();
         nl.b3p.imro._2012._1.GebiedsaanduidingType ga = (nl.b3p.imro._2012._1.GebiedsaanduidingType) o;
 

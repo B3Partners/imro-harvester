@@ -9,6 +9,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import javax.xml.bind.JAXBException;
+import nl.b3p.imro._2012._1.FeatureCollectionIMROType;
+import nl.b3p.imro._2012._1.FeatureCollectionIMROType.FeatureMember;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
@@ -83,24 +85,21 @@ public class IMROParserTest {
      * Test of parsePlan method, of class Processor.
      */
 
-       @Test
+    @Test
     public void testParseGebiedsaanduidingInhoud() throws JAXBException {
         System.out.println("testParseGebiedsaanduidingInhoud");
-        URL u = this.getClass().getResource("2012.gml");
-        List<Object> o = instance.parseGML(u);
-        assertNotNull(o);
-        Gebiedsaanduiding db = null;
-        for (Object obj : o) {
-            if (obj instanceof Gebiedsaanduiding) {
-                db = (Gebiedsaanduiding) obj;
-            }
-        }
-        assertNotNull(db);
-        assertEquals("NL.IMRO.0297.GP2308954338-00", db.getIdentificatie());
-        assertEquals("gebiedsaanduiding", db.getTypePlanObject());
-        assertEquals("overige zone - accessen",db.getNaam());
-        assertEquals("overige zone",db.getGebiedsaanduidinggroep());
-        assertEquals("2.3.2",db.getArtikelnummer());
+        URL u = this.getClass().getResource("gebiedsaanduiding.gml");
+
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Gebiedsaanduiding ga = instance.parseImro2012Gebiedsaanduiding(gba);
+ 
+        assertNotNull(ga);
+        assertEquals("NL.IMRO.0297.GP2308954338-00", ga.getIdentificatie());
+        assertEquals("gebiedsaanduiding", ga.getTypePlanObject());
+        assertEquals("overige zone - accessen",ga.getNaam());
+        assertEquals("overige zone",ga.getGebiedsaanduidinggroep());
+        assertEquals("2.3.2",ga.getArtikelnummer());
     }
 
 
