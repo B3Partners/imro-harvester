@@ -6,7 +6,6 @@
 package nl.b3p.imro.harvester.entities.imro;
 
 import com.vividsolutions.jts.geom.MultiPolygon;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +18,14 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class Gebiedsaanduiding {
-   @Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String identificatie;
 
-    @org.hibernate.annotations.Type(type="org.hibernatespatial.GeometryUserType")
+    @org.hibernate.annotations.Type(type = "org.hibernatespatial.GeometryUserType")
     private MultiPolygon geometrie;
 
     private String naam;
@@ -112,5 +112,5 @@ public class Gebiedsaanduiding {
     public void setBestemmingsplan(Bestemmingsplan bestemmingsplan) {
         this.bestemmingsplan = bestemmingsplan;
     }
-    
+
 }

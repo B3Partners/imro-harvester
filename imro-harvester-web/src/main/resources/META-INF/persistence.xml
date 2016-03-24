@@ -8,7 +8,8 @@
         <class>nl.b3p.imro.harvester.entities.HarvestJob</class>
         <class>nl.b3p.imro.harvester.entities.imro.Bestemmingsplan</class>
         <class>nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding</class>
-        <properties>
+        <class>nl.b3p.imro.harvester.entities.imro.Dubbelbestemming</class>
+    <properties>
 
             <property name="hibernate.connection.url" value="${imro.url}" />
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />

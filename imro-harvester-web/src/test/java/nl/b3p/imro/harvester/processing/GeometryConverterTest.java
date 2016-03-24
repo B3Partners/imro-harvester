@@ -18,7 +18,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import nl.b3p.imro._2012._1.GebiedsaanduidingType;
+import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -81,6 +81,20 @@ public class GeometryConverterTest {
         for (Object o : os) {
             if(o instanceof Gebiedsaanduiding){
                 Gebiedsaanduiding g = (Gebiedsaanduiding)o;
+                assertNotNull("Geometrie moet gevuld zijn", g.getGeometrie());
+            }
+        }
+    }
+
+    @Test
+    public void testDubbelbestemmingViaParser() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException, JAXBException {
+        URL url = this.getClass().getResource("2012.gml");
+
+        IMROParser p = new IMROParser();
+        List<Object> os = p.parseGML(url);
+        for (Object o : os) {
+            if(o instanceof Dubbelbestemming){
+                Dubbelbestemming g = (Dubbelbestemming)o;
                 assertNotNull("Geometrie moet gevuld zijn", g.getGeometrie());
             }
         }
