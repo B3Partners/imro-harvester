@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.List;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
+import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -44,7 +45,7 @@ public class IMROParserTest {
         geleideformulier.setIdentificatie("NL.IMRO.0297.BGBBP20140020-OW01");
 
         List<Object> result = instance.parseGML(geleideformulier);
-        assertEquals(7, result.size());
+        assertEquals(8, result.size());
     }
 
     /**
@@ -55,28 +56,9 @@ public class IMROParserTest {
         System.out.println("testParseGML_URL");
         URL u = null;
         List<Object> result = instance.parseGML(new URL("http://files.b3p.nl/imroharvester/NL.IMRO.0297.BGBBP20140020-OW01.gml"));
-        assertEquals(7, result.size());
+        assertEquals(8, result.size());
     }
 
-    /**
-     * Test of parsePlan method, of class Processor.
-     */
-    @Test
-    public void testParsePlanInhoudBestemmingsplan() throws JAXBException {
-        System.out.println("testParsePlanInhoudBestemmingsplan");
-        URL u = this.getClass().getResource("2012.gml");
-        List<Object> o = instance.parseGML(u);
-        assertNotNull(o);
-        Bestemmingsplan bp = null;
-        for (Object obj : o) {
-            if (obj instanceof Bestemmingsplan) {
-                bp = (Bestemmingsplan) obj;
-            }
-        }
-        assertNotNull(bp);
-        assertEquals("bestemmingsplan", bp.getTypePlan());
-        assertEquals("NL.IMRO.0297.BGBBP20140020-OW01", bp.getIdentificatie());
-    }
 
     /**
      * Test of parsePlan method, of class Processor.
@@ -97,6 +79,70 @@ public class IMROParserTest {
         }
     }
 
+        /**
+     * Test of parsePlan method, of class Processor.
+     */
+
+       @Test
+    public void testParseGebiedsaanduidingInhoud() throws JAXBException {
+        System.out.println("testParseGebiedsaanduidingInhoud");
+        URL u = this.getClass().getResource("2012.gml");
+        List<Object> o = instance.parseGML(u);
+        assertNotNull(o);
+        Gebiedsaanduiding db = null;
+        for (Object obj : o) {
+            if (obj instanceof Gebiedsaanduiding) {
+                db = (Gebiedsaanduiding) obj;
+            }
+        }
+        assertNotNull(db);
+        assertEquals("NL.IMRO.0297.GP2308954338-00", db.getIdentificatie());
+        assertEquals("gebiedsaanduiding", db.getTypePlanObject());
+        assertEquals("overige zone - accessen",db.getNaam());
+        assertEquals("overige zone",db.getGebiedsaanduidinggroep());
+        assertEquals("2.3.2",db.getArtikelnummer());
+    }
+
+
+    @Test
+    public void testParseDubbelbestemmingInhoud() throws JAXBException {
+        System.out.println("testParsePlanInhoudGebiedsaanduiding");
+        URL u = this.getClass().getResource("2012.gml");
+        List<Object> o = instance.parseGML(u);
+        assertNotNull(o);
+        Dubbelbestemming db = null;
+        for (Object obj : o) {
+            if (obj instanceof Dubbelbestemming) {
+                db = (Dubbelbestemming) obj;
+            }
+        }
+        assertNotNull(db);
+        assertEquals("NL.IMRO00297.DP6313603771-00", db.getIdentificatie());
+        assertEquals("dubbelbestemming", db.getTypePlanObject());
+        assertEquals("Waarde - Nieuwe Hollandse Waterlinie",db.getNaam());
+        assertEquals("waarde",db.getBestemmingshoofdgroep());
+        assertEquals("2",db.getArtikelnummer());
+    }
+
+    /**
+     * Test of parsePlan method, of class Processor.
+     */
+    @Test
+    public void testParseBestemmingsplanInhoud() throws JAXBException {
+        System.out.println("testParsePlanInhoudBestemmingsplan");
+        URL u = this.getClass().getResource("2012.gml");
+        List<Object> o = instance.parseGML(u);
+        assertNotNull(o);
+        Bestemmingsplan bp = null;
+        for (Object obj : o) {
+            if (obj instanceof Bestemmingsplan) {
+                bp = (Bestemmingsplan) obj;
+            }
+        }
+        assertNotNull(bp);
+        assertEquals("bestemmingsplan", bp.getTypePlan());
+        assertEquals("NL.IMRO.0297.BGBBP20140020-OW01", bp.getIdentificatie());
+    }
     /**
      * Test of parsePlan method, of class Processor.
      */

@@ -30,12 +30,16 @@ import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro._2012._1.FeatureCollectionIMROType;
 import nl.b3p.imro._2012._1.NEN3610IDType;
+import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
 public class IMROParser {
+    protected final static Log log = LogFactory.getLog(IMROParser.class);
     private static GeometryConverter gc;
     private JAXBContext context20121;
 
@@ -81,7 +85,10 @@ public class IMROParser {
             obj = parseImro2012Gebiedsaanduiding(o);
         } else if (o instanceof nl.b3p.imro._2012._1.BestemmingsplangebiedType) {
             obj = parseImro2012Bestemmingsplan(o);
-        } else {
+        } else if(o instanceof nl.b3p.imro._2012._1.DubbelbestemmingType){
+            obj = parseImro2012Dubbelbestemming(o);
+        }else{
+            log.debug("Unknown type of featuremember when parsing. Class encountered: " + o.getClass().toString());
         }
 
         return obj;
@@ -116,14 +123,32 @@ public class IMROParser {
         bp.setTypePlan(bpgt.getTypePlan().value());
         bp.setIdentificatie(identificatie);
         try {
-            GeometryConverter gc = new GeometryConverter();
             MultiPolygon g = gc.convertMultiPolygonGeometry(bpgt.getGeometrie());
             bp.setGeometrie(g);
-            int b = 0;
         } catch (Exception e) {
-            int a = 0;
         }
         return bp;
+    }
+
+    protected Dubbelbestemming parseImro2012Dubbelbestemming(Object o){
+        Dubbelbestemming db = new Dubbelbestemming();
+        nl.b3p.imro._2012._1.DubbelbestemmingType dbt = (nl.b3p.imro._2012._1.DubbelbestemmingType) o;
+        String identificatie = getIdentificatie(dbt.getIdentificatie().getNEN3610ID());
+
+
+        db.setArtikelnummer(dbt.getArtikelnummer());
+        db.setBestemmingshoofdgroep(dbt.getBestemmingshoofdgroep().value());
+        db.setIdentificatie(identificatie);
+        db.setNaam(dbt.getNaam().getValue());
+        db.setTypePlanObject(dbt.getTypePlanobject().value());
+        db.setVerwijzing(dbt.getVerwijzingNaarTekstInfo().getTekstReferentieBP().getVerwijzingNaarTekst());
+        try {
+            MultiPolygon g = gc.convertMultiPolygonGeometry(dbt.getGeometrie());
+            db.setGeometrie(g);
+        } catch (Exception e) {
+        }
+
+        return db;
     }
 
     private String getIdentificatie(NEN3610IDType id){

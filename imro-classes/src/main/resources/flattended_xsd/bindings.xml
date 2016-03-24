@@ -91,9 +91,9 @@
 			<bindings node="xsd:complexType[@name='BestemmingsvlakType']//xsd:element[@name='geometrie']">
 				<dom/>
 			</bindings>
-			<bindings node="xsd:complexType[@name='BestemmingsvlakType']//xsd:element[@name='plangebied']">
+			<!--bindings node="xsd:complexType[@name='BestemmingsvlakType']//xsd:element[@name='plangebied']">
 				<dom/>
-			</bindings>
+			</bindings-->
 			<bindings node="xsd:complexType[@name='GebiedsaanduidingType']//xsd:element[@name='geometrie']">
 				<dom/>
 			</bindings>
