@@ -100,7 +100,7 @@ public class IMROParser {
         gba.setTypePlanObject(ga.getTypePlanobject().value());
         gba.setVerwijzing(ga.getVerwijzingNaarTekstInfo().getTekstReferentieBP().getVerwijzingNaarTekst());
         try {
-            MultiPolygon g = gc.convertMultiPolygonGeometry(ga.getGeometrie());
+            MultiPolygon g = gc.convertMultiPolygonGeometry(ga.getPlangebied());
             gba.setGeometrie(g);
         } catch (Exception e) {
         }

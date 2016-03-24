@@ -25,7 +25,7 @@ public class Gebiedsaanduiding {
 
     private String identificatie;
 
-    @Column(name = "geometrie", columnDefinition="geometry")
+    @org.hibernate.annotations.Type(type="org.hibernatespatial.GeometryUserType")
     private MultiPolygon geometrie;
 
     private String naam;
