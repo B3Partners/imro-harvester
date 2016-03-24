@@ -23,7 +23,10 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import javax.persistence.RollbackException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -47,6 +50,8 @@ public class Processor {
     private Integer timeout;
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
     private IMROParser parser;
+    private JAXBContext jaxbSTRIContext = JAXBContext.newInstance(nl.geonovum.stri._2012._1.GeleideFormulier.class, nl.geonovum.stri._2012._2.GeleideFormulier.class,
+            nl.geonovum.stri._2012._1.Manifest.class, nl.geonovum.stri._2012._2.Manifest.class );
 
     public Processor(List<HarvestJob> jobs) throws JAXBException {
         this(jobs, 30000);
@@ -64,44 +69,55 @@ public class Processor {
             try {
                 URL manifestUrl = getManifest(job);
                 List<URL> geleideformulierenURLS = getGeleideformulierURLSFromManifest(manifestUrl);
-                List<Geleideformulier> geleideformulieren = retrieveGeleideformulieren(geleideformulierenURLS);
-                
-                for (Geleideformulier geleideformulier : geleideformulieren) {
-                    try {
-                        List<Object> plannen = parser.parseGML(geleideformulier);
-                        
-                        if (!em.getTransaction().isActive()) {
-                            em.getTransaction().begin();
+
+                try {
+                    List<Geleideformulier> geleideformulieren = retrieveGeleideformulieren(geleideformulierenURLS);
+
+                    for (Geleideformulier geleideformulier : geleideformulieren) {
+                        log.debug("Processing geleideformulier: " + geleideformulier.toString());
+                        try {
+                            List<Object> plannen = parser.parseGML(geleideformulier);
+
+                            if (!em.getTransaction().isActive()) {
+                                em.getTransaction().begin();
+                            }
+                            for (Object plan : plannen) {
+                                em.persist(plan);
+                            }
+                            em.getTransaction().commit();
+                        } catch (JAXBException ex) {
+                            log.error("Cannot parse url " + geleideformulier);
+                            log.debug(ex);
+                        } catch (URISyntaxException ex) {
+                            log.error("Error concerning URI:");
+                            log.debug(ex);
+                        } catch (RollbackException e) {
+                            log.error("Cannot save entity in plan " + geleideformulier);
+                            log.debug(e);
+                            em.getTransaction().rollback();
+                        }catch(PersistenceException e){
+                            log.error("Cannot save entity in plan " + geleideformulier);
+                            log.debug(e);
+                            em.getTransaction().rollback();
                         }
-                        for (Object plan : plannen) {
-                            em.persist(plan);
-                        }
-                        em.getTransaction().commit();
-                    } catch (JAXBException ex) {
-                        log.error("Cannot parse url " + geleideformulier);
-                        log.debug(ex);
-                    } catch (URISyntaxException ex) {
-                        log.error("Error concerning URI:");
-                        log.debug(ex);
-                    } catch (RollbackException e) {
-                        log.error("Cannot save entity in plan " + geleideformulier);
-                        log.debug(e);
-                        em.getTransaction().rollback();
                     }
+
+                } catch (IOException ex) {
+                    log.error("Cannot get manifest url for HarvestJob " + job.getId() + " - " + job.getUrl(), ex);
                 }
+            } catch (IOException ex) {
+                Logger.getLogger(Processor.class.getName()).log(Level.SEVERE, null, ex);
             } catch (JAXBException ex) {
-                log.error("Cannot parse manifest/dossier for job " + job.getId() + " - " + job.getUrl(), ex);
-            }catch (IOException ex) {
-                log.error("Cannot get manifest url for HarvestJob " + job.getId() + " - " + job.getUrl(), ex);
+                Logger.getLogger(Processor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
     // <editor-fold desc="Manifest ophaalmethods" defaultstate="Collapsed">
     protected URL getManifest(HarvestJob job) throws IOException {
-        if(job.getType() == null || job.getType() == HarvestJob.HarvestJobType.DIRECT){
+        if (job.getType() == null || job.getType() == HarvestJob.HarvestJobType.DIRECT) {
             return new URL(job.getUrl());
-        }else{
+        } else {
             URL u = new URL(job.getUrl());
             Document doc = Jsoup.parse(u, timeout);
             return getManifest(doc);
@@ -122,11 +138,10 @@ public class Processor {
     // </editor-fold>
 
     // <editor-fold desc="Geleideformulier verwerk methodes" defaultstate="collapsed">
-    protected List<URL> getGeleideformulierURLSFromManifest(URL manifestUrl) throws JAXBException, MalformedURLException{
+    protected List<URL> getGeleideformulierURLSFromManifest(URL manifestUrl) throws JAXBException, MalformedURLException {
         List<URL> geleideformulieren = new ArrayList<URL>();
-        JAXBContext jaxbContext = JAXBContext.newInstance(nl.geonovum.stri._2012._1.Manifest.class, nl.geonovum.stri._2012._2.Manifest.class);
 
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
         Object m = jaxbUnmarshaller.unmarshal(manifestUrl);
 
         // Support two versions of the manifest. Sadly, almost the same, but namespaces in xsd differ.
@@ -152,55 +167,51 @@ public class Processor {
         return geleideformulieren;
     }
 
-    protected List<Geleideformulier> retrieveGeleideformulieren(List<URL> geleideformulieren) throws JAXBException, MalformedURLException{
+    protected List<Geleideformulier> retrieveGeleideformulieren(List<URL> geleideformulieren) throws MalformedURLException, JAXBException {
         List<Geleideformulier> urls = new ArrayList<Geleideformulier>();
-        JAXBContext jaxbContext = JAXBContext.newInstance(nl.geonovum.stri._2012._1.GeleideFormulier.class, nl.geonovum.stri._2012._2.GeleideFormulier.class);
 
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
 
         for (URL geleideformulierURL : geleideformulieren) {
-            Geleideformulier geleideformulier = new Geleideformulier();
-            Object geleideformulierObject = jaxbUnmarshaller.unmarshal(geleideformulierURL);
-            // Support two versions of the manifest. Sadly, almost the same, but namespaces in xsd differ.
-            if (geleideformulierObject instanceof nl.geonovum.stri._2012._1.GeleideFormulier) {
-                nl.geonovum.stri._2012._1.GeleideFormulier gf = (nl.geonovum.stri._2012._1.GeleideFormulier) geleideformulierObject;
-                nl.geonovum.stri._2012._1.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
-                nl.geonovum.stri._2012._1.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
+            try {
+                Geleideformulier geleideformulier = new Geleideformulier();
+                Object geleideformulierObject = jaxbUnmarshaller.unmarshal(geleideformulierURL);
+                // Support two versions of the manifest. Sadly, almost the same, but namespaces in xsd differ.
+                if (geleideformulierObject instanceof nl.geonovum.stri._2012._1.GeleideFormulier) {
+                    nl.geonovum.stri._2012._1.GeleideFormulier gf = (nl.geonovum.stri._2012._1.GeleideFormulier) geleideformulierObject;
+                    nl.geonovum.stri._2012._1.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
+                    nl.geonovum.stri._2012._1.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
 
-                String basisurl = onderdelen.getBasisURL();
-                String gml = onderdelen.getIMRO();
-                URL u = new URL (basisurl + gml);
+                    String basisurl = onderdelen.getBasisURL();
+                    String gml = onderdelen.getIMRO();
+                    URL u = new URL(basisurl + gml);
 
-                geleideformulier.setIdentificatie(gf.getPlan().getId());
-                geleideformulier.setBasisURL(basisurl);
-                geleideformulier.setDatum(eigenschappen.getDatum().toString());
-                geleideformulier.setNaam(eigenschappen.getNaam());
-                geleideformulier.setStatus(eigenschappen.getStatus().value());
-                geleideformulier.setVersie(eigenschappen.getVersieIMRO());
-                geleideformulier.setType(eigenschappen.getType().value());
+                    geleideformulier.setIdentificatie(gf.getPlan().getId());
+                    geleideformulier.setBasisURL(basisurl);
+                    geleideformulier.setDatum(eigenschappen.getDatum().toString());
+                    geleideformulier.setNaam(eigenschappen.getNaam());
+                    geleideformulier.setStatus(eigenschappen.getStatus().value());
+                    geleideformulier.setVersie(eigenschappen.getVersieIMRO());
+                    geleideformulier.setType(eigenschappen.getType().value());
 
-            } else if (geleideformulierObject instanceof nl.geonovum.stri._2012._2.GeleideFormulier) {
-                nl.geonovum.stri._2012._2.GeleideFormulier gf = (nl.geonovum.stri._2012._2.GeleideFormulier) geleideformulierObject;
-                nl.geonovum.stri._2012._2.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
+                } else if (geleideformulierObject instanceof nl.geonovum.stri._2012._2.GeleideFormulier) {
+                    nl.geonovum.stri._2012._2.GeleideFormulier gf = (nl.geonovum.stri._2012._2.GeleideFormulier) geleideformulierObject;
+                    nl.geonovum.stri._2012._2.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
 
-                nl.geonovum.stri._2012._2.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
-                String basisurl = onderdelen.getBasisURL();
-                String gml = onderdelen.getGML();
-                URL u = new URL (basisurl + gml);
+                    nl.geonovum.stri._2012._2.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
+                    String basisurl = onderdelen.getBasisURL();
+                    String gml = onderdelen.getGML();
+                    URL u = new URL(basisurl + gml);
 
-
-                /*geleideformulier.setBasisURL(basisurl);
-                geleideformulier.setDatum(eigenschappen.getDatum().toString());
-                geleideformulier.setNaam(eigenschappen.getNaam());
-                geleideformulier.setStatus(eigenschappen.getStatus().value());
-                geleideformulier.setVersie(eigenschappen.getVersieGML());
-                geleideformulier.setType(eigenschappen.getType().value());*/
+                }
+                urls.add(geleideformulier);
+            } catch (JAXBException ex) {
+                log.info("Cannot unmarshal geleideformulier" + geleideformulierURL);
             }
-            urls.add(geleideformulier);
-
         }
+
         return urls;
     }
     // </editor-fold>
-    
+
 }
