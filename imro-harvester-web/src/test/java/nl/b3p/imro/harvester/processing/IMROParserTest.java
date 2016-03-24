@@ -7,6 +7,7 @@ package nl.b3p.imro.harvester.processing;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro._2012._1.FeatureCollectionIMROType;
@@ -144,7 +145,8 @@ public class IMROParserTest {
         assertEquals("0297",bp.getOverheidsCode());
         assertEquals("Buitengebied Parapluplan Nieuwe Hollandse Waterlinie",bp.getNaam());
         assertEquals("ontwerp",bp.getPlanstatusInfo());
-        assertEquals("2015-05-19",bp.getPlanstatusInfo());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        assertEquals("2015-05-19",sdf.format(bp.getPlanstatusDatum()));
 
     }
     /**

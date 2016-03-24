@@ -17,12 +17,13 @@
 package nl.b3p.imro.harvester.entities.imro;
 
 import com.vividsolutions.jts.geom.MultiPolygon;
-import javax.persistence.Column;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import org.hibernate.annotations.Type;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -50,6 +51,9 @@ public class Bestemmingsplan {
     private String locatieNaam;
 
     private String planstatusInfo;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date planstatusDatum;
 
     private String besluitnummer;
 
@@ -142,5 +146,13 @@ public class Bestemmingsplan {
 
     public void setGeometrie(MultiPolygon geometrie) {
         this.geometrie = geometrie;
+    }
+
+    public Date getPlanstatusDatum() {
+        return planstatusDatum;
+    }
+
+    public void setPlanstatusDatum(Date planstatusDatum) {
+        this.planstatusDatum = planstatusDatum;
     }
 }

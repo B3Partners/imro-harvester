@@ -21,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -69,8 +70,6 @@ public class IMROParser {
         
         return value;
     }
-
-
 
     protected List<Object> processFeatureCollection(FeatureCollectionIMROType fc) {
         List<Object> objs = new ArrayList<Object>();
@@ -129,6 +128,14 @@ public class IMROParser {
         String identificatie = getIdentificatie(bpgt.getIdentificatie().getNEN3610ID());
         bp.setTypePlan(bpgt.getTypePlan().value());
         bp.setIdentificatie(identificatie);
+        bp.setBeleidsmatigeVerantwoordelijkeOverheid(bpgt.getBeleidsmatigVerantwoordelijkeOverheid().value());
+        bp.setBesluitnummer(bpgt.getBesluitnummer());
+        bp.setNaam(bpgt.getNaam().getValue());
+        bp.setNaamOverheid(bpgt.getNaamOverheid().get(0));
+        bp.setOverheidsCode(bpgt.getOverheidsCode());
+        bp.setPlanstatusInfo(bpgt.getPlanstatusInfo().getPlanstatusEnDatum().getPlanstatus().value());
+        bp.setPlanstatusDatum(new Date(bpgt.getPlanstatusInfo().getPlanstatusEnDatum().getDatum().getTimeInMillis()));
+        bp.setTypePlan(bpgt.getTypePlan().value());
         try {
             MultiPolygon g = gc.convertMultiPolygonGeometry(bpgt.getGeometrie());
             bp.setGeometrie(g);
