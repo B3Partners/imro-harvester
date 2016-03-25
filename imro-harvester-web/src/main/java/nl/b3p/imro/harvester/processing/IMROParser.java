@@ -27,6 +27,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import nl.b3p.imro._2012._1.BestemmingsvlakPropertyType;
+import nl.b3p.imro._2012._1.BestemmingsvlakType;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro._2012._1.FeatureCollectionIMROType;
@@ -185,9 +187,11 @@ public class IMROParser {
         bv.setIdentificatie(identificatie);
         bv.setNaam(bvt.getNaam().getValue());
         bv.setTypePlanObject(bvt.getTypePlanobject().value());
-        
+        BestemmingsvlakPropertyType bt=  bvt.getBestemmingsvlak().get(0);
+
+        bv.setEnkelbestemming(bt.getHref().substring(1));
         try {
-            MultiPolygon g = gc.convertMultiPolygonGeometry(bvt.getGeometrie());
+            MultiPolygon g = gc.convertMultiPolygonGeometry(bvt.getPlangebied());
             bv.setGeometrie(g);
         } catch (Exception e) {
         }
@@ -231,7 +235,7 @@ public class IMROParser {
         }
         
         try {
-            MultiPolygon g = gc.convertMultiPolygonGeometry(ebt.getGeometrie());
+            MultiPolygon g = gc.convertMultiPolygonGeometry(ebt.getPlangebied());
             mv.setGeometrie(g);
         } catch (Exception e) {
         }

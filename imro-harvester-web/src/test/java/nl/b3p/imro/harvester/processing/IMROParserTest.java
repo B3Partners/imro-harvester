@@ -195,7 +195,7 @@ public class IMROParserTest {
     @Test
     public void testParseBouwvlakInhoud() throws JAXBException {
         System.out.println("testParseMaatvoeringInhoud");
-        URL u = this.getClass().getResource("maatvoering.xml");
+        URL u = this.getClass().getResource("bouwvlak.xml");
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
         Bouwvlak bv = instance.parseImro2012Bouwvlak(gba);
