@@ -15,6 +15,7 @@ import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
+import nl.b3p.imro.harvester.entities.imro.Figuur;
 import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
@@ -83,6 +84,17 @@ public class IMROParserTest {
 
 
         assertEquals(47, o.size());
+    }
+
+
+    @Test
+    public void testDoornboomFiguur() throws JAXBException {
+        System.out.println("testDoornboomFiguur");
+        URL u = this.getClass().getResource("NL.IMRO.0798.BPDoornboom-ON01.gml");
+        List<Object> o = instance.parseGML(u);
+
+
+        assertEquals(28, o.size());
     }
 
     /**
@@ -207,6 +219,22 @@ public class IMROParserTest {
         assertEquals("bouwvlak", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
         assertEquals("NL.IMRO.0664.EP5302177522-00", bv.getEnkelbestemming());
+    }
+
+    @Test
+    public void testParseFiguurInhoud() throws JAXBException {
+        System.out.println("testParseFiguurInhoud");
+        URL u = this.getClass().getResource("figuur.xml");
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Figuur bv = instance.parseImro2012Figuur(gba);
+
+        assertNotNull(bv);
+        assertEquals("NL.IMRO.da5ed70e337a4d40a2ebd0f09b87fc15", bv.getIdentificatie());
+        assertEquals("figuur", bv.getTypePlanObject());
+        assertEquals("gevellijn", bv.getNaam());
+        assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertEquals("NL.IMRO.f33370be08c84334abd9abbf5212bb4f", bv.getEnkelbestemming());
     }
 
     @Test

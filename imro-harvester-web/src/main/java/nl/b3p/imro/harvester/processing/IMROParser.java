@@ -16,6 +16,7 @@
  */
 package nl.b3p.imro.harvester.processing;
 
+import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -37,6 +38,7 @@ import nl.b3p.imro._2012._1.WaardeEnTypeType;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
+import nl.b3p.imro.harvester.entities.imro.Figuur;
 import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import nl.b3p.imro.harvester.entities.imro.WaardeEnType;
@@ -109,6 +111,8 @@ public class IMROParser {
             obj = parseImro2012Bouwvlak(o);
         } else if(o instanceof nl.b3p.imro._2012._1.FunctieaanduidingType){
             obj = parseImro2012Functieaanduiding(o);
+        } else if ( o instanceof nl.b3p.imro._2012._1.FiguurType){
+            obj = parseImro2012Figuur(o);
         }else{
             log.error("Unknown type of featuremember when parsing. Class encountered: " + o.getClass().toString());
         }
@@ -215,6 +219,27 @@ public class IMROParser {
         }
         try {
             MultiPolygon g = gc.convertMultiPolygonGeometry(fat.getPlangebied());
+            fa.setGeometrie(g);
+        } catch (Exception e) {
+        }
+        return fa;
+    }
+
+    protected Figuur parseImro2012Figuur(Object o){
+        Figuur fa = new Figuur();
+        nl.b3p.imro._2012._1.FiguurType fat = (nl.b3p.imro._2012._1.FiguurType) o;
+        String identificatie = getIdentificatie(fat.getIdentificatie().getNEN3610ID());
+
+        fa.setIdentificatie(identificatie);
+        fa.setNaam(fat.getNaam());
+        fa.setTypePlanObject(fat.getTypePlanobject().value());
+        if (fat.getBestemmingsvlak().size() > 0) {
+            BestemmingsvlakPropertyType bt = fat.getBestemmingsvlak().get(0);
+
+            fa.setEnkelbestemming(bt.getHref().substring(1));
+        }
+        try {
+            MultiLineString g = gc.convertMultiLineStringGeometry(fat.getPlangebied());
             fa.setGeometrie(g);
         } catch (Exception e) {
         }

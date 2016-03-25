@@ -7,6 +7,8 @@ package nl.b3p.imro.harvester.processing;
 
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.LineString;
+import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.geom.PrecisionModel;
@@ -23,6 +25,7 @@ import org.geotools.gml3.CircleRadiusTolerance;
 import org.geotools.xml.Parser;
 import org.jdom2.input.DOMBuilder;
 import org.jdom2.output.XMLOutputter;
+import org.jsoup.nodes.Node;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
@@ -66,47 +69,33 @@ public class GeometryConverter {
             } else if (resultGeometry instanceof Polygon) {
                 return geometryFactory.createMultiPolygon(new Polygon[]{(Polygon) resultGeometry});
             }
-
-            //   throw new ROConversionException("geometry not a Polygon or MultiPolygon: " + resultGeometry.getClass());
         }
         return null;
     }
-    /*
-     public MultiLineString convertMultiLineStringGeometry(Node geometry)
-     throws  IOException, SAXException, ParserConfigurationException {
-     if (geometry != null) {
-     Geometry resultGeometry = convertGeometryImpl(geometry);
 
-     if (resultGeometry instanceof MultiLineString)
-     return (MultiLineString) resultGeometry;
-     else if (resultGeometry instanceof LineString)
-     return geometryFactory.createMultiLineString(new LineString[] { (LineString)resultGeometry });
+    public MultiLineString convertMultiLineStringGeometry(Element geometry)
+            throws IOException, SAXException, ParserConfigurationException, TransformerException {
+        if (geometry != null) {
+            Geometry resultGeometry = convertGeometry(geometry);
 
-     // throw new ROConversionException("geometry not a LineString or MultiLineString: " + resultGeometry.getClass());
-     }
-     return null;
-     }
-     */
+            if (resultGeometry instanceof MultiLineString) {
+                return (MultiLineString) resultGeometry;
+            } else if (resultGeometry instanceof LineString) {
+                return geometryFactory.createMultiLineString(new LineString[]{(LineString) resultGeometry});
+            }
+        }
+        return null;
+    }
 
     private Geometry convertGeometry(Element el)
             throws IOException, SAXException, ParserConfigurationException, TransformerException {
         if (!(el instanceof org.w3c.dom.Element)) {
             throw new IllegalArgumentException("gml org.w3c.node is not an org.w3c.Element");
         }
-            // TODO: maybe convert node directly to a source / inputsource / reader / stream for parser.
+        // TODO: maybe convert node directly to a source / inputsource / reader / stream for parser.
         // instead of JDOM detour.
         org.jdom2.Element elem = new DOMBuilder().build((org.w3c.dom.Element) el);
-        /* Transformer transformer = TransformerFactory.newInstance().newTransformer();
-         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-
-         StreamResult result = new StreamResult(new StringWriter());
-         DOMSource source = new DOMSource(elem);
-         transformer.transform(source, result);
-
-         String gmlString = result.getWriter().toString();
-         */
         String gmlString = new XMLOutputter().outputString(elem);
-        //String gmlString = "";
         gmlString = gmlString.replaceAll("gml:", "");
         parser.getNamespaces().declarePrefix("gml", "http://www.opengis.net/gml/3.2");
         Object parsedObject = parser.parse(new StringReader(gmlString));

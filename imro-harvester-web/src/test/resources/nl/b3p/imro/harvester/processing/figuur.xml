@@ -1,0 +1,25 @@
+  <imro:Figuur gml:id="NL.IMRO.da5ed70e337a4d40a2ebd0f09b87fc15"  xmlns:imro="http://www.geonovum.nl/imro/2012/1.1"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            xmlns:gml="http://www.opengis.net/gml/3.2"
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                            xsi:schemaLocation="http://www.geonovum.nl/imro/2012/1.1 http://schemas.geonovum.nl/imro/2012/1.1/IMRO2012.xsd">
+         <imro:identificatie>
+            <imro:NEN3610ID>
+               <imro:namespace>NL.IMRO</imro:namespace>
+               <imro:lokaalID>da5ed70e337a4d40a2ebd0f09b87fc15</imro:lokaalID>
+            </imro:NEN3610ID>
+         </imro:identificatie>
+         <imro:typePlanobject>figuur</imro:typePlanobject>
+         <imro:plangebied xlink:href="#NL.IMRO.0798.BPDoornboom-ON01" />
+         <imro:bestemmingsvlak xlink:href="#NL.IMRO.f33370be08c84334abd9abbf5212bb4f" />
+         <imro:naam>gevellijn</imro:naam>
+         <imro:geometrie>
+            <gml:Curve gml:id="id.1e1dc9e727e048149e6bfca0a4329c0a" srsName="urn:ogc:def:crs:EPSG::28992">
+               <gml:segments>
+                  <gml:LineStringSegment>
+                     <gml:posList>137485.109 388846.643 137491.937 388848.067</gml:posList>
+                  </gml:LineStringSegment>
+               </gml:segments>
+            </gml:Curve>
+         </imro:geometrie>
+      </imro:Figuur>
