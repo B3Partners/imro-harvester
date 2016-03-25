@@ -1,0 +1,67 @@
+		<imro:Bouwvlak gml:id="NL.IMRO.0664.BP4302177420-00" xmlns:imro="http://www.geonovum.nl/imro/2012/1.1" 
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            xmlns:gml="http://www.opengis.net/gml/3.2"
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                            xsi:schemaLocation="http://www.geonovum.nl/imro/2012/1.1 http://schemas.geonovum.nl/imro/2012/1.1/IMRO2012.xsd">
+			<imro:identificatie>
+				<imro:NEN3610ID>
+					<imro:namespace>NL.IMRO</imro:namespace>
+					<imro:lokaalID>0664.BP4302177420-00</imro:lokaalID>
+				</imro:NEN3610ID>
+			</imro:identificatie>
+			<imro:typePlanobject>bouwvlak</imro:typePlanobject>
+			<imro:plangebied xlink:href="#NL.IMRO.0664.BPBS03-ON99"/>
+			<imro:bestemmingsvlak xlink:href="#NL.IMRO.0664.EP5302177522-00"/>
+			<imro:naam>bouwvlak</imro:naam>
+			<imro:geometrie>
+				<gml:Surface gml:id="id13" srsName="urn:ogc:def:crs:EPSG::28992">
+					<gml:patches>
+						<gml:PolygonPatch>
+							<gml:exterior>
+								<gml:Ring>
+									<gml:curveMember>
+										<gml:Curve gml:id="id14">
+											<gml:segments>
+												<gml:Arc>
+													<gml:posList>50959.65 390906.965 50957.145 390926.599 50950.878 390945.37</gml:posList>
+												</gml:Arc>
+												<gml:LineStringSegment>
+													<gml:posList>50950.878 390945.37 50869.825 390947.043</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>50869.825 390947.043 50869.144 390916.678</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>50869.144 390916.678 50872.673 390916.598</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>50872.673 390916.598 50883.294 390871.16</gml:posList>
+												</gml:LineStringSegment>
+												<gml:Arc>
+													<gml:posList>50883.294 390871.16 50888.127 390858.927 50896.158 390848.74</gml:posList>
+												</gml:Arc>
+												<gml:LineStringSegment>
+													<gml:posList>50896.158 390848.74 50900.038 390844.956</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>50900.038 390844.956 50901.133 390846.252</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>50901.133 390846.252 50928.93 390820.077</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>50928.93 390820.077 50937.856 390829.553 50932.077 390835.691 50960.45 390875.1</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>50960.45 390875.1 50959.65 390906.965</gml:posList>
+												</gml:LineStringSegment>
+											</gml:segments>
+										</gml:Curve>
+									</gml:curveMember>
+								</gml:Ring>
+							</gml:exterior>
+						</gml:PolygonPatch>
+					</gml:patches>
+				</gml:Surface>
+			</imro:geometrie>
+		</imro:Bouwvlak>

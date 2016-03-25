@@ -12,9 +12,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
+import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
+import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -130,6 +132,7 @@ public class IMROParserTest {
         assertEquals("overige zone - accessen", ga.getNaam());
         assertEquals("overige zone", ga.getGebiedsaanduidinggroep());
         assertEquals("2.3.2", ga.getArtikelnummer());
+        assertNotNull("Geometrie moet gevuld zijn",ga.getGeometrie());
     }
 
     @Test
@@ -150,6 +153,7 @@ public class IMROParserTest {
         assertEquals("Waarde - Nieuwe Hollandse Waterlinie", db.getNaam());
         assertEquals("waarde", db.getBestemmingshoofdgroep());
         assertEquals("2", db.getArtikelnummer());
+        assertNotNull("Geometrie moet gevuld zijn",db.getGeometrie());
     }
 
     @Test
@@ -166,6 +170,42 @@ public class IMROParserTest {
         assertEquals("Tuin", eb.getNaam());
         assertEquals("tuin", eb.getBestemmingshoofdgroep());
         assertEquals("3", eb.getArtikelnummer());
+        assertNotNull("Geometrie moet gevuld zijn",eb.getGeometrie());
+    }
+
+    @Test
+    public void testParseMaatvoeringInhoud() throws JAXBException {
+        System.out.println("testParseMaatvoeringInhoud");
+        URL u = this.getClass().getResource("maatvoering.xml");
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Maatvoering mv = instance.parseImro2012Maatvoering(gba);
+
+        assertNotNull(mv);
+        assertEquals("NL.IMRO.0664.MP18312983563-00", mv.getIdentificatie());
+        assertEquals("maatvoering", mv.getTypePlanObject());
+        assertEquals("maximum aantal bouwlagen", mv.getNaam());
+        assertNotNull("Geometrie moet gevuld zijn",mv.getGeometrie());
+        assertEquals(1,mv.getWaardeEnType().size());
+        assertEquals("maximum aantal bouwlagen", mv.getWaardeEnType().get(0).getWaardeType());
+        assertEquals("8", mv.getWaardeEnType().get(0).getWaarde());
+        assertEquals("s120", mv.getWaardeEnType().get(0).getSymboolCode());
+    }
+
+    @Test
+    public void testParseBouwvlakInhoud() throws JAXBException {
+        System.out.println("testParseMaatvoeringInhoud");
+        URL u = this.getClass().getResource("maatvoering.xml");
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Bouwvlak bv = instance.parseImro2012Bouwvlak(gba);
+
+        assertNotNull(bv);
+        assertEquals("NL.IMRO.0664.BP4302177420-00", bv.getIdentificatie());
+        assertEquals("bouwvlak", bv.getTypePlanObject());
+        assertEquals("bouwvlak", bv.getNaam());
+        assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertEquals("NL.IMRO.0664.EP5302177522-00", bv.getEnkelbestemming());
     }
 
     /**
@@ -191,6 +231,7 @@ public class IMROParserTest {
         assertEquals("ontwerp", bp.getPlanstatusInfo());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         assertEquals("2015-05-19", sdf.format(bp.getPlanstatusDatum()));
+        assertNotNull("Geometrie moet gevuld zijn",bp.getGeometrie());
 
     }
 

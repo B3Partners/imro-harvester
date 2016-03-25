@@ -1,0 +1,92 @@
+	<imro:Maatvoering gml:id="NL.IMRO.0664.MP18312983563-00" xmlns:imro="http://www.geonovum.nl/imro/2012/1.1" 
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            xmlns:gml="http://www.opengis.net/gml/3.2"
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                            xsi:schemaLocation="http://www.geonovum.nl/imro/2012/1.1 http://schemas.geonovum.nl/imro/2012/1.1/IMRO2012.xsd">
+			<imro:identificatie>
+				<imro:NEN3610ID>
+					<imro:namespace>NL.IMRO</imro:namespace>
+					<imro:lokaalID>0664.MP18312983563-00</imro:lokaalID>
+				</imro:NEN3610ID>
+			</imro:identificatie>
+			<imro:typePlanobject>maatvoering</imro:typePlanobject>
+			<imro:plangebied xlink:href="#NL.IMRO.0664.BPBS03-ON99"/>
+			<imro:naam>maximum aantal bouwlagen</imro:naam>
+			<imro:symboolInfo>
+				<imro:SymboolEnPositie>
+					<imro:symboolCode>s120</imro:symboolCode>
+					<imro:positie>
+						<imro:Labelpositie>
+							<imro:plaatsingspunt>
+								<gml:Point gml:id="id136" srsName="urn:ogc:def:crs:EPSG::28992">
+									<gml:pos>51004.625 390833.297</gml:pos>
+								</gml:Point>
+							</imro:plaatsingspunt>
+							<imro:hoek>0</imro:hoek>
+						</imro:Labelpositie>
+					</imro:positie>
+				</imro:SymboolEnPositie>
+			</imro:symboolInfo>
+			<imro:maatvoeringInfo>
+				<imro:WaardeEnType>
+					<imro:waarde>8</imro:waarde>
+					<imro:waardeType>maximum aantal bouwlagen</imro:waardeType>
+					<imro:symboolCode>s120</imro:symboolCode>
+				</imro:WaardeEnType>
+			</imro:maatvoeringInfo>
+			<imro:geometrie>
+				<gml:Surface gml:id="id5" srsName="urn:ogc:def:crs:EPSG::28992">
+					<gml:patches>
+						<gml:PolygonPatch>
+							<gml:exterior>
+								<gml:Ring>
+									<gml:curveMember>
+										<gml:Curve gml:id="id6">
+											<gml:segments>
+												<gml:Arc>
+													<gml:posList>51020.827 390916.565 51010.981 390913.947 51003.17 390909.707</gml:posList>
+												</gml:Arc>
+												<gml:Arc>
+													<gml:posList>51003.17 390909.707 50994.274 390900.741 50989.251 390889.645</gml:posList>
+												</gml:Arc>
+												<gml:LineStringSegment>
+													<gml:posList>50989.251 390889.645 50989.038 390861.79</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>50989.038 390861.79 50992.027 390845.155</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>50992.027 390845.155 50992.055 390845</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>50992.055 390845 50992.553 390842.227</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>50992.553 390842.227 50997.093 390816.967</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>50997.093 390816.967 51023.507 390821.741</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>51023.507 390821.741 51014.871 390869.942</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>51014.871 390869.942 51023.452 390896.946</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>51023.452 390896.946 51022.507 390904.013</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>51022.507 390904.013 51022.419 390904.671 51020.827 390916.565</gml:posList>
+												</gml:LineStringSegment>
+											</gml:segments>
+										</gml:Curve>
+									</gml:curveMember>
+								</gml:Ring>
+							</gml:exterior>
+						</gml:PolygonPatch>
+					</gml:patches>
+				</gml:Surface>
+			</imro:geometrie>
+			<imro:aanduiding xlink:href="#NL.IMRO.0664.BP5312913733-00"/>
+		</imro:Maatvoering>
