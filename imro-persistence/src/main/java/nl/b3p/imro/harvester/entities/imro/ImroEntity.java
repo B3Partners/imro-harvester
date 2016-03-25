@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 /**
@@ -37,6 +38,18 @@ public abstract class ImroEntity {
     protected String verwijzing;
 
     protected String typePlanObject;
+
+
+    @ManyToOne
+    private Bestemmingsplan bestemmingsplan;
+
+    public Bestemmingsplan getBestemmingsplan() {
+        return bestemmingsplan;
+    }
+
+    public void setBestemmingsplan(Bestemmingsplan bestemmingsplan) {
+        this.bestemmingsplan = bestemmingsplan;
+    }
 
     public int getId() {
         return id;

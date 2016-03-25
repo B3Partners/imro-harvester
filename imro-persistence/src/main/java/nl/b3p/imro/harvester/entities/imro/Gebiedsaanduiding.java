@@ -5,12 +5,7 @@
  */
 package nl.b3p.imro.harvester.entities.imro;
 
-import com.vividsolutions.jts.geom.MultiPolygon;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 /**
  *
@@ -22,23 +17,12 @@ public class Gebiedsaanduiding extends ImroEntity{
 
     private String gebiedsaanduidinggroep;
 
-    @ManyToOne
-    private Bestemmingsplan bestemmingsplan;
-
     public String getGebiedsaanduidinggroep() {
         return gebiedsaanduidinggroep;
     }
 
     public void setGebiedsaanduidinggroep(String gebiedsaanduidinggroep) {
         this.gebiedsaanduidinggroep = gebiedsaanduidinggroep;
-    }
-
-    public Bestemmingsplan getBestemmingsplan() {
-        return bestemmingsplan;
-    }
-
-    public void setBestemmingsplan(Bestemmingsplan bestemmingsplan) {
-        this.bestemmingsplan = bestemmingsplan;
     }
 
 }
