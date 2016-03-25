@@ -15,6 +15,7 @@ import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
+import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import org.junit.Test;
@@ -206,6 +207,22 @@ public class IMROParserTest {
         assertEquals("bouwvlak", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
         assertEquals("NL.IMRO.0664.EP5302177522-00", bv.getEnkelbestemming());
+    }
+
+    @Test
+    public void testParseFunctieaanduidingInhoud() throws JAXBException {
+        System.out.println("testParseFunctieaanduidingInhoud");
+        URL u = this.getClass().getResource("functieaanduiding.xml");
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Functieaanduiding bv = instance.parseImro2012Functieaanduiding(gba);
+
+        assertNotNull(bv);
+        assertEquals("NL.IMRO.0664.FA10312914914-00", bv.getIdentificatie());
+        assertEquals("functieaanduiding", bv.getTypePlanObject());
+        assertEquals("detailhandel", bv.getNaam());
+        assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertEquals("NL.IMRO.0664.EP7312914753-00", bv.getEnkelbestemming());
     }
 
     /**

@@ -13,6 +13,7 @@
         <class>nl.b3p.imro.harvester.entities.imro.Maatvoering</class>
         <class>nl.b3p.imro.harvester.entities.imro.WaardeEnType</class>
         <class>nl.b3p.imro.harvester.entities.imro.Bouwvlak</class>
+        <class>nl.b3p.imro.harvester.entities.imro.Functieaanduiding</class>
     <properties>
 
             <property name="hibernate.connection.url" value="${imro.url}" />

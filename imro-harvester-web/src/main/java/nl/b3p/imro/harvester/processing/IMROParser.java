@@ -28,7 +28,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import nl.b3p.imro._2012._1.BestemmingsvlakPropertyType;
-import nl.b3p.imro._2012._1.BestemmingsvlakType;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro._2012._1.FeatureCollectionIMROType;
@@ -38,6 +37,7 @@ import nl.b3p.imro._2012._1.WaardeEnTypeType;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
+import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import nl.b3p.imro.harvester.entities.imro.WaardeEnType;
 import org.apache.commons.logging.Log;
@@ -107,6 +107,8 @@ public class IMROParser {
             obj = parseImro2012Maatvoering(o);
         } else if(o instanceof nl.b3p.imro._2012._1.BouwvlakType){
             obj = parseImro2012Bouwvlak(o);
+        } else if(o instanceof nl.b3p.imro._2012._1.FunctieaanduidingType){
+            obj = parseImro2012Functieaanduiding(o);
         }else{
             log.debug("Unknown type of featuremember when parsing. Class encountered: " + o.getClass().toString());
         }
@@ -196,6 +198,25 @@ public class IMROParser {
         } catch (Exception e) {
         }
         return bv;
+    }
+
+    protected Functieaanduiding parseImro2012Functieaanduiding(Object o){
+        Functieaanduiding fa = new Functieaanduiding();
+        nl.b3p.imro._2012._1.FunctieaanduidingType fat = (nl.b3p.imro._2012._1.FunctieaanduidingType) o;
+        String identificatie = getIdentificatie(fat.getIdentificatie().getNEN3610ID());
+
+        fa.setIdentificatie(identificatie);
+        fa.setNaam(fat.getNaam());
+        fa.setTypePlanObject(fat.getTypePlanobject().value());
+        BestemmingsvlakPropertyType bt=  fat.getBestemmingsvlak().get(0);
+
+        fa.setEnkelbestemming(bt.getHref().substring(1));
+        try {
+            MultiPolygon g = gc.convertMultiPolygonGeometry(fat.getPlangebied());
+            fa.setGeometrie(g);
+        } catch (Exception e) {
+        }
+        return fa;
     }
 
     protected Enkelbestemming parseImro2012Enkelbestemming(Object o){
