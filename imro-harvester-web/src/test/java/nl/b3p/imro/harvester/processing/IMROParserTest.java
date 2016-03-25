@@ -5,6 +5,7 @@
  */
 package nl.b3p.imro.harvester.processing;
 
+import com.vividsolutions.jts.geom.MultiPolygon;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -50,6 +51,25 @@ public class IMROParserTest {
         assertEquals(8, result.size());
     }
 
+    @Test
+    public void testStationsPleinZuidOost() throws JAXBException {
+        System.out.println("testParsePlanInhoudGebiedsaanduiding");
+        URL u = this.getClass().getResource("stationspleinzuidoost.gml");
+        List<Object> o = instance.parseGML(u);
+
+        for (Object o1 : o) {
+            if(o1 instanceof Bestemmingsplan){
+                Bestemmingsplan b = (Bestemmingsplan)o1;
+                MultiPolygon mp = b.getGeometrie();
+                assertTrue(mp.isValid());
+                assertTrue(mp instanceof MultiPolygon);
+                break;
+            }
+
+        }
+      //  assertEquals(81, o.size());
+    }
+
     /**
      * Test of parseGML method, of class IMROParser.
      */
@@ -60,7 +80,6 @@ public class IMROParserTest {
         List<Object> result = instance.parseGML(new URL("http://files.b3p.nl/imroharvester/NL.IMRO.0297.BGBBP20140020-OW01.gml"));
         assertEquals(8, result.size());
     }
-
 
     /**
      * Test of parsePlan method, of class Processor.
@@ -81,10 +100,9 @@ public class IMROParserTest {
         }
     }
 
-        /**
+    /**
      * Test of parsePlan method, of class Processor.
      */
-
     @Test
     public void testParseGebiedsaanduidingInhoud() throws JAXBException {
         System.out.println("testParseGebiedsaanduidingInhoud");
@@ -93,15 +111,14 @@ public class IMROParserTest {
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
         Gebiedsaanduiding ga = instance.parseImro2012Gebiedsaanduiding(gba);
- 
+
         assertNotNull(ga);
         assertEquals("NL.IMRO.0297.GP2308954338-00", ga.getIdentificatie());
         assertEquals("gebiedsaanduiding", ga.getTypePlanObject());
-        assertEquals("overige zone - accessen",ga.getNaam());
-        assertEquals("overige zone",ga.getGebiedsaanduidinggroep());
-        assertEquals("2.3.2",ga.getArtikelnummer());
+        assertEquals("overige zone - accessen", ga.getNaam());
+        assertEquals("overige zone", ga.getGebiedsaanduidinggroep());
+        assertEquals("2.3.2", ga.getArtikelnummer());
     }
-
 
     @Test
     public void testParseDubbelbestemmingInhoud() throws JAXBException {
@@ -118,9 +135,9 @@ public class IMROParserTest {
         assertNotNull(db);
         assertEquals("NL.IMRO.0297.DP6313603771-00", db.getIdentificatie());
         assertEquals("dubbelbestemming", db.getTypePlanObject());
-        assertEquals("Waarde - Nieuwe Hollandse Waterlinie",db.getNaam());
-        assertEquals("waarde",db.getBestemmingshoofdgroep());
-        assertEquals("2",db.getArtikelnummer());
+        assertEquals("Waarde - Nieuwe Hollandse Waterlinie", db.getNaam());
+        assertEquals("waarde", db.getBestemmingshoofdgroep());
+        assertEquals("2", db.getArtikelnummer());
     }
 
     @Test
@@ -134,9 +151,9 @@ public class IMROParserTest {
         assertNotNull(eb);
         assertEquals("NL.IMRO.0664.EP3262265634-00", eb.getIdentificatie());
         assertEquals("enkelbestemming", eb.getTypePlanObject());
-        assertEquals("Tuin",eb.getNaam());
-        assertEquals("tuin",eb.getBestemmingshoofdgroep());
-        assertEquals("3",eb.getArtikelnummer());
+        assertEquals("Tuin", eb.getNaam());
+        assertEquals("tuin", eb.getBestemmingshoofdgroep());
+        assertEquals("3", eb.getArtikelnummer());
     }
 
     /**
@@ -155,15 +172,16 @@ public class IMROParserTest {
         assertNotNull(bp);
         assertEquals("bestemmingsplan", bp.getTypePlan());
         assertEquals("NL.IMRO.0297.BGBBP20140020-OW01", bp.getIdentificatie());
-        assertEquals("gemeentelijke overheid",bp.getBeleidsmatigeVerantwoordelijkeOverheid());
-        assertEquals("gemeente Zaltbommel",bp.getNaamOverheid());
-        assertEquals("0297",bp.getOverheidsCode());
-        assertEquals("Buitengebied Parapluplan Nieuwe Hollandse Waterlinie",bp.getNaam());
-        assertEquals("ontwerp",bp.getPlanstatusInfo());
+        assertEquals("gemeentelijke overheid", bp.getBeleidsmatigeVerantwoordelijkeOverheid());
+        assertEquals("gemeente Zaltbommel", bp.getNaamOverheid());
+        assertEquals("0297", bp.getOverheidsCode());
+        assertEquals("Buitengebied Parapluplan Nieuwe Hollandse Waterlinie", bp.getNaam());
+        assertEquals("ontwerp", bp.getPlanstatusInfo());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        assertEquals("2015-05-19",sdf.format(bp.getPlanstatusDatum()));
+        assertEquals("2015-05-19", sdf.format(bp.getPlanstatusDatum()));
 
     }
+
     /**
      * Test of parsePlan method, of class Processor.
      */
