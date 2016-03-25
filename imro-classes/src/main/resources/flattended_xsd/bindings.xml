@@ -136,9 +136,9 @@
 			<bindings node="xsd:complexType[@name='AanduidingType']//xsd:element[@name='plangebied']">
 				<dom/>
 			</bindings>
-			<bindings node="xsd:complexType[@name='AanduidingType']//xsd:element[@name='bestemmingsvlak']">
+			<!--bindings node="xsd:complexType[@name='AanduidingType']//xsd:element[@name='bestemmingsvlak']">
 				<dom/>
-			</bindings>
+			</bindings-->
 			<bindings node="xsd:complexType[@name='LabelpositieType']//xsd:element[@name='plaatsingspunt']">
 				<dom/>
 			</bindings>
@@ -160,9 +160,9 @@
 			<bindings node="xsd:complexType[@name='MaatvoeringType']//xsd:element[@name='geometrie']">
 				<dom/>
 			</bindings>
-			<bindings node="xsd:complexType[@name='MaatvoeringType']//xsd:element[@name='aanduiding']">
+			<!--bindings node="xsd:complexType[@name='MaatvoeringType']//xsd:element[@name='aanduiding']">
 				<dom/>
-			</bindings>
+			</bindings-->
 			<bindings node="xsd:complexType[@name='Structuurvisieplangebied_RType']//xsd:element[@name='begrenzing']">
 				<dom/>
 			</bindings>
