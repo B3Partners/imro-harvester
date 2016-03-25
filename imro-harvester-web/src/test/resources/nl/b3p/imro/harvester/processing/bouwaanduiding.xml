@@ -1,0 +1,43 @@
+      <imro:Bouwaanduiding gml:id="NL.IMRO.3c3b6f4bdf5b4168bb4932c48d90466e" xmlns:imro="http://www.geonovum.nl/imro/2012/1.1"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            xmlns:gml="http://www.opengis.net/gml/3.2"
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                            xsi:schemaLocation="http://www.geonovum.nl/imro/2012/1.1 http://schemas.geonovum.nl/imro/2012/1.1/IMRO2012.xsd">
+         <imro:identificatie>
+            <imro:NEN3610ID>
+               <imro:namespace>NL.IMRO</imro:namespace>
+               <imro:lokaalID>3c3b6f4bdf5b4168bb4932c48d90466e</imro:lokaalID>
+            </imro:NEN3610ID>
+         </imro:identificatie>
+         <imro:typePlanobject>bouwaanduiding</imro:typePlanobject>
+         <imro:plangebied xlink:href="#NL.IMRO.0798.BPDoornboom-ON01" />
+         <imro:bestemmingsvlak xlink:href="#NL.IMRO.9cacbcca5a9e412faeaf47df4d75173d" />
+         <imro:naam>onderdoorgang</imro:naam>
+         <imro:labelInfo>
+            <imro:Label>
+               <imro:tekst>[ond]</imro:tekst>
+               <imro:positie>
+                  <imro:Labelpositie>
+                     <imro:plaatsingspunt>
+                        <gml:Point srsName="urn:ogc:def:crs:EPSG::28992" gml:id="id.3d86e9db868e468eb3ae8939befc1a58">
+                           <gml:pos>137470.305 388912.974</gml:pos>
+                        </gml:Point>
+                     </imro:plaatsingspunt>
+                  </imro:Labelpositie>
+               </imro:positie>
+            </imro:Label>
+         </imro:labelInfo>
+         <imro:geometrie>
+            <gml:Surface gml:id="id.aa6cfdc760a944a6887b21507b024a93" srsName="urn:ogc:def:crs:EPSG::28992">
+               <gml:patches>
+                  <gml:PolygonPatch>
+                     <gml:exterior>
+                        <gml:LinearRing>
+                           <gml:posList>137472.124 388915.417 137468.373 388915.044 137468.935 388910.204 137472.585 388910.567 137472.124 388915.417</gml:posList>
+                        </gml:LinearRing>
+                     </gml:exterior>
+                  </gml:PolygonPatch>
+               </gml:patches>
+            </gml:Surface>
+         </imro:geometrie>
+      </imro:Bouwaanduiding>

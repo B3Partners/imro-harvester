@@ -35,6 +35,7 @@ import nl.b3p.imro._2012._1.FeatureCollectionIMROType;
 import nl.b3p.imro._2012._1.NEN3610IDType;
 import nl.b3p.imro._2012._1.WaardeEnTypePropertyType;
 import nl.b3p.imro._2012._1.WaardeEnTypeType;
+import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
@@ -113,6 +114,8 @@ public class IMROParser {
             obj = parseImro2012Functieaanduiding(o);
         } else if ( o instanceof nl.b3p.imro._2012._1.FiguurType){
             obj = parseImro2012Figuur(o);
+        } else if ( o instanceof nl.b3p.imro._2012._1.BouwaanduidingType){
+            obj = parseImro2012Bouwaanduiding(o);
         }else{
             log.error("Unknown type of featuremember when parsing. Class encountered: " + o.getClass().toString());
         }
@@ -244,6 +247,27 @@ public class IMROParser {
         } catch (Exception e) {
         }
         return fa;
+    }
+
+    protected Bouwaanduiding parseImro2012Bouwaanduiding(Object o){
+        Bouwaanduiding ba = new Bouwaanduiding();
+        nl.b3p.imro._2012._1.BouwaanduidingType fat = (nl.b3p.imro._2012._1.BouwaanduidingType) o;
+        String identificatie = getIdentificatie(fat.getIdentificatie().getNEN3610ID());
+
+        ba.setIdentificatie(identificatie);
+        ba.setNaam(fat.getNaam());
+        ba.setTypePlanObject(fat.getTypePlanobject().value());
+        if (fat.getBestemmingsvlak().size() > 0) {
+            BestemmingsvlakPropertyType bt = fat.getBestemmingsvlak().get(0);
+
+            ba.setEnkelbestemming(bt.getHref().substring(1));
+        }
+        try {
+            MultiPolygon g = gc.convertMultiPolygonGeometry(fat.getPlangebied());
+            ba.setGeometrie(g);
+        } catch (Exception e) {
+        }
+        return ba;
     }
 
     protected Enkelbestemming parseImro2012Enkelbestemming(Object o){
