@@ -110,7 +110,7 @@ public class IMROParser {
         } else if(o instanceof nl.b3p.imro._2012._1.FunctieaanduidingType){
             obj = parseImro2012Functieaanduiding(o);
         }else{
-            log.debug("Unknown type of featuremember when parsing. Class encountered: " + o.getClass().toString());
+            log.error("Unknown type of featuremember when parsing. Class encountered: " + o.getClass().toString());
         }
 
         return obj;
@@ -208,9 +208,11 @@ public class IMROParser {
         fa.setIdentificatie(identificatie);
         fa.setNaam(fat.getNaam());
         fa.setTypePlanObject(fat.getTypePlanobject().value());
-        BestemmingsvlakPropertyType bt=  fat.getBestemmingsvlak().get(0);
+        if (fat.getBestemmingsvlak().size() > 0) {
+            BestemmingsvlakPropertyType bt = fat.getBestemmingsvlak().get(0);
 
-        fa.setEnkelbestemming(bt.getHref().substring(1));
+            fa.setEnkelbestemming(bt.getHref().substring(1));
+        }
         try {
             MultiPolygon g = gc.convertMultiPolygonGeometry(fat.getPlangebied());
             fa.setGeometrie(g);
