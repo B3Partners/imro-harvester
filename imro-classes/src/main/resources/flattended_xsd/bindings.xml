@@ -133,12 +133,6 @@
 			<bindings node="xsd:complexType[@name='Besluitgebied_PType']//xsd:element[@name='begrenzing']">
 				<dom/>
 			</bindings>
-			<bindings node="xsd:complexType[@name='AanduidingType']//xsd:element[@name='plangebied']">
-				<dom/>
-			</bindings>
-			<bindings node="xsd:complexType[@name='AanduidingType']//xsd:element[@name='bestemmingsvlak']">
-				<dom/>
-			</bindings>
 			<bindings node="xsd:complexType[@name='LabelpositieType']//xsd:element[@name='plaatsingspunt']">
 				<dom/>
 			</bindings>

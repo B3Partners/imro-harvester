@@ -1,0 +1,1 @@
+xjc -b bindings.xml -p nl.b3p.imro._2012._1 -d ../../java/ finalized/IMRO2012_resolved.xsd
