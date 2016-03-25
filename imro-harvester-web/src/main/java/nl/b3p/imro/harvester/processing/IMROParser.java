@@ -33,6 +33,7 @@ import nl.b3p.imro._2012._1.FeatureCollectionIMROType;
 import nl.b3p.imro._2012._1.NEN3610IDType;
 import nl.b3p.imro._2012._1.WaardeEnTypePropertyType;
 import nl.b3p.imro._2012._1.WaardeEnTypeType;
+import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
@@ -102,32 +103,13 @@ public class IMROParser {
             obj = parseImro2012Enkelbestemming(o);
         }else if (o instanceof nl.b3p.imro._2012._1.MaatvoeringType){
             obj = parseImro2012Maatvoering(o);
-        } else{
+        } else if(o instanceof nl.b3p.imro._2012._1.BouwvlakType){
+            obj = parseImro2012Bouwvlak(o);
+        }else{
             log.debug("Unknown type of featuremember when parsing. Class encountered: " + o.getClass().toString());
         }
 
         return obj;
-    }
-
-    protected Gebiedsaanduiding parseImro2012Gebiedsaanduiding(Object o) {
-        Gebiedsaanduiding gba = new Gebiedsaanduiding();
-        nl.b3p.imro._2012._1.GebiedsaanduidingType ga = (nl.b3p.imro._2012._1.GebiedsaanduidingType) o;
-
-        String identificatie = getIdentificatie(ga.getIdentificatie().getNEN3610ID());
-        
-        gba.setNaam(ga.getNaam());
-        gba.setIdentificatie(identificatie);
-        gba.setArtikelnummer(ga.getArtikelnummer());
-        gba.setGebiedsaanduidinggroep(ga.getGebiedsaanduidinggroep().value());
-        gba.setTypePlanObject(ga.getTypePlanobject().value());
-        gba.setVerwijzing(ga.getVerwijzingNaarTekstInfo().getTekstReferentieBP().getVerwijzingNaarTekst());
-        try {
-            MultiPolygon g = gc.convertMultiPolygonGeometry(ga.getPlangebied());
-            gba.setGeometrie(g);
-        } catch (Exception e) {
-        }
-        
-        return gba;
     }
 
     protected Bestemmingsplan parseImro2012Bestemmingsplan(Object o) {
@@ -174,6 +156,44 @@ public class IMROParser {
         return db;
     }
 
+    protected Gebiedsaanduiding parseImro2012Gebiedsaanduiding(Object o) {
+        Gebiedsaanduiding gba = new Gebiedsaanduiding();
+        nl.b3p.imro._2012._1.GebiedsaanduidingType ga = (nl.b3p.imro._2012._1.GebiedsaanduidingType) o;
+
+        String identificatie = getIdentificatie(ga.getIdentificatie().getNEN3610ID());
+
+        gba.setNaam(ga.getNaam());
+        gba.setIdentificatie(identificatie);
+        gba.setArtikelnummer(ga.getArtikelnummer());
+        gba.setGebiedsaanduidinggroep(ga.getGebiedsaanduidinggroep().value());
+        gba.setTypePlanObject(ga.getTypePlanobject().value());
+        gba.setVerwijzing(ga.getVerwijzingNaarTekstInfo().getTekstReferentieBP().getVerwijzingNaarTekst());
+        try {
+            MultiPolygon g = gc.convertMultiPolygonGeometry(ga.getPlangebied());
+            gba.setGeometrie(g);
+        } catch (Exception e) {
+        }
+
+        return gba;
+    }
+
+    protected Bouwvlak parseImro2012Bouwvlak(Object o){
+        Bouwvlak bv = new Bouwvlak();
+        nl.b3p.imro._2012._1.BouwvlakType bvt = (nl.b3p.imro._2012._1.BouwvlakType) o;
+        String identificatie = getIdentificatie(bvt.getIdentificatie().getNEN3610ID());
+
+        bv.setIdentificatie(identificatie);
+        bv.setNaam(bvt.getNaam().getValue());
+        bv.setTypePlanObject(bvt.getTypePlanobject().value());
+        
+        try {
+            MultiPolygon g = gc.convertMultiPolygonGeometry(bvt.getGeometrie());
+            bv.setGeometrie(g);
+        } catch (Exception e) {
+        }
+        return bv;
+    }
+
     protected Enkelbestemming parseImro2012Enkelbestemming(Object o){
         Enkelbestemming eb = new Enkelbestemming();
         nl.b3p.imro._2012._1.EnkelbestemmingType ebt = (nl.b3p.imro._2012._1.EnkelbestemmingType) o;
@@ -194,28 +214,28 @@ public class IMROParser {
     }
 
     protected Maatvoering parseImro2012Maatvoering(Object o){
-        Maatvoering eb = new Maatvoering();
+        Maatvoering mv = new Maatvoering();
         nl.b3p.imro._2012._1.MaatvoeringType ebt = (nl.b3p.imro._2012._1.MaatvoeringType) o;
         String identificatie = getIdentificatie(ebt.getIdentificatie().getNEN3610ID());
 
-        eb.setIdentificatie(identificatie);
-        eb.setNaam(ebt.getNaam().getValue());
-        eb.setTypePlanObject(ebt.getTypePlanobject().value());
+        mv.setIdentificatie(identificatie);
+        mv.setNaam(ebt.getNaam().getValue());
+        mv.setTypePlanObject(ebt.getTypePlanobject().value());
         if(ebt.getVerwijzingNaarTekstInfo() != null){
-            eb.setVerwijzing(ebt.getVerwijzingNaarTekstInfo().getTekstReferentieBP().getVerwijzingNaarTekst());
+            mv.setVerwijzing(ebt.getVerwijzingNaarTekstInfo().getTekstReferentieBP().getVerwijzingNaarTekst());
         }
         for (WaardeEnTypePropertyType maatvoeringInfo : ebt.getMaatvoeringInfo()) {
             WaardeEnTypeType wett = maatvoeringInfo.getWaardeEnType();
             WaardeEnType wet = new WaardeEnType(wett.getWaarde(),wett.getWaardeType(), wett.getSymboolCode());
-            eb.getWaardeEnType().add(wet);
+            mv.getWaardeEnType().add(wet);
         }
         
         try {
             MultiPolygon g = gc.convertMultiPolygonGeometry(ebt.getGeometrie());
-            eb.setGeometrie(g);
+            mv.setGeometrie(g);
         } catch (Exception e) {
         }
-        return eb;
+        return mv;
     }
 
     private String getIdentificatie(NEN3610IDType id){
