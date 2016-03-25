@@ -40,6 +40,8 @@ public class Geleideformulier {
 
     private String type;
 
+    private String imro;
+
     public String getType() {
         return type;
     }
@@ -97,8 +99,16 @@ public class Geleideformulier {
     }
 
     public URL getGML() throws MalformedURLException{
-        URL u = new URL(this.getBasisURL() + this.getIdentificatie() +".gml");
+        URL u = new URL(this.getBasisURL() + this.getImro());
         return u;
+    }
+
+    public String getImro() {
+        return imro;
+    }
+
+    public void setImro(String imro) {
+        this.imro = imro;
     }
 
     @Override

@@ -51,7 +51,7 @@ public class ProcessorTest {
     }
 
     @Test
-    public void testRun() throws JAXBException{
+    public void testRun() throws JAXBException {
         job = new HarvestJob();
         job.setUrl("https://www.ruimtelijkeplannen.nl/web-roi/index/showManifest?organizationId=zaltbommel&striVersion=STRI2008");
         instance = new Processor(Collections.singletonList(job));
@@ -61,7 +61,6 @@ public class ProcessorTest {
     /*
      * Test of getManifest method, of class Processor.
      */
-
     @Test
     public void testGetManifestUrl() {
         try {
@@ -74,8 +73,8 @@ public class ProcessorTest {
     }
 
     @Test
-    public void testParseGeleideformulieren(){
-           try {
+    public void testParseGeleideformulieren() {
+        try {
             URL expResult = new URL("http://files.b3p.nl/imroharvester/NL.IMRO.0297.BGBBP20140020-OW01.gml");
             List<Geleideformulier> result = instance.retrieveGeleideformulieren(Collections.singletonList(new URL("http://files.b3p.nl/imroharvester/g_NL.IMRO.0297.BGBBP20140020-OW01.xml")));
 
@@ -93,7 +92,7 @@ public class ProcessorTest {
     public void testGetPlannenManifestSTRItV1() {
         try {
             System.out.println("testGetPlannenManifestV1");
-           // URL u = this.getClass().getResource("manifestaaenhunze.xml");
+            // URL u = this.getClass().getResource("manifestaaenhunze.xml");
             List<URL> result = instance.getGeleideformulierURLSFromManifest(new URL(job.getUrl()));
             assertEquals(1, result.size());
         } catch (Exception e) {
@@ -118,6 +117,12 @@ public class ProcessorTest {
 
     }
 
-
+//    @Test
+    public void testStationsPlein() throws JAXBException {
+        job = new HarvestJob();
+        job.setUrl("http://files.b3p.nl/imroharvester/manifest_station.xml");
+        instance = new Processor(Collections.singletonList(job));
+        instance.process();
+    }
 
 }

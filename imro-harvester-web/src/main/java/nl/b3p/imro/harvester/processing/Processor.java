@@ -192,6 +192,7 @@ public class Processor {
                     geleideformulier.setStatus(eigenschappen.getStatus().value());
                     geleideformulier.setVersie(eigenschappen.getVersieIMRO());
                     geleideformulier.setType(eigenschappen.getType().value());
+                    geleideformulier.setImro(onderdelen.getIMRO());
 
                 } else if (geleideformulierObject instanceof nl.geonovum.stri._2012._2.GeleideFormulier) {
                     nl.geonovum.stri._2012._2.GeleideFormulier gf = (nl.geonovum.stri._2012._2.GeleideFormulier) geleideformulierObject;

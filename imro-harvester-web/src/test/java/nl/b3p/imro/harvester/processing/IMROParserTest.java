@@ -46,12 +46,13 @@ public class IMROParserTest {
         Geleideformulier geleideformulier = new Geleideformulier();
         geleideformulier.setBasisURL("http://files.b3p.nl/imroharvester/");
         geleideformulier.setIdentificatie("NL.IMRO.0297.BGBBP20140020-OW01");
+        geleideformulier.setImro("NL.IMRO.0297.BGBBP20140020-OW01.gml");
 
         List<Object> result = instance.parseGML(geleideformulier);
         assertEquals(8, result.size());
     }
 
-    @Test
+    //@Test
     public void testStationsPleinZuidOost() throws JAXBException {
         System.out.println("testParsePlanInhoudGebiedsaanduiding");
         URL u = this.getClass().getResource("stationspleinzuidoost.gml");
@@ -63,11 +64,22 @@ public class IMROParserTest {
                 MultiPolygon mp = b.getGeometrie();
                 assertTrue(mp.isValid());
                 assertTrue(mp instanceof MultiPolygon);
+                assertFalse(mp.isEmpty());
                 break;
             }
 
         }
       //  assertEquals(81, o.size());
+    }
+
+    @Test
+    public void testStationsomgevingZuidWest() throws JAXBException {
+        System.out.println("testStationsomgevingZuidWest");
+        URL u = this.getClass().getResource("NL.IMRO.0664.BPBS03-ON99.gml");
+        List<Object> o = instance.parseGML(u);
+
+
+        assertEquals(47, o.size());
     }
 
     /**

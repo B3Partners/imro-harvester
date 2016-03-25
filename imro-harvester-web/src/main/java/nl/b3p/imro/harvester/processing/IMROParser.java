@@ -31,9 +31,12 @@ import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro._2012._1.FeatureCollectionIMROType;
 import nl.b3p.imro._2012._1.NEN3610IDType;
+import nl.b3p.imro._2012._1.WaardeEnTypePropertyType;
+import nl.b3p.imro._2012._1.WaardeEnTypeType;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
-import nl.b3p.imro.harvester.entities.imro.ImroEntity;
+import nl.b3p.imro.harvester.entities.imro.Maatvoering;
+import nl.b3p.imro.harvester.entities.imro.WaardeEnType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -97,7 +100,9 @@ public class IMROParser {
             obj = parseImro2012Dubbelbestemming(o);
         }else if(o instanceof nl.b3p.imro._2012._1.EnkelbestemmingType) {
             obj = parseImro2012Enkelbestemming(o);
-        }else{
+        }else if (o instanceof nl.b3p.imro._2012._1.MaatvoeringType){
+            obj = parseImro2012Maatvoering(o);
+        } else{
             log.debug("Unknown type of featuremember when parsing. Class encountered: " + o.getClass().toString());
         }
 
@@ -180,6 +185,31 @@ public class IMROParser {
         eb.setNaam(ebt.getNaam().getValue());
         eb.setTypePlanObject(ebt.getTypePlanobject().value());
         eb.setVerwijzing(ebt.getVerwijzingNaarTekstInfo().getTekstReferentieBP().getVerwijzingNaarTekst());
+        try {
+            MultiPolygon g = gc.convertMultiPolygonGeometry(ebt.getGeometrie());
+            eb.setGeometrie(g);
+        } catch (Exception e) {
+        }
+        return eb;
+    }
+
+    protected Maatvoering parseImro2012Maatvoering(Object o){
+        Maatvoering eb = new Maatvoering();
+        nl.b3p.imro._2012._1.MaatvoeringType ebt = (nl.b3p.imro._2012._1.MaatvoeringType) o;
+        String identificatie = getIdentificatie(ebt.getIdentificatie().getNEN3610ID());
+
+        eb.setIdentificatie(identificatie);
+        eb.setNaam(ebt.getNaam().getValue());
+        eb.setTypePlanObject(ebt.getTypePlanobject().value());
+        if(ebt.getVerwijzingNaarTekstInfo() != null){
+            eb.setVerwijzing(ebt.getVerwijzingNaarTekstInfo().getTekstReferentieBP().getVerwijzingNaarTekst());
+        }
+        for (WaardeEnTypePropertyType maatvoeringInfo : ebt.getMaatvoeringInfo()) {
+            WaardeEnTypeType wett = maatvoeringInfo.getWaardeEnType();
+            WaardeEnType wet = new WaardeEnType(wett.getWaarde(),wett.getWaardeType(), wett.getSymboolCode());
+            eb.getWaardeEnType().add(wet);
+        }
+        
         try {
             MultiPolygon g = gc.convertMultiPolygonGeometry(ebt.getGeometrie());
             eb.setGeometrie(g);
