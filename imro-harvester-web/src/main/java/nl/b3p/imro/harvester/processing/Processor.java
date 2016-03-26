@@ -23,8 +23,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.RollbackException;
@@ -50,17 +48,20 @@ public class Processor {
     private Integer timeout;
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
     private IMROParser parser;
+    private File downloadfolder;
+    
     private JAXBContext jaxbSTRIContext = JAXBContext.newInstance(nl.geonovum.stri._2012._1.GeleideFormulier.class, nl.geonovum.stri._2012._2.GeleideFormulier.class,
             nl.geonovum.stri._2012._1.Manifest.class, nl.geonovum.stri._2012._2.Manifest.class );
 
-    public Processor(List<HarvestJob> jobs) throws JAXBException {
-        this(jobs, 30000);
+    public Processor(List<HarvestJob> jobs, File downloadfolder) throws JAXBException {
+        this(jobs, 30000, downloadfolder);
     }
 
-    public Processor(List<HarvestJob> jobs, Integer timeout) throws JAXBException {
+    public Processor(List<HarvestJob> jobs, Integer timeout, File downloadfolder) throws JAXBException {
         this.jobs = jobs;
         this.timeout = timeout;
         this.parser = new IMROParser();
+        this.downloadfolder = downloadfolder;
     }
 
     public void process() {

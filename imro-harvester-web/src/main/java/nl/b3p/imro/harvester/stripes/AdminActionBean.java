@@ -16,7 +16,6 @@
  */
 package nl.b3p.imro.harvester.stripes;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,23 +42,15 @@ import org.stripesstuff.stripersist.Stripersist;
  */
 @StrictBinding
 @UrlBinding("/action/beheer/jobs/{event}")
-public class HarvestJobActionBean implements ActionBean{
+public class AdminActionBean implements ActionBean{
 
     private ActionBeanContext context;
 
-    private final String JSP_VIEW = "/WEB-INF/jsp/jobs/view.jsp";
-    private final String JSP_EDIT = "/WEB-INF/jsp/jobs/edit.jsp";
+    private final String JSP_VIEW = "/WEB-INF/jsp/admin/view.jsp";
 
-    private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
+    private String cron;
 
-    private File downloadfolder;
-
-    @Validate
-    @ValidateNestedProperties({
-            @Validate(field = "url"),
-            @Validate(field = "type")
-    })
-    private HarvestJob job = new HarvestJob();
+    private String downloadfolder;
 
     // <editor-fold desc="Getters and Setters" defaultstate="collapsed" >
     @Override
@@ -72,21 +63,22 @@ public class HarvestJobActionBean implements ActionBean{
         this.context = context;
     }
 
-    public List<HarvestJob> getJobs() {
-        return jobs;
+    public String getCron() {
+        return cron;
     }
 
-    public void setJobs(List<HarvestJob> jobs) {
-        this.jobs = jobs;
+    public void setCron(String cron) {
+        this.cron = cron;
     }
 
-    public HarvestJob getJob() {
-        return job;
+    public String getDownloadfolder() {
+        return downloadfolder;
     }
 
-    public void setJob(HarvestJob job) {
-        this.job = job;
+    public void setDownloadfolder(String downloadfolder) {
+        this.downloadfolder = downloadfolder;
     }
+
 
     // </editor-fold>
 
@@ -95,38 +87,11 @@ public class HarvestJobActionBean implements ActionBean{
         return new ForwardResolution(JSP_VIEW);
     }
 
-    public Resolution add(){
-        return new ForwardResolution(JSP_EDIT);
-        
-    }
 
-    public Resolution delete(){
-        EntityManager em = Stripersist.getEntityManager();
-        em.remove(job);
-        em.getTransaction().commit();
-        return new ForwardResolution(JSP_VIEW);
-    }
 
     public Resolution save(){
         EntityManager em = Stripersist.getEntityManager();
-        em.persist(job);
-        em.getTransaction().commit();
         return new ForwardResolution(JSP_VIEW);
     }
 
-    public Resolution edit(){
-        return new ForwardResolution(JSP_EDIT);
-    }
-
-    public Resolution run() throws JAXBException{
-        Processor p = new Processor(Collections.singletonList(job), downloadfolder);
-        p.process();
-        return new ForwardResolution(JSP_VIEW);
-    }
-
-    @After(stages = LifecycleStage.EventHandling)
-    private void createLists(){
-        EntityManager em = Stripersist.getEntityManager();
-        jobs = em.createQuery("From HarvestJob", HarvestJob.class).getResultList();
-    }
 }

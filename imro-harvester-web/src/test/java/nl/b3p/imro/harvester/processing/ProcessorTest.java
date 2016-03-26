@@ -18,6 +18,7 @@ package nl.b3p.imro.harvester.processing;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
@@ -38,23 +39,26 @@ public class ProcessorTest {
 
     private Processor instance = null;
     private HarvestJob job = null;
+    private File downloadfolder = null;
 
     @Before
     public void initTests() throws MalformedURLException, JAXBException {
         job = new HarvestJob();
+        downloadfolder = new File("target");
 
         URL u = new URL("http://files.b3p.nl/imroharvester/manifest.xml");
         //URL u = this.getClass().getResource("testaaenhunze.html");
         //"https://www.ruimtelijkeplannen.nl/web-roi/index/showManifest?organizationId=aaenhunze&striVersion=STRI2008"
         job.setUrl(u.toString());
-        instance = new Processor(Collections.singletonList(job));
+        instance = new Processor(Collections.singletonList(job),downloadfolder);
+
     }
 
     @Test
     public void testRun() throws JAXBException {
         job = new HarvestJob();
         job.setUrl("https://www.ruimtelijkeplannen.nl/web-roi/index/showManifest?organizationId=zaltbommel&striVersion=STRI2008");
-        instance = new Processor(Collections.singletonList(job));
+        instance = new Processor(Collections.singletonList(job),downloadfolder);
         instance.process();
     }
 
@@ -86,10 +90,9 @@ public class ProcessorTest {
     }
 
     @Test
-    public void testParseGeleideformulier() throws MalformedURLException, JAXBException{
+    public void testParseGeleideformulier() throws MalformedURLException, JAXBException, URISyntaxException{
         URL u = this.getClass().getResource("geleideformulier.xml");
-        File root = new File("target");
-        File realDir = new File(root, "NL.IMRO.0297.BGBBP20140020-OW01");
+        File realDir = new File(new File( downloadfolder.toURI()), "NL.IMRO.0297.BGBBP20140020-OW01");
         List<Geleideformulier> forms = instance.retrieveGeleideformulieren(Collections.singletonList(u));
         assertEquals (1,forms.size());
         Geleideformulier form = forms.get(0);
@@ -134,7 +137,7 @@ public class ProcessorTest {
     public void testStationsPlein() throws JAXBException {
         job = new HarvestJob();
         job.setUrl("http://files.b3p.nl/imroharvester/manifest_station.xml");
-        instance = new Processor(Collections.singletonList(job));
+        instance = new Processor(Collections.singletonList(job),downloadfolder);
         instance.process();
     }
 
