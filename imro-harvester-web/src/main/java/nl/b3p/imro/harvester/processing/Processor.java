@@ -78,19 +78,23 @@ public class Processor {
                         try {
                             List<Object> plannen = parser.parseGML(geleideformulier);
 
+
                             if (!em.getTransaction().isActive()) {
                                 em.getTransaction().begin();
                             }
                             for (Object plan : plannen) {
                                 em.persist(plan);
                             }
+                            downloadFiles(geleideformulier);
                             em.getTransaction().commit();
                         } catch (JAXBException ex) {
                             log.error("Cannot parse url " + geleideformulier);
                             log.debug(ex);
+                            em.getTransaction().rollback();
                         } catch (URISyntaxException ex) {
                             log.error("Error concerning URI:");
                             log.debug(ex);
+                            em.getTransaction().rollback();
                         } catch (RollbackException e) {
                             log.error("Cannot save entity in plan " + geleideformulier);
                             log.debug(e);
@@ -211,6 +215,10 @@ public class Processor {
         }
 
         return urls;
+    }
+
+    protected void downloadFiles(Geleideformulier formulier){
+        
     }
     // </editor-fold>
 

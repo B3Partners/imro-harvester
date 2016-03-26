@@ -18,6 +18,8 @@ package nl.b3p.imro.harvester.processing;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -41,6 +43,8 @@ public class Geleideformulier {
     private String type;
 
     private String imro;
+
+    private List<URL> bijlages = new ArrayList<URL>();
 
     public String getType() {
         return type;
@@ -109,6 +113,14 @@ public class Geleideformulier {
 
     public void setImro(String imro) {
         this.imro = imro;
+    }
+
+    public List<URL> getBijlages() {
+        return bijlages;
+    }
+
+    public void setBijlages(List<URL> bijlages) {
+        this.bijlages = bijlages;
     }
 
     @Override

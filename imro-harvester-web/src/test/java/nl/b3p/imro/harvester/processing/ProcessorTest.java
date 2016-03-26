@@ -16,13 +16,13 @@
  */
 package nl.b3p.imro.harvester.processing;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
-import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -83,6 +83,19 @@ public class ProcessorTest {
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
         }
+    }
+
+    @Test
+    public void testParseGeleideformulier() throws MalformedURLException, JAXBException{
+        URL u = this.getClass().getResource("geleideformulier.xml");
+        File root = new File("target");
+        File realDir = new File(root, "NL.IMRO.0297.BGBBP20140020-OW01");
+        List<Geleideformulier> forms = instance.retrieveGeleideformulieren(Collections.singletonList(u));
+        assertEquals (1,forms.size());
+        Geleideformulier form = forms.get(0);
+        assertTrue(realDir.exists());
+        assertEquals(17, form.getBijlages().size());
+        assertEquals(17, realDir.listFiles().length);
     }
 
     /**

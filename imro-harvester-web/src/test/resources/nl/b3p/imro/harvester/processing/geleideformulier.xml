@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GeleideFormulier Datum="2015-05-22" NaamOverheid="gemeente Zaltbommel" OverheidsCode="0297" xmlns="http://www.geonovum.nl/stri/2012/1.0" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:stri="http://www.geonovum.nl/stri/2012/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geonovum.nl/stri/2012/1.0 http://schemas.geonovum.nl/stri/2012/1.0/STRI2012.xsd">
+	<Plan Id="NL.IMRO.0297.BGBBP20140020-OW01">
+		<Eigenschappen>
+			<Naam>Buitengebied Parapluplan Nieuwe Hollandse Waterlinie</Naam>
+			<Type>bestemmingsplan</Type>
+			<Status>ontwerp</Status>
+			<Datum>2015-05-19</Datum>
+			<VersieIMRO>IMRO2012</VersieIMRO>
+			<VersiePraktijkRichtlijn>PRABPK2012</VersiePraktijkRichtlijn>
+		</Eigenschappen>
+		<Onderdelen BasisURL="http://files.b3p.nl/imroharvester/">
+			<IMRO>NL.IMRO.0297.BGBBP20140020-OW01.gml</IMRO>
+			<Regels>r_NL.IMRO.0297.BGBBP20140020-OW01.html</Regels>
+			<Toelichting>t_NL.IMRO.0297.BGBBP20140020-OW01.html</Toelichting>
+			<Bijlage>b_NL.IMRO.0297.BGBBP20140020-OW01_rb.html</Bijlage>
+			<Bijlage>b_NL.IMRO.0297.BGBBP20140020-OW01_rb1.pdf</Bijlage>
+			<Bijlage>b_NL.IMRO.0297.BGBBP20140020-OW01_rb2.pdf</Bijlage>
+			<Bijlage>b_NL.IMRO.0297.BGBBP20140020-OW01_tb.html</Bijlage>
+			<Bijlage>b_NL.IMRO.0297.BGBBP20140020-OW01_tb1.pdf</Bijlage>
+			<Illustratie>i_NL.IMRO.0297.BGBBP20140020-OW01_0001.png</Illustratie>
+			<Illustratie>i_NL.IMRO.0297.BGBBP20140020-OW01_0002.jpg</Illustratie>
+			<Illustratie>i_NL.IMRO.0297.BGBBP20140020-OW01_0003.jpg</Illustratie>
+			<Illustratie>i_NL.IMRO.0297.BGBBP20140020-OW01_0004.png</Illustratie>
+			<Illustratie>i_NL.IMRO.0297.BGBBP20140020-OW01_0005.png</Illustratie>
+			<Illustratie>i_NL.IMRO.0297.BGBBP20140020-OW01_0006.png</Illustratie>
+			<Illustratie>i_NL.IMRO.0297.BGBBP20140020-OW01_0007.png</Illustratie>
+			<GeleideFormulier>g_NL.IMRO.0297.BGBBP20140020-OW01.xml</GeleideFormulier>
+		</Onderdelen>
+		<Supplementen BasisURL="http://ruimtelijkeplannen.zaltbommel.nl/NL.IMRO.0297.BGBBP20140020-OW01/">
+			<CSS>opmaak.css</CSS>
+		</Supplementen>
+	</Plan>
+	<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+		<SignedInfo>
+			<CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+			<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+			<Reference URI="">
+				<Transforms>
+					<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+				</Transforms>
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>a4+MpQIZQMMUkrY9HNspWPyfgbk=</DigestValue>
+			</Reference>
+			<Reference URI="NL.IMRO.0297.BGBBP20140020-OW01.gml">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>hj95Cwl8kpyXEfWnByhOJ2jNtMA=</DigestValue>
+			</Reference>
+			<Reference URI="r_NL.IMRO.0297.BGBBP20140020-OW01.html">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>4iN4LET04Zn7P54VklAxZQmcQxY=</DigestValue>
+			</Reference>
+			<Reference URI="t_NL.IMRO.0297.BGBBP20140020-OW01.html">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>e5QSIPLHzr72CZog2hpmB9KIfyo=</DigestValue>
+			</Reference>
+			<Reference URI="b_NL.IMRO.0297.BGBBP20140020-OW01_rb.html">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>IzjGKHDu0R4b0XwAeRM6B9vv75g=</DigestValue>
+			</Reference>
+			<Reference URI="b_NL.IMRO.0297.BGBBP20140020-OW01_rb1.pdf">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>c7TlcPs1Hy/9OPi2vqXrtkMeNQw=</DigestValue>
+			</Reference>
+			<Reference URI="b_NL.IMRO.0297.BGBBP20140020-OW01_rb2.pdf">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>jxrO9OpVQ/+06FEeJ2F+xq044Uo=</DigestValue>
+			</Reference>
+			<Reference URI="b_NL.IMRO.0297.BGBBP20140020-OW01_tb.html">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>upXcCvdsH6pX1Ji0rHdoJhaqNs0=</DigestValue>
+			</Reference>
+			<Reference URI="b_NL.IMRO.0297.BGBBP20140020-OW01_tb1.pdf">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>PebYv2J9XLWiouXFn71LmXNDEX4=</DigestValue>
+			</Reference>
+			<Reference URI="i_NL.IMRO.0297.BGBBP20140020-OW01_0001.png">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>vWVceB41H7PkClSTLTROoRYUfGk=</DigestValue>
+			</Reference>
+			<Reference URI="i_NL.IMRO.0297.BGBBP20140020-OW01_0002.jpg">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>AN7G4IETUBn7u7kssYllj0BezZ0=</DigestValue>
+			</Reference>
+			<Reference URI="i_NL.IMRO.0297.BGBBP20140020-OW01_0003.jpg">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>8EUiQGKQV6jl94+J7SuJ5kNiCSM=</DigestValue>
+			</Reference>
+			<Reference URI="i_NL.IMRO.0297.BGBBP20140020-OW01_0004.png">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>mfOJocEnFwLYClq+TxAgEfomYqw=</DigestValue>
+			</Reference>
+			<Reference URI="i_NL.IMRO.0297.BGBBP20140020-OW01_0005.png">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>wOfzgKf+lUIodoVRqQZZAWF4B8U=</DigestValue>
+			</Reference>
+			<Reference URI="i_NL.IMRO.0297.BGBBP20140020-OW01_0006.png">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>4lNzZN6D50iVu7bW0ycuJGF4/8w=</DigestValue>
+			</Reference>
+			<Reference URI="i_NL.IMRO.0297.BGBBP20140020-OW01_0007.png">
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>QZvS7xYp3Fcx92kCsqXH1dwzb10=</DigestValue>
+			</Reference>
+		</SignedInfo>
+		<SignatureValue>qUwTpiV7fpjb9Il+6y1KnjQvM4psAXDzJomR3nlQxhbiP1ln+WNjnkRyCiZTh2mlRgcugOdwk47Q4+lJEFwWYBeuCj4jysPpL+17GRO3H1/yEGQAJCQu99GPDIoLe3kBsb9WwVm/IZViCNtd3RSk72M3S/vwVmdabfAvY4voea2DtGPYMhgKEj0TKT22N+Ahgf7a9q8DQN5TFUfIZFbvYCZ0FYBP5RqSB7RSPbICMA7XoaZ+jFK0Luuqe/NwuthPM6iyp2fmt+AdGyrZhCyibxhKVHXowVJNBl1UhyxWY/PtiibtcPwwGMrjkHTcuAtYqekHNnAUlYFIaO3WDk4OKw==</SignatureValue>
+		<KeyInfo>
+			<X509Data>
+				<X509Certificate>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</X509Certificate>
+			</X509Data>
+		</KeyInfo>
+	</Signature>
+</GeleideFormulier>
