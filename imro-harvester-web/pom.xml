@@ -111,6 +111,11 @@
             <groupId>org.geotools.xsd</groupId>
             <artifactId>gt-xsd-core</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

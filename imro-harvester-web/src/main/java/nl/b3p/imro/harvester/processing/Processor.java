@@ -30,6 +30,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import nl.b3p.imro.harvester.entities.HarvestJob;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
@@ -49,9 +50,9 @@ public class Processor {
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
     private IMROParser parser;
     private File downloadfolder;
-    
+
     private JAXBContext jaxbSTRIContext = JAXBContext.newInstance(nl.geonovum.stri._2012._1.GeleideFormulier.class, nl.geonovum.stri._2012._2.GeleideFormulier.class,
-            nl.geonovum.stri._2012._1.Manifest.class, nl.geonovum.stri._2012._2.Manifest.class );
+            nl.geonovum.stri._2012._1.Manifest.class, nl.geonovum.stri._2012._2.Manifest.class);
 
     public Processor(List<HarvestJob> jobs, File downloadfolder) throws JAXBException {
         this(jobs, 30000, downloadfolder);
@@ -79,7 +80,6 @@ public class Processor {
                         try {
                             List<Object> plannen = parser.parseGML(geleideformulier);
 
-
                             if (!em.getTransaction().isActive()) {
                                 em.getTransaction().begin();
                             }
@@ -100,8 +100,8 @@ public class Processor {
                             log.error("Cannot save entity in plan " + geleideformulier);
                             log.debug(e);
                             em.getTransaction().rollback();
-                        }catch(PersistenceException e){
-                            log.error("Cannot save entity in plan " + geleideformulier,e);
+                        } catch (PersistenceException e) {
+                            log.error("Cannot save entity in plan " + geleideformulier, e);
                             em.getTransaction().rollback();
                         }
                     }
@@ -188,7 +188,42 @@ public class Processor {
 
                     String basisurl = onderdelen.getBasisURL();
                     String gml = onderdelen.getIMRO();
-                    URL u = new URL(basisurl + gml);
+
+                    geleideformulier.getBijlages().add(new URL(basisurl + gml));
+
+                    if (onderdelen.getRegels() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getRegels()));
+                    }
+
+                    if (onderdelen.getToelichting() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getToelichting()));
+                    }
+
+                    if (onderdelen.getGeleideFormulier() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getGeleideFormulier()));
+                    }
+
+                    if (onderdelen.getVaststellingsBesluit() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getVaststellingsBesluit()));
+                    }
+
+                    if (onderdelen.getPlanTeksten() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getPlanTeksten()));
+                    }
+
+                    if (onderdelen.getBeleidsOfBesluitDocument() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getBeleidsOfBesluitDocument()));
+                    }
+
+                    List<String> bijlages = onderdelen.getBijlage();
+                    for (String bijlage : bijlages) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + bijlage));
+                    }
+
+                    List<String> illustraties = onderdelen.getIllustratie();
+                    for (String illustratie : illustraties) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + illustratie));
+                    }
 
                     geleideformulier.setIdentificatie(gf.getPlan().getId());
                     geleideformulier.setBasisURL(basisurl);
@@ -218,8 +253,25 @@ public class Processor {
         return urls;
     }
 
-    protected void downloadFiles(Geleideformulier formulier){
-        
+    protected void downloadFiles(Geleideformulier formulier) throws IOException {
+        File newDir = new File(downloadfolder, formulier.getIdentificatie());
+        boolean created = newDir.mkdir();
+        if (!created && !newDir.exists()) {
+            throw new IOException("Cannot create new directory for saving files");
+        }
+
+        for (URL bijlage : formulier.getBijlages()) {
+            downloadUrl(bijlage, newDir);
+        }
+
+    }
+
+    private void downloadUrl(URL url, File dir) throws IOException {
+        String filename = url.getFile();
+        if(filename.indexOf("/") != -1){
+            filename = filename.substring(filename.lastIndexOf("/") + 1);
+        }
+        FileUtils.copyURLToFile(url, new File (dir, filename));
     }
     // </editor-fold>
 

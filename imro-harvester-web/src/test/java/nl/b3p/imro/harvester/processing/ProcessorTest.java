@@ -17,6 +17,7 @@
 package nl.b3p.imro.harvester.processing;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -90,15 +91,16 @@ public class ProcessorTest {
     }
 
     @Test
-    public void testParseGeleideformulier() throws MalformedURLException, JAXBException, URISyntaxException{
-        URL u = this.getClass().getResource("geleideformulier.xml");
+    public void testParseGeleideformulier() throws MalformedURLException, JAXBException, URISyntaxException, IOException{
+        URL u = this.getClass().getResource("geleideformulier.xml"); //new URL("http://ruimtelijkeplannen.zaltbommel.nl/NL.IMRO.0297.BGBBP20140020-VS01/g_NL.IMRO.0297.BGBBP20140020-VS01.xml");//
         File realDir = new File(new File( downloadfolder.toURI()), "NL.IMRO.0297.BGBBP20140020-OW01");
         List<Geleideformulier> forms = instance.retrieveGeleideformulieren(Collections.singletonList(u));
         assertEquals (1,forms.size());
         Geleideformulier form = forms.get(0);
+        instance.downloadFiles(form);
+        assertEquals(16, form.getBijlages().size());
         assertTrue(realDir.exists());
-        assertEquals(17, form.getBijlages().size());
-        assertEquals(17, realDir.listFiles().length);
+        assertEquals(16, realDir.listFiles().length);
     }
 
     /**
