@@ -76,7 +76,7 @@ public class GeometryConverterTest {
     public void testGebiedsaanduidingViaParser() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException, JAXBException {
         URL url = this.getClass().getResource("2012.gml");
 
-        IMROParser p = new IMROParser();
+        IMROParser2012 p = new IMROParser2012();
         List<Object> os = p.parseGML(url);
         for (Object o : os) {
             if(o instanceof Gebiedsaanduiding){
@@ -90,7 +90,7 @@ public class GeometryConverterTest {
     public void testDubbelbestemmingViaParser() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException, JAXBException {
         URL url = this.getClass().getResource("2012.gml");
 
-        IMROParser p = new IMROParser();
+        IMROParser2012 p = new IMROParser2012();
         List<Object> os = p.parseGML(url);
         for (Object o : os) {
             if(o instanceof Dubbelbestemming){

@@ -30,7 +30,7 @@ import org.junit.Before;
  */
 public class IMROParserTest {
 
-    protected IMROParser instance;
+    protected IMROParser2012 instance;
 
     public IMROParserTest() {
 
@@ -38,11 +38,11 @@ public class IMROParserTest {
 
     @Before
     public void beforeTest() throws JAXBException {
-        instance = new IMROParser();
+        instance = new IMROParser2012();
     }
 
     /**
-     * Test of parseGML method, of class IMROParser.
+     * Test of parseGML method, of class IMROParser2012.
      */
     @Test
     public void testParseGML_Geleideformulier() throws Exception {
@@ -99,7 +99,7 @@ public class IMROParserTest {
     }
 
     /**
-     * Test of parseGML method, of class IMROParser.
+     * Test of parseGML method, of class IMROParser2012.
      */
     @Test
     public void testParseGML_URL() throws JAXBException, MalformedURLException {
@@ -138,7 +138,7 @@ public class IMROParserTest {
 
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
-        Gebiedsaanduiding ga = instance.parseImro2012Gebiedsaanduiding(gba);
+        Gebiedsaanduiding ga = instance.parseImroGebiedsaanduiding(gba);
 
         assertNotNull(ga);
         assertEquals("NL.IMRO.0297.GP2308954338-00", ga.getIdentificatie());
@@ -176,7 +176,7 @@ public class IMROParserTest {
         URL u = this.getClass().getResource("enkelbestemming.gml");
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
-        Enkelbestemming eb = instance.parseImro2012Enkelbestemming(gba);
+        Enkelbestemming eb = instance.parseImroEnkelbestemming(gba);
 
         assertNotNull(eb);
         assertEquals("NL.IMRO.0664.EP3262265634-00", eb.getIdentificatie());
@@ -193,7 +193,7 @@ public class IMROParserTest {
         URL u = this.getClass().getResource("maatvoering.xml");
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
-        Maatvoering mv = instance.parseImro2012Maatvoering(gba);
+        Maatvoering mv = instance.parseImroMaatvoering(gba);
 
         assertNotNull(mv);
         assertEquals("NL.IMRO.0664.MP18312983563-00", mv.getIdentificatie());
@@ -212,7 +212,7 @@ public class IMROParserTest {
         URL u = this.getClass().getResource("bouwvlak.xml");
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
-        Bouwvlak bv = instance.parseImro2012Bouwvlak(gba);
+        Bouwvlak bv = instance.parseImroBouwvlak(gba);
 
         assertNotNull(bv);
         assertEquals("NL.IMRO.0664.BP4302177420-00", bv.getIdentificatie());
@@ -228,7 +228,7 @@ public class IMROParserTest {
         URL u = this.getClass().getResource("figuur.xml");
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
-        Figuur bv = instance.parseImro2012Figuur(gba);
+        Figuur bv = instance.parseImroFiguur(gba);
 
         assertNotNull(bv);
         assertEquals("NL.IMRO.da5ed70e337a4d40a2ebd0f09b87fc15", bv.getIdentificatie());
@@ -244,7 +244,7 @@ public class IMROParserTest {
         URL u = this.getClass().getResource("functieaanduiding.xml");
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
-        Functieaanduiding bv = instance.parseImro2012Functieaanduiding(gba);
+        Functieaanduiding bv = instance.parseImroFunctieaanduiding(gba);
 
         assertNotNull(bv);
         assertEquals("NL.IMRO.0664.FA10312914914-00", bv.getIdentificatie());
@@ -260,7 +260,7 @@ public class IMROParserTest {
         URL u = this.getClass().getResource("bouwaanduiding.xml");
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
-        Bouwaanduiding bv = instance.parseImro2012Bouwaanduiding(gba);
+        Bouwaanduiding bv = instance.parseImroBouwaanduiding(gba);
 
         assertNotNull(bv);
         assertEquals("NL.IMRO.3c3b6f4bdf5b4168bb4932c48d90466e", bv.getIdentificatie());
@@ -281,7 +281,7 @@ public class IMROParserTest {
 
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
-        Bestemmingsplan bp = instance.parseImro2012Bestemmingsplan(gba);
+        Bestemmingsplan bp = instance.parseImroBestemmingsplan(gba);
 
         assertNotNull(bp);
         assertEquals("bestemmingsplan", bp.getTypePlan());

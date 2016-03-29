@@ -48,7 +48,7 @@ public class Processor {
     private static final Log log = LogFactory.getLog(Processor.class);
     private Integer timeout;
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
-    private IMROParser parser;
+    private IMROParser2012 parser;
     private File downloadfolder;
 
     private JAXBContext jaxbSTRIContext = JAXBContext.newInstance(nl.geonovum.stri._2012._1.GeleideFormulier.class, nl.geonovum.stri._2012._2.GeleideFormulier.class,
@@ -61,7 +61,7 @@ public class Processor {
     public Processor(List<HarvestJob> jobs, Integer timeout, File downloadfolder) throws JAXBException {
         this.jobs = jobs;
         this.timeout = timeout;
-        this.parser = new IMROParser();
+        this.parser = new IMROParser2012();
         this.downloadfolder = downloadfolder;
     }
 

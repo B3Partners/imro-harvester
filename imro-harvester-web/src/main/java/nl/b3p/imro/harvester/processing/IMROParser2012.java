@@ -50,22 +50,23 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
-public class IMROParser {
-    protected final static Log log = LogFactory.getLog(IMROParser.class);
-    private static GeometryConverter gc;
-    private JAXBContext context20121;
+public class IMROParser2012 implements ImroParser{
+    
+    protected final static Log log = LogFactory.getLog(IMROParser2012.class);
+    private JAXBContext context = null;
 
-    public IMROParser() throws JAXBException{
-        context20121 = JAXBContext.newInstance("nl.b3p.imro._2012._1");
-        gc = new GeometryConverter();
+    public IMROParser2012() throws JAXBException{
+        context = JAXBContext.newInstance("nl.b3p.imro._2012._1");
     }
 
 
-    protected List<Object> parseGML(Geleideformulier geleideformulier) throws JAXBException, URISyntaxException, MalformedURLException {
+    @Override
+    public List<Object> parseGML(Geleideformulier geleideformulier) throws JAXBException, URISyntaxException, MalformedURLException {
         return parseGML(geleideformulier.getGML());
     }
 
-    protected List<Object> parseGML(URL u) throws JAXBException {
+    @Override
+    public List<Object> parseGML(URL u) throws JAXBException {
         Object value = unmarshalUrl(u);
 
         FeatureCollectionIMROType fc = (FeatureCollectionIMROType) value;
@@ -73,8 +74,9 @@ public class IMROParser {
         return bp;
     }
 
-    protected Object unmarshalUrl(URL u) throws JAXBException{
-        Unmarshaller jaxbUnmarshaller = context20121.createUnmarshaller();
+    @Override
+    public Object unmarshalUrl(URL u) throws JAXBException{
+        Unmarshaller jaxbUnmarshaller = context.createUnmarshaller();
         JAXBElement o = (JAXBElement) jaxbUnmarshaller.unmarshal(u);
 
         Object value = o.getValue();
@@ -82,7 +84,8 @@ public class IMROParser {
         return value;
     }
 
-    protected List<Object> processFeatureCollection(FeatureCollectionIMROType fc) {
+    public List<Object> processFeatureCollection(Object featureCollection) {
+        FeatureCollectionIMROType fc = (FeatureCollectionIMROType)featureCollection;
         List<Object> objs = new ArrayList<Object>();
         List<FeatureCollectionIMROType.FeatureMember> members = fc.getFeatureMember();
         for (FeatureCollectionIMROType.FeatureMember member : members) {
@@ -96,26 +99,27 @@ public class IMROParser {
         return objs;
     }
 
-    protected Object parseFeatureMember(Object o) {
+    @Override
+    public Object parseFeatureMember(Object o) {
         Object obj = null;
         if (o instanceof nl.b3p.imro._2012._1.GebiedsaanduidingType) {
-            obj = parseImro2012Gebiedsaanduiding(o);
+            obj = parseImroGebiedsaanduiding(o);
         } else if (o instanceof nl.b3p.imro._2012._1.BestemmingsplangebiedType) {
-            obj = parseImro2012Bestemmingsplan(o);
+            obj = parseImroBestemmingsplan(o);
         } else if(o instanceof nl.b3p.imro._2012._1.DubbelbestemmingType){
-            obj = parseImro2012Dubbelbestemming(o);
+            obj = parseImroDubbelbestemming(o);
         }else if(o instanceof nl.b3p.imro._2012._1.EnkelbestemmingType) {
-            obj = parseImro2012Enkelbestemming(o);
+            obj = parseImroEnkelbestemming(o);
         }else if (o instanceof nl.b3p.imro._2012._1.MaatvoeringType){
-            obj = parseImro2012Maatvoering(o);
+            obj = parseImroMaatvoering(o);
         } else if(o instanceof nl.b3p.imro._2012._1.BouwvlakType){
-            obj = parseImro2012Bouwvlak(o);
+            obj = parseImroBouwvlak(o);
         } else if(o instanceof nl.b3p.imro._2012._1.FunctieaanduidingType){
-            obj = parseImro2012Functieaanduiding(o);
+            obj = parseImroFunctieaanduiding(o);
         } else if ( o instanceof nl.b3p.imro._2012._1.FiguurType){
-            obj = parseImro2012Figuur(o);
+            obj = parseImroFiguur(o);
         } else if ( o instanceof nl.b3p.imro._2012._1.BouwaanduidingType){
-            obj = parseImro2012Bouwaanduiding(o);
+            obj = parseImroBouwaanduiding(o);
         }else{
             log.error("Unknown type of featuremember when parsing. Class encountered: " + o.getClass().toString());
         }
@@ -123,7 +127,8 @@ public class IMROParser {
         return obj;
     }
 
-    protected Bestemmingsplan parseImro2012Bestemmingsplan(Object o) {
+    @Override
+    public Bestemmingsplan parseImroBestemmingsplan(Object o) {
         Bestemmingsplan bp = new Bestemmingsplan();
         nl.b3p.imro._2012._1.BestemmingsplangebiedType bpgt = (nl.b3p.imro._2012._1.BestemmingsplangebiedType) o;
 
@@ -146,7 +151,8 @@ public class IMROParser {
         return bp;
     }
 
-    protected Dubbelbestemming parseImro2012Dubbelbestemming(Object o){
+    @Override
+    public Dubbelbestemming parseImroDubbelbestemming(Object o){
         Dubbelbestemming db = new Dubbelbestemming();
         nl.b3p.imro._2012._1.DubbelbestemmingType dbt = (nl.b3p.imro._2012._1.DubbelbestemmingType) o;
         String identificatie = getIdentificatie(dbt.getIdentificatie().getNEN3610ID());
@@ -167,7 +173,8 @@ public class IMROParser {
         return db;
     }
 
-    protected Gebiedsaanduiding parseImro2012Gebiedsaanduiding(Object o) {
+    @Override
+    public Gebiedsaanduiding parseImroGebiedsaanduiding(Object o) {
         Gebiedsaanduiding gba = new Gebiedsaanduiding();
         nl.b3p.imro._2012._1.GebiedsaanduidingType ga = (nl.b3p.imro._2012._1.GebiedsaanduidingType) o;
 
@@ -188,7 +195,8 @@ public class IMROParser {
         return gba;
     }
 
-    protected Bouwvlak parseImro2012Bouwvlak(Object o){
+    @Override
+    public Bouwvlak parseImroBouwvlak(Object o){
         Bouwvlak bv = new Bouwvlak();
         nl.b3p.imro._2012._1.BouwvlakType bvt = (nl.b3p.imro._2012._1.BouwvlakType) o;
         String identificatie = getIdentificatie(bvt.getIdentificatie().getNEN3610ID());
@@ -207,7 +215,8 @@ public class IMROParser {
         return bv;
     }
 
-    protected Functieaanduiding parseImro2012Functieaanduiding(Object o){
+    @Override
+    public Functieaanduiding parseImroFunctieaanduiding(Object o){
         Functieaanduiding fa = new Functieaanduiding();
         nl.b3p.imro._2012._1.FunctieaanduidingType fat = (nl.b3p.imro._2012._1.FunctieaanduidingType) o;
         String identificatie = getIdentificatie(fat.getIdentificatie().getNEN3610ID());
@@ -228,7 +237,8 @@ public class IMROParser {
         return fa;
     }
 
-    protected Figuur parseImro2012Figuur(Object o){
+    @Override
+    public Figuur parseImroFiguur(Object o){
         Figuur fa = new Figuur();
         nl.b3p.imro._2012._1.FiguurType fat = (nl.b3p.imro._2012._1.FiguurType) o;
         String identificatie = getIdentificatie(fat.getIdentificatie().getNEN3610ID());
@@ -249,7 +259,8 @@ public class IMROParser {
         return fa;
     }
 
-    protected Bouwaanduiding parseImro2012Bouwaanduiding(Object o){
+    @Override
+    public Bouwaanduiding parseImroBouwaanduiding(Object o){
         Bouwaanduiding ba = new Bouwaanduiding();
         nl.b3p.imro._2012._1.BouwaanduidingType fat = (nl.b3p.imro._2012._1.BouwaanduidingType) o;
         String identificatie = getIdentificatie(fat.getIdentificatie().getNEN3610ID());
@@ -270,7 +281,8 @@ public class IMROParser {
         return ba;
     }
 
-    protected Enkelbestemming parseImro2012Enkelbestemming(Object o){
+    @Override
+    public Enkelbestemming parseImroEnkelbestemming(Object o){
         Enkelbestemming eb = new Enkelbestemming();
         nl.b3p.imro._2012._1.EnkelbestemmingType ebt = (nl.b3p.imro._2012._1.EnkelbestemmingType) o;
         String identificatie = getIdentificatie(ebt.getIdentificatie().getNEN3610ID());
@@ -289,7 +301,8 @@ public class IMROParser {
         return eb;
     }
 
-    protected Maatvoering parseImro2012Maatvoering(Object o){
+    @Override
+    public Maatvoering parseImroMaatvoering(Object o){
         Maatvoering mv = new Maatvoering();
         nl.b3p.imro._2012._1.MaatvoeringType ebt = (nl.b3p.imro._2012._1.MaatvoeringType) o;
         String identificatie = getIdentificatie(ebt.getIdentificatie().getNEN3610ID());
@@ -314,11 +327,14 @@ public class IMROParser {
         return mv;
     }
 
-    private String getIdentificatie(NEN3610IDType id){
+    @Override
+    public String getIdentificatie(Object identif){
+        NEN3610IDType id = (NEN3610IDType)identif;
         String identificatie = id.getNamespace() + "." + id.getLokaalID();
         if(id.getVersie()!= null){
             identificatie += "-" + id.getVersie();
         }
         return identificatie;
     }
+
 }
