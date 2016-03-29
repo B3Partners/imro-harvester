@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:imro="http://www.geonovum.nl/imro/2008/1"   version="2.0">
+
+	<bindings schemaLocation="local-IMRO2008.xsd">
+		<schemaBindings>
+			<package name="nl.b3p.jaxb.imro2008"/>
+		</schemaBindings>
+		
+		<bindings node="//xsd:complexType[@name='GebiedsaanduidingType']//xsd:element[@name='geometrie']">
+			<dom/>
+		
+		</bindings>
+	</bindings>
+
+	<bindings schemaLocation="local-gml4nl.xsd" node="/xsd:schema">
+		<bindings node="//xsd:element[@name='_Curve']" >
+			<class name = "AbstractCurve"/>
+		</bindings>
+		
+		<bindings node="//xsd:element[@name='_Surface']" >
+			<class name = "AbstractSurface"/>
+		</bindings>
+		
+		<bindings node="//xsd:element[@name='_Ring']" >
+			<class name = "AbstractRing"/>
+		</bindings>
+		
+		<schemaBindings>
+			<package name="nl.b3p.jaxb.gml4nl"/>
+		</schemaBindings>
+	</bindings>
+
+
+	<bindings schemaLocation="local-gml4nlLevels.xsd">
+		<schemaBindings>
+			<package name="nl.b3p.jaxb.gml4nlLevels"/>
+		</schemaBindings>
+	</bindings>	
+</bindings>

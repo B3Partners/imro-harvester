@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- =========================================================== -->
-<!--                                                     IMRO2008                                                  -->
-<!-- =========================================================== -->
-<!-- Versie informatie -->
+<!-- =================================================================== -->
+<!--                                                     local-IMRO2008                                                          -->
+<!--                                             versie voor lokale installatie                                               -->
+<!-- =================================================================== -->
+<!-- Geonovum, Beheerorganisatie RO-Standaarden. http://ro-standaarden.geonovum.nl -->
+<!-- =================================================================== -->
+<!-- Versie informatie: -->
+<!-- 2009-01-09: Versie 1.1.0. Officieel uitgebrachte versie. Onderdeel van RO Standaarden 2008, versie 1.1, 24 december 2008 -->
+<!-- Dit is de versie voor lokale installatie. De schemalocatie voor gepubliceerde IMRO2008 bestanden is de webversie -->
+<!-- gepubliceerd op http://schemas.geonovum.nl/imro/2008/1.1/IMRO2008.xsd -->
+<!-- Hoort bij IMRO2008 modeldocument 1.1 -->
+<!-- Geen veranderingen t.o.v. versie 1.1.0RC. Behalve aanpassing versienummer -->
+<!-- =================================================================== -->
+<!-- 2008-12-17: Versie 1.1.0RC. Aanpassing uit wijzigingsvoorstel BROS20081111 gerealiseerd.-->
+<!-- Aanpassing uit Supplement Wijzigingsvoorstel SUP20081208 gerealiseerd: -->
+<!-- Wijziging: 1366: spelfout: militair oefenterrein, gerealiseerd (2x aangepast) -->
+<!-- Wijziging: 1367: spelfout: veiligheidszone, gerealiseerd (1X) -->
+<!-- Wijziging: 1368: gebiedsaanduiding, verwijzingNaarTekst, 1..* -> , gerealiseerd -->
+<!-- Wijziging: 1369: aanpassing: luchtvaartverkeerzone, gerealiseerd (1X) -->
+<!-- Wijziging: 1372: aanpassing: bedrijf tot en met categorie, gerealiseerd (2X) -->
+<!-- Wijziging: 1373: aanpassing: horeca tot en met categorie, gerealiseerd (2X) -->
+<!-- Wijziging: 1437: niet geeffectueerd. VerwijzingNaarObjectgerichteTekst blijft als string. Minder implementatie -->
+<!-- problemen -->
+<!-- Wijziging: 1690: Conform supplement SUP20081208 -->
+<!-- 1) aanpassen enumlijst gebiedsaanduidingen -->
+<!-- verwijderd: overig -->
+<!-- toegevoegd: patronen voor toevoeging bij elke voorkomende waarde:-->
+<!-- " - .*" bij hoofdgroepen -->
+<!-- " .*" bij subwaarden    -->
+<!-- 2) Attribuut gebiedsaanduidinggroep bij objectklasse gebiedsaanduiding toegevoegd -->
+<!-- 3) enumeratie Gebiedsaanduidinggroep toegevoegd -->
+<!-- Wijziging 1775: spelfout: buiten toepassing verklaring beheersverordening, gerealiseerd (1X) -->
+<!-- Wijziging 1832: datatype NotEmptyString om gebruik lege stringwaarden te voorkomen; alle string datatypen -->
+<!-- vervangen door imro:NotEmptyString -->
+<!-- =================================================================== -->
 <!-- 2008-04-15: Versie 1.0.0RC. 3de in ontwikkelingstraject gedistribueerde versie -->
 <!-- Deze versie volgt na versie 0.0.5 -->
 <!-- Dit is een Release Candidate. Alle inhoudelijke info is verwerkt -->
@@ -11,18 +42,17 @@
 <!-- Bij die verwerking is zorgvuldigheid betracht. Discrepanties tussen beide worden niet verwacht, -->
 <!-- maar indien deze toch worden gevonden, graag terugkoppelen naar de opsteller van het XSD. -->
 <!-- Hoort bij IMRO2008 modeldocument versie 1.0 -->
-<!-- Paul Janssen (Geonovum): Paul.Janssen@Geonovum.nl -->
-<!-- =========================================================== -->
-<!-- =========================================================== -->
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" xmlns:gml4nl="http://www.geonovum.nl/gml4nl/1.0" xmlns:imro="http://www.geonovum.nl/imro/2008/1" targetNamespace="http://www.geonovum.nl/imro/2008/1" elementFormDefault="qualified" version="1.0.0RC">
+<!-- =================================================================== -->
+<!-- =================================================================== -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml"  xmlns:gml4nl="http://www.geonovum.nl/gml4nl/1.0" xmlns:imro="http://www.geonovum.nl/imro/2008/1" targetNamespace="http://www.geonovum.nl/imro/2008/1" elementFormDefault="qualified" version="1.1.0">
 	<annotation>
 		<appinfo>
 			<gml4nl:ComplianceLevel>2</gml4nl:ComplianceLevel>
 			<gml4nl:GMLProfileSchema>http://www.geonovum.nl/imro2008/1.0/imro2008gmlprofile.xsd</gml4nl:GMLProfileSchema>
 		</appinfo>
 	</annotation>
-	<import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
-	<import namespace="http://www.geonovum.nl/gml4nl/1.0" schemaLocation="http://schemas.geonovum.nl/gml4nl/1.0.0/gml4nlLevels.xsd"/>
+	<import namespace="http://www.opengis.net/gml" schemaLocation="local-IMRO2008gmlprofile.xsd"/>
+	<import namespace="http://www.geonovum.nl/gml4nl/1.0" schemaLocation="local-gml4nlLevels.xsd"/>
 	<!-- =========================================================== -->
 	<element name="FeatureCollectionIMRO" type="imro:FeatureCollectionIMROType" substitutionGroup="gml:_GML"/>
 	<complexType name="FeatureCollectionIMROType">
@@ -109,7 +139,7 @@
 	<complexType name="PlanstatusEnDatum_SVType">
 		<sequence>
 			<element name="planstatus" type="imro:Planstatus_SVType"/>
-			<element name="datum" type="string"/>
+			<element name="datum" type="imro:NotEmptyString"/>
 		</sequence>
 	</complexType>
 	<complexType name="PlanstatusEnDatum_SVPropertyType">
@@ -146,9 +176,9 @@
 			<extension base="imro:PlanobjectType">
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="thema" type="string" maxOccurs="unbounded"/>
+					<element name="thema" type="imro:NotEmptyString" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_AMBPropertyType" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentiePropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="besluitsubvlak" type="imro:Besluitsubvlak_APropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="besluitvlak" type="imro:Besluitvlak_APropertyType" minOccurs="0" maxOccurs="unbounded"/>
@@ -169,8 +199,8 @@
 	<element name="ExternPlanReferentie_SV" type="imro:ExternPlanReferentie_SVType"/>
 	<complexType name="ExternPlanReferentie_SVType">
 		<sequence>
-			<element name="naamExternPlan" type="string"/>
-			<element name="idnExternPlan" type="string" minOccurs="0"/>
+			<element name="naamExternPlan" type="imro:NotEmptyString"/>
+			<element name="idnExternPlan" type="imro:NotEmptyString" minOccurs="0"/>
 			<element name="rolExternPlan" type="imro:RolExternPlan_SVType"/>
 		</sequence>
 	</complexType>
@@ -191,7 +221,7 @@
 	<complexType name="PlanstatusEnDatum_XGBType">
 		<sequence>
 			<element name="planstatus" type="imro:Planstatus_XGBType"/>
-			<element name="datum" type="string"/>
+			<element name="datum" type="imro:NotEmptyString"/>
 		</sequence>
 	</complexType>
 	<complexType name="PlanstatusEnDatum_XGBPropertyType">
@@ -224,20 +254,20 @@
 				<sequence>
 					<element name="typePlan" type="imro:RuimtelijkPlanOfBesluit_XGBType"/>
 					<element name="beleidsmatigVerantwoordelijkeOverheid" type="imro:Overheden_XGBType"/>
-					<element name="naamOverheid" type="string"/>
-					<element name="overheidsCode" type="string"/>
+					<element name="naamOverheid" type="imro:NotEmptyString"/>
+					<element name="overheidsCode" type="imro:NotEmptyString"/>
 					<element name="naam" type="gml:CodeType"/>
 					<element name="normadressant" type="imro:Normadressant_XGBType" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="locatieNaam" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="locatieNaam" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="planstatusInfo" type="imro:PlanstatusEnDatum_XGBPropertyType"/>
-					<element name="besluitnummer" type="string" minOccurs="0"/>
-					<element name="verwijzingNaarVaststellingsbesluit" type="string" minOccurs="0"/>
+					<element name="besluitnummer" type="imro:NotEmptyString" minOccurs="0"/>
+					<element name="verwijzingNaarVaststellingsbesluit" type="imro:NotEmptyString" minOccurs="0"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentieBG_XGBPropertyType" maxOccurs="6"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="ondergrond" type="string" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="ondergrond" type="imro:NotEmptyString" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentie_XGBPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarExternPlanInfo" type="imro:ExternPlanReferentie_XGBPropertyType" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="verwijzingNorm" type="string" minOccurs="2" maxOccurs="2"/>
+					<element name="verwijzingNorm" type="imro:NotEmptyString" minOccurs="2" maxOccurs="2"/>
 					<element name="geometrie" type="imro:VlakMultiVlakPropertyType"/>
 				</sequence>
 			</extension>
@@ -257,7 +287,7 @@
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_XGBPropertyType" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="geometrie" type="imro:VlakMultiVlakPropertyType"/>
 					<element name="besluitgebied" type="imro:Besluitgebied_XPropertyType"/>
 				</sequence>
@@ -277,9 +307,9 @@
 			<extension base="imro:PlanobjectType">
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="thema" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="thema" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentieV_PSVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentie_PSVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="begrenzing" type="imro:GeometrieStructuurvisieObject_PPropertyType" maxOccurs="unbounded"/>
 					<element name="plangebied" type="imro:Structuurvisieplangebied_PPropertyType"/>
@@ -301,7 +331,7 @@
 				<sequence>
 					<element name="naam" type="imro:BouwaanduidingenType"/>
 					<element name="labelInfo" type="imro:LabelPropertyType"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0"/>
 					<element name="geometrie" type="gml:SurfacePropertyType"/>
 					<element name="aanduiding" type="imro:AanduidingPropertyType" minOccurs="0"/>
 				</sequence>
@@ -319,7 +349,7 @@
 		<restriction base="string">
 			<enumeration value="aanwijzingsbesluit"/>
 			<enumeration value="beheersverordening"/>
-			<enumeration value="buiten toepassing veklaring beheersverordening"/>
+			<enumeration value="buiten toepassing verklaring beheersverordening"/>
 			<enumeration value="projectbesluit"/>
 			<enumeration value="reactieve aanwijzing"/>
 			<enumeration value="tijdelijke ontheffing buitenplans"/>
@@ -344,7 +374,7 @@
 	<element name="IllustratieReferentie_BP" type="imro:IllustratieReferentie_BPType"/>
 	<complexType name="IllustratieReferentie_BPType">
 		<sequence>
-			<element name="verwijzingNaarIllustratie" type="string"/>
+			<element name="verwijzingNaarIllustratie" type="imro:NotEmptyString"/>
 			<element name="typeIllustratie" type="imro:Illustratie_BPType"/>
 		</sequence>
 	</complexType>
@@ -374,9 +404,9 @@
 	<element name="BeleidInfo" type="imro:BeleidInfoType"/>
 	<complexType name="BeleidInfoType">
 		<sequence>
-			<element name="belang" type="string"/>
-			<element name="rol" type="string"/>
-			<element name="instrument" type="string" minOccurs="0"/>
+			<element name="belang" type="imro:NotEmptyString"/>
+			<element name="rol" type="imro:NotEmptyString"/>
+			<element name="instrument" type="imro:NotEmptyString" minOccurs="0"/>
 		</sequence>
 	</complexType>
 	<complexType name="BeleidInfoPropertyType">
@@ -399,7 +429,7 @@
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_XGBPropertyType" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="geometrie" type="imro:VlakMultiVlakPropertyType"/>
 					<element name="besluitgebied" type="imro:Besluitgebied_XPropertyType"/>
 					<element name="besluitvlak" type="imro:Besluitvlak_XPropertyType" minOccurs="0" maxOccurs="unbounded"/>
@@ -418,7 +448,7 @@
 	<element name="IllustratieReferentie_XGB" type="imro:IllustratieReferentie_XGBType"/>
 	<complexType name="IllustratieReferentie_XGBType">
 		<sequence>
-			<element name="verwijzingNaarIllustratie" type="string"/>
+			<element name="verwijzingNaarIllustratie" type="imro:NotEmptyString"/>
 			<element name="typeIllustratie" type="imro:Illustratie_XGBType"/>
 		</sequence>
 	</complexType>
@@ -430,7 +460,7 @@
 	<element name="TekstReferentie_XGB" type="imro:TekstReferentie_XGBType"/>
 	<complexType name="TekstReferentie_XGBType">
 		<sequence>
-			<element name="verwijzingNaarTekst" type="string"/>
+			<element name="verwijzingNaarTekst" type="imro:NotEmptyString"/>
 			<element name="typeTekst" type="imro:Teksttype_XGBType"/>
 			<element name="normadressant" type="imro:Normadressant_XGBType" minOccurs="0" maxOccurs="unbounded"/>
 		</sequence>
@@ -443,10 +473,10 @@
 	<element name="IllustratieReferentie_PSV" type="imro:IllustratieReferentie_PSVType"/>
 	<complexType name="IllustratieReferentie_PSVType">
 		<sequence>
-			<element name="verwijzingNaarIllustratie" type="string"/>
+			<element name="verwijzingNaarIllustratie" type="imro:NotEmptyString"/>
 			<element name="typeIllustratie" type="imro:IllustratieType"/>
-			<element name="naamIllustratie" type="string" minOccurs="0"/>
-			<element name="legendanaam" type="string" minOccurs="0"/>
+			<element name="naamIllustratie" type="imro:NotEmptyString" minOccurs="0"/>
+			<element name="legendanaam" type="imro:NotEmptyString" minOccurs="0"/>
 		</sequence>
 	</complexType>
 	<complexType name="IllustratieReferentie_PSVPropertyType">
@@ -467,7 +497,7 @@
 	<element name="TekstReferentie_BP" type="imro:TekstReferentie_BPType"/>
 	<complexType name="TekstReferentie_BPType">
 		<sequence>
-			<element name="verwijzingNaarTekst" type="string"/>
+			<element name="verwijzingNaarTekst" type="imro:NotEmptyString"/>
 			<element name="typeTekst" type="imro:Teksttype_BPType"/>
 		</sequence>
 	</complexType>
@@ -530,20 +560,20 @@
 				<sequence>
 					<element name="typePlan" type="imro:RuimtelijkPlanOfBesluit_PVType"/>
 					<element name="beleidsmatigVerantwoordelijkeOverheid" type="imro:Overheden_PType"/>
-					<element name="naamOverheid" type="string"/>
-					<element name="overheidsCode" type="string"/>
+					<element name="naamOverheid" type="imro:NotEmptyString"/>
+					<element name="overheidsCode" type="imro:NotEmptyString"/>
 					<element name="naam" type="gml:CodeType"/>
 					<element name="normadressant" type="imro:Normadressant_PVType" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="locatieNaam" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="locatieNaam" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="planstatusInfo" type="imro:PlanstatusEnDatum_PVPropertyType"/>
-					<element name="besluitnummer" type="string" minOccurs="0"/>
-					<element name="verwijzingNaarVaststellingsbesluit" type="string" minOccurs="0"/>
+					<element name="besluitnummer" type="imro:NotEmptyString" minOccurs="0"/>
+					<element name="verwijzingNaarVaststellingsbesluit" type="imro:NotEmptyString" minOccurs="0"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentieBG_PVPropertyType" maxOccurs="6"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="ondergrond" type="string" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="ondergrond" type="imro:NotEmptyString" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentiePGPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarExternPlanInfo" type="imro:ExternPlanReferentie_PVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="verwijzingNorm" type="string" minOccurs="2" maxOccurs="2"/>
+					<element name="verwijzingNorm" type="imro:NotEmptyString" minOccurs="2" maxOccurs="2"/>
 					<element name="begrenzing" type="imro:GeometriePlangebiedPropertyType"/>
 				</sequence>
 			</extension>
@@ -562,9 +592,9 @@
 			<extension base="imro:PlanobjectType">
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="thema" type="string" maxOccurs="unbounded"/>
+					<element name="thema" type="imro:NotEmptyString" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_PVPropertyType" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentiePropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="besluitgebied" type="imro:Besluitgebied_PPropertyType"/>
 					<element name="begrenzing" type="imro:GeometrieBesluitobject_P1PropertyType" maxOccurs="unbounded"/>
@@ -585,9 +615,9 @@
 			<extension base="imro:PlanobjectType">
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="thema" type="string" maxOccurs="unbounded"/>
+					<element name="thema" type="imro:NotEmptyString" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_PVPropertyType" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentiePropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="besluitgebied" type="imro:Besluitgebied_PPropertyType"/>
 					<element name="besluitvlak" type="imro:Besluitvlak_PPropertyType" minOccurs="0" maxOccurs="unbounded"/>
@@ -625,7 +655,7 @@
 	<element name="TekstReferentie_PSV" type="imro:TekstReferentie_PSVType"/>
 	<complexType name="TekstReferentie_PSVType">
 		<sequence>
-			<element name="verwijzingNaarTekst" type="string"/>
+			<element name="verwijzingNaarTekst" type="imro:NotEmptyString"/>
 			<element name="typeTekst" type="imro:Teksttype_PSVType"/>
 		</sequence>
 	</complexType>
@@ -647,10 +677,10 @@
 			<extension base="imro:PlanobjectType">
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="thema" type="string" maxOccurs="unbounded"/>
+					<element name="thema" type="imro:NotEmptyString" maxOccurs="unbounded"/>
 					<element name="beleidInfo" type="imro:BeleidInfo_RSVPropertyType" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_SVPropertyType" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentiePropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarExternPlanInfo" type="imro:ExternPlanReferentie_SVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="begrenzing" type="imro:GeometrieStructuurvisieObjectPropertyType" minOccurs="0" maxOccurs="unbounded"/>
@@ -672,10 +702,10 @@
 			<extension base="imro:PlanobjectType">
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="thema" type="string" maxOccurs="unbounded"/>
+					<element name="thema" type="imro:NotEmptyString" maxOccurs="unbounded"/>
 					<element name="beleidInfo" type="imro:BeleidInfo_GSVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_SVPropertyType" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentiePropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarExternPlanInfo" type="imro:ExternPlanReferentie_SVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="begrenzing" type="imro:GeometrieStructuurvisieObjectPropertyType" maxOccurs="unbounded"/>
@@ -697,10 +727,10 @@
 			<extension base="imro:PlanobjectType">
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="thema" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="thema" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="beleidInfo" type="imro:BeleidInfo_RSVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_SVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentiePropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarExternPlanInfo" type="imro:ExternPlanReferentie_SVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="begrenzing" type="imro:GeometrieStructuurvisieObjectPropertyType" minOccurs="0" maxOccurs="unbounded"/>
@@ -798,10 +828,10 @@
 			<extension base="imro:PlanobjectType">
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="thema" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="thema" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="beleidInfo" type="imro:BeleidInfo_GSVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_SVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentiePropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarExternPlanInfo" type="imro:ExternPlanReferentie_SVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="begrenzing" type="imro:GeometrieStructuurvisieObjectPropertyType" minOccurs="0" maxOccurs="unbounded"/>
@@ -825,19 +855,19 @@
 				<sequence>
 					<element name="typePlan" type="imro:RuimtelijkPlanOfBesluit_SVType"/>
 					<element name="beleidsmatigVerantwoordelijkeOverheid" type="imro:Overheden_GType"/>
-					<element name="naamOverheid" type="string"/>
-					<element name="overheidsCode" type="string"/>
+					<element name="naamOverheid" type="imro:NotEmptyString"/>
+					<element name="overheidsCode" type="imro:NotEmptyString"/>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="locatieNaam" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="locatieNaam" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="planstatusInfo" type="imro:PlanstatusEnDatum_SVPropertyType"/>
-					<element name="besluitnummer" type="string" minOccurs="0"/>
-					<element name="verwijzingNaarVaststellingsbesluit" type="string" minOccurs="0"/>
+					<element name="besluitnummer" type="imro:NotEmptyString" minOccurs="0"/>
+					<element name="verwijzingNaarVaststellingsbesluit" type="imro:NotEmptyString" minOccurs="0"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentiePGPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentiePG_SVPropertyType" maxOccurs="2"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="ondergrond" type="string" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="ondergrond" type="imro:NotEmptyString" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarExternPlanInfo" type="imro:ExternPlanReferentiePG_SVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="verwijzingNorm" type="string" minOccurs="2" maxOccurs="2"/>
+					<element name="verwijzingNorm" type="imro:NotEmptyString" minOccurs="2" maxOccurs="2"/>
 					<element name="begrenzing" type="imro:GeometriePlangebiedPropertyType"/>
 				</sequence>
 			</extension>
@@ -857,19 +887,19 @@
 				<sequence>
 					<element name="typePlan" type="imro:RuimtelijkPlanOfBesluit_SVType"/>
 					<element name="beleidsmatigVerantwoordelijkeOverheid" type="imro:Overheden_RType"/>
-					<element name="naamOverheid" type="string" maxOccurs="unbounded"/>
-					<element name="overheidsCode" type="string"/>
+					<element name="naamOverheid" type="imro:NotEmptyString" maxOccurs="unbounded"/>
+					<element name="overheidsCode" type="imro:NotEmptyString"/>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="locatieNaam" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="locatieNaam" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="planstatusInfo" type="imro:PlanstatusEnDatum_SVPropertyType"/>
-					<element name="besluitnummer" type="string" minOccurs="0"/>
-					<element name="verwijzingNaarVaststellingsbesluit" type="string" minOccurs="0"/>
+					<element name="besluitnummer" type="imro:NotEmptyString" minOccurs="0"/>
+					<element name="verwijzingNaarVaststellingsbesluit" type="imro:NotEmptyString" minOccurs="0"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentiePGPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentiePG_SVPropertyType" maxOccurs="2"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="ondergrond" type="string" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="ondergrond" type="imro:NotEmptyString" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarExternPlanInfo" type="imro:ExternPlanReferentiePG_SVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="verwijzingNorm" type="string" minOccurs="2" maxOccurs="2"/>
+					<element name="verwijzingNorm" type="imro:NotEmptyString" minOccurs="2" maxOccurs="2"/>
 					<element name="begrenzing" type="imro:GeometriePlangebiedPropertyType"/>
 				</sequence>
 			</extension>
@@ -907,7 +937,7 @@
 	<complexType name="PlanstatusEnDatum_AMBType">
 		<sequence>
 			<element name="planstatus" type="imro:Planstatus_AMBType"/>
-			<element name="datum" type="string"/>
+			<element name="datum" type="imro:NotEmptyString"/>
 		</sequence>
 	</complexType>
 	<complexType name="PlanstatusEnDatum_AMBPropertyType">
@@ -951,7 +981,7 @@
 	<element name="TekstReferentieBG_AMB" type="imro:TekstReferentieBG_AMBType"/>
 	<complexType name="TekstReferentieBG_AMBType">
 		<sequence>
-			<element name="verwijzingNaarTekst" type="string"/>
+			<element name="verwijzingNaarTekst" type="imro:NotEmptyString"/>
 			<element name="typeTekst" type="imro:TeksttypeBG_AMBType"/>
 		</sequence>
 	</complexType>
@@ -963,7 +993,7 @@
 	<element name="TekstReferentieBG_PV" type="imro:TekstReferentieBG_PVType"/>
 	<complexType name="TekstReferentieBG_PVType">
 		<sequence>
-			<element name="verwijzingNaarTekst" type="string"/>
+			<element name="verwijzingNaarTekst" type="imro:NotEmptyString"/>
 			<element name="typeTekst" type="imro:TeksttypeBG_PVType"/>
 		</sequence>
 	</complexType>
@@ -1010,8 +1040,8 @@
 	<element name="ExternPlanReferentie_BP" type="imro:ExternPlanReferentie_BPType"/>
 	<complexType name="ExternPlanReferentie_BPType">
 		<sequence>
-			<element name="naamExternPlan" type="string"/>
-			<element name="idnExternPlan" type="string" minOccurs="0"/>
+			<element name="naamExternPlan" type="imro:NotEmptyString"/>
+			<element name="idnExternPlan" type="imro:NotEmptyString" minOccurs="0"/>
 			<element name="rolExternPlan" type="imro:RolExternPlan_BPType"/>
 		</sequence>
 	</complexType>
@@ -1050,8 +1080,8 @@
 	<element name="ExternPlanReferentie_XGB" type="imro:ExternPlanReferentie_XGBType"/>
 	<complexType name="ExternPlanReferentie_XGBType">
 		<sequence>
-			<element name="naamExternPlan" type="string"/>
-			<element name="idnExternPlan" type="string" minOccurs="0"/>
+			<element name="naamExternPlan" type="imro:NotEmptyString"/>
+			<element name="idnExternPlan" type="imro:NotEmptyString" minOccurs="0"/>
 			<element name="rolExternPlan" type="imro:RolExternPlan_XGBType"/>
 		</sequence>
 	</complexType>
@@ -1078,7 +1108,7 @@
 	<complexType name="PlanstatusEnDatum_BPType">
 		<sequence>
 			<element name="planstatus" type="imro:Planstatus_BPType"/>
-			<element name="datum" type="string"/>
+			<element name="datum" type="imro:NotEmptyString"/>
 		</sequence>
 	</complexType>
 	<complexType name="PlanstatusEnDatum_BPPropertyType">
@@ -1089,7 +1119,7 @@
 	<element name="Label" type="imro:LabelType"/>
 	<complexType name="LabelType">
 		<sequence>
-			<element name="tekst" type="string"/>
+			<element name="tekst" type="imro:NotEmptyString"/>
 			<element name="positie" type="imro:LabelpositiePropertyType" maxOccurs="unbounded"/>
 		</sequence>
 	</complexType>
@@ -1114,7 +1144,7 @@
 	<element name="WaardeEnType" type="imro:WaardeEnTypeType"/>
 	<complexType name="WaardeEnTypeType">
 		<sequence>
-			<element name="waarde" type="string"/>
+			<element name="waarde" type="imro:NotEmptyString"/>
 			<element name="waardeType" type="imro:OmvangWaardeType"/>
 		</sequence>
 	</complexType>
@@ -1195,20 +1225,20 @@
 				<sequence>
 					<element name="typePlan" type="imro:RuimtelijkPlanOfBesluit_AMBType"/>
 					<element name="beleidsmatigVerantwoordelijkeOverheid" type="imro:Overheden_RType"/>
-					<element name="naamOverheid" type="string"/>
-					<element name="overheidsCode" type="string"/>
+					<element name="naamOverheid" type="imro:NotEmptyString"/>
+					<element name="overheidsCode" type="imro:NotEmptyString"/>
 					<element name="naam" type="gml:CodeType"/>
 					<element name="normadressant" type="imro:Normadressant_AMBType" maxOccurs="unbounded"/>
-					<element name="locatieNaam" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="locatieNaam" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="planstatusInfo" type="imro:PlanstatusEnDatum_AMBPropertyType"/>
-					<element name="besluitnummer" type="string" minOccurs="0"/>
-					<element name="verwijzingNaarVaststellingsbesluit" type="string" minOccurs="0"/>
+					<element name="besluitnummer" type="imro:NotEmptyString" minOccurs="0"/>
+					<element name="verwijzingNaarVaststellingsbesluit" type="imro:NotEmptyString" minOccurs="0"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentieBG_AMBPropertyType" maxOccurs="6"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="ondergrond" type="string" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="ondergrond" type="imro:NotEmptyString" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentiePGPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarExternPlanInfo" type="imro:ExternPlanReferentie_AMBPropertyType" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="verwijzingNorm" type="string" minOccurs="2" maxOccurs="2"/>
+					<element name="verwijzingNorm" type="imro:NotEmptyString" minOccurs="2" maxOccurs="2"/>
 					<element name="begrenzing" type="imro:GeometriePlangebiedPropertyType"/>
 				</sequence>
 			</extension>
@@ -1227,9 +1257,9 @@
 			<extension base="imro:PlanobjectType">
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="thema" type="string" maxOccurs="unbounded"/>
+					<element name="thema" type="imro:NotEmptyString" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_AMBPropertyType" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentiePropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="begrenzing" type="imro:GeometrieBesluitobject_APropertyType" maxOccurs="unbounded"/>
 					<element name="besluitgebied" type="imro:Besluitgebied_APropertyType"/>
@@ -1251,19 +1281,19 @@
 				<sequence>
 					<element name="typePlan" type="imro:RuimtelijkPlanOfBesluit_SVType"/>
 					<element name="beleidsmatigVerantwoordelijkeOverheid" type="imro:Overheden_PType"/>
-					<element name="naamOverheid" type="string"/>
-					<element name="overheidsCode" type="string"/>
+					<element name="naamOverheid" type="imro:NotEmptyString"/>
+					<element name="overheidsCode" type="imro:NotEmptyString"/>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="locatieNaam" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="locatieNaam" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="planstatusInfo" type="imro:PlanstatusEnDatum_SVPropertyType"/>
-					<element name="besluitnummer" type="string" minOccurs="0"/>
-					<element name="verwijzingNaarVaststellingsbesluit" type="string" minOccurs="0"/>
+					<element name="besluitnummer" type="imro:NotEmptyString" minOccurs="0"/>
+					<element name="verwijzingNaarVaststellingsbesluit" type="imro:NotEmptyString" minOccurs="0"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentiePGPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentiePG_SVPropertyType" maxOccurs="2"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="ondergrond" type="string" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="ondergrond" type="imro:NotEmptyString" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarExternPlanInfo" type="imro:ExternPlanReferentiePG_SVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="verwijzingNorm" type="string" minOccurs="2" maxOccurs="2"/>
+					<element name="verwijzingNorm" type="imro:NotEmptyString" minOccurs="2" maxOccurs="2"/>
 					<element name="begrenzing" type="imro:GeometriePlangebied_PPropertyType"/>
 				</sequence>
 			</extension>
@@ -1284,7 +1314,7 @@
 					<element name="naam" type="imro:FigurenType"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentie_BPPropertyType" minOccurs="0"/>
 					<element name="labelInfo" type="imro:LabelPropertyType" minOccurs="0"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0"/>
 					<element name="geometrie" type="imro:LijnMultiLijnPropertyType"/>
 					<element name="aanduiding" type="imro:AanduidingPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 				</sequence>
@@ -1304,7 +1334,7 @@
 			<extension base="imro:AanduidingType">
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0"/>
 					<element name="geometrie" type="imro:VlakMultiVlakPropertyType"/>
 				</sequence>
 			</extension>
@@ -1324,18 +1354,18 @@
 				<sequence>
 					<element name="typePlan" type="imro:RuimtelijkPlanOfBesluit_BPType"/>
 					<element name="beleidsmatigVerantwoordelijkeOverheid" type="imro:Overheden_BPType"/>
-					<element name="naamOverheid" type="string"/>
-					<element name="overheidsCode" type="string"/>
+					<element name="naamOverheid" type="imro:NotEmptyString"/>
+					<element name="overheidsCode" type="imro:NotEmptyString"/>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="locatieNaam" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="locatieNaam" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="planstatusInfo" type="imro:PlanstatusEnDatum_BPPropertyType"/>
-					<element name="besluitnummer" type="string" minOccurs="0"/>
-					<element name="verwijzingNaarVaststellingsbesluit" type="string" minOccurs="0"/>
+					<element name="besluitnummer" type="imro:NotEmptyString" minOccurs="0"/>
+					<element name="verwijzingNaarVaststellingsbesluit" type="imro:NotEmptyString" minOccurs="0"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentiePG_BPPropertyType" minOccurs="2" maxOccurs="4"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="ondergrond" type="string" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="ondergrond" type="imro:NotEmptyString" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarExternPlanInfo" type="imro:ExternPlanReferentie_BPPropertyType" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="verwijzingNorm" type="string" minOccurs="2" maxOccurs="2"/>
+					<element name="verwijzingNorm" type="imro:NotEmptyString" minOccurs="2" maxOccurs="2"/>
 					<element name="geometrie" type="imro:VlakMultiVlakPropertyType"/>
 				</sequence>
 			</extension>
@@ -1354,10 +1384,10 @@
 			<extension base="imro:PlanobjectType">
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="thema" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="thema" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="beleidInfo" type="imro:BeleidInfo_PSVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_PSVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentie_PSVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarExternPlanInfo" type="imro:ExternPlanReferentie_SVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="plangebied" type="imro:Structuurvisieplangebied_PPropertyType"/>
@@ -1428,9 +1458,9 @@
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
 					<element name="bestemmingshoofdgroep" type="imro:Bestemmingshoofdgroep_EDType"/>
-					<element name="artikelnummer" type="string"/>
+					<element name="artikelnummer" type="imro:NotEmptyString"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_BPPropertyType"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0"/>
 					<element name="labelInfo" type="imro:LabelPropertyType"/>
 					<element name="geometrie" type="gml:SurfacePropertyType"/>
 					<element name="plangebied" type="imro:BestemmingsplangebiedPropertyType"/>
@@ -1452,7 +1482,7 @@
 				<sequence>
 					<element name="naam" type="imro:FunctieaanduidingenType"/>
 					<element name="labelInfo" type="imro:LabelPropertyType"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0"/>
 					<element name="geometrie" type="gml:SurfacePropertyType"/>
 					<element name="aanduiding" type="imro:AanduidingPropertyType" minOccurs="0"/>
 				</sequence>
@@ -1474,7 +1504,7 @@
 					<element name="naam" type="imro:MaatvoeringenType"/>
 					<element name="symboolInfo" type="imro:SymboolEnPositiePropertyType"/>
 					<element name="maatvoeringInfo" type="imro:WaardeEnTypePropertyType" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0"/>
 					<element name="geometrie" type="gml:SurfacePropertyType"/>
 					<element name="aanduiding" type="imro:AanduidingPropertyType" minOccurs="0"/>
 				</sequence>
@@ -1512,10 +1542,10 @@
 			<extension base="imro:PlanobjectType">
 				<sequence>
 					<element name="naam" type="gml:CodeType"/>
-					<element name="thema" type="string" maxOccurs="unbounded"/>
+					<element name="thema" type="imro:NotEmptyString" maxOccurs="unbounded"/>
 					<element name="beleidInfo" type="imro:BeleidInfo_PSVPropertyType" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_PSVPropertyType" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarIllustratieInfo" type="imro:IllustratieReferentie_PSVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="verwijzingNaarExternPlanInfo" type="imro:ExternPlanReferentie_SVPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<element name="plangebied" type="imro:Structuurvisieplangebied_PPropertyType"/>
@@ -1552,9 +1582,10 @@
 			<extension base="imro:AanduidingType">
 				<sequence>
 					<element name="naam" type="imro:GebiedsaanduidingenType"/>
-					<element name="artikelnummer" type="string"/>
-					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_BPPropertyType" maxOccurs="unbounded"/>
-					<element name="verwijzingNaarObjectgerichteTekst" type="string" minOccurs="0"/>
+					<element name="gebiedsaanduidinggroep" type="imro:NotEmptyString"/>
+					<element name="artikelnummer" type="imro:NotEmptyString"/>
+					<element name="verwijzingNaarTekstInfo" type="imro:TekstReferentie_BPPropertyType"/>
+					<element name="verwijzingNaarObjectgerichteTekst" type="imro:NotEmptyString" minOccurs="0"/>
 					<element name="labelInfo" type="imro:LabelPropertyType" minOccurs="0"/>
 					<element name="geometrie" type="imro:VlakMultiVlakPropertyType"/>
 				</sequence>
@@ -1585,7 +1616,7 @@
 		<complexContent>
 			<extension base="gml:AbstractFeatureType">
 				<sequence>
-					<element name="identificatie" type="string"/>
+					<element name="identificatie" type="imro:NotEmptyString"/>
 				</sequence>
 			</extension>
 		</complexContent>
@@ -1639,15 +1670,15 @@
 		<complexContent>
 			<extension base="gml:AbstractFeatureType">
 				<sequence>
-					<element name="datasetTitel" type="string"/>
-					<element name="creatiedatum" type="string"/>
-					<element name="bronbeheerder" type="string"/>
-					<element name="codeerVerantwoordelijke" type="string"/>
-					<element name="naamApplicatieschema" type="string"/>
-					<element name="codeReferentiesysteem" type="string"/>
+					<element name="datasetTitel" type="imro:NotEmptyString"/>
+					<element name="creatiedatum" type="imro:NotEmptyString"/>
+					<element name="bronbeheerder" type="imro:NotEmptyString"/>
+					<element name="codeerVerantwoordelijke" type="imro:NotEmptyString"/>
+					<element name="naamApplicatieschema" type="imro:NotEmptyString"/>
+					<element name="codeReferentiesysteem" type="imro:NotEmptyString"/>
 					<element name="toepassingsschaal" type="integer"/>
-					<element name="applicatieIdentificatie" type="string"/>
-					<element name="versieXMLschema" type="string"/>
+					<element name="applicatieIdentificatie" type="imro:NotEmptyString"/>
+					<element name="versieXMLschema" type="imro:NotEmptyString"/>
 				</sequence>
 			</extension>
 		</complexContent>
@@ -1782,7 +1813,7 @@
 	<element name="TekstReferentieBG_XGB" type="imro:TekstReferentieBG_XGBType"/>
 	<complexType name="TekstReferentieBG_XGBType">
 		<sequence>
-			<element name="verwijzingNaarTekst" type="string"/>
+			<element name="verwijzingNaarTekst" type="imro:NotEmptyString"/>
 			<element name="typeTekst" type="imro:TeksttypeBG_XGBType"/>
 		</sequence>
 	</complexType>
@@ -1794,8 +1825,8 @@
 	<element name="ExternPlanReferentie_AMB" type="imro:ExternPlanReferentie_AMBType"/>
 	<complexType name="ExternPlanReferentie_AMBType">
 		<sequence>
-			<element name="naamExternPlan" type="string"/>
-			<element name="idnExternPlan" type="string" minOccurs="0"/>
+			<element name="naamExternPlan" type="imro:NotEmptyString"/>
+			<element name="idnExternPlan" type="imro:NotEmptyString" minOccurs="0"/>
 			<element name="rolExternPlan" type="imro:RolExternPlan_AMBType"/>
 		</sequence>
 	</complexType>
@@ -1816,7 +1847,7 @@
 	<element name="TekstReferentie_AMB" type="imro:TekstReferentie_AMBType"/>
 	<complexType name="TekstReferentie_AMBType">
 		<sequence>
-			<element name="verwijzingNaarTekst" type="string"/>
+			<element name="verwijzingNaarTekst" type="imro:NotEmptyString"/>
 			<element name="typeTekst" type="imro:Teksttype_AMBType"/>
 			<element name="normadressant" type="imro:Normadressant_AMBType" minOccurs="0" maxOccurs="unbounded"/>
 		</sequence>
@@ -1850,7 +1881,7 @@
 	<complexType name="PlanstatusEnDatum_PVType">
 		<sequence>
 			<element name="planstatus" type="imro:Planstatus_PVType"/>
-			<element name="datum" type="string"/>
+			<element name="datum" type="imro:NotEmptyString"/>
 		</sequence>
 	</complexType>
 	<complexType name="PlanstatusEnDatum_PVPropertyType">
@@ -1868,8 +1899,8 @@
 	<element name="ExternPlanReferentie_PV" type="imro:ExternPlanReferentie_PVType"/>
 	<complexType name="ExternPlanReferentie_PVType">
 		<sequence>
-			<element name="naamExternPlan" type="string"/>
-			<element name="idnExternPlan" type="string" minOccurs="0"/>
+			<element name="naamExternPlan" type="imro:NotEmptyString"/>
+			<element name="idnExternPlan" type="imro:NotEmptyString" minOccurs="0"/>
 			<element name="rolExternPlan" type="imro:RolExternPlan_PVType"/>
 		</sequence>
 	</complexType>
@@ -1891,7 +1922,7 @@
 	<element name="TekstReferentie_PV" type="imro:TekstReferentie_PVType"/>
 	<complexType name="TekstReferentie_PVType">
 		<sequence>
-			<element name="verwijzingNaarTekst" type="string"/>
+			<element name="verwijzingNaarTekst" type="imro:NotEmptyString"/>
 			<element name="typeTekst" type="imro:Teksttype_PVType"/>
 			<element name="normadressant" type="imro:Normadressant_PVType" minOccurs="0" maxOccurs="unbounded"/>
 		</sequence>
@@ -1904,9 +1935,9 @@
 	<element name="IllustratieReferentie" type="imro:IllustratieReferentieType"/>
 	<complexType name="IllustratieReferentieType">
 		<sequence>
-			<element name="verwijzingNaarIllustratie" type="string"/>
+			<element name="verwijzingNaarIllustratie" type="imro:NotEmptyString"/>
 			<element name="typeIllustratie" type="imro:IllustratieType"/>
-			<element name="legendanaam" type="string" minOccurs="0"/>
+			<element name="legendanaam" type="imro:NotEmptyString" minOccurs="0"/>
 		</sequence>
 	</complexType>
 	<complexType name="IllustratieReferentiePropertyType">
@@ -1917,8 +1948,8 @@
 	<element name="BeleidInfo_GSV" type="imro:BeleidInfo_GSVType"/>
 	<complexType name="BeleidInfo_GSVType">
 		<sequence>
-			<element name="belang" type="string" minOccurs="0"/>
-			<element name="rol" type="string" minOccurs="0"/>
+			<element name="belang" type="imro:NotEmptyString" minOccurs="0"/>
+			<element name="rol" type="imro:NotEmptyString" minOccurs="0"/>
 			<element name="instrument" type="imro:Instrument_GSVType" minOccurs="0"/>
 		</sequence>
 	</complexType>
@@ -1988,7 +2019,7 @@
 	<element name="TekstReferentie_SV" type="imro:TekstReferentie_SVType"/>
 	<complexType name="TekstReferentie_SVType">
 		<sequence>
-			<element name="verwijzingNaarTekst" type="string"/>
+			<element name="verwijzingNaarTekst" type="imro:NotEmptyString"/>
 			<element name="typeTekst" type="imro:Teksttype_SVType"/>
 		</sequence>
 	</complexType>
@@ -2021,8 +2052,8 @@
 	<element name="BeleidInfo_PSV" type="imro:BeleidInfo_PSVType"/>
 	<complexType name="BeleidInfo_PSVType">
 		<sequence>
-			<element name="belang" type="string"/>
-			<element name="rol" type="string"/>
+			<element name="belang" type="imro:NotEmptyString"/>
+			<element name="rol" type="imro:NotEmptyString"/>
 			<element name="instrument" type="imro:Instrument_PSVType" minOccurs="0"/>
 		</sequence>
 	</complexType>
@@ -2071,8 +2102,8 @@
 	<element name="BeleidInfo_RSV" type="imro:BeleidInfo_RSVType"/>
 	<complexType name="BeleidInfo_RSVType">
 		<sequence>
-			<element name="belang" type="string"/>
-			<element name="rol" type="string"/>
+			<element name="belang" type="imro:NotEmptyString"/>
+			<element name="rol" type="imro:NotEmptyString"/>
 			<element name="instrument" type="imro:Instrument_RSVType" minOccurs="0"/>
 		</sequence>
 	</complexType>
@@ -2224,7 +2255,7 @@
 	<element name="IllustratieReferentiePG" type="imro:IllustratieReferentiePGType"/>
 	<complexType name="IllustratieReferentiePGType">
 		<sequence>
-			<element name="verwijzingNaarIllustratie" type="string"/>
+			<element name="verwijzingNaarIllustratie" type="imro:NotEmptyString"/>
 			<element name="typeIllustratie" type="imro:IllustratieType"/>
 		</sequence>
 	</complexType>
@@ -2348,7 +2379,7 @@
 			<enumeration value="markt"/>
 			<enumeration value="meer"/>
 			<enumeration value="militaire zaken"/>
-			<enumeration value="militairoefenterrein"/>
+			<enumeration value="militair oefenterrein"/>
 			<enumeration value="modelvliegtuigbaan"/>
 			<enumeration value="monumentale boom"/>
 			<enumeration value="motorcrossterrein"/>
@@ -2569,7 +2600,7 @@
 			<enumeration value="markt uitgesloten"/>
 			<enumeration value="meer uitgesloten"/>
 			<enumeration value="militaire zaken uitgesloten"/>
-			<enumeration value="militairoefenterrein uitgesloten"/>
+			<enumeration value="militair oefenterrein uitgesloten"/>
 			<enumeration value="modelvliegtuigbaan uitgesloten"/>
 			<enumeration value="monumentale boom uitgesloten"/>
 			<enumeration value="motorcrossterrein uitgesloten"/>
@@ -2684,9 +2715,9 @@
 	</simpleType>
 	<simpleType name="FunctieaanduidingenOtherType">
 		<restriction base="string">
-			<pattern value="bedrijf ten hoogste tot en met categorie .*"/>
+			<pattern value="bedrijf tot en met categorie .*"/>
 			<pattern value="bedrijf van categorie .*"/>
-			<pattern value="horeca ten hoogste tot en met horecacategorie .*"/>
+			<pattern value="horeca tot en met horecacategorie .*"/>
 			<pattern value="horeca van categorie .*"/>
 			<pattern value="specifieke vorm van agrarisch - .*"/>
 			<pattern value="specifieke vorm van agrarisch met waarden - .*"/>
@@ -2713,9 +2744,9 @@
 			<pattern value="specifieke vorm van waterstaat - .*"/>
 			<pattern value="specifieke vorm van wonen - .*"/>
 			<pattern value="specifieke vorm van woongebied - .*"/>
-			<pattern value="bedrijf ten hoogste tot en met categorie .* uitgesloten"/>
+			<pattern value="bedrijf tot en met categorie .* uitgesloten"/>
 			<pattern value="bedrijf van categorie .* uitgesloten"/>
-			<pattern value="horeca ten hoogste tot en met horecacategorie .* uitgesloten"/>
+			<pattern value="horeca tot en met horecacategorie .* uitgesloten"/>
 			<pattern value="horeca van categorie .* uitgesloten"/>
 			<pattern value="specifieke vorm van agrarisch uitgesloten - .*"/>
 			<pattern value="specifieke vorm van agrarisch met waarden uitgesloten - .*"/>
@@ -2753,7 +2784,7 @@
 			<enumeration value="geluidzone - industrie"/>
 			<enumeration value="geluidzone - spoor"/>
 			<enumeration value="geluidzone - weg"/>
-			<enumeration value="luchtvaartzone"/>
+			<enumeration value="luchtvaartverkeerzone"/>
 			<enumeration value="milieuzone"/>
 			<enumeration value="milieuzone - bodembeschermingsgebied"/>
 			<enumeration value="milieuzone - geluidsgevoelige functie"/>
@@ -2762,12 +2793,11 @@
 			<enumeration value="milieuzone - stiltegebied"/>
 			<enumeration value="milieuzone - waterwingebied"/>
 			<enumeration value="milieuzone - zones Wet milieubeheer"/>
-			<enumeration value="overig"/>
 			<enumeration value="reconstructiewetzone"/>
 			<enumeration value="reconstructiewetzone - extensiveringsgebied"/>
 			<enumeration value="reconstructiewetzone - landbouwontwikkelingsgebied"/>
 			<enumeration value="reconstructiewetzone - verwevingsgebied"/>
-			<enumeration value="veligheidszone"/>
+			<enumeration value="veiligheidszone"/>
 			<enumeration value="veiligheidszone - bevi"/>
 			<enumeration value="veiligheidszone - leiding"/>
 			<enumeration value="veiligheidszone - lpg"/>
@@ -2794,6 +2824,46 @@
 	</simpleType>
 	<simpleType name="GebiedsaanduidingenOtherType">
 		<restriction base="string">
+			<pattern value="geluidzone - .*"/>
+			<pattern value="geluidzone - industrie .*"/>
+			<pattern value="geluidzone - spoor .*"/>
+			<pattern value="geluidzone - weg .*"/>
+			<pattern value="luchtvaartverkeerzone - .*"/>
+			<pattern value="milieuzone - .*"/>
+			<pattern value="milieuzone - bodembeschermingsgebied .*"/>
+			<pattern value="milieuzone - geluidsgevoelige functie .*"/>
+			<pattern value="milieuzone - geurzone .*"/>
+			<pattern value="milieuzone - grondwaterbeschermingsgebied .*"/>
+			<pattern value="milieuzone - stiltegebied .*"/>
+			<pattern value="milieuzone - waterwingebied .*"/>
+			<pattern value="milieuzone - zones Wet milieubeheer ``.*"/>
+			<pattern value="reconstructiewetzone - .*"/>
+			<pattern value="reconstructiewetzone - extensiveringsgebied .*"/>
+			<pattern value="reconstructiewetzone - landbouwontwikkelingsgebied .*"/>
+			<pattern value="reconstructiewetzone - verwevingsgebied .*"/>
+			<pattern value="veiligheidszone - .*"/>
+			<pattern value="veiligheidszone - bevi .*"/>
+			<pattern value="veiligheidszone - leiding .*"/>
+			<pattern value="veiligheidszone - lpg .*"/>
+			<pattern value="veiligheidszone - munitie .*"/>
+			<pattern value="veiligheidszone - vervoer gevaarlijke stoffen .*"/>
+			<pattern value="veiligheidszone - vuurwerk .*"/>
+			<pattern value="veiligheidszone - windturbine .*"/>
+			<pattern value="vrijwaringszone - .*"/>
+			<pattern value="vrijwaringszone - buisleidingenstraat .*"/>
+			<pattern value="vrijwaringszone - dijk .*"/>
+			<pattern value="vrijwaringszone - duin .*"/>
+			<pattern value="vrijwaringszone - molenbiotoop .*"/>
+			<pattern value="vrijwaringszone - radar .*"/>
+			<pattern value="vrijwaringszone - spoor .*"/>
+			<pattern value="vrijwaringszone - straalpad .*"/>
+			<pattern value="vrijwaringszone - vaarweg .*"/>
+			<pattern value="vrijwaringszone - weg .*"/>
+			<pattern value="wro-zone - .*"/>
+			<pattern value="wro-zone - moderniseringsgebied .*"/>
+			<pattern value="wro-zone - ontheffingsgebied .*"/>
+			<pattern value="wro-zone - verwerkelijking in naaste toekomst .*"/>
+			<pattern value="wro-zone - wijzigingsgebied .*"/>
 			<pattern value="other: .*"/>
 		</restriction>
 	</simpleType>
@@ -2905,8 +2975,8 @@
 	<element name="ExternPlanReferentiePG_SV" type="imro:ExternPlanReferentiePG_SVType"/>
 	<complexType name="ExternPlanReferentiePG_SVType">
 		<sequence>
-			<element name="naamExternPlan" type="string"/>
-			<element name="idnExternPlan" type="string" minOccurs="0"/>
+			<element name="naamExternPlan" type="imro:NotEmptyString"/>
+			<element name="idnExternPlan" type="imro:NotEmptyString" minOccurs="0"/>
 			<element name="rolExternPlan" type="imro:RolExternPlanPG_SVType"/>
 		</sequence>
 	</complexType>
@@ -2918,7 +2988,7 @@
 	<element name="TekstReferentiePG_SV" type="imro:TekstReferentiePG_SVType"/>
 	<complexType name="TekstReferentiePG_SVType">
 		<sequence>
-			<element name="verwijzingNaarTekst" type="string"/>
+			<element name="verwijzingNaarTekst" type="imro:NotEmptyString"/>
 			<element name="typeTekst" type="imro:TeksttypePG_SVType"/>
 		</sequence>
 	</complexType>
@@ -2938,7 +3008,7 @@
 	<element name="TekstReferentiePG_BP" type="imro:TekstReferentiePG_BPType"/>
 	<complexType name="TekstReferentiePG_BPType">
 		<sequence>
-			<element name="verwijzingNaarTekst" type="string"/>
+			<element name="verwijzingNaarTekst" type="imro:NotEmptyString"/>
 			<element name="typeTekst" type="imro:TeksttypePG_BPType"/>
 		</sequence>
 	</complexType>
@@ -2950,7 +3020,7 @@
 	<element name="TekstReferentieV_PSV" type="imro:TekstReferentieV_PSVType"/>
 	<complexType name="TekstReferentieV_PSVType">
 		<sequence>
-			<element name="verwijzingNaarTekst" type="string"/>
+			<element name="verwijzingNaarTekst" type="imro:NotEmptyString"/>
 			<element name="typeTekst" type="imro:TeksttypeV_PSVType"/>
 		</sequence>
 	</complexType>
@@ -3067,6 +3137,27 @@
 			<pattern value=".*"/>
 			<pattern value="minimum .*"/>
 			<pattern value="maximum .*"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="GebiedsaanduidinggroepType">
+		<restriction base="string">
+			<enumeration value="geluidzone"/>
+			<enumeration value="luchtvaartverkeerzone"/>
+			<enumeration value="milieuzone"/>
+			<enumeration value="reconstructiewetzone"/>
+			<enumeration value="veiligheidszone"/>
+			<enumeration value="vrijwaringszone"/>
+			<enumeration value="wro-zone"/>
+			<enumeration value="overig"/>
+		</restriction>
+	</simpleType>
+	<!-- datatype NotEmptyString om gebruik lege stringwaarden te voorkomen -->
+	<simpleType name="NotEmptyString">
+		<restriction base="string">
+			<pattern value="[^ \t]{1}.*"/>
+			<!-- string is niet leeg -->
+			<!-- string begint niet met een spatie -->
+			<!-- string begint niet met een tab -->
 		</restriction>
 	</simpleType>
 </schema>
