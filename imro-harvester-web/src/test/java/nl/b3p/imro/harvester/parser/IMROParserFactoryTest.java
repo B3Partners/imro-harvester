@@ -28,21 +28,38 @@ public class IMROParserFactoryTest {
     IMROParserFactory instance = null;
 
     public IMROParserFactoryTest() throws JAXBException {
-        instance =new IMROParserFactory();
+        instance = new IMROParserFactory();
     }
 
     /**
      * Test of getParser method, of class IMROParserFactory.
      */
     @Test
-    public void testGetParser2012() throws Exception {
+    public void testGetParserGML2012V1() throws Exception {
         System.out.println("testGetParser2012");
         final URL inputXmlFullPath = this.getClass().getResource("2012.gml");
         Geleideformulier geleideformulier = Mockito.mock(Geleideformulier.class);
 
-        Mockito.when(geleideformulier.getGML()).thenAnswer(new Answer(){
+        Mockito.when(geleideformulier.getGML()).thenAnswer(new Answer() {
             @Override
-            public URL answer(InvocationOnMock invocation){
+            public URL answer(InvocationOnMock invocation) {
+                return inputXmlFullPath;
+            }
+        });
+
+        IMROParser result = instance.getParser(geleideformulier);
+        assertEquals(IMROParser2012.class, result.getClass());
+    }
+
+ //  @Test
+    public void testGetParserGML2012V2() throws Exception {
+        System.out.println("testGetParser2012");
+        final URL inputXmlFullPath = this.getClass().getResource("2012.gml");
+        Geleideformulier geleideformulier = Mockito.mock(Geleideformulier.class);
+
+        Mockito.when(geleideformulier.getGML()).thenAnswer(new Answer() {
+            @Override
+            public URL answer(InvocationOnMock invocation) {
                 return inputXmlFullPath;
             }
         });
@@ -52,35 +69,16 @@ public class IMROParserFactoryTest {
     }
 
     @Test
-    public void testGetParser2008() throws Exception {
-        System.out.println("testGetParser2008");
-        final URL inputXmlFullPath = this.getClass().getResource("2008.gml");
-        Geleideformulier geleideformulier = Mockito.mock(Geleideformulier.class);
-
-        Mockito.when(geleideformulier.getGML()).thenAnswer(new Answer(){
-            @Override
-            public URL answer(InvocationOnMock invocation){
-                return inputXmlFullPath;
-            }
-        });
-
-        IMROParser result = instance.getParser(geleideformulier);
-        assertEquals(IMROParser2008.class, result.getClass());
-    }
-
-    /**
-     * Test of getROType method, of class IMROParserFactory.
-     */
-    @Test
-    public void testGetROType2008() throws Exception {
-        System.out.println("testGetROType2008");
-        URL inputXmlFullPath = this.getClass().getResource("2008.gml");
+    public void testGetROTypeGML2012V1() throws Exception {
+        System.out.println("testGetROType2012");
+        URL inputXmlFullPath = this.getClass().getResource("2012.gml");
         ROType result = IMROParserFactory.getROType(inputXmlFullPath);
-        assertEquals(ROType.IMRO2008, result);
+        assertEquals(ROType.IMRO2012, result);
     }
 
-    @Test
-    public void testGetROType2012() throws Exception {
+
+    //@Test
+    public void testGetROTypeGML2012V2() throws Exception {
         System.out.println("testGetROType2012");
         URL inputXmlFullPath = this.getClass().getResource("2012.gml");
         ROType result = IMROParserFactory.getROType(inputXmlFullPath);
@@ -91,45 +89,114 @@ public class IMROParserFactoryTest {
      * Test of getSTRIParser method, of class IMROParserFactory.
      */
     @Test
-    public void testGetSTRIParser2012() throws Exception {
+    public void testGetSTRIParserManifest2012V1() throws Exception {
         System.out.println("testGetSTRIParser2012");
         URL u = this.getClass().getResource("manifest2012.xml");
         STRIParser result = instance.getSTRIParser(u);
         assertEquals(STRIParser2012.class, result.getClass());
     }
-    /**
-     * Test of getSTRIParser method, of class IMROParserFactory.
-     */
-    @Test
-    public void testGetSTRIParser2008() throws Exception {
-        System.out.println("testGetSTRIParser2008");
-        URL u = this.getClass().getResource("manifest2008.xml");
-        STRIParser result = instance.getSTRIParser(u);
-        assertEquals(STRIParser2008.class, result.getClass());
-    }
-
 
     /**
      * Test of getROType method, of class IMROParserFactory.
      */
     @Test
-    public void testGetROTypeSTRI2012() throws Exception {
+    public void testGetROTypeSTRIManifest2012V1() throws Exception {
         System.out.println("getROType");
         URL u = this.getClass().getResource("manifest2012.xml");
         ROType result = IMROParserFactory.getROType(u);
         assertEquals(ROType.STRI2012, result);
         // TODO review the generated test code and remove the default call to fail.
     }
+
     /**
      * Test of getROType method, of class IMROParserFactory.
      */
     @Test
-    public void testGetROTypeSTRI2008() throws Exception {
+    public void testGetROTypeSTRIManifest2012V2() throws Exception {
+        System.out.println("testGetROTypeSTRI2012V2");
+        URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
+        ROType result = IMROParserFactory.getROType(u);
+        assertEquals(ROType.STRI2012, result);
+    }
+
+    /**
+     * Test of getROType method, of class IMROParserFactory.
+     */
+    @Test
+    public void testGetROTypeManifestSTRI2012V1() throws Exception {
+        System.out.println("testGetROTypeManifestSTRI2012");
+        URL u = this.getClass().getResource("manifest2012.xml");
+        ROType result = IMROParserFactory.getROType(u);
+        assertEquals(ROType.STRI2012, result);
+    }
+
+
+    /**
+     * Test of getROType method, of class IMROParserFactory.
+     */
+    @Test
+    public void testGetROTypeManifestSTRI2012V2() throws Exception {
+        System.out.println("testGetROTypeManifestSTRI2012");
+        URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
+        ROType result = IMROParserFactory.getROType(u);
+        assertEquals(ROType.STRI2012, result);
+    }
+
+    @Test
+    public void testGetSTRIParserManifest2012V2() throws Exception {
+        System.out.println("testGetSTRIParser2012");
+        URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
+        STRIParser result = instance.getSTRIParser(u);
+        assertEquals(STRIParser2012.class, result.getClass());
+    }
+
+    /**
+     * Test of getROType method, of class IMROParserFactory.
+     */
+    @Test
+    public void testGetROTypeManifestSTRI2008() throws Exception {
         System.out.println("getROType");
         URL u = this.getClass().getResource("manifest2008.xml");
         ROType result = IMROParserFactory.getROType(u);
         assertEquals(ROType.STRI2008, result);
-        // TODO review the generated test code and remove the default call to fail.
     }
 
+    /**
+     * Test of getSTRIParser method, of class IMROParserFactory.
+     */
+    @Test
+    public void testGetSTRIParserManifest2008() throws Exception {
+        System.out.println("testGetSTRIParser2008");
+        URL u = this.getClass().getResource("manifest2008.xml");
+        STRIParser result = instance.getSTRIParser(u);
+        assertEquals(STRIParser2008.class, result.getClass());
+    }
+
+    /**
+     * Test of getROType method, of class IMROParserFactory.
+     */
+    @Test
+    public void testGetROTypeGML2008() throws Exception {
+        System.out.println("testGetROType2008");
+        URL inputXmlFullPath = this.getClass().getResource("2008.gml");
+        ROType result = IMROParserFactory.getROType(inputXmlFullPath);
+        assertEquals(ROType.IMRO2008, result);
+    }
+
+    @Test
+    public void testGetParserGML2008() throws Exception {
+        System.out.println("testGetParser2008");
+        final URL inputXmlFullPath = this.getClass().getResource("2008.gml");
+        Geleideformulier geleideformulier = Mockito.mock(Geleideformulier.class);
+
+        Mockito.when(geleideformulier.getGML()).thenAnswer(new Answer() {
+            @Override
+            public URL answer(InvocationOnMock invocation) {
+                return inputXmlFullPath;
+            }
+        });
+
+        IMROParser result = instance.getParser(geleideformulier);
+        assertEquals(IMROParser2008.class, result.getClass());
+    }
 }
