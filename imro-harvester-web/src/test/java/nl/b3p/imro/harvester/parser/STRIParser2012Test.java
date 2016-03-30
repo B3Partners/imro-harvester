@@ -53,18 +53,28 @@ public class STRIParser2012Test {
      * Test of retrieveGeleideformulieren method, of class STRIParser2012.
      */
     @Test
-    public void testRetrieveGeleideformulieren() throws Exception {
-        System.out.println("retrieveGeleideformulieren");
+    public void testRetrieveGeleideformulierV1() throws Exception {
+        System.out.println("testRetrieveGeleideformulierV1");
 
         URL u = this.getClass().getResource("geleideformulier2012.xml");
         List<URL> geleideformulieren = Collections.singletonList(u);
         List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren);
         assertEquals(1, result.size());
+        Geleideformulier form = result.get(0);
+        URL expResult = new URL("http://files.b3p.nl/imroharvester/1.txt");
+        assertEquals(expResult, form.getGML());
+        assertEquals(16, form.getBijlages().size());
+        assertEquals("Buitengebied Parapluplan Nieuwe Hollandse Waterlinie", form.getNaam());
+        assertEquals("bestemmingsplan", form.getType());
+        assertEquals("ontwerp", form.getStatus());
+        assertEquals("2015-05-19",form.getDatum());
+        assertEquals("IMRO2012",form.getVersie());
+        assertEquals("NL.IMRO.0297.BGBBP20140020-OW01",form.getIdentificatie());
         // TODO review the generated test code and remove the default call to fail.
     }
 
     @Test
-    public void testParseGeleideformulieren() throws MalformedURLException, JAXBException {
+    public void testParseGeleideformulierV2() throws MalformedURLException, JAXBException {
         URL expResult = new URL("http://www.rijksplannen.nl/NL.IMRO.0000.AD16081970/V037/NL.IMRO.0000.AD16081970-V037.gml");
         URL u = this.getClass().getResource("v2.0_STRI2012-geleideformulier-voorbeeld.xml");
         List<Geleideformulier> result = instance.retrieveGeleideformulieren(Collections.singletonList(u));
