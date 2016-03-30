@@ -10,10 +10,8 @@ package nl.b3p.imro.harvester.processing;
  * @author Erik van de Pol
  */
 public enum ROType {
-    STRI2006("STRI2006"),
     STRI2008("STRI2008"),
     IMRO2008("IMRO2008"),
-    IMROPCP2008("IMROPCP2008"),
     STRI2012("STRI2012"),
     IMRO2012("IMRO2012");
 

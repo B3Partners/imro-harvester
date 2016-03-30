@@ -78,12 +78,58 @@ public class IMROParserFactoryTest {
         ROType result = IMROParserFactory.getROType(inputXmlFullPath);
         assertEquals(ROType.IMRO2008, result);
     }
+
     @Test
     public void testGetROType2012() throws Exception {
         System.out.println("testGetROType2012");
         URL inputXmlFullPath = this.getClass().getResource("2012.gml");
         ROType result = IMROParserFactory.getROType(inputXmlFullPath);
         assertEquals(ROType.IMRO2012, result);
+    }
+
+    /**
+     * Test of getSTRIParser method, of class IMROParserFactory.
+     */
+    @Test
+    public void testGetSTRIParser2012() throws Exception {
+        System.out.println("testGetSTRIParser2012");
+        URL u = this.getClass().getResource("manifest2012.xml");
+        STRIParser result = instance.getSTRIParser(u);
+        assertEquals(STRIParser2012.class, result.getClass());
+    }
+    /**
+     * Test of getSTRIParser method, of class IMROParserFactory.
+     */
+    @Test
+    public void testGetSTRIParser2008() throws Exception {
+        System.out.println("testGetSTRIParser2008");
+        URL u = this.getClass().getResource("manifest2008.xml");
+        STRIParser result = instance.getSTRIParser(u);
+        assertEquals(STRIParser2008.class, result.getClass());
+    }
+
+
+    /**
+     * Test of getROType method, of class IMROParserFactory.
+     */
+    @Test
+    public void testGetROTypeSTRI2012() throws Exception {
+        System.out.println("getROType");
+        URL u = this.getClass().getResource("manifest2012.xml");
+        ROType result = IMROParserFactory.getROType(u);
+        assertEquals(ROType.STRI2012, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+    /**
+     * Test of getROType method, of class IMROParserFactory.
+     */
+    @Test
+    public void testGetROTypeSTRI2008() throws Exception {
+        System.out.println("getROType");
+        URL u = this.getClass().getResource("manifest2008.xml");
+        ROType result = IMROParserFactory.getROType(u);
+        assertEquals(ROType.STRI2008, result);
+        // TODO review the generated test code and remove the default call to fail.
     }
 
 }
