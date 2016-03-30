@@ -74,7 +74,7 @@ public class Processor {
         EntityManager em = Stripersist.getEntityManager();
         for (HarvestJob job : jobs) {
             try {
-                URL manifestUrl = getManifest(job);
+                URL manifestUrl = Processor.this.getManifestURL(job);
                 List<URL> geleideformulierenURLS = getGeleideformulierURLSFromManifest(manifestUrl);
 
                 try {
@@ -127,22 +127,22 @@ public class Processor {
     }
 
     // <editor-fold desc="Manifest ophaalmethods" defaultstate="Collapsed">
-    protected URL getManifest(HarvestJob job) throws IOException {
+    protected URL getManifestURL(HarvestJob job) throws IOException {
         if (job.getType() == null || job.getType() == HarvestJob.HarvestJobType.DIRECT) {
             return new URL(job.getUrl());
         } else {
             URL u = new URL(job.getUrl());
             Document doc = Jsoup.parse(u, timeout);
-            return getManifest(doc);
+            return getManifestFromHTMLDocument(doc);
         }
     }
 
-    protected URL getManifest(File f) throws IOException {
+    protected URL getManifestURL(File f) throws IOException {
         Document doc = Jsoup.parse(f, "UTF-8");
-        return getManifest(doc);
+        return getManifestFromHTMLDocument(doc);
     }
 
-    private URL getManifest(Document doc) throws MalformedURLException {
+    private URL getManifestFromHTMLDocument(Document doc) throws MalformedURLException {
         Elements els = doc.select("a.external");
         Element link = els.first();
         String url = link.attr("href");

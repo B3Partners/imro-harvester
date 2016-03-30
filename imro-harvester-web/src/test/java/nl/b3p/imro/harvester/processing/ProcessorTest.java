@@ -65,13 +65,13 @@ public class ProcessorTest {
     }
 
     /*
-     * Test of getManifest method, of class Processor.
+     * Test of getManifestURL method, of class Processor.
      */
     @Test
     public void testGetManifestUrl() {
         try {
             URL expResult = new URL("http://files.b3p.nl/imroharvester/manifest.xml");
-            URL result = instance.getManifest(job);
+            URL result = instance.getManifestURL(job);
             assertEquals(expResult, result);
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
