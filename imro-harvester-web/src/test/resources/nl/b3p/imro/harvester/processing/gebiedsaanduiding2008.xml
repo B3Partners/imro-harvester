@@ -1,0 +1,28 @@
+      <imro:Gebiedsaanduiding gml:id="NL.IMRO.289" xmlns:imro="http://www.geonovum.nl/imro/2008/1" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.geonovum.nl/imro/2008/1 http://schemas.geonovum.nl/imro/2008/1.1/IMRO2008.xsd">
+         <imro:identificatie>NL.IMRO.289</imro:identificatie>
+         <imro:typePlanobject>gebiedsaanduiding</imro:typePlanobject>
+         <imro:plangebied xlink:href="#NL.IMRO.1680.1800030105-0000" />
+         <imro:bestemmingsvlak xlink:href="#NL.IMRO.98" />
+         <imro:naam>other: wijzigingsbevoegheid overeenkomstig artikel 27 lid b</imro:naam>
+         <imro:gebiedsaanduidinggroep>overig</imro:gebiedsaanduidinggroep>
+         <imro:artikelnummer>27</imro:artikelnummer>
+         <imro:verwijzingNaarTekstInfo>
+            <imro:TekstReferentie_BP>
+               <imro:verwijzingNaarTekst>r_NL.IMRO.1680.1800030105-0000_otherwijz..kel27lidb.htm</imro:verwijzingNaarTekst>
+               <imro:typeTekst>regels</imro:typeTekst>
+            </imro:TekstReferentie_BP>
+         </imro:verwijzingNaarTekstInfo>
+         <imro:geometrie>
+            <gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
+               <gml:patches>
+                  <gml:PolygonPatch>
+                     <gml:exterior>
+                        <gml:LinearRing>
+                           <gml:posList>252232.941 561231.346 252237.109 561233.811 252180.977 561327.627 251923.725 561168.789 251929.155 561155.697 251991.584 561194.241 252058.553 561235.588 252103.163 561154.567 252124.862 561167.404 252187.865 561204.678 252158.612 561254.125 252123.079 561233.103 252111.748 561252.257 252146.873 561273.967 252140.159 561285.317 252184.246 561312.566 252232.941 561231.346</gml:posList>
+                        </gml:LinearRing>
+                     </gml:exterior>
+                  </gml:PolygonPatch>
+               </gml:patches>
+            </gml:Surface>
+         </imro:geometrie>
+      </imro:Gebiedsaanduiding>

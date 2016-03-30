@@ -21,9 +21,11 @@ import org.jdom2.input.SAXBuilder;
 public class IMROParserFactory {
 
     private IMROParser2012 imro2012;
+    private IMROParser2008 imro2008;
 
     public IMROParserFactory() throws JAXBException {
         imro2012 = new IMROParser2012();
+        imro2008 = new IMROParser2008();
 
     }
     /*protected final static String STRI2008_JAXB_ELEMENTS_PACKAGE = "nl.b3p.jaxb.stri2008:nl.b3p.jaxb.xmldsig";
@@ -49,7 +51,7 @@ public class IMROParserFactory {
 
         ROType type = getROType(geleideformulier.getGML());
         if (type.equals(ROType.IMRO2008)) {
-            throw new IllegalArgumentException("IMRO2008 parser not yet implented");
+            return imro2008;
         } else if (type.equals(ROType.IMRO2012)) {
             return imro2012;
         } else {

@@ -1,0 +1,39 @@
+      <imro:Functieaanduiding gml:id="NL.IMRO.297" xmlns:imro="http://www.geonovum.nl/imro/2008/1" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.geonovum.nl/imro/2008/1 http://schemas.geonovum.nl/imro/2008/1.1/IMRO2008.xsd">
+         <imro:identificatie>NL.IMRO.297</imro:identificatie>
+         <imro:typePlanobject>functieaanduiding</imro:typePlanobject>
+         <imro:plangebied xlink:href="#NL.IMRO.1680.1800030105-0000" />
+         <imro:bestemmingsvlak xlink:href="#NL.IMRO.176" />
+         <imro:naam>specifieke vorm van bedrijf - landbouwmechanisatiebedrijf</imro:naam>
+         <imro:labelInfo>
+            <imro:Label>
+               <imro:tekst>(lm)</imro:tekst>
+               <imro:positie>
+                  <imro:Labelpositie>
+                     <imro:plaatsingspunt>
+                        <gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
+                           <gml:pos>252409.397 561428.888</gml:pos>
+                        </gml:Point>
+                     </imro:plaatsingspunt>
+                  </imro:Labelpositie>
+               </imro:positie>
+            </imro:Label>
+         </imro:labelInfo>
+         <imro:geometrie>
+            <gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
+               <gml:patches>
+                  <gml:PolygonPatch>
+                     <gml:exterior>
+                        <gml:LinearRing>
+                           <gml:posList>252448.792 561465.13 252387.232 561428.992 252368.365 561417.762 252350.115 561406.615 252355.944 561395.741 252360.869 561387.354 252401.346 561412.241 252459.34 561447.86 252448.792 561465.13</gml:posList>
+                        </gml:LinearRing>
+                     </gml:exterior>
+                     <gml:interior>
+                        <gml:LinearRing>
+                           <gml:posList>252369.16 561415.02 252358.87 561409.25 252362.65 561402.27 252372.99 561408.02 252369.16 561415.02</gml:posList>
+                        </gml:LinearRing>
+                     </gml:interior>
+                  </gml:PolygonPatch>
+               </gml:patches>
+            </gml:Surface>
+         </imro:geometrie>
+      </imro:Functieaanduiding>

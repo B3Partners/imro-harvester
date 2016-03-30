@@ -1,0 +1,43 @@
+      <imro:Bestemmingsplangebied gml:id="NL.IMRO.1680.1800030105-0000" xmlns:imro="http://www.geonovum.nl/imro/2008/1" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.geonovum.nl/imro/2008/1 http://schemas.geonovum.nl/imro/2008/1.1/IMRO2008.xsd">
+         <imro:identificatie>NL.IMRO.1680.1800030105-0000</imro:identificatie>
+         <imro:typePlan>bestemmingsplan</imro:typePlan>
+         <imro:beleidsmatigVerantwoordelijkeOverheid>gemeentelijke overheid</imro:beleidsmatigVerantwoordelijkeOverheid>
+         <imro:naamOverheid>Gemeente Aa en Hunze</imro:naamOverheid>
+         <imro:overheidsCode>1680</imro:overheidsCode>
+         <imro:naam>Gieterveen</imro:naam>
+         <imro:locatieNaam>Dorp</imro:locatieNaam>
+         <imro:planstatusInfo>
+            <imro:PlanstatusEnDatum_BP>
+               <imro:planstatus>concept</imro:planstatus>
+               <imro:datum>2009-07-07</imro:datum>
+            </imro:PlanstatusEnDatum_BP>
+         </imro:planstatusInfo>
+         <imro:verwijzingNaarTekstInfo>
+            <imro:TekstReferentiePG_BP>
+               <imro:verwijzingNaarTekst>r_NL.IMRO.1680.1800030105-0000.htm</imro:verwijzingNaarTekst>
+               <imro:typeTekst>regels</imro:typeTekst>
+            </imro:TekstReferentiePG_BP>
+         </imro:verwijzingNaarTekstInfo>
+         <imro:verwijzingNaarTekstInfo>
+            <imro:TekstReferentiePG_BP>
+               <imro:verwijzingNaarTekst>t_NL.IMRO.1680.1800030105-0000.htm</imro:verwijzingNaarTekst>
+               <imro:typeTekst>toelichting</imro:typeTekst>
+            </imro:TekstReferentiePG_BP>
+         </imro:verwijzingNaarTekstInfo>
+         <imro:ondergrond>o_NL.IMRO.1680.1800030105-0000_GBKN versie april 2008</imro:ondergrond>
+         <imro:verwijzingNorm>IMRO2008</imro:verwijzingNorm>
+         <imro:verwijzingNorm>PRBP2008</imro:verwijzingNorm>
+         <imro:geometrie>
+            <gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
+               <gml:patches>
+                  <gml:PolygonPatch>
+                     <gml:exterior>
+                        <gml:LinearRing>
+                           <gml:posList>251842.151 560971.892 251842.818 560970.025 251853.361 560931.431 251865.118 560889.547 251872.053 560862.283 251876.918 560844.747 251879.824 560834.095 251890.652 560798.293 251893.863 560790.058 251894.526 560788.358 251899.331 560778.853 251903.859 560771.283 251910.094 560761.92 251919.436 560750.57 251927.769 560741.911 251935.295 560735.744 251942.915 560730.678 251953.636 560725.321 251964.353 560721.361 251977.468 560717.908 251988.279 560715.646 251998.887 560713.984 252003.131 560713.52 252004.954 560696.917 252017.064 560588.14 252019.065 560552.329 252034.571 560552.594 252073.278 560552.522 252090.377 560551.996 252156.508 560552.085 252174.834 560552.211 252257.53 560552.526 252371.983 560552.632 252392.256 560552.682 252399.69 560552.7 252405.66 560631.97 252405.54 560647.36 252401.01 560691.02 252397.61 560729.2 252389.825 560756.904 252420.076 560766.62 252429.974 560771.215 252440.274 560776.708 252446.523 560780.959 252457.975 560789.695 252460.575 560792.192 252464.977 560797.789 252469.178 560802.585 252474.88 560811.179 252479.883 560819.274 252486.288 560831.467 252488.09 560836.665 252489.291 560840.763 252490.694 560844.76 252497.308 560874.649 252503.518 560898.938 252507.223 560909.733 252511.526 560919.728 252514.728 560925.124 252517.13 560929.922 252517.625 560930.63 252518.529 560931.92 252522.432 560938.716 252527.323 560946.043 252528.935 560948.61 252535.537 560957.904 252538.187 560961.019 252543.439 560966.598 252546.438 560969.395 252549.238 560971.594 252553.638 560974.591 252560.739 560978.386 252568.337 560982.181 252578.737 560987.775 252604.535 561001.06 252632.955 561013.861 252637.789 561016.001 252652.909 561021.189 252664.348 561024.339 252676.961 561025.862 252665.965 561055.323 252666.859 561055.687 252714.26 561074.99 252755.62 561091.87 252770.781 561098.058 252782.55 561090.55 252790.09 561087.04 252799.36 561083.91 252824.15 561078.24 252857.97 561071.96 252884.45 561067.65 252903.92 561065.34 252730.372 561277.248 252731.453 561277.851 252721.569 561289.886 252694.642 561323.36 252632.415 561401.687 252597.6 561444.788 252593.463 561449.916 252576.76 561470.623 252553.837 561501.21 252533.07 561529.27 252525.362 561539.113 252504.833 561563.252 252495.088 561573.953 252412.966 561524.384 252315.504 561465.73 252337.83 561424.776 252330.409 561419.929 252186.595 561331.096 251858.516 561128.527 251848.258 561122.194 251853.957 561100.997 251873.689 561019.355 251878.927 560990.304 251869.903 560986.038 251842.151 560971.892</gml:posList>
+                        </gml:LinearRing>
+                     </gml:exterior>
+                  </gml:PolygonPatch>
+               </gml:patches>
+            </gml:Surface>
+         </imro:geometrie>
+      </imro:Bestemmingsplangebied>

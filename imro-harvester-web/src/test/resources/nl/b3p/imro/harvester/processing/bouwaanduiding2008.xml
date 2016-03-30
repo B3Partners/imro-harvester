@@ -1,0 +1,34 @@
+      <imro:Bouwaanduiding gml:id="NL.IMRO.270" xmlns:imro="http://www.geonovum.nl/imro/2008/1" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.geonovum.nl/imro/2008/1 http://schemas.geonovum.nl/imro/2008/1.1/IMRO2008.xsd">
+         <imro:identificatie>NL.IMRO.270</imro:identificatie>
+         <imro:typePlanobject>bouwaanduiding</imro:typePlanobject>
+         <imro:plangebied xlink:href="#NL.IMRO.1680.1800030105-0000" />
+         <imro:naam>karakteristiek</imro:naam>
+         <imro:labelInfo>
+            <imro:Label>
+               <imro:tekst>(k)</imro:tekst>
+               <imro:positie>
+                  <imro:Labelpositie>
+                     <imro:plaatsingspunt>
+                        <gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
+                           <gml:pos>252635.46 561102.325</gml:pos>
+                        </gml:Point>
+                     </imro:plaatsingspunt>
+                  </imro:Labelpositie>
+               </imro:positie>
+            </imro:Label>
+         </imro:labelInfo>
+         <imro:geometrie>
+            <gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
+               <gml:patches>
+                  <gml:PolygonPatch>
+                     <gml:exterior>
+                        <gml:LinearRing>
+                           <gml:posList>252645.98 561096.95 252640.79 561107.43 252639.65 561106.83 252636.77 561112.32 252629.44 561108.72 252630.31 561106.89 252629.14 561106.28 252636.47 561092.04 252645.98 561096.95</gml:posList>
+                        </gml:LinearRing>
+                     </gml:exterior>
+                  </gml:PolygonPatch>
+               </gml:patches>
+            </gml:Surface>
+         </imro:geometrie>
+         <imro:aanduiding xlink:href="#NL.IMRO.80" />
+      </imro:Bouwaanduiding>

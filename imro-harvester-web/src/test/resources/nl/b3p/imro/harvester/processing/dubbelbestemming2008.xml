@@ -1,0 +1,75 @@
+      <imro:Dubbelbestemming gml:id="NL.IMRO.258" xmlns:imro="http://www.geonovum.nl/imro/2008/1" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.geonovum.nl/imro/2008/1 http://schemas.geonovum.nl/imro/2008/1.1/IMRO2008.xsd">
+         <imro:identificatie>NL.IMRO.258</imro:identificatie>
+         <imro:typePlanobject>dubbelbestemming</imro:typePlanobject>
+         <imro:naam>Archeologisch waardevol gebied</imro:naam>
+         <imro:bestemmingshoofdgroep>leiding</imro:bestemmingshoofdgroep>
+         <imro:artikelnummer>21</imro:artikelnummer>
+         <imro:verwijzingNaarTekstInfo>
+            <imro:TekstReferentie_BP>
+               <imro:verwijzingNaarTekst>r_NL.IMRO.1680.1800030105-0000_archeolog..volgebied.htm</imro:verwijzingNaarTekst>
+               <imro:typeTekst>regels</imro:typeTekst>
+            </imro:TekstReferentie_BP>
+         </imro:verwijzingNaarTekstInfo>
+         <imro:labelInfo>
+            <imro:Label>
+               <imro:tekst>L</imro:tekst>
+               <imro:positie>
+                  <imro:Labelpositie>
+                     <imro:plaatsingspunt>
+                        <gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
+                           <gml:pos>252160.875 560822.666</gml:pos>
+                        </gml:Point>
+                     </imro:plaatsingspunt>
+                  </imro:Labelpositie>
+               </imro:positie>
+            </imro:Label>
+         </imro:labelInfo>
+         <imro:geometrie>
+            <gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
+               <gml:patches>
+                  <gml:PolygonPatch>
+                     <gml:exterior>
+                        <gml:LinearRing>
+                           <gml:posList>252004.954 560696.917 252017.064 560588.14 252019.065 560552.329 252034.571 560552.594 252073.278 560552.522 252090.377 560551.996 252156.508 560552.085 252166.877 560552.156 252164.126 560635.886 252162.042 560635.918 252159.588 560661.978 252157.498 560691.004 252169.668 560705.511 252148.593 560754.812 252197.285 560778.858 252220.58 560790.536 252261.574 560816.43 252268.467 560804.896 252285.771 560814.603 252283.6 560818.548 252355.245 560863.758 252376.194 560877.604 252368.249 560894.783 252435.42 560927.58 252446.25 560932.22 252444.841 560935.881 252497.78 560965.998 252547.871 561000.451 252520.496 561045.818 252519.68 561063.22 252503.238 561093.336 252449.835 561064.146 252443.812 561073.991 252436.287 561069.936 252434.961 561069.261 252432.096 561076.294 252369.757 561038.819 252387.15 561010.01 252360.56 560994.28 252330.51 560976.991 252324.342 560986.569 252289.82 560966.16 252244.754 560940.93 252235.45 560934.65 252124.055 560863.666 252116.92 560866.126 252103.436 560881.729 252086.623 560870.929 252049.77 560839.738 252026.415 560817.764 252025.856 560804.996 252031.853 560800.895 251998.659 560762.521 252003.131 560713.52 252004.954 560696.917</gml:posList>
+                        </gml:LinearRing>
+                     </gml:exterior>
+                     <gml:interior>
+                        <gml:Ring>
+                           <gml:curveMember>
+                              <gml:Curve>
+                                 <gml:segments>
+                                    <gml:Arc>
+                                       <gml:posList>252141.378 560822.93 252142.983 560825.116 252142.545 560827.792</gml:posList>
+                                    </gml:Arc>
+                                    <gml:LineStringSegment>
+                                       <gml:posList>252142.545 560827.792 252141.869 560828.87</gml:posList>
+                                    </gml:LineStringSegment>
+                                    <gml:Arc>
+                                       <gml:posList>252141.869 560828.87 252139.687 560830.422 252137.047 560829.977</gml:posList>
+                                    </gml:Arc>
+                                    <gml:LineStringSegment>
+                                       <gml:posList>252137.047 560829.977 252103.355 560808.882</gml:posList>
+                                    </gml:LineStringSegment>
+                                    <gml:Arc>
+                                       <gml:posList>252103.355 560808.882 252101.794 560806.669 252102.279 560804.005</gml:posList>
+                                    </gml:Arc>
+                                    <gml:LineStringSegment>
+                                       <gml:posList>252102.279 560804.005 252102.673 560803.401</gml:posList>
+                                    </gml:LineStringSegment>
+                                    <gml:Arc>
+                                       <gml:posList>252102.673 560803.401 252104.829 560801.899 252107.422 560802.32</gml:posList>
+                                    </gml:Arc>
+                                    <gml:LineStringSegment>
+                                       <gml:posList>252107.422 560802.32 252140.326 560822.3 252141.378 560822.93</gml:posList>
+                                    </gml:LineStringSegment>
+                                 </gml:segments>
+                              </gml:Curve>
+                           </gml:curveMember>
+                        </gml:Ring>
+                     </gml:interior>
+                  </gml:PolygonPatch>
+               </gml:patches>
+            </gml:Surface>
+         </imro:geometrie>
+         <imro:plangebied xlink:href="#NL.IMRO.1680.1800030105-0000" />
+      </imro:Dubbelbestemming>

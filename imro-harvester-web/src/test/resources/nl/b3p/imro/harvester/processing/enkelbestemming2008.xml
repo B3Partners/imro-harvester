@@ -1,0 +1,41 @@
+      <imro:Enkelbestemming gml:id="NL.IMRO.90" xmlns:imro="http://www.geonovum.nl/imro/2008/1" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.geonovum.nl/imro/2008/1 http://schemas.geonovum.nl/imro/2008/1.1/IMRO2008.xsd">
+         <imro:identificatie>NL.IMRO.90</imro:identificatie>
+         <imro:typePlanobject>enkelbestemming</imro:typePlanobject>
+         <imro:naam>Vogelpark</imro:naam>
+         <imro:bestemmingshoofdgroep>groen</imro:bestemmingshoofdgroep>
+         <imro:artikelnummer>17</imro:artikelnummer>
+         <imro:verwijzingNaarTekstInfo>
+            <imro:TekstReferentie_BP>
+               <imro:verwijzingNaarTekst>r_NL.IMRO.1680.1800030105-0000_vogelpark.htm</imro:verwijzingNaarTekst>
+               <imro:typeTekst>regels</imro:typeTekst>
+            </imro:TekstReferentie_BP>
+         </imro:verwijzingNaarTekstInfo>
+         <imro:labelInfo>
+            <imro:Label>
+               <imro:tekst>G</imro:tekst>
+               <imro:positie>
+                  <imro:Labelpositie>
+                     <imro:plaatsingspunt>
+                        <gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
+                           <gml:pos>252616.427 561255.064</gml:pos>
+                        </gml:Point>
+                     </imro:plaatsingspunt>
+                  </imro:Labelpositie>
+               </imro:positie>
+            </imro:Label>
+         </imro:labelInfo>
+         <imro:geometrie>
+            <gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
+               <gml:patches>
+                  <gml:PolygonPatch>
+                     <gml:exterior>
+                        <gml:LinearRing>
+                           <gml:posList>252448.793 561356.486 252484.468 561293.475 252468.512 561283.966 252482.849 561257.679 252497.291 561231.891 252521.521 561187.942 252531.772 561168.991 252509.6 561156.832 252516.605 561144.051 252511.31 561135.14 252496.6 561127.08 252509.52 561103.38 252530.75 561114.499 252572.97 561136.638 252572.907 561136.753 252670.11 561187.93 252676.26 561189.47 252682.66 561187.54 252699.03 561158.57 252702.54 561142.64 252711.57 561137.82 252725.186 561128.88 252770.781 561098.058 252782.55 561090.55 252790.09 561087.04 252799.36 561083.91 252824.15 561078.24 252857.97 561071.96 252884.45 561067.65 252903.92 561065.34 252730.372 561277.248 252731.453 561277.851 252721.569 561289.886 252694.642 561323.36 252632.415 561401.687 252597.6 561444.788 252493.248 561382.719 252448.793 561356.486</gml:posList>
+                        </gml:LinearRing>
+                     </gml:exterior>
+                  </gml:PolygonPatch>
+               </gml:patches>
+            </gml:Surface>
+         </imro:geometrie>
+         <imro:plangebied xlink:href="#NL.IMRO.1680.1800030105-0000" />
+      </imro:Enkelbestemming>

@@ -1,0 +1,20 @@
+ <imro:Bouwvlak gml:id="NL.IMRO.1" xmlns:imro="http://www.geonovum.nl/imro/2008/1" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.geonovum.nl/imro/2008/1 http://schemas.geonovum.nl/imro/2008/1.1/IMRO2008.xsd">
+         <imro:identificatie>NL.IMRO.1</imro:identificatie>
+         <imro:typePlanobject>bouwvlak</imro:typePlanobject>
+         <imro:plangebied xlink:href="#NL.IMRO.1680.1800030105-0000" />
+         <imro:bestemmingsvlak xlink:href="#NL.IMRO.108" />
+         <imro:naam>bouwvlak</imro:naam>
+         <imro:geometrie>
+            <gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
+               <gml:patches>
+                  <gml:PolygonPatch>
+                     <gml:exterior>
+                        <gml:LinearRing>
+                           <gml:posList>252409.449 561304.491 252503.55 561132.91 252510.43 561136.82 252508.809 561139.775 252515.035 561143.19 252422.728 561311.472 252426.48 561313.56 252418.269 561332.741 252404.479 561326.838 252413.202 561306.464 252409.449 561304.491</gml:posList>
+                        </gml:LinearRing>
+                     </gml:exterior>
+                  </gml:PolygonPatch>
+               </gml:patches>
+            </gml:Surface>
+         </imro:geometrie>
+      </imro:Bouwvlak>

@@ -1,0 +1,40 @@
+      <imro:Maatvoering gml:id="NL.IMRO.281" xmlns:imro="http://www.geonovum.nl/imro/2008/1" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.geonovum.nl/imro/2008/1 http://schemas.geonovum.nl/imro/2008/1.1/IMRO2008.xsd">
+         <imro:identificatie>NL.IMRO.281</imro:identificatie>
+         <imro:typePlanobject>maatvoering</imro:typePlanobject>
+         <imro:plangebied xlink:href="#NL.IMRO.1680.1800030105-0000" />
+         <imro:bestemmingsvlak xlink:href="#NL.IMRO.112" />
+         <imro:naam>maximum oppervlakte (m2)</imro:naam>
+         <imro:symboolInfo>
+            <imro:SymboolEnPositie>
+               <imro:symboolCode>s130s</imro:symboolCode>
+               <imro:positie>
+                  <imro:Labelpositie>
+                     <imro:plaatsingspunt>
+                        <gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
+                           <gml:pos>252574.164 561014.478</gml:pos>
+                        </gml:Point>
+                     </imro:plaatsingspunt>
+                  </imro:Labelpositie>
+               </imro:positie>
+            </imro:SymboolEnPositie>
+         </imro:symboolInfo>
+         <imro:maatvoeringInfo>
+            <imro:WaardeEnType>
+               <imro:waarde>370</imro:waarde>
+               <imro:waardeType>other: vrije tekst</imro:waardeType>
+            </imro:WaardeEnType>
+         </imro:maatvoeringInfo>
+         <imro:geometrie>
+            <gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
+               <gml:patches>
+                  <gml:PolygonPatch>
+                     <gml:exterior>
+                        <gml:LinearRing>
+                           <gml:posList>252557.2 561022.02 252577.17 560990.46 252594.29 561001.28 252574.3 561032.85 252557.2 561022.02</gml:posList>
+                        </gml:LinearRing>
+                     </gml:exterior>
+                  </gml:PolygonPatch>
+               </gml:patches>
+            </gml:Surface>
+         </imro:geometrie>
+      </imro:Maatvoering>
