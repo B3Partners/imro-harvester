@@ -25,37 +25,43 @@ public class IMROParserFactory {
     private IMROParser2008 imro2008;
 
     private STRIParser2012 stri2012;
+    private STRIParser2008 stri2008;
     
     public IMROParserFactory() throws JAXBException {
         imro2012 = new IMROParser2012();
         imro2008 = new IMROParser2008();
 
         stri2012 = new STRIParser2012();
+        stri2008 = new STRIParser2008();
     }
+
     /*protected final static String STRI2008_JAXB_ELEMENTS_PACKAGE = "nl.b3p.jaxb.stri2008:nl.b3p.jaxb.xmldsig";
-     // protected final static String STRI2008_XSD_PATH = "nl/b3p/jaxb/stri2008/xsd/STRI2008.xsd";
-     protected final static Element STRI2008_ROOTELEMENT1 = new Element("Manifest", Namespace.getNamespace("http://www.geonovum.nl/stri/2008/1"));
-     protected final static Element STRI2008_ROOTELEMENT2 = new Element("GeleideFormulier", Namespace.getNamespace("http://www.geonovum.nl/stri/2008/1"));
-     */
-    protected final static String IMRO2008_JAXB_ELEMENTS_PACKAGE = "nl.b3p.jaxb.imro2008:nl.b3p.jaxb.gml4nl:nl.b3p.jaxb.gml4nlLevels";
+     // protected final static String STRI2008_XSD_PATH = "nl/b3p/jaxb/stri2008/xsd/STRI2008.xsd";*/
+
+     protected final static Element STRI2008_ROOTELEMENT_MANIFEST = new Element("Manifest", Namespace.getNamespace("http://www.geonovum.nl/stri/2008/1"));
+     protected final static Element STRI2008_ROOTELEMENT_GELEIDEFORMULIER = new Element("GeleideFormulier", Namespace.getNamespace("http://www.geonovum.nl/stri/2008/1"));
+     
+    //protected final static String IMRO2008_JAXB_ELEMENTS_PACKAGE = "nl.b3p.jaxb.imro2008:nl.b3p.jaxb.gml4nl:nl.b3p.jaxb.gml4nlLevels";
     //  protected final static String IMRO2008_XSD_PATH = "nl/b3p/jaxb/imro2008/xsd/local-IMRO2008.xsd";
     protected final static Element IMRO2008_ROOTELEMENT = new Element("FeatureCollectionIMRO", Namespace.getNamespace("http://www.geonovum.nl/imro/2008/1"));
 
     protected final static String IMRO2012_JAXB_ELEMENTS_PACKAGE = "nl.b3p.imro._2012._1:nl.b3p.imro.gml4nl:nnl.b3p.imro.gml4nlLevels";
     //  protected final static String IMRO2008_XSD_PATH = "nl/b3p/jaxb/imro2008/xsd/local-IMRO2008.xsd";
     protected final static Element IMRO2012_ROOTELEMENT = new Element("FeatureCollectionIMRO", Namespace.getNamespace("http://www.geonovum.nl/imro/2012/1.1"));
-    /*
-     protected final static String STRI2012_JAXB_ELEMENTS_PACKAGE = "nl.b3p.jaxb.stri2012:nl.b3p.jaxb.xmldsig";
+    
+     //protected final static String STRI2012_JAXB_ELEMENTS_PACKAGE = "nl.geonovum.stri._2012._1:nl.b3p.jaxb.xmldsig";
      // protected final static String STRI2012_XSD_PATH = "nl/b3p/jaxb/stri2012/xsd/STRI2012.xsd";
-     protected final static Element STRI2012_ROOTELEMENT1 = new Element("Manifest", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/1.1"));
-     protected final static Element STRI2012_ROOTELEMENT2 = new Element("GeleideFormulier", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/1.1"));
-     */
+     protected final static Element STRI2012_ROOTELEMENT_MANIFEST = new Element("Manifest", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/1.0"));
+     protected final static Element STRI2012_ROOTELEMENT_GELEIDEFORMULIER = new Element("GeleideFormulier", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/1.0"));
+     
 
     public STRIParser getSTRIParser(URL u) throws IOException, JDOMException{
         ROType type = getROType(u);
 
         if (type.equals(ROType.STRI2012)) {
             return stri2012;
+        }else if (type.equals(ROType.STRI2008)) {
+            return stri2008;
         }else{
             throw new UnsupportedOperationException("Not Yet implemented stri version " + type);
         }
@@ -86,7 +92,11 @@ public class IMROParserFactory {
             return ROType.IMRO2008;
         } else if (isElementEqual(rootElem, IMRO2012_ROOTELEMENT)) {
             return ROType.IMRO2012;
-        } else {
+        } else if(isElementEqual(rootElem, STRI2012_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2012_ROOTELEMENT_MANIFEST)){
+            return ROType.STRI2012;
+        }else if(isElementEqual(rootElem, STRI2008_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2008_ROOTELEMENT_MANIFEST)){
+            return ROType.STRI2008;
+        }else{
             throw new IllegalArgumentException("Unrecognized root element: " + rootElem);
         }
     }
