@@ -28,8 +28,9 @@ import static org.junit.Assert.*;
  */
 public class IMROParser2008Test {
 
-    private IMROParser2008 instance = new IMROParser2008();
-    public IMROParser2008Test() {
+    private IMROParser2008 instance ;
+    public IMROParser2008Test() throws JAXBException {
+        instance = new IMROParser2008();
     }
 
     /**
@@ -42,7 +43,7 @@ public class IMROParser2008Test {
 
         Geleideformulier geleideformulier = new Geleideformulier();
         geleideformulier.setBasisURL("http://files.b3p.nl/imroharvester/");
-        geleideformulier.setImro("2008.gml");
+        geleideformulier.setImro("2008.xml");
 
         List<Object> result = instance.parseGML(geleideformulier);
         assertNotEquals(218, result.size());
@@ -54,7 +55,7 @@ public class IMROParser2008Test {
     @Test
     public void testParseGML_URL() throws Exception {
         System.out.println("parseGML");
-        URL u = new URL("http://files.b3p.nl/imroharvester/2008.gml");
+        URL u = new URL("http://files.b3p.nl/imroharvester/2008.xml");
         
         List<Object> result = instance.parseGML(u);
         assertNotEquals(218, result.size());
@@ -67,7 +68,7 @@ public class IMROParser2008Test {
     public void testParseImroBestemmingsplan() throws JAXBException {
         System.out.println("testParsePlanInhoudBestemmingsplan");
 
-        URL u = this.getClass().getResource("bestemmingsplangebied2008.gml");
+        URL u = this.getClass().getResource("bestemmingsplangebied2008.xml");
 
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
@@ -92,7 +93,7 @@ public class IMROParser2008Test {
     @Test
     public void testParseImroDubbelbestemming() throws JAXBException {
         System.out.println("testParseGebiedsaanduidingInhoud");
-        URL u = this.getClass().getResource("dubbelbestemming2008.gml");
+        URL u = this.getClass().getResource("dubbelbestemming2008.xml");
 
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
@@ -113,7 +114,7 @@ public class IMROParser2008Test {
     @Test
     public void testParseImroGebiedsaanduiding() throws JAXBException {
         System.out.println("testParseGebiedsaanduidingInhoud");
-        URL u = this.getClass().getResource("gebiedsaanduiding2008.gml");
+        URL u = this.getClass().getResource("gebiedsaanduiding2008.xml");
 
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
@@ -208,7 +209,7 @@ public class IMROParser2008Test {
     @Test
     public void testParseImroEnkelbestemming() throws JAXBException {
         System.out.println("parseImroEnkelbestemming");
-        URL u = this.getClass().getResource("enkelbestemming2008.gml");
+        URL u = this.getClass().getResource("enkelbestemming2008.xml");
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
         Enkelbestemming eb = instance.parseImroEnkelbestemming(gba);
@@ -250,7 +251,7 @@ public class IMROParser2008Test {
     @Test
     public void testGetIdentificatie() throws JAXBException {
         System.out.println("getIdentificatie");
-        URL u = this.getClass().getResource("bestemmingsplangebied2008.gml");
+        URL u = this.getClass().getResource("bestemmingsplangebied2008.xml");
 
         Object gba = instance.unmarshalUrl(u);
         BestemmingsplangebiedType bpgt = (BestemmingsplangebiedType)gba;
@@ -263,7 +264,7 @@ public class IMROParser2008Test {
     @Test
     public void testParse2008Plan() throws JAXBException{
         System.out.println("testParse2008Plan");
-        URL u = this.getClass().getResource("2008.gml");
+        URL u = this.getClass().getResource("2008.xml");
         List<Object> o = instance.parseGML(u);
         assertNotNull(o);
         assertNotEquals(218, o.size());
