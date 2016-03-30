@@ -35,6 +35,7 @@ import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import nl.b3p.imro.harvester.processing.Processor;
+import org.jdom2.JDOMException;
 import org.stripesstuff.stripersist.Stripersist;
 
 /**
@@ -118,7 +119,7 @@ public class HarvestJobActionBean implements ActionBean{
         return new ForwardResolution(JSP_EDIT);
     }
 
-    public Resolution run() throws JAXBException{
+    public Resolution run() throws JAXBException, JDOMException{
         Processor p = new Processor(Collections.singletonList(job), downloadfolder);
         p.process();
         return new ForwardResolution(JSP_VIEW);

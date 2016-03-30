@@ -26,6 +26,8 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import nl.b3p.imro.harvester.parser.Geleideformulier;
+import nl.b3p.imro.harvester.parser.STRIParser2012;
+import org.jdom2.JDOMException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -57,8 +59,9 @@ public class ProcessorTest {
     }
 
     @Test
-    public void testRun() throws JAXBException {
+    public void testParseRuimtelijkeplannenScraper() throws JAXBException, JDOMException {
         job = new HarvestJob();
+        job.setType(HarvestJob.HarvestJobType.RUIMTELIJKEPLANNENSCRAPER);
         job.setUrl("https://www.ruimtelijkeplannen.nl/web-roi/index/showManifest?organizationId=zaltbommel&striVersion=STRI2008");
         instance = new Processor(Collections.singletonList(job),downloadfolder);
         instance.process();
@@ -78,24 +81,13 @@ public class ProcessorTest {
         }
     }
 
-    @Test
-    public void testParseGeleideformulieren() {
-        try {
-            URL expResult = new URL("http://files.b3p.nl/imroharvester/NL.IMRO.0297.BGBBP20140020-OW01.gml");
-            List<Geleideformulier> result = instance.retrieveGeleideformulieren(Collections.singletonList(new URL("http://files.b3p.nl/imroharvester/g_NL.IMRO.0297.BGBBP20140020-OW01.xml")));
-
-            assertEquals(1, result.size());
-            assertEquals(expResult, result.get(0).getGML());
-        } catch (Exception e) {
-            fail("Exception occured: " + e.getLocalizedMessage());
-        }
-    }
 
     @Test
-    public void testParseGeleideformulier() throws MalformedURLException, JAXBException, URISyntaxException, IOException{
-        URL u = this.getClass().getResource("geleideformulier.xml"); //new URL("http://ruimtelijkeplannen.zaltbommel.nl/NL.IMRO.0297.BGBBP20140020-VS01/g_NL.IMRO.0297.BGBBP20140020-VS01.xml");//
+    public void testDownloadFiles() throws MalformedURLException, JAXBException, URISyntaxException, IOException{
+        URL u = this.getClass().getResource("geleideformulier2012.xml"); //new URL("http://ruimtelijkeplannen.zaltbommel.nl/NL.IMRO.0297.BGBBP20140020-VS01/g_NL.IMRO.0297.BGBBP20140020-VS01.xml");//
         File realDir = new File(new File( downloadfolder.toURI()), "NL.IMRO.0297.BGBBP20140020-OW01");
-        List<Geleideformulier> forms = instance.retrieveGeleideformulieren(Collections.singletonList(u));
+        STRIParser2012 parser = new STRIParser2012();
+        List<Geleideformulier> forms = parser.retrieveGeleideformulieren(Collections.singletonList(u));
         assertEquals (1,forms.size());
         Geleideformulier form = forms.get(0);
         instance.downloadFiles(form);
@@ -104,40 +96,10 @@ public class ProcessorTest {
         assertEquals(16, realDir.listFiles().length);
     }
 
-    /**
-     * Test of getPlannen method, of class Processor.
-     */
-    @Test
-    public void testGetPlannenManifestSTRItV1() {
-        try {
-            System.out.println("testGetPlannenManifestV1");
-            // URL u = this.getClass().getResource("manifestaaenhunze.xml");
-            List<URL> result = instance.getGeleideformulierURLSFromManifest(new URL(job.getUrl()));
-            assertEquals(1, result.size());
-        } catch (Exception e) {
-            fail("Exception occured: " + e.getLocalizedMessage());
-        }
-    }
 
-    /**
-     * Test of getPlannen method, of class Processor.
-     */
-    //@Test
-    public void testGetPlannenManifestV2() {
-        try {
-            fail("Not yet implemented");
-            System.out.println("testGetPlannenManifestV2");
-            URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
-            List<URL> result = instance.getGeleideformulierURLSFromManifest(u);
-            assertEquals(2, result.size());
-        } catch (Exception e) {
-            fail("Exception occured: " + e.getLocalizedMessage());
-        }
-
-    }
 
 //    @Test
-    public void testStationsPlein() throws JAXBException {
+    public void testStationsPlein() throws JAXBException, JDOMException {
         job = new HarvestJob();
         job.setUrl("http://files.b3p.nl/imroharvester/manifest_station.xml");
         instance = new Processor(Collections.singletonList(job),downloadfolder);

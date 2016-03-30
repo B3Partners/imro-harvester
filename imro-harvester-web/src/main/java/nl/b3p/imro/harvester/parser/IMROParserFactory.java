@@ -24,10 +24,13 @@ public class IMROParserFactory {
     private IMROParser2012 imro2012;
     private IMROParser2008 imro2008;
 
+    private STRIParser2012 stri2012;
+    
     public IMROParserFactory() throws JAXBException {
         imro2012 = new IMROParser2012();
         imro2008 = new IMROParser2008();
 
+        stri2012 = new STRIParser2012();
     }
     /*protected final static String STRI2008_JAXB_ELEMENTS_PACKAGE = "nl.b3p.jaxb.stri2008:nl.b3p.jaxb.xmldsig";
      // protected final static String STRI2008_XSD_PATH = "nl/b3p/jaxb/stri2008/xsd/STRI2008.xsd";
@@ -47,6 +50,16 @@ public class IMROParserFactory {
      protected final static Element STRI2012_ROOTELEMENT1 = new Element("Manifest", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/1.1"));
      protected final static Element STRI2012_ROOTELEMENT2 = new Element("GeleideFormulier", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/1.1"));
      */
+
+    public STRIParser getSTRIParser(URL u) throws IOException, JDOMException{
+        ROType type = getROType(u);
+
+        if (type.equals(ROType.STRI2012)) {
+            return stri2012;
+        }else{
+            throw new UnsupportedOperationException("Not Yet implemented stri version " + type);
+        }
+    }
 
     public IMROParser getParser(Geleideformulier geleideformulier) throws IOException, JDOMException, JAXBException {
 
