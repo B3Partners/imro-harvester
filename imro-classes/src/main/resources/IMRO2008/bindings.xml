@@ -107,9 +107,9 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 			<bindings node="xsd:complexType[@name='BouwaanduidingType']//xsd:element[@name='geometrie']">
 				<dom/>
 			</bindings>
-			<bindings node="xsd:complexType[@name='BouwaanduidingType']//xsd:element[@name='aanduiding']">
+			<!--bindings node="xsd:complexType[@name='BouwaanduidingType']//xsd:element[@name='aanduiding']">
 				<dom/>
-			</bindings>
+			</bindings-->
 			<bindings node="xsd:complexType[@name='BestemmingsplangebiedType']//xsd:element[@name='geometrie']">
 				<dom/>
 			</bindings>

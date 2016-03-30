@@ -1,0 +1,1 @@
+xjc -b bindings.xml -p nl.b3p.imro._2008._11 -d ../../java/ local-IMRO2008.xsd

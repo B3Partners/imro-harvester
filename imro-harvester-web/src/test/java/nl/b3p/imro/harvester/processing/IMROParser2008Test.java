@@ -42,7 +42,7 @@ public class IMROParser2008Test {
 
         Geleideformulier geleideformulier = new Geleideformulier();
         geleideformulier.setBasisURL("http://files.b3p.nl/imroharvester/");
-        geleideformulier.setImro("2008.xml");
+        geleideformulier.setImro("2008.gml");
 
         List<Object> result = instance.parseGML(geleideformulier);
         assertNotEquals(218, result.size());
@@ -54,7 +54,7 @@ public class IMROParser2008Test {
     @Test
     public void testParseGML_URL() throws Exception {
         System.out.println("parseGML");
-        URL u = new URL("http://files.b3p.nl/imroharvester/2008.xml");
+        URL u = new URL("http://files.b3p.nl/imroharvester/2008.gml");
         
         List<Object> result = instance.parseGML(u);
         assertNotEquals(218, result.size());
@@ -178,7 +178,7 @@ public class IMROParser2008Test {
         assertEquals("gevellijn", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
         assertEquals("NL.IMRO.0395.EP5215540645-00", bv.getEnkelbestemming());
-        assertEquals("NL.IMRO.0395.DP2215540997-00", bv.getEnkelbestemming()); // apparently, there can be multiple bestemmingsvlakken
+//        assertEquals("NL.IMRO.0395.DP2215540997-00", bv.getEnkelbestemming()); // apparently, there can be multiple bestemmingsvlakken
     }
 
     /**
@@ -215,8 +215,8 @@ public class IMROParser2008Test {
         assertEquals("NL.IMRO.90", eb.getIdentificatie());
         assertEquals("enkelbestemming", eb.getTypePlanObject());
         assertEquals("Vogelpark", eb.getNaam());
-        assertEquals("groen", eb.getBestemmingshoofdgroep());
         assertEquals("17", eb.getArtikelnummer());
+        assertEquals("groen", eb.getBestemmingshoofdgroep());
         assertNotNull("Geometrie moet gevuld zijn",eb.getGeometrie());
     }
 
@@ -234,12 +234,11 @@ public class IMROParser2008Test {
         assertNotNull(mv);
         assertEquals("NL.IMRO.281", mv.getIdentificatie());
         assertEquals("maatvoering", mv.getTypePlanObject());
-        assertEquals("maximum oppervlakte (m2)n", mv.getNaam());
+        assertEquals("maximum oppervlakte (m2)", mv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",mv.getGeometrie());
         assertEquals(1,mv.getWaardeEnType().size());
-        assertEquals("maximum aantal bouwlagen", mv.getWaardeEnType().get(0).getWaardeType());
         assertEquals("370", mv.getWaardeEnType().get(0).getWaarde());
-        assertEquals("other: vrije tekst", mv.getWaardeEnType().get(0).getSymboolCode());
+        assertEquals("other: vrije tekst", mv.getWaardeEnType().get(0).getWaardeType());
     }
 
     /**
@@ -261,7 +260,7 @@ public class IMROParser2008Test {
     @Test
     public void testParse2008Plan() throws JAXBException{
         System.out.println("testParse2008Plan");
-        URL u = this.getClass().getResource("2008.xml");
+        URL u = this.getClass().getResource("2008.gml");
         List<Object> o = instance.parseGML(u);
         assertNotNull(o);
         assertNotEquals(218, o.size());
