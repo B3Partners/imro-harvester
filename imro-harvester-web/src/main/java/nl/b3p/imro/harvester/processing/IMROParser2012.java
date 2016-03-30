@@ -50,7 +50,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
-public class IMROParser2012 implements ImroParser{
+public class IMROParser2012 implements IMROParser{
     
     protected final static Log log = LogFactory.getLog(IMROParser2012.class);
     private JAXBContext context = null;

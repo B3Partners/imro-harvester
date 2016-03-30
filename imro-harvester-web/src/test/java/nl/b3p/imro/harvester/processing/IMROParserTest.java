@@ -312,7 +312,7 @@ public class IMROParserTest {
     @Test
     public void testParse2008Plan() throws JAXBException{
         System.out.println("testParse2008Plan");
-        URL u = this.getClass().getResource("2012.gml");
+        URL u = this.getClass().getResource("2008.gml");
         List<Object> o = instance.parseGML(u);
         assertNotNull(o);
         assertNotEquals(218, o.size());

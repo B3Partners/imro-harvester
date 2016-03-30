@@ -23,6 +23,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.RollbackException;
@@ -33,6 +35,7 @@ import nl.b3p.imro.harvester.entities.HarvestJob;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jdom2.JDOMException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -48,7 +51,8 @@ public class Processor {
     private static final Log log = LogFactory.getLog(Processor.class);
     private Integer timeout;
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
-    private IMROParser2012 parser;
+    //private IMROParser2012 parser;
+    private IMROParserFactory factory;
     private File downloadfolder;
 
     private JAXBContext jaxbSTRIContext = JAXBContext.newInstance(nl.geonovum.stri._2012._1.GeleideFormulier.class, nl.geonovum.stri._2012._2.GeleideFormulier.class,
@@ -61,7 +65,7 @@ public class Processor {
     public Processor(List<HarvestJob> jobs, Integer timeout, File downloadfolder) throws JAXBException {
         this.jobs = jobs;
         this.timeout = timeout;
-        this.parser = new IMROParser2012();
+        this.factory = new IMROParserFactory();
         this.downloadfolder = downloadfolder;
     }
 
@@ -78,12 +82,13 @@ public class Processor {
                     for (Geleideformulier geleideformulier : geleideformulieren) {
                         log.debug("Processing geleideformulier: " + geleideformulier.toString());
                         try {
-                            List<Object> plannen = parser.parseGML(geleideformulier);
+                            IMROParser parser = factory.getParser(geleideformulier);
+                            List<Object> planObjecten = parser.parseGML(geleideformulier);
 
                             if (!em.getTransaction().isActive()) {
                                 em.getTransaction().begin();
                             }
-                            for (Object plan : plannen) {
+                            for (Object plan : planObjecten) {
                                 em.persist(plan);
                             }
                             downloadFiles(geleideformulier);
@@ -102,6 +107,9 @@ public class Processor {
                             em.getTransaction().rollback();
                         } catch (PersistenceException e) {
                             log.error("Cannot save entity in plan " + geleideformulier, e);
+                            em.getTransaction().rollback();
+                        } catch (JDOMException ex) {
+                            log.error("Cannot retrieve IMROParser " + geleideformulier, ex);
                             em.getTransaction().rollback();
                         }
                     }
