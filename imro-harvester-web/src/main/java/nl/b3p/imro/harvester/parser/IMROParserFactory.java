@@ -51,9 +51,12 @@ public class IMROParserFactory {
     
      //protected final static String STRI2012_JAXB_ELEMENTS_PACKAGE = "nl.geonovum.stri._2012._1:nl.b3p.jaxb.xmldsig";
      // protected final static String STRI2012_XSD_PATH = "nl/b3p/jaxb/stri2012/xsd/STRI2012.xsd";
-     protected final static Element STRI2012_ROOTELEMENT_MANIFEST = new Element("Manifest", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/1.0"));
-     protected final static Element STRI2012_ROOTELEMENT_GELEIDEFORMULIER = new Element("GeleideFormulier", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/1.0"));
+     protected final static Element STRI2012V1_ROOTELEMENT_MANIFEST = new Element("Manifest", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/1.0"));
+     protected final static Element STRI2012V1_ROOTELEMENT_GELEIDEFORMULIER = new Element("GeleideFormulier", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/1.0"));
      
+     protected final static Element STRI2012V2_ROOTELEMENT_MANIFEST = new Element("Manifest", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/2.0"));
+     protected final static Element STRI2012V2_ROOTELEMENT_GELEIDEFORMULIER = new Element("GeleideFormulier", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/2.0"));
+
 
     public STRIParser getSTRIParser(URL u) throws IOException, JDOMException{
         ROType type = getROType(u);
@@ -92,7 +95,8 @@ public class IMROParserFactory {
             return ROType.IMRO2008;
         } else if (isElementEqual(rootElem, IMRO2012_ROOTELEMENT)) {
             return ROType.IMRO2012;
-        } else if(isElementEqual(rootElem, STRI2012_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2012_ROOTELEMENT_MANIFEST)){
+        } else if(isElementEqual(rootElem, STRI2012V1_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2012V1_ROOTELEMENT_MANIFEST)
+                    || isElementEqual(rootElem, STRI2012V2_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2012V2_ROOTELEMENT_MANIFEST)){
             return ROType.STRI2012;
         }else if(isElementEqual(rootElem, STRI2008_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2008_ROOTELEMENT_MANIFEST)){
             return ROType.STRI2008;
