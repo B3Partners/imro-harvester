@@ -5,6 +5,7 @@
  */
 package nl.b3p.imro.harvester.processing;
 
+import nl.b3p.imro.harvester.parser.IMROParser2012;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import java.net.MalformedURLException;
 import java.net.URL;

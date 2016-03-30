@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.b3p.imro.harvester.processing;
+package nl.b3p.imro.harvester.parser;
 
 import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.MultiPolygon;
@@ -40,8 +40,9 @@ import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import nl.b3p.imro.harvester.entities.imro.WaardeEnType;
-import static nl.b3p.imro.harvester.processing.IMROParser.gc;
-import static nl.b3p.imro.harvester.processing.IMROParser2012.log;
+import nl.b3p.imro.harvester.processing.Geleideformulier;
+import static nl.b3p.imro.harvester.parser.IMROParser.gc;
+import static nl.b3p.imro.harvester.parser.IMROParser2012.log;
 
 /**
  *

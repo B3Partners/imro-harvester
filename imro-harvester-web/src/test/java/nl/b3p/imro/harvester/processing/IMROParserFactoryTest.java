@@ -5,6 +5,10 @@
  */
 package nl.b3p.imro.harvester.processing;
 
+import nl.b3p.imro.harvester.parser.IMROParserFactory;
+import nl.b3p.imro.harvester.parser.IMROParser2012;
+import nl.b3p.imro.harvester.parser.IMROParser2008;
+import nl.b3p.imro.harvester.parser.IMROParser;
 import java.net.URL;
 import javax.xml.bind.JAXBException;
 import org.junit.Test;

@@ -16,6 +16,8 @@
  */
 package nl.b3p.imro.harvester.processing;
 
+import nl.b3p.imro.harvester.parser.IMROParser;
+import nl.b3p.imro.harvester.parser.IMROParserFactory;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -23,8 +25,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.RollbackException;

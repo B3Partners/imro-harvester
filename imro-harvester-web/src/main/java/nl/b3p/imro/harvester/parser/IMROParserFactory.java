@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.b3p.imro.harvester.processing;
+package nl.b3p.imro.harvester.parser;
 
 import java.io.IOException;
 import java.net.URL;
 import javax.xml.bind.JAXBException;
+import nl.b3p.imro.harvester.processing.Geleideformulier;
+import nl.b3p.imro.harvester.processing.ROType;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;

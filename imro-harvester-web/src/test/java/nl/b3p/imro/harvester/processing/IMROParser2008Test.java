@@ -5,6 +5,7 @@
  */
 package nl.b3p.imro.harvester.processing;
 
+import nl.b3p.imro.harvester.parser.IMROParser2008;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
