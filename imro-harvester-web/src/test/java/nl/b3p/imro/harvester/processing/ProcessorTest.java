@@ -54,7 +54,7 @@ public class ProcessorTest {
         //URL u = this.getClass().getResource("testaaenhunze.html");
         //"https://www.ruimtelijkeplannen.nl/web-roi/index/showManifest?organizationId=aaenhunze&striVersion=STRI2008"
         job.setUrl(u.toString());
-        instance = new Processor(Collections.singletonList(job),downloadfolder);
+        instance = new Processor(Collections.singletonList(job), downloadfolder);
 
     }
 
@@ -63,7 +63,7 @@ public class ProcessorTest {
         job = new HarvestJob();
         job.setType(HarvestJob.HarvestJobType.RUIMTELIJKEPLANNENSCRAPER);
         job.setUrl("https://www.ruimtelijkeplannen.nl/web-roi/index/showManifest?organizationId=zaltbommel&striVersion=STRI2008");
-        instance = new Processor(Collections.singletonList(job),downloadfolder);
+        instance = new Processor(Collections.singletonList(job), downloadfolder);
         instance.process();
     }
 
@@ -71,24 +71,19 @@ public class ProcessorTest {
      * Test of getManifestURL method, of class Processor.
      */
     @Test
-    public void testGetManifestUrl() {
-        try {
-            URL expResult = new URL("http://files.b3p.nl/imroharvester/manifest.xml");
-            URL result = instance.getManifestURL(job);
-            assertEquals(expResult, result);
-        } catch (Exception e) {
-            fail("Exception occured: " + e.getLocalizedMessage());
-        }
+    public void testGetManifestUrl() throws MalformedURLException, IOException {
+        URL expResult = new URL("http://files.b3p.nl/imroharvester/manifest.xml");
+        URL result = instance.getManifestURL(job);
+        assertEquals(expResult, result);
     }
 
-
     @Test
-    public void testDownloadFiles() throws MalformedURLException, JAXBException, URISyntaxException, IOException{
+    public void testDownloadFiles() throws MalformedURLException, JAXBException, URISyntaxException, IOException {
         URL u = this.getClass().getResource("geleideformulier2012.xml"); //new URL("http://ruimtelijkeplannen.zaltbommel.nl/NL.IMRO.0297.BGBBP20140020-VS01/g_NL.IMRO.0297.BGBBP20140020-VS01.xml");//
-        File realDir = new File(new File( downloadfolder.toURI()), "NL.IMRO.0297.BGBBP20140020-OW01");
+        File realDir = new File(new File(downloadfolder.toURI()), "NL.IMRO.0297.BGBBP20140020-OW01");
         STRIParser2012 parser = new STRIParser2012();
         List<Geleideformulier> forms = parser.retrieveGeleideformulieren(Collections.singletonList(u));
-        assertEquals (1,forms.size());
+        assertEquals(1, forms.size());
         Geleideformulier form = forms.get(0);
         instance.downloadFiles(form);
         assertEquals(16, form.getBijlages().size());
@@ -96,13 +91,11 @@ public class ProcessorTest {
         assertEquals(16, realDir.listFiles().length);
     }
 
-
-
 //    @Test
     public void testStationsPlein() throws JAXBException, JDOMException {
         job = new HarvestJob();
         job.setUrl("http://files.b3p.nl/imroharvester/manifest_station.xml");
-        instance = new Processor(Collections.singletonList(job),downloadfolder);
+        instance = new Processor(Collections.singletonList(job), downloadfolder);
         instance.process();
     }
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.b3p.imro.harvester.processing;
+package nl.b3p.imro.harvester.parser;
 
 import nl.b3p.imro.harvester.parser.IMROParserFactory;
 import nl.b3p.imro.harvester.parser.IMROParser2012;
@@ -12,6 +12,7 @@ import nl.b3p.imro.harvester.parser.IMROParser;
 import java.net.URL;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.parser.Geleideformulier;
+import nl.b3p.imro.harvester.processing.ROType;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.mockito.Mockito;
