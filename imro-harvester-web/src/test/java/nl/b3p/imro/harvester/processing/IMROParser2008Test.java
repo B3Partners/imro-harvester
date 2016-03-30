@@ -40,7 +40,6 @@ public class IMROParser2008Test {
     public void testParseGML_Geleideformulier() throws Exception {
         System.out.println("parseGML");
 
-
         Geleideformulier geleideformulier = new Geleideformulier();
         geleideformulier.setBasisURL("http://files.b3p.nl/imroharvester/");
         geleideformulier.setImro("2008.xml");
@@ -99,7 +98,6 @@ public class IMROParser2008Test {
         assertNotNull(gba);
         Dubbelbestemming db = instance.parseImroDubbelbestemming(gba);
 
-
         assertEquals("NL.IMRO.258", db.getIdentificatie());
         assertEquals("dubbelbestemming", db.getTypePlanObject());
         assertEquals("Archeologisch waardevol gebied", db.getNaam());
@@ -119,7 +117,6 @@ public class IMROParser2008Test {
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
         Gebiedsaanduiding ga = instance.parseImroGebiedsaanduiding(gba);
-
 
         assertEquals("NL.IMRO.289", ga.getIdentificatie());
         assertEquals("gebiedsaanduiding", ga.getTypePlanObject());
@@ -268,6 +265,5 @@ public class IMROParser2008Test {
         List<Object> o = instance.parseGML(u);
         assertNotNull(o);
         assertNotEquals(218, o.size());
-
     }
 }
