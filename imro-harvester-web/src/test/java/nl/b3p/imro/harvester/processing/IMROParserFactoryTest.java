@@ -11,6 +11,7 @@ import nl.b3p.imro.harvester.parser.IMROParser2008;
 import nl.b3p.imro.harvester.parser.IMROParser;
 import java.net.URL;
 import javax.xml.bind.JAXBException;
+import nl.b3p.imro.harvester.parser.Geleideformulier;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.mockito.Mockito;

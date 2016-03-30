@@ -21,6 +21,7 @@ import nl.b3p.imro.harvester.entities.imro.Figuur;
 import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
+import nl.b3p.imro.harvester.parser.Geleideformulier;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;

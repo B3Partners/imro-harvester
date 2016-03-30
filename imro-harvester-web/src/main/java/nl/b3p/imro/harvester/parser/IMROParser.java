@@ -19,7 +19,6 @@ import nl.b3p.imro.harvester.entities.imro.Figuur;
 import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
-import nl.b3p.imro.harvester.processing.Geleideformulier;
 import nl.b3p.imro.harvester.processing.GeometryConverter;
 
 /**

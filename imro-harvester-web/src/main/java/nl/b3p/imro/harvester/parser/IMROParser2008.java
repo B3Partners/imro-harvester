@@ -40,7 +40,6 @@ import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import nl.b3p.imro.harvester.entities.imro.WaardeEnType;
-import nl.b3p.imro.harvester.processing.Geleideformulier;
 import static nl.b3p.imro.harvester.parser.IMROParser.gc;
 import static nl.b3p.imro.harvester.parser.IMROParser2012.log;
 

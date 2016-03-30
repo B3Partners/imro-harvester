@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
+import nl.b3p.imro.harvester.parser.Geleideformulier;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
