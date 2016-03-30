@@ -6,8 +6,10 @@
 package nl.b3p.imro.harvester.processing;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.xml.bind.JAXBException;
+import nl.b3p.imro._2008._11.BestemmingsplangebiedType;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
@@ -36,12 +38,14 @@ public class IMROParser2008Test {
     @Test
     public void testParseGML_Geleideformulier() throws Exception {
         System.out.println("parseGML");
-        Geleideformulier geleideformulier = null;
-        List<Object> expResult = null;
+
+
+        Geleideformulier geleideformulier = new Geleideformulier();
+        geleideformulier.setBasisURL("http://files.b3p.nl/imroharvester/");
+        geleideformulier.setImro("2008.gml");
+
         List<Object> result = instance.parseGML(geleideformulier);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotEquals(218, result.size());
     }
 
     /**
@@ -50,194 +54,210 @@ public class IMROParser2008Test {
     @Test
     public void testParseGML_URL() throws Exception {
         System.out.println("parseGML");
-        URL u = null;
-        List<Object> expResult = null;
+        URL u = new URL("http://files.b3p.nl/imroharvester/2008.gml");
+        
         List<Object> result = instance.parseGML(u);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of unmarshalUrl method, of class IMROParser2008.
-     */
-    @Test
-    public void testUnmarshalUrl() throws Exception {
-        System.out.println("unmarshalUrl");
-        URL u = null;
-        Object expResult = null;
-        Object result = instance.unmarshalUrl(u);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of processFeatureCollection method, of class IMROParser2008.
-     */
-    @Test
-    public void testProcessFeatureCollection() {
-        System.out.println("processFeatureCollection");
-        Object fc = null;
-        List<Object> expResult = null;
-        List<Object> result = instance.processFeatureCollection(fc);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of parseFeatureMember method, of class IMROParser2008.
-     */
-    @Test
-    public void testParseFeatureMember() {
-        System.out.println("parseFeatureMember");
-        Object o = null;
-        Object expResult = null;
-        Object result = instance.parseFeatureMember(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotEquals(218, result.size());
     }
 
     /**
      * Test of parseImroBestemmingsplan method, of class IMROParser2008.
      */
     @Test
-    public void testParseImroBestemmingsplan() {
-        System.out.println("parseImroBestemmingsplan");
-        Object o = null;
-        Bestemmingsplan expResult = null;
-        Bestemmingsplan result = instance.parseImroBestemmingsplan(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testParseImroBestemmingsplan() throws JAXBException {
+        System.out.println("testParsePlanInhoudBestemmingsplan");
+
+        URL u = this.getClass().getResource("bestemmingsplangebied2008.gml");
+
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Bestemmingsplan bp = instance.parseImroBestemmingsplan(gba);
+        assertEquals("NL.IMRO.1680.1800030105-0000", bp.getIdentificatie());
+        assertEquals("bestemmingsplan", bp.getTypePlan());
+        assertEquals("gemeentelijke overheid", bp.getBeleidsmatigeVerantwoordelijkeOverheid());
+        assertEquals("Gemeente Aa en Hunze", bp.getNaamOverheid());
+        assertEquals("1680", bp.getOverheidsCode());
+        assertEquals("Gieterveen", bp.getNaam());
+        assertEquals("Dorp", bp.getLocatieNaam());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        assertEquals("2009-07-07", sdf.format(bp.getPlanstatusDatum()));
+        assertEquals("concept", bp.getPlanstatusInfo());
+        assertNotNull(bp.getGeometrie());
+
     }
 
     /**
      * Test of parseImroDubbelbestemming method, of class IMROParser2008.
      */
     @Test
-    public void testParseImroDubbelbestemming() {
-        System.out.println("parseImroDubbelbestemming");
-        Object o = null;
-        Dubbelbestemming expResult = null;
-        Dubbelbestemming result = instance.parseImroDubbelbestemming(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testParseImroDubbelbestemming() throws JAXBException {
+        System.out.println("testParseGebiedsaanduidingInhoud");
+        URL u = this.getClass().getResource("dubbelbestemming2008.gml");
+
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Dubbelbestemming db = instance.parseImroDubbelbestemming(gba);
+
+
+        assertEquals("NL.IMRO.258", db.getIdentificatie());
+        assertEquals("dubbelbestemming", db.getTypePlanObject());
+        assertEquals("Archeologisch waardevol gebied", db.getNaam());
+        assertEquals("leiding", db.getBestemmingshoofdgroep());
+        assertEquals("21", db.getArtikelnummer());
+        assertNotNull("Geometrie moet gevuld zijn",db.getGeometrie());
     }
 
     /**
      * Test of parseImroGebiedsaanduiding method, of class IMROParser2008.
      */
     @Test
-    public void testParseImroGebiedsaanduiding() {
-        System.out.println("parseImroGebiedsaanduiding");
-        Object o = null;
-        Gebiedsaanduiding expResult = null;
-        Gebiedsaanduiding result = instance.parseImroGebiedsaanduiding(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testParseImroGebiedsaanduiding() throws JAXBException {
+        System.out.println("testParseGebiedsaanduidingInhoud");
+        URL u = this.getClass().getResource("gebiedsaanduiding2008.gml");
+
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Gebiedsaanduiding ga = instance.parseImroGebiedsaanduiding(gba);
+
+
+        assertEquals("NL.IMRO.289", ga.getIdentificatie());
+        assertEquals("gebiedsaanduiding", ga.getTypePlanObject());
+        assertEquals("other: wijzigingsbevoegheid overeenkomstig artikel 27 lid b", ga.getNaam());
+        assertEquals("overig", ga.getGebiedsaanduidinggroep());
+        assertEquals("27", ga.getArtikelnummer());
+        assertNotNull("Geometrie moet gevuld zijn",ga.getGeometrie());
     }
 
     /**
      * Test of parseImroBouwvlak method, of class IMROParser2008.
      */
     @Test
-    public void testParseImroBouwvlak() {
-        System.out.println("parseImroBouwvlak");
-        Object o = null;
-        Bouwvlak expResult = null;
-        Bouwvlak result = instance.parseImroBouwvlak(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testParseImroBouwvlak() throws JAXBException {
+        System.out.println("testParseMaatvoeringInhoud");
+        URL u = this.getClass().getResource("bouwvlak2008.xml");
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Bouwvlak bv = instance.parseImroBouwvlak(gba);
+        assertEquals("NL.IMRO.1", bv.getIdentificatie());
+        assertEquals("bouwvlak", bv.getTypePlanObject());
+        assertEquals("bouwvlak", bv.getNaam());
+        assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertEquals("NL.IMRO.108", bv.getEnkelbestemming());;
     }
 
     /**
      * Test of parseImroFunctieaanduiding method, of class IMROParser2008.
      */
     @Test
-    public void testParseImroFunctieaanduiding() {
-        System.out.println("parseImroFunctieaanduiding");
-        Object o = null;
-        Functieaanduiding expResult = null;
-        Functieaanduiding result = instance.parseImroFunctieaanduiding(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testParseImroFunctieaanduiding() throws JAXBException {
+        System.out.println("testParseFunctieaanduidingInhoud");
+        URL u = this.getClass().getResource("functieaanduiding2008.xml");
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Functieaanduiding bv = instance.parseImroFunctieaanduiding(gba);
+
+        assertNotNull(bv);
+        assertEquals("NL.IMRO.297", bv.getIdentificatie());
+        assertEquals("functieaanduiding", bv.getTypePlanObject());
+        assertEquals("specifieke vorm van bedrijf - landbouwmechanisatiebedrijf", bv.getNaam());
+        assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertEquals("NL.IMRO.176", bv.getEnkelbestemming());
     }
 
     /**
      * Test of parseImroFiguur method, of class IMROParser2008.
      */
     @Test
-    public void testParseImroFiguur() {
-        System.out.println("parseImroFiguur");
-        Object o = null;
-        Figuur expResult = null;
-        Figuur result = instance.parseImroFiguur(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testParseImroFiguur() throws JAXBException {
+        System.out.println("testParseFiguurInhoud");
+        URL u = this.getClass().getResource("figuur2008.xml");
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Figuur bv = instance.parseImroFiguur(gba);
+        assertNotNull(bv);
+        assertEquals("NL.IMRO.0395.FL3218736019-00", bv.getIdentificatie());
+        assertEquals("figuur", bv.getTypePlanObject());
+        assertEquals("gevellijn", bv.getNaam());
+        assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertEquals("NL.IMRO.0395.EP5215540645-00", bv.getEnkelbestemming());
+        assertEquals("NL.IMRO.0395.DP2215540997-00", bv.getEnkelbestemming()); // apparently, there can be multiple bestemmingsvlakken
     }
 
     /**
      * Test of parseImroBouwaanduiding method, of class IMROParser2008.
      */
     @Test
-    public void testParseImroBouwaanduiding() {
-        System.out.println("parseImroBouwaanduiding");
-        Object o = null;
-        Bouwaanduiding expResult = null;
-        Bouwaanduiding result = instance.parseImroBouwaanduiding(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testParseImroBouwaanduiding() throws JAXBException {
+        System.out.println("testParseBouwaanduidingInhoud");
+        URL u = this.getClass().getResource("bouwaanduiding2008.xml");
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Bouwaanduiding bv = instance.parseImroBouwaanduiding(gba);
+
+        assertNotNull(bv);
+        assertEquals("NL.IMRO.270", bv.getIdentificatie());
+        assertEquals("bouwaanduiding", bv.getTypePlanObject());
+        assertEquals("karakteristiek", bv.getNaam());
+        assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertNotEquals("NL.IMRO.1680.1800030105-0000", bv.getEnkelbestemming());
     }
 
     /**
      * Test of parseImroEnkelbestemming method, of class IMROParser2008.
      */
     @Test
-    public void testParseImroEnkelbestemming() {
+    public void testParseImroEnkelbestemming() throws JAXBException {
         System.out.println("parseImroEnkelbestemming");
-        Object o = null;
-        Enkelbestemming expResult = null;
-        Enkelbestemming result = instance.parseImroEnkelbestemming(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        URL u = this.getClass().getResource("enkelbestemming2008.gml");
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Enkelbestemming eb = instance.parseImroEnkelbestemming(gba);
+
+        assertNotNull(eb);
+        assertEquals("NL.IMRO.90", eb.getIdentificatie());
+        assertEquals("enkelbestemming", eb.getTypePlanObject());
+        assertEquals("Vogelpark", eb.getNaam());
+        assertEquals("groen", eb.getBestemmingshoofdgroep());
+        assertEquals("17", eb.getArtikelnummer());
+        assertNotNull("Geometrie moet gevuld zijn",eb.getGeometrie());
     }
 
     /**
      * Test of parseImroMaatvoering method, of class IMROParser2008.
      */
     @Test
-    public void testParseImroMaatvoering() {
-        System.out.println("parseImroMaatvoering");
-        Object o = null;
-        Maatvoering expResult = null;
-        Maatvoering result = instance.parseImroMaatvoering(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testParseImroMaatvoering() throws JAXBException {
+        System.out.println("testParseMaatvoeringInhoud");
+        URL u = this.getClass().getResource("maatvoering2008.xml");
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Maatvoering mv = instance.parseImroMaatvoering(gba);
+
+        assertNotNull(mv);
+        assertEquals("NL.IMRO.281", mv.getIdentificatie());
+        assertEquals("maatvoering", mv.getTypePlanObject());
+        assertEquals("maximum oppervlakte (m2)n", mv.getNaam());
+        assertNotNull("Geometrie moet gevuld zijn",mv.getGeometrie());
+        assertEquals(1,mv.getWaardeEnType().size());
+        assertEquals("maximum aantal bouwlagen", mv.getWaardeEnType().get(0).getWaardeType());
+        assertEquals("370", mv.getWaardeEnType().get(0).getWaarde());
+        assertEquals("other: vrije tekst", mv.getWaardeEnType().get(0).getSymboolCode());
     }
 
     /**
      * Test of getIdentificatie method, of class IMROParser2008.
      */
     @Test
-    public void testGetIdentificatie() {
+    public void testGetIdentificatie() throws JAXBException {
         System.out.println("getIdentificatie");
-        Object id = null;
-        String expResult = "";
-        String result = instance.getIdentificatie(id);
+        URL u = this.getClass().getResource("bestemmingsplangebied2008.gml");
+
+        Object gba = instance.unmarshalUrl(u);
+        BestemmingsplangebiedType bpgt = (BestemmingsplangebiedType)gba;
+
+        String expResult = "NL.IMRO.1680.1800030105-0000";
+        String result = instance.getIdentificatie(bpgt.getIdentificatie());
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     @Test

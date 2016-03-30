@@ -1,0 +1,17 @@
+<imro:Figuur gml:id="NL.IMRO.0395.FL3218736019-00" xmlns:gml="http://www.opengis.net/gml" xmlns:imro="http://www.geonovum.nl/imro/2008/1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geonovum.nl/imro/2008/1 http://schemas.geonovum.nl/imro/2008/1.1/IMRO2008.xsd">
+	<imro:identificatie>NL.IMRO.0395.FL3218736019-00</imro:identificatie>
+	<imro:typePlanobject>figuur</imro:typePlanobject>
+	<imro:plangebied xlink:href="#NL.IMRO.0395.BPWHZ20111749VW1-ON01"/>
+	<imro:bestemmingsvlak xlink:href="#NL.IMRO.0395.EP5215540645-00"/>
+	<imro:bestemmingsvlak xlink:href="#NL.IMRO.0395.DP2215540997-00"/>
+	<imro:naam>gevellijn</imro:naam>
+	<imro:geometrie>
+		<gml:Curve srsName="urn:ogc:def:crs:EPSG::28992">
+			<gml:segments>
+				<gml:LineStringSegment>
+					<gml:posList>111700.82 523537.355 111691.529 523563.72</gml:posList>
+				</gml:LineStringSegment>
+			</gml:segments>
+		</gml:Curve>
+	</imro:geometrie>
+</imro:Figuur>
