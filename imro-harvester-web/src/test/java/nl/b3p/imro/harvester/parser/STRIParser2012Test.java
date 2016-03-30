@@ -64,16 +64,20 @@ public class STRIParser2012Test {
     }
 
     @Test
-    public void testParseGeleideformulieren() {
-        try {
-            URL expResult = new URL("http://files.b3p.nl/imroharvester/NL.IMRO.0297.BGBBP20140020-OW01.gml");
-            List<Geleideformulier> result = instance.retrieveGeleideformulieren(Collections.singletonList(new URL("http://files.b3p.nl/imroharvester/g_NL.IMRO.0297.BGBBP20140020-OW01.xml")));
-
-            assertEquals(1, result.size());
-            assertEquals(expResult, result.get(0).getGML());
-        } catch (Exception e) {
-            fail("Exception occured: " + e.getLocalizedMessage());
-        }
+    public void testParseGeleideformulieren() throws MalformedURLException, JAXBException {
+        URL expResult = new URL("http://www.rijksplannen.nl/NL.IMRO.0000.AD16081970/V037/NL.IMRO.0000.AD16081970-V037.gml");
+        URL u = this.getClass().getResource("v2.0_STRI2012-geleideformulier-voorbeeld.xml");
+        List<Geleideformulier> result = instance.retrieveGeleideformulieren(Collections.singletonList(u));
+        assertEquals(1, result.size());
+        Geleideformulier form = result.get(0);
+        assertEquals(expResult, form.getGML());
+        assertEquals(5, form.getBijlages().size());
+        assertEquals("Voorbeeld", form.getNaam());
+        assertEquals("bestemmingsplan", form.getType());
+        assertEquals("vastgesteld", form.getStatus());
+        assertEquals("2012-07-01",form.getDatum());
+        assertEquals("IMRO2012",form.getVersie());
+        assertEquals("NL.IMRO.0000.AD16081970-V037",form.getIdentificatie());
     }
 
     /**

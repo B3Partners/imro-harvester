@@ -133,6 +133,50 @@ public class STRIParser2012 implements STRIParser{
                     String gml = onderdelen.getGML();
                     URL u = new URL(basisurl + gml);
 
+                    geleideformulier.getBijlages().add(new URL(basisurl + gml));
+
+                    if (onderdelen.getRegels() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getRegels()));
+                    }
+
+                    if (onderdelen.getToelichting() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getToelichting()));
+                    }
+
+                    if (onderdelen.getGeleideFormulier() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getGeleideFormulier()));
+                    }
+
+                    if (onderdelen.getVaststellingsBesluit() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getVaststellingsBesluit()));
+                    }
+
+                    if (onderdelen.getPlanTeksten() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getPlanTeksten()));
+                    }
+
+                    if (onderdelen.getBeleidsOfBesluitDocument() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getBeleidsOfBesluitDocument()));
+                    }
+
+                    List<String> bijlages = onderdelen.getBijlage();
+                    for (String bijlage : bijlages) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + bijlage));
+                    }
+
+                    List<String> illustraties = onderdelen.getIllustratie();
+                    for (String illustratie : illustraties) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + illustratie));
+                    }
+
+                    geleideformulier.setIdentificatie(gf.getPlan().getId());
+                    geleideformulier.setBasisURL(basisurl);
+                    geleideformulier.setDatum(eigenschappen.getDatum().toString());
+                    geleideformulier.setNaam(eigenschappen.getNaam());
+                    geleideformulier.setStatus(eigenschappen.getStatus().value());
+                    geleideformulier.setVersie(eigenschappen.getVersieGML());
+                    geleideformulier.setType(eigenschappen.getType().value());
+                    geleideformulier.setImro(onderdelen.getGML());
                 }
                 urls.add(geleideformulier);
             } catch (JAXBException ex) {
