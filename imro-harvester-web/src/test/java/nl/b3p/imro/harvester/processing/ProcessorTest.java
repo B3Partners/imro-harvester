@@ -51,6 +51,7 @@ public class ProcessorTest {
         downloadfolder = new File("target");
 
         URL u = new URL("http://files.b3p.nl/imroharvester/manifest.xml");
+        job.setType(HarvestJob.HarvestJobType.DIRECT);
         //URL u = this.getClass().getResource("testaaenhunze.html");
         //"https://www.ruimtelijkeplannen.nl/web-roi/index/showManifest?organizationId=aaenhunze&striVersion=STRI2008"
         job.setUrl(u.toString());
@@ -58,20 +59,21 @@ public class ProcessorTest {
 
     }
 
-    @Test
-    public void testParseRuimtelijkeplannenScraper() throws JAXBException, JDOMException {
+    @Test 
+    public void testGetManifestUrlScraper() throws JAXBException, JDOMException, IOException {
         job = new HarvestJob();
         job.setType(HarvestJob.HarvestJobType.RUIMTELIJKEPLANNENSCRAPER);
         job.setUrl("https://www.ruimtelijkeplannen.nl/web-roi/index/showManifest?organizationId=zaltbommel&striVersion=STRI2008");
         instance = new Processor(Collections.singletonList(job), downloadfolder);
-        instance.process();
+        URL u = instance.getManifestURL(job);
+        assertEquals(new URL("http://ruimtelijkeplannen.zaltbommel.nl/manifest.xml"), u);
     }
 
     /*
      * Test of getManifestURL method, of class Processor.
      */
     @Test
-    public void testGetManifestUrl() throws MalformedURLException, IOException {
+    public void testGetManifestUrlDirect() throws MalformedURLException, IOException {
         URL expResult = new URL("http://files.b3p.nl/imroharvester/manifest.xml");
         URL result = instance.getManifestURL(job);
         assertEquals(expResult, result);
