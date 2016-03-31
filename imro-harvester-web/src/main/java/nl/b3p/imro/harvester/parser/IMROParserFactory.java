@@ -21,14 +21,14 @@ import org.jdom2.input.SAXBuilder;
  */
 public class IMROParserFactory {
 
-    private IMROParser2012 imro2012;
+    private IMROParser2012_11 imro2012;
     private IMROParser2008 imro2008;
 
     private STRIParser2012 stri2012;
     private STRIParser2008 stri2008;
     
     public IMROParserFactory() throws JAXBException {
-        imro2012 = new IMROParser2012();
+        imro2012 = new IMROParser2012_11();
         imro2008 = new IMROParser2008();
 
         stri2012 = new STRIParser2012();

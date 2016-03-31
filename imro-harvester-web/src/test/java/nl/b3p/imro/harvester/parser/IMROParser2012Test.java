@@ -5,7 +5,7 @@
  */
 package nl.b3p.imro.harvester.parser;
 
-import nl.b3p.imro.harvester.parser.IMROParser2012;
+import nl.b3p.imro.harvester.parser.IMROParser2012_11;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -32,7 +32,7 @@ import org.junit.Before;
  */
 public class IMROParser2012Test {
 
-    protected IMROParser2012 instance;
+    protected IMROParser2012_11 instance;
 
     public IMROParser2012Test() {
 
@@ -40,11 +40,11 @@ public class IMROParser2012Test {
 
     @Before
     public void beforeTest() throws JAXBException {
-        instance = new IMROParser2012();
+        instance = new IMROParser2012_11();
     }
 
     /**
-     * Test of parseGML method, of class IMROParser2012.
+     * Test of parseGML method, of class IMROParser2012_11.
      */
     @Test
     public void testParseGML_Geleideformulier() throws Exception {
@@ -101,7 +101,7 @@ public class IMROParser2012Test {
     }
 
     /**
-     * Test of parseGML method, of class IMROParser2012.
+     * Test of parseGML method, of class IMROParser2012_11.
      */
     @Test
     public void testParseGML_URL() throws JAXBException, MalformedURLException {

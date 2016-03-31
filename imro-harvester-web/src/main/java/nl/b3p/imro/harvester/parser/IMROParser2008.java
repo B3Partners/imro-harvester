@@ -41,7 +41,8 @@ import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import nl.b3p.imro.harvester.entities.imro.WaardeEnType;
 import static nl.b3p.imro.harvester.parser.IMROParser.gc;
-import static nl.b3p.imro.harvester.parser.IMROParser2012.log;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  *
@@ -49,6 +50,7 @@ import static nl.b3p.imro.harvester.parser.IMROParser2012.log;
  */
 public class IMROParser2008 implements IMROParser{
 
+    protected final static Log log = LogFactory.getLog(IMROParser2008.class);
     private JAXBContext context = null;
 
     public IMROParser2008() throws JAXBException {

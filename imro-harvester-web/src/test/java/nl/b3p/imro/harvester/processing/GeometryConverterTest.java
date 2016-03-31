@@ -5,7 +5,7 @@
  */
 package nl.b3p.imro.harvester.processing;
 
-import nl.b3p.imro.harvester.parser.IMROParser2012;
+import nl.b3p.imro.harvester.parser.IMROParser2012_11;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import java.io.IOException;
 import java.net.URL;
@@ -77,7 +77,7 @@ public class GeometryConverterTest {
     public void testGebiedsaanduidingViaParser() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException, JAXBException {
         URL url = this.getClass().getResource("2012.gml");
 
-        IMROParser2012 p = new IMROParser2012();
+        IMROParser2012_11 p = new IMROParser2012_11();
         List<Object> os = p.parseGML(url);
         for (Object o : os) {
             if(o instanceof Gebiedsaanduiding){
@@ -91,7 +91,7 @@ public class GeometryConverterTest {
     public void testDubbelbestemmingViaParser() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException, JAXBException {
         URL url = this.getClass().getResource("2012.gml");
 
-        IMROParser2012 p = new IMROParser2012();
+        IMROParser2012_11 p = new IMROParser2012_11();
         List<Object> os = p.parseGML(url);
         for (Object o : os) {
             if(o instanceof Dubbelbestemming){

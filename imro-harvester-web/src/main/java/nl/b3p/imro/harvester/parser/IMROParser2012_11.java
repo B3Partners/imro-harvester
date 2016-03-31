@@ -50,12 +50,12 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
-public class IMROParser2012 implements IMROParser{
+public class IMROParser2012_11 implements IMROParser{
     
-    protected final static Log log = LogFactory.getLog(IMROParser2012.class);
+    protected final static Log log = LogFactory.getLog(IMROParser2012_11.class);
     private JAXBContext context = null;
 
-    public IMROParser2012() throws JAXBException{
+    public IMROParser2012_11() throws JAXBException{
         context = JAXBContext.newInstance("nl.b3p.imro._2012._11");
     }
 

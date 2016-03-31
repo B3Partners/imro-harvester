@@ -6,7 +6,7 @@
 package nl.b3p.imro.harvester.parser;
 
 import nl.b3p.imro.harvester.parser.IMROParserFactory;
-import nl.b3p.imro.harvester.parser.IMROParser2012;
+import nl.b3p.imro.harvester.parser.IMROParser2012_11;
 import nl.b3p.imro.harvester.parser.IMROParser2008;
 import nl.b3p.imro.harvester.parser.IMROParser;
 import java.net.URL;
@@ -48,7 +48,7 @@ public class IMROParserFactoryTest {
         });
 
         IMROParser result = instance.getParser(geleideformulier);
-        assertEquals(IMROParser2012.class, result.getClass());
+        assertEquals(IMROParser2012_11.class, result.getClass());
     }
 
  //  @Test
@@ -65,7 +65,7 @@ public class IMROParserFactoryTest {
         });
 
         IMROParser result = instance.getParser(geleideformulier);
-        assertEquals(IMROParser2012.class, result.getClass());
+        assertEquals(IMROParser2012_11.class, result.getClass());
     }
 
     @Test
