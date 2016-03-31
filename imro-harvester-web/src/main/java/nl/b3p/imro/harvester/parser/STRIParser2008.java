@@ -17,6 +17,7 @@ import nl.b3p.stri._2008._1.Manifest;
 import nl.b3p.stri._2008._1.Plan;
 import nl.b3p.stri._2008._1.Plan.Eigenschappen;
 import nl.b3p.stri._2008._1.Plan.Onderdelen;
+
 /**
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
@@ -41,7 +42,6 @@ public class STRIParser2008 implements STRIParser {
         Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
         for (URL formulierURL : geleideformulieren) {
 
-
             Manifest manifest = (Manifest) jaxbUnmarshaller.unmarshal(formulierURL);
             List<Plan> plannen = manifest.getPlan();
             for (Plan plan : plannen) {
@@ -50,7 +50,74 @@ public class STRIParser2008 implements STRIParser {
                 Onderdelen onderdelen = plan.getOnderdelen();
                 Plan.Supplementen supplementen = plan.getSupplementen();
                 String identificatie = plan.getId();
+                String basisURL = onderdelen.getBasisURL();
 
+                geleideformulier.setIdentificatie(identificatie);
+                geleideformulier.setNaam(eigenschappen.getNaam());
+                geleideformulier.setType(eigenschappen.getType().value());
+                geleideformulier.setStatus(eigenschappen.getStatus().value());
+                geleideformulier.setDatum(eigenschappen.getDatum().toString());
+                geleideformulier.setVersie(eigenschappen.getVersieIMRO());
+                geleideformulier.setBasisURL(basisURL);
+
+                for (String regel : onderdelen.getRegels() ) {
+                    geleideformulier.getBijlages().add(new URL(basisURL + regel));
+                }
+
+                for (String regelsBijlage : onderdelen.getRegelsBijlage()) {
+                    geleideformulier.getBijlages().add(new URL(basisURL + regelsBijlage));
+                }
+
+                for (String toelichting : onderdelen.getToelichting()) {
+                    geleideformulier.getBijlages().add(new URL(basisURL + toelichting));
+                }
+
+                for (String toelichtingBijlage : onderdelen.getToelichtingBijlage()) {
+                    geleideformulier.getBijlages().add(new URL(basisURL + toelichtingBijlage));
+                }
+
+                if (onderdelen.getGeleideFormulier() != null) {
+                    geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getGeleideFormulier()));
+                }
+
+                if (onderdelen.getVaststellingsBesluit() != null) {
+                    geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getVaststellingsBesluit()));
+                }
+
+                if (onderdelen.getPlanTeksten() != null) {
+                    geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getPlanTeksten()));
+                }
+
+                for (String beleidsDocument : onderdelen.getBeleidsDocument()) {
+                    geleideformulier.getBijlages().add(new URL(basisURL + beleidsDocument));
+                }
+
+                for (String beleidsDocumentBijlage : onderdelen.getBeleidsDocumentBijlage()) {
+                    geleideformulier.getBijlages().add(new URL(basisURL + beleidsDocumentBijlage));
+                }
+
+                if (onderdelen.getBesluitDocument() != null) {
+                    geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getBesluitDocument()));
+                }
+
+                for( String besldocbijl : onderdelen.getBesluitDocumentBijlage()){
+                    geleideformulier.getBijlages().add(new URL(basisURL + besldocbijl));
+                }
+
+                for (String beleidsTekst : onderdelen.getBeleidsTekst()) {
+                    geleideformulier.getBijlages().add(new URL(basisURL + beleidsTekst));
+                }
+
+                for (String beleidsTekstBijlage : onderdelen.getBeleidsTekstBijlage()) {
+                    geleideformulier.getBijlages().add(new URL(basisURL + beleidsTekstBijlage));
+                }
+
+                for (String illustratie : onderdelen.getIllustratie()) {
+                    geleideformulier.getBijlages().add(new URL(basisURL + illustratie));
+                }
+
+
+                geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getIMRO()));
                 formulieren.add(geleideformulier);
             }
 
