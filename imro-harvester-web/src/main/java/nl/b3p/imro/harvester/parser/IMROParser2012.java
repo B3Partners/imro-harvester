@@ -28,13 +28,13 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import nl.b3p.imro._2012._1.BestemmingsvlakPropertyType;
+import nl.b3p.imro._2012._11.BestemmingsvlakPropertyType;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
-import nl.b3p.imro._2012._1.FeatureCollectionIMROType;
-import nl.b3p.imro._2012._1.NEN3610IDType;
-import nl.b3p.imro._2012._1.WaardeEnTypePropertyType;
-import nl.b3p.imro._2012._1.WaardeEnTypeType;
+import nl.b3p.imro._2012._11.FeatureCollectionIMROType;
+import nl.b3p.imro._2012._11.NEN3610IDType;
+import nl.b3p.imro._2012._11.WaardeEnTypePropertyType;
+import nl.b3p.imro._2012._11.WaardeEnTypeType;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
@@ -56,7 +56,7 @@ public class IMROParser2012 implements IMROParser{
     private JAXBContext context = null;
 
     public IMROParser2012() throws JAXBException{
-        context = JAXBContext.newInstance("nl.b3p.imro._2012._1");
+        context = JAXBContext.newInstance("nl.b3p.imro._2012._11");
     }
 
 
@@ -102,23 +102,23 @@ public class IMROParser2012 implements IMROParser{
     @Override
     public Object parseFeatureMember(Object o) {
         Object obj = null;
-        if (o instanceof nl.b3p.imro._2012._1.GebiedsaanduidingType) {
+        if (o instanceof nl.b3p.imro._2012._11.GebiedsaanduidingType) {
             obj = parseImroGebiedsaanduiding(o);
-        } else if (o instanceof nl.b3p.imro._2012._1.BestemmingsplangebiedType) {
+        } else if (o instanceof nl.b3p.imro._2012._11.BestemmingsplangebiedType) {
             obj = parseImroBestemmingsplan(o);
-        } else if(o instanceof nl.b3p.imro._2012._1.DubbelbestemmingType){
+        } else if(o instanceof nl.b3p.imro._2012._11.DubbelbestemmingType){
             obj = parseImroDubbelbestemming(o);
-        }else if(o instanceof nl.b3p.imro._2012._1.EnkelbestemmingType) {
+        }else if(o instanceof nl.b3p.imro._2012._11.EnkelbestemmingType) {
             obj = parseImroEnkelbestemming(o);
-        }else if (o instanceof nl.b3p.imro._2012._1.MaatvoeringType){
+        }else if (o instanceof nl.b3p.imro._2012._11.MaatvoeringType){
             obj = parseImroMaatvoering(o);
-        } else if(o instanceof nl.b3p.imro._2012._1.BouwvlakType){
+        } else if(o instanceof nl.b3p.imro._2012._11.BouwvlakType){
             obj = parseImroBouwvlak(o);
-        } else if(o instanceof nl.b3p.imro._2012._1.FunctieaanduidingType){
+        } else if(o instanceof nl.b3p.imro._2012._11.FunctieaanduidingType){
             obj = parseImroFunctieaanduiding(o);
-        } else if ( o instanceof nl.b3p.imro._2012._1.FiguurType){
+        } else if ( o instanceof nl.b3p.imro._2012._11.FiguurType){
             obj = parseImroFiguur(o);
-        } else if ( o instanceof nl.b3p.imro._2012._1.BouwaanduidingType){
+        } else if ( o instanceof nl.b3p.imro._2012._11.BouwaanduidingType){
             obj = parseImroBouwaanduiding(o);
         }else{
             log.error("Unknown type of featuremember when parsing. Class encountered: " + o.getClass().toString());
@@ -130,7 +130,7 @@ public class IMROParser2012 implements IMROParser{
     @Override
     public Bestemmingsplan parseImroBestemmingsplan(Object o) {
         Bestemmingsplan bp = new Bestemmingsplan();
-        nl.b3p.imro._2012._1.BestemmingsplangebiedType bpgt = (nl.b3p.imro._2012._1.BestemmingsplangebiedType) o;
+        nl.b3p.imro._2012._11.BestemmingsplangebiedType bpgt = (nl.b3p.imro._2012._11.BestemmingsplangebiedType) o;
 
         String identificatie = getIdentificatie(bpgt.getIdentificatie().getNEN3610ID());
         bp.setTypePlan(bpgt.getTypePlan().value());
@@ -154,7 +154,7 @@ public class IMROParser2012 implements IMROParser{
     @Override
     public Dubbelbestemming parseImroDubbelbestemming(Object o){
         Dubbelbestemming db = new Dubbelbestemming();
-        nl.b3p.imro._2012._1.DubbelbestemmingType dbt = (nl.b3p.imro._2012._1.DubbelbestemmingType) o;
+        nl.b3p.imro._2012._11.DubbelbestemmingType dbt = (nl.b3p.imro._2012._11.DubbelbestemmingType) o;
         String identificatie = getIdentificatie(dbt.getIdentificatie().getNEN3610ID());
 
 
@@ -176,7 +176,7 @@ public class IMROParser2012 implements IMROParser{
     @Override
     public Gebiedsaanduiding parseImroGebiedsaanduiding(Object o) {
         Gebiedsaanduiding gba = new Gebiedsaanduiding();
-        nl.b3p.imro._2012._1.GebiedsaanduidingType ga = (nl.b3p.imro._2012._1.GebiedsaanduidingType) o;
+        nl.b3p.imro._2012._11.GebiedsaanduidingType ga = (nl.b3p.imro._2012._11.GebiedsaanduidingType) o;
 
         String identificatie = getIdentificatie(ga.getIdentificatie().getNEN3610ID());
 
@@ -198,7 +198,7 @@ public class IMROParser2012 implements IMROParser{
     @Override
     public Bouwvlak parseImroBouwvlak(Object o){
         Bouwvlak bv = new Bouwvlak();
-        nl.b3p.imro._2012._1.BouwvlakType bvt = (nl.b3p.imro._2012._1.BouwvlakType) o;
+        nl.b3p.imro._2012._11.BouwvlakType bvt = (nl.b3p.imro._2012._11.BouwvlakType) o;
         String identificatie = getIdentificatie(bvt.getIdentificatie().getNEN3610ID());
 
         bv.setIdentificatie(identificatie);
@@ -218,7 +218,7 @@ public class IMROParser2012 implements IMROParser{
     @Override
     public Functieaanduiding parseImroFunctieaanduiding(Object o){
         Functieaanduiding fa = new Functieaanduiding();
-        nl.b3p.imro._2012._1.FunctieaanduidingType fat = (nl.b3p.imro._2012._1.FunctieaanduidingType) o;
+        nl.b3p.imro._2012._11.FunctieaanduidingType fat = (nl.b3p.imro._2012._11.FunctieaanduidingType) o;
         String identificatie = getIdentificatie(fat.getIdentificatie().getNEN3610ID());
 
         fa.setIdentificatie(identificatie);
@@ -240,7 +240,7 @@ public class IMROParser2012 implements IMROParser{
     @Override
     public Figuur parseImroFiguur(Object o){
         Figuur fa = new Figuur();
-        nl.b3p.imro._2012._1.FiguurType fat = (nl.b3p.imro._2012._1.FiguurType) o;
+        nl.b3p.imro._2012._11.FiguurType fat = (nl.b3p.imro._2012._11.FiguurType) o;
         String identificatie = getIdentificatie(fat.getIdentificatie().getNEN3610ID());
 
         fa.setIdentificatie(identificatie);
@@ -262,7 +262,7 @@ public class IMROParser2012 implements IMROParser{
     @Override
     public Bouwaanduiding parseImroBouwaanduiding(Object o){
         Bouwaanduiding ba = new Bouwaanduiding();
-        nl.b3p.imro._2012._1.BouwaanduidingType fat = (nl.b3p.imro._2012._1.BouwaanduidingType) o;
+        nl.b3p.imro._2012._11.BouwaanduidingType fat = (nl.b3p.imro._2012._11.BouwaanduidingType) o;
         String identificatie = getIdentificatie(fat.getIdentificatie().getNEN3610ID());
 
         ba.setIdentificatie(identificatie);
@@ -284,7 +284,7 @@ public class IMROParser2012 implements IMROParser{
     @Override
     public Enkelbestemming parseImroEnkelbestemming(Object o){
         Enkelbestemming eb = new Enkelbestemming();
-        nl.b3p.imro._2012._1.EnkelbestemmingType ebt = (nl.b3p.imro._2012._1.EnkelbestemmingType) o;
+        nl.b3p.imro._2012._11.EnkelbestemmingType ebt = (nl.b3p.imro._2012._11.EnkelbestemmingType) o;
         String identificatie = getIdentificatie(ebt.getIdentificatie().getNEN3610ID());
 
         eb.setArtikelnummer(ebt.getArtikelnummer());
@@ -304,7 +304,7 @@ public class IMROParser2012 implements IMROParser{
     @Override
     public Maatvoering parseImroMaatvoering(Object o){
         Maatvoering mv = new Maatvoering();
-        nl.b3p.imro._2012._1.MaatvoeringType ebt = (nl.b3p.imro._2012._1.MaatvoeringType) o;
+        nl.b3p.imro._2012._11.MaatvoeringType ebt = (nl.b3p.imro._2012._11.MaatvoeringType) o;
         String identificatie = getIdentificatie(ebt.getIdentificatie().getNEN3610ID());
 
         mv.setIdentificatie(identificatie);
