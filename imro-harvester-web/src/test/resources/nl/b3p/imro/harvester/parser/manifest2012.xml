@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Manifest xmlns="http://www.geonovum.nl/stri/2012/1.0" xmlns:stri="http://www.geonovum.nl/stri/2012/1.0" xsi:schemaLocation="http://www.geonovum.nl/stri/2012/1.0 http://schemas.geonovum.nl/stri/2012/1.0/STRI2012.xsd" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OverheidsCode="1680" NaamOverheid="Gemeente Aa en Hunze" Datum="2016-02-29">
+<?xml version="1.0" encoding="utf-8"?>
+<Manifest xmlns="http://www.geonovum.nl/stri/2012/1.0" xmlns:stri="http://www.geonovum.nl/stri/2012/1.0" xsi:schemaLocation="http://www.geonovum.nl/stri/2012/1.0 http://schemas.geonovum.nl/stri/2012/1.0/STRI2012.xsd" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OverheidsCode="1680" NaamOverheid="Gemeente Aa en Hunze" Datum="2016-02-29">
     <Dossier Id="NL.IMRO.1680.1800030105" Status="in voorbereiding">
         <Plan Id="NL.IMRO.1680.1800030105-0000">
             <Naam>Gieterveen</Naam>

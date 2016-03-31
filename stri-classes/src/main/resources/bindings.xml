@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="2.0" xmlns:gml="http://www.opengis.net/gml">
+
+	<bindings schemaLocation="./STRI2008.xsd">
+		<schemaBindings>
+			<package name="nl.b3p.stri._2008._1"/>
+		</schemaBindings>
+	</bindings>
+		<bindings schemaLocation="http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd">
+		<schemaBindings>
+			<package name="org.w3._2000._09.xmldsig_"/>
+		</schemaBindings>
+	</bindings>
+</bindings>

@@ -18,7 +18,7 @@ OverheidsCode="1234" NaamOverheid="Durperdam" Datum="2010-11-08T12:23:43.843+01:
 			<GeleideFormulier>g_NL.IMRO.1234.BP0013-0001.xml</GeleideFormulier>			
 		</Onderdelen>
 	</Plan>
-	<Plan Historisch="false" Id="NL.IMRO.1234.SV0014-0001">
+	<!--Plan Historisch="false" Id="NL.IMRO.1234.SV0014-0001">
 		<Eigenschappen>
 			<Naam>Structuurvisie Ongerweges</Naam>
 			<Type>structuurvisie</Type>
@@ -34,7 +34,7 @@ OverheidsCode="1234" NaamOverheid="Durperdam" Datum="2010-11-08T12:23:43.843+01:
 			<BeleidsDocument>d_NL.IMRO.1234.SV0014-0001.pdf</BeleidsDocument>
 			<GeleideFormulier>g_NL.IMRO.1234.SV0014-0001.xml</GeleideFormulier>
 		</Onderdelen>
-	</Plan>
+	</Plan-->
 	<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
 		<SignedInfo>
 			<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
