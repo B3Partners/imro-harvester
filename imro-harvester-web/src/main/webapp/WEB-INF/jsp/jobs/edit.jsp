@@ -12,20 +12,35 @@
         <%@include file="/WEB-INF/jsp/commons/headerlinks.jsp" %>
     </stripes:layout-component>
 
-        <stripes:layout-component name="content">
-        <h1>Add The Jobs!</h1>
+    <stripes:layout-component name="content">
+        <c:choose>
+            <c:when test="${actionBean.job.id == 0}">
+                <h1>Voeg een harvestjob toe</h1>
+            </c:when>
+            <c:otherwise>
+                <h1>Bewerk een harvestjob</h1>
+            </c:otherwise>
+        </c:choose>
         <stripes:form   beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean">
             <stripes:hidden name="job" value="${job.id}"/>
-            <stripes:text name="job.url"/>
-            <stripes:select name="job.type">
-                <stripes:option value="">Select One</stripes:option>
-                <stripes:options-enumeration label="value" enum="nl.b3p.imro.harvester.entities.HarvestJob.HarvestJobType"/>
-            </stripes:select>
-            <stripes:submit name="save"/><stripes:reset name="reset"/>
+            <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">URL</span>
+                <stripes:text class="form-control" name="job.url" />
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">Type URL</span>
+                <stripes:select name="job.type" class="selectpicker">
+                    <stripes:option value="">Select One</stripes:option>
+                    <stripes:options-enumeration label="value" enum="nl.b3p.imro.harvester.entities.HarvestJob.HarvestJobType"/>
+                </stripes:select>
+            </div>
+            <div>
+                <stripes:submit name="save" value="Opslaan" class="btn btn-info"/><stripes:reset name="reset" class="btn btn-danger"/>
+            </div>
         </stripes:form>
 
         <script>
             var currentpage = 'harvestjobs';
         </script>
-        </stripes:layout-component>
+    </stripes:layout-component>
 </stripes:layout-render>

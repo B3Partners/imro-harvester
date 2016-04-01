@@ -15,7 +15,7 @@
     </stripes:layout-component>
 
     <stripes:layout-component name="content">
-        <h1>All The Jobs!</h1>
+        <h1>Alle harvestjobs</h1>
         <h2>Overzicht</h2>
         <div class="table-responsive">
             <table class="table table-hover table-bordered table-striped">
