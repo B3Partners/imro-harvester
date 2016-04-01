@@ -125,6 +125,6 @@ public class Geleideformulier {
 
     @Override
     public String toString(){
-        return identificatie + " from " + basisURL;
+        return identificatie + " from " + basisURL + ": " + getStatus() + " - " + getDatum();
     }
 }

@@ -30,6 +30,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.RollbackException;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
+import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.parser.Geleideformulier;
 import nl.b3p.imro.harvester.parser.STRIParser;
 import org.apache.commons.io.FileUtils;
@@ -77,6 +78,10 @@ public class Processor {
                     List<Geleideformulier> geleideformulieren = striParser.retrieveGeleideformulieren(geleideformulierenURLS);
 
                     for (Geleideformulier geleideformulier : geleideformulieren) {
+                        if(checkIfExists(geleideformulier, em)){
+                            log.debug("Geleideformulier already in db: " + geleideformulier.toString());
+                            continue;
+                        }
                         log.debug("Processing geleideformulier: " + geleideformulier.toString());
                         try {
                             IMROParser parser = factory.getIMROParser(geleideformulier);
@@ -143,6 +148,17 @@ public class Processor {
         Element link = els.first();
         String url = link.attr("href");
         return new URL(url);
+    }
+
+    public boolean checkIfExists(Geleideformulier formulier,EntityManager em){
+        List<Bestemmingsplan> plannen = em.createNativeQuery("FROM Bestemmingsplan WHERE naam = :naam and typePlan = :typePlan and planstatusDatum = :datum and planstatusInfo = :status "
+                + "and identificatie = :identificatie",Bestemmingsplan.class)
+                .setParameter("naam", formulier.getNaam())
+                .setParameter("typePlan", formulier.getType())
+                .setParameter("datum", formulier.getDatum())
+                .setParameter("status", formulier.getStatus())
+                .setParameter("identificatie", formulier.getIdentificatie()).getResultList();
+        return plannen.size() > 0;
     }
     // </editor-fold>
 
