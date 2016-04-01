@@ -12,7 +12,6 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import nl.b3p.imro.harvester.processing.Processor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -73,110 +72,114 @@ public class STRIParser2012 implements STRIParser{
                 // Support two versions of the manifest. Sadly, almost the same, but namespaces in xsd differ.
                 if (geleideformulierObject instanceof nl.geonovum.stri._2012._1.GeleideFormulier) {
                     nl.geonovum.stri._2012._1.GeleideFormulier gf = (nl.geonovum.stri._2012._1.GeleideFormulier) geleideformulierObject;
-                    nl.geonovum.stri._2012._1.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
                     nl.geonovum.stri._2012._1.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
+                    
+                    if (eigenschappen.getType().equals(nl.geonovum.stri._2012._1.TypePlan.BESTEMMINGSPLAN)) {
+                        nl.geonovum.stri._2012._1.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
 
-                    String basisurl = onderdelen.getBasisURL();
-                    String gml = onderdelen.getIMRO();
+                        String basisurl = onderdelen.getBasisURL();
+                        String gml = onderdelen.getIMRO();
 
-                    geleideformulier.getBijlages().add(new URL(basisurl + gml));
+                        geleideformulier.getBijlages().add(new URL(basisurl + gml));
 
-                    if (onderdelen.getRegels() != null) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getRegels()));
+                        if (onderdelen.getRegels() != null) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getRegels()));
+                        }
+
+                        if (onderdelen.getToelichting() != null) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getToelichting()));
+                        }
+
+                        if (onderdelen.getGeleideFormulier() != null) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getGeleideFormulier()));
+                        }
+
+                        if (onderdelen.getVaststellingsBesluit() != null) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getVaststellingsBesluit()));
+                        }
+
+                        if (onderdelen.getPlanTeksten() != null) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getPlanTeksten()));
+                        }
+
+                        if (onderdelen.getBeleidsOfBesluitDocument() != null) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getBeleidsOfBesluitDocument()));
+                        }
+
+                        List<String> bijlages = onderdelen.getBijlage();
+                        for (String bijlage : bijlages) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + bijlage));
+                        }
+
+                        List<String> illustraties = onderdelen.getIllustratie();
+                        for (String illustratie : illustraties) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + illustratie));
+                        }
+
+                        geleideformulier.setIdentificatie(gf.getPlan().getId());
+                        geleideformulier.setBasisURL(basisurl);
+                        geleideformulier.setDatum(eigenschappen.getDatum().toString());
+                        geleideformulier.setNaam(eigenschappen.getNaam());
+                        geleideformulier.setStatus(eigenschappen.getStatus().value());
+                        geleideformulier.setVersie(eigenschappen.getVersieIMRO());
+                        geleideformulier.setType(eigenschappen.getType().value());
+                        geleideformulier.setImro(onderdelen.getIMRO());
                     }
-
-                    if (onderdelen.getToelichting() != null) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getToelichting()));
-                    }
-
-                    if (onderdelen.getGeleideFormulier() != null) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getGeleideFormulier()));
-                    }
-
-                    if (onderdelen.getVaststellingsBesluit() != null) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getVaststellingsBesluit()));
-                    }
-
-                    if (onderdelen.getPlanTeksten() != null) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getPlanTeksten()));
-                    }
-
-                    if (onderdelen.getBeleidsOfBesluitDocument() != null) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getBeleidsOfBesluitDocument()));
-                    }
-
-                    List<String> bijlages = onderdelen.getBijlage();
-                    for (String bijlage : bijlages) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + bijlage));
-                    }
-
-                    List<String> illustraties = onderdelen.getIllustratie();
-                    for (String illustratie : illustraties) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + illustratie));
-                    }
-
-                    geleideformulier.setIdentificatie(gf.getPlan().getId());
-                    geleideformulier.setBasisURL(basisurl);
-                    geleideformulier.setDatum(eigenschappen.getDatum().toString());
-                    geleideformulier.setNaam(eigenschappen.getNaam());
-                    geleideformulier.setStatus(eigenschappen.getStatus().value());
-                    geleideformulier.setVersie(eigenschappen.getVersieIMRO());
-                    geleideformulier.setType(eigenschappen.getType().value());
-                    geleideformulier.setImro(onderdelen.getIMRO());
-
                 } else if (geleideformulierObject instanceof nl.geonovum.stri._2012._2.GeleideFormulier) {
                     nl.geonovum.stri._2012._2.GeleideFormulier gf = (nl.geonovum.stri._2012._2.GeleideFormulier) geleideformulierObject;
-                    nl.geonovum.stri._2012._2.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
-
                     nl.geonovum.stri._2012._2.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
-                    String basisurl = onderdelen.getBasisURL();
-                    String gml = onderdelen.getGML();
-                    URL u = new URL(basisurl + gml);
 
-                    geleideformulier.getBijlages().add(new URL(basisurl + gml));
+                    if (eigenschappen.getType().equals(nl.geonovum.stri._2012._2.TypePlan.BESTEMMINGSPLAN)) {
+                        nl.geonovum.stri._2012._2.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
+                        String basisurl = onderdelen.getBasisURL();
+                        String gml = onderdelen.getGML();
+                        URL u = new URL(basisurl + gml);
 
-                    if (onderdelen.getRegels() != null) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getRegels()));
+                        geleideformulier.getBijlages().add(new URL(basisurl + gml));
+
+                        if (onderdelen.getRegels() != null) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getRegels()));
+                        }
+
+                        if (onderdelen.getToelichting() != null) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getToelichting()));
+                        }
+
+                        if (onderdelen.getGeleideFormulier() != null) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getGeleideFormulier()));
+                        }
+
+                        if (onderdelen.getVaststellingsBesluit() != null) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getVaststellingsBesluit()));
+                        }
+
+                        if (onderdelen.getPlanTeksten() != null) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getPlanTeksten()));
+                        }
+
+                        if (onderdelen.getBeleidsOfBesluitDocument() != null) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getBeleidsOfBesluitDocument()));
+                        }
+
+                        List<String> bijlages = onderdelen.getBijlage();
+                        for (String bijlage : bijlages) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + bijlage));
+                        }
+
+                        List<String> illustraties = onderdelen.getIllustratie();
+                        for (String illustratie : illustraties) {
+                            geleideformulier.getBijlages().add(new URL(basisurl + illustratie));
+                        }
+
+                        geleideformulier.setIdentificatie(gf.getPlan().getId());
+                        geleideformulier.setBasisURL(basisurl);
+                        geleideformulier.setDatum(eigenschappen.getDatum().toString());
+                        geleideformulier.setNaam(eigenschappen.getNaam());
+                        geleideformulier.setStatus(eigenschappen.getStatus().value());
+                        geleideformulier.setVersie(eigenschappen.getVersieGML());
+                        geleideformulier.setType(eigenschappen.getType().value());
+                        geleideformulier.setImro(onderdelen.getGML());
                     }
-
-                    if (onderdelen.getToelichting() != null) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getToelichting()));
-                    }
-
-                    if (onderdelen.getGeleideFormulier() != null) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getGeleideFormulier()));
-                    }
-
-                    if (onderdelen.getVaststellingsBesluit() != null) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getVaststellingsBesluit()));
-                    }
-
-                    if (onderdelen.getPlanTeksten() != null) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getPlanTeksten()));
-                    }
-
-                    if (onderdelen.getBeleidsOfBesluitDocument() != null) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getBeleidsOfBesluitDocument()));
-                    }
-
-                    List<String> bijlages = onderdelen.getBijlage();
-                    for (String bijlage : bijlages) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + bijlage));
-                    }
-
-                    List<String> illustraties = onderdelen.getIllustratie();
-                    for (String illustratie : illustraties) {
-                        geleideformulier.getBijlages().add(new URL(basisurl + illustratie));
-                    }
-
-                    geleideformulier.setIdentificatie(gf.getPlan().getId());
-                    geleideformulier.setBasisURL(basisurl);
-                    geleideformulier.setDatum(eigenschappen.getDatum().toString());
-                    geleideformulier.setNaam(eigenschappen.getNaam());
-                    geleideformulier.setStatus(eigenschappen.getStatus().value());
-                    geleideformulier.setVersie(eigenschappen.getVersieGML());
-                    geleideformulier.setType(eigenschappen.getType().value());
-                    geleideformulier.setImro(onderdelen.getGML());
                 }
                 urls.add(geleideformulier);
             } catch (JAXBException ex) {
