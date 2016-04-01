@@ -5,7 +5,6 @@
  */
 package nl.b3p.imro.harvester.parser;
 
-import nl.b3p.imro.harvester.parser.IMROParser2012_11;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,7 +20,6 @@ import nl.b3p.imro.harvester.entities.imro.Figuur;
 import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
-import nl.b3p.imro.harvester.parser.Geleideformulier;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -314,4 +312,24 @@ public class IMROParser2012_11Test {
         assertNotEquals(0, o.size());
     }
 
+    @Test
+    public void testGeomCollections() throws JAXBException{
+        URL u = this.getClass().getResource("2012v10GeomCollection.gml");
+
+        List<Object> o = instance.parseGML(u);
+        assertNotNull(o);
+        assertEquals(16, o.size());
+        Bestemmingsplan bp = null;
+        for (Object obj : o) {
+            if(obj instanceof Bestemmingsplan){
+                bp = (Bestemmingsplan)obj;
+                break;
+            }
+        }
+        assertNotNull(bp);
+
+        assertEquals(MultiPolygon.class, bp.getGeometrie().getClass());
+        assertFalse(bp.getGeometrie().isEmpty());
+
+    }
 }

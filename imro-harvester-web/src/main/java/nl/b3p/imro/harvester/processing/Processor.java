@@ -23,10 +23,13 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 import javax.persistence.RollbackException;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
@@ -52,6 +55,7 @@ public class Processor {
     private static final Log log = LogFactory.getLog(Processor.class);
     private Integer timeout;
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private ParserFactory factory;
     private File downloadfolder;
 
@@ -118,11 +122,13 @@ public class Processor {
 
                 } catch (IOException ex) {
                     log.error("Cannot get manifest url for HarvestJob " + job.getId() + " - " + job.getUrl(), ex);
+                } catch (ParseException ex) {
+                    log.error("Cannot parse date"+  job.getId() + " - " + job.getUrl(), ex);
                 }
             } catch (IOException ex) {
-                log.error("Cannot parse manifest");
+                log.error("Cannot parse manifest", ex);
             } catch (JAXBException ex) {
-                log.error("Cannot unmarshal manifest");
+                log.error("Cannot unmarshal manifest", ex);
             }
         }
     }
@@ -150,14 +156,16 @@ public class Processor {
         return new URL(url);
     }
 
-    public boolean checkIfExists(Geleideformulier formulier,EntityManager em){
-        List<Bestemmingsplan> plannen = em.createNativeQuery("FROM Bestemmingsplan WHERE naam = :naam and typePlan = :typePlan and planstatusDatum = :datum and planstatusInfo = :status "
+    public boolean checkIfExists(Geleideformulier formulier,EntityManager em) throws ParseException{
+        Query q = em.createQuery("FROM Bestemmingsplan WHERE naam = :naam and typePlan = :typePlan and planstatusDatum = :datum and planstatusInfo = :status "
                 + "and identificatie = :identificatie",Bestemmingsplan.class)
                 .setParameter("naam", formulier.getNaam())
                 .setParameter("typePlan", formulier.getType())
-                .setParameter("datum", formulier.getDatum())
                 .setParameter("status", formulier.getStatus())
-                .setParameter("identificatie", formulier.getIdentificatie()).getResultList();
+                .setParameter("identificatie", formulier.getIdentificatie())
+                .setParameter("datum", sdf.parse(formulier.getDatum()));
+  
+        List<Bestemmingsplan> plannen = q .getResultList();
         return plannen.size() > 0;
     }
     // </editor-fold>
