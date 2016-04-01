@@ -20,6 +20,12 @@
          </imro:symboolInfo>
          <imro:maatvoeringInfo>
             <imro:WaardeEnType>
+               <imro:waarde>371</imro:waarde>
+               <imro:waardeType>other: vrije tekst1</imro:waardeType>
+            </imro:WaardeEnType>   
+         </imro:maatvoeringInfo>  
+         <imro:maatvoeringInfo>
+            <imro:WaardeEnType>
                <imro:waarde>370</imro:waarde>
                <imro:waardeType>other: vrije tekst</imro:waardeType>
             </imro:WaardeEnType>

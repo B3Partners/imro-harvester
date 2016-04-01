@@ -30,11 +30,11 @@ import org.junit.Before;
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
-public class IMROParser2012Test {
+public class IMROParser2012_11Test {
 
     protected IMROParser2012_11 instance;
 
-    public IMROParser2012Test() {
+    public IMROParser2012_11Test() {
 
     }
 
@@ -202,10 +202,13 @@ public class IMROParser2012Test {
         assertEquals("maatvoering", mv.getTypePlanObject());
         assertEquals("maximum aantal bouwlagen", mv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",mv.getGeometrie());
-        assertEquals(1,mv.getWaardeEnType().size());
+        assertEquals(2,mv.getWaardeEnType().size());
         assertEquals("maximum aantal bouwlagen", mv.getWaardeEnType().get(0).getWaardeType());
         assertEquals("8", mv.getWaardeEnType().get(0).getWaarde());
         assertEquals("s120", mv.getWaardeEnType().get(0).getSymboolCode());
+        assertEquals("maximum aantal bouwlagen1", mv.getWaardeEnType().get(1).getWaardeType());
+        assertEquals("18", mv.getWaardeEnType().get(1).getWaarde());
+        assertEquals("s121", mv.getWaardeEnType().get(1).getSymboolCode());
     }
 
     @Test

@@ -238,9 +238,11 @@ public class IMROParser2008Test {
         assertEquals("maatvoering", mv.getTypePlanObject());
         assertEquals("maximum oppervlakte (m2)", mv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",mv.getGeometrie());
-        assertEquals(1,mv.getWaardeEnType().size());
-        assertEquals("370", mv.getWaardeEnType().get(0).getWaarde());
-        assertEquals("other: vrije tekst", mv.getWaardeEnType().get(0).getWaardeType());
+        assertEquals(2,mv.getWaardeEnType().size());
+        assertEquals("371", mv.getWaardeEnType().get(0).getWaarde());
+        assertEquals("other: vrije tekst1", mv.getWaardeEnType().get(0).getWaardeType());
+        assertEquals("370", mv.getWaardeEnType().get(1).getWaarde());
+        assertEquals("other: vrije tekst", mv.getWaardeEnType().get(1).getWaardeType());
     }
 
     /**

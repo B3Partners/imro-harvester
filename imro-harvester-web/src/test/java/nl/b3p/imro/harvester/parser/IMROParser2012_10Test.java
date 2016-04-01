@@ -9,6 +9,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.xml.bind.JAXBException;
+import nl.b3p.imro._2012._10.FeatureCollectionIMROType;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
@@ -20,6 +21,9 @@ import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 /**
  *
@@ -37,13 +41,17 @@ public class IMROParser2012_10Test {
     @Test
     public void testParseGML_Geleideformulier() throws Exception {
         System.out.println("parseGML");
-        Geleideformulier geleideformulier = null;
-        
-        List<Object> expResult = null;
+
+        Geleideformulier geleideformulier = Mockito.mock(Geleideformulier.class);
+        final URL u = this.getClass().getResource("2012_10.gml");
+        Mockito.when(geleideformulier.getGML()).thenAnswer(new Answer() {
+            @Override
+            public URL answer(InvocationOnMock invocation) {
+                return u;
+            }
+        });
         List<Object> result = instance.parseGML(geleideformulier);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(186, result.size());
     }
 
     /**
@@ -52,13 +60,10 @@ public class IMROParser2012_10Test {
     @Test
     public void testParseGML_URL() throws Exception {
         System.out.println("parseGML");
-        URL u = null;
+        URL u = this.getClass().getResource("2012_10.gml");
         
-        List<Object> expResult = null;
         List<Object> result = instance.parseGML(u);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(186, result.size());
     }
 
     /**
@@ -67,13 +72,10 @@ public class IMROParser2012_10Test {
     @Test
     public void testUnmarshalUrl() throws Exception {
         System.out.println("unmarshalUrl");
-        URL u = null;
-        
-        Object expResult = null;
+        URL u = this.getClass().getResource("2012_10.gml");
         Object result = instance.unmarshalUrl(u);
-        assertEquals(expResult, result);
+        assertEquals(FeatureCollectionIMROType.class, result.getClass());
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -82,47 +84,11 @@ public class IMROParser2012_10Test {
     @Test
     public void testProcessFeatureCollection() throws JAXBException {
         System.out.println("processFeatureCollection");
-        Object featureCollection = null;
-        
-        List<Object> expResult = null;
+        URL u = this.getClass().getResource("2012_10.gml");
+        Object featureCollection = instance.unmarshalUrl(u);
+
         List<Object> result = instance.processFeatureCollection(featureCollection);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of parseFeatureMember method, of class IMROParser2012_10.
-     */
-    @Test
-    public void testParseFeatureMember() throws JAXBException {
-        System.out.println("parseFeatureMember");
-        Object o = null;
-        
-        Object expResult = null;
-        Object result = instance.parseFeatureMember(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of parsePlan method, of class Processor.
-     */
-    @Test
-    public void testParseGebiedsaanduiding() throws JAXBException {
-        System.out.println("testParsePlanInhoudGebiedsaanduiding");
-        URL u = this.getClass().getResource("2012201210.xml");
-        List<Object> o = instance.parseGML(u);
-        assertNotNull(o);
-        Gebiedsaanduiding ga = null;
-        for (Object obj : o) {
-            if (obj instanceof Gebiedsaanduiding) {
-                ga = (Gebiedsaanduiding) obj;
-                assertNotNull(ga);
-                assertNotNull(ga.getGeometrie());
-            }
-        }
+        assertEquals(186, result.size());
     }
 
     /**
@@ -138,32 +104,28 @@ public class IMROParser2012_10Test {
         Gebiedsaanduiding ga = instance.parseImroGebiedsaanduiding(gba);
 
         assertNotNull(ga);
-        assertEquals("NL.IMRO.0297.GP2308954338-00", ga.getIdentificatie());
+        assertEquals("NL.IMRO.052", ga.getIdentificatie());
         assertEquals("gebiedsaanduiding", ga.getTypePlanObject());
-        assertEquals("overige zone - accessen", ga.getNaam());
-        assertEquals("overige zone", ga.getGebiedsaanduidinggroep());
-        assertEquals("2.3.2", ga.getArtikelnummer());
+        assertEquals("vrijwaringszone - molenbiotoop", ga.getNaam());
+        assertEquals("vrijwaringszone", ga.getGebiedsaanduidinggroep());
+        assertEquals("25", ga.getArtikelnummer());
         assertNotNull("Geometrie moet gevuld zijn",ga.getGeometrie());
     }
 
     @Test
     public void testParseDubbelbestemmingInhoud() throws JAXBException {
         System.out.println("testParseDubbelbestemmingInhoud");
-        URL u = this.getClass().getResource("2012201210.xml");
-        List<Object> o = instance.parseGML(u);
+        URL u = this.getClass().getResource("dubbelbestemming201210.xml");
+        Object o = instance.unmarshalUrl(u);
         assertNotNull(o);
-        Dubbelbestemming db = null;
-        for (Object obj : o) {
-            if (obj instanceof Dubbelbestemming) {
-                db = (Dubbelbestemming) obj;
-            }
-        }
+        Dubbelbestemming db = instance.parseImroDubbelbestemming(o);
+
         assertNotNull(db);
-        assertEquals("NL.IMRO.0297.DP6313603771-00", db.getIdentificatie());
+        assertEquals("NL.IMRO.054", db.getIdentificatie());
         assertEquals("dubbelbestemming", db.getTypePlanObject());
-        assertEquals("Waarde - Nieuwe Hollandse Waterlinie", db.getNaam());
-        assertEquals("waarde", db.getBestemmingshoofdgroep());
-        assertEquals("2", db.getArtikelnummer());
+        assertEquals("Leiding - Gas", db.getNaam());
+        assertEquals("leiding", db.getBestemmingshoofdgroep());
+        assertEquals("20", db.getArtikelnummer());
         assertNotNull("Geometrie moet gevuld zijn",db.getGeometrie());
     }
 
@@ -176,10 +138,10 @@ public class IMROParser2012_10Test {
         Enkelbestemming eb = instance.parseImroEnkelbestemming(gba);
 
         assertNotNull(eb);
-        assertEquals("NL.IMRO.0664.EP3262265634-00", eb.getIdentificatie());
+        assertEquals("NL.IMRO.135", eb.getIdentificatie());
         assertEquals("enkelbestemming", eb.getTypePlanObject());
-        assertEquals("Tuin", eb.getNaam());
-        assertEquals("tuin", eb.getBestemmingshoofdgroep());
+        assertEquals("Agrarisch", eb.getNaam());
+        assertEquals("agrarisch", eb.getBestemmingshoofdgroep());
         assertEquals("3", eb.getArtikelnummer());
         assertNotNull("Geometrie moet gevuld zijn",eb.getGeometrie());
     }
@@ -193,30 +155,31 @@ public class IMROParser2012_10Test {
         Maatvoering mv = instance.parseImroMaatvoering(gba);
 
         assertNotNull(mv);
-        assertEquals("NL.IMRO.0664.MP18312983563-00", mv.getIdentificatie());
+        assertEquals("NL.IMRO.368", mv.getIdentificatie());
         assertEquals("maatvoering", mv.getTypePlanObject());
-        assertEquals("maximum aantal bouwlagen", mv.getNaam());
+        assertEquals("maatvoering", mv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",mv.getGeometrie());
-        assertEquals(1,mv.getWaardeEnType().size());
-        assertEquals("maximum aantal bouwlagen", mv.getWaardeEnType().get(0).getWaardeType());
-        assertEquals("8", mv.getWaardeEnType().get(0).getWaarde());
-        assertEquals("s120", mv.getWaardeEnType().get(0).getSymboolCode());
+        assertEquals(2, mv.getWaardeEnType().size());
+        assertEquals("maximum goothoogte (m)", mv.getWaardeEnType().get(0).getWaardeType());
+        assertEquals("6", mv.getWaardeEnType().get(0).getWaarde());
+        assertEquals("12", mv.getWaardeEnType().get(1).getWaarde());
+        assertEquals("maximum bouwhoogte (m)", mv.getWaardeEnType().get(1).getWaardeType());
     }
 
     @Test
     public void testParseBouwvlakInhoud() throws JAXBException {
-        System.out.println("testParseMaatvoeringInhoud");
+        System.out.println("testParseBouwvlakInhoud");
         URL u = this.getClass().getResource("bouwvlak201210.xml");
         Object gba = instance.unmarshalUrl(u);
         assertNotNull(gba);
         Bouwvlak bv = instance.parseImroBouwvlak(gba);
 
         assertNotNull(bv);
-        assertEquals("NL.IMRO.0664.BP4302177420-00", bv.getIdentificatie());
+        assertEquals("NL.IMRO.003", bv.getIdentificatie());
         assertEquals("bouwvlak", bv.getTypePlanObject());
         assertEquals("bouwvlak", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
-        assertEquals("NL.IMRO.0664.EP5302177522-00", bv.getEnkelbestemming());
+        assertEquals("NL.IMRO.058", bv.getEnkelbestemming());
     }
 
     @Test
@@ -228,11 +191,11 @@ public class IMROParser2012_10Test {
         Figuur bv = instance.parseImroFiguur(gba);
 
         assertNotNull(bv);
-        assertEquals("NL.IMRO.da5ed70e337a4d40a2ebd0f09b87fc15", bv.getIdentificatie());
+        assertEquals("NL.IMRO.254", bv.getIdentificatie());
         assertEquals("figuur", bv.getTypePlanObject());
-        assertEquals("gevellijn", bv.getNaam());
+        assertEquals("hartlijn leiding - gas", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
-        assertEquals("NL.IMRO.f33370be08c84334abd9abbf5212bb4f", bv.getEnkelbestemming());
+        assertEquals("NL.IMRO.054", bv.getEnkelbestemming());
     }
 
     @Test
@@ -244,11 +207,11 @@ public class IMROParser2012_10Test {
         Functieaanduiding bv = instance.parseImroFunctieaanduiding(gba);
 
         assertNotNull(bv);
-        assertEquals("NL.IMRO.0664.FA10312914914-00", bv.getIdentificatie());
+        assertEquals("NL.IMRO.376", bv.getIdentificatie());
         assertEquals("functieaanduiding", bv.getTypePlanObject());
-        assertEquals("detailhandel", bv.getNaam());
+        assertEquals("bedrijf tot en met categorie 2", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
-        assertEquals("NL.IMRO.0664.EP7312914753-00", bv.getEnkelbestemming());
+        assertEquals("NL.IMRO.088", bv.getEnkelbestemming());
     }
 
     @Test
@@ -260,11 +223,11 @@ public class IMROParser2012_10Test {
         Bouwaanduiding bv = instance.parseImroBouwaanduiding(gba);
 
         assertNotNull(bv);
-        assertEquals("NL.IMRO.3c3b6f4bdf5b4168bb4932c48d90466e", bv.getIdentificatie());
+        assertEquals("NL.IMRO.040", bv.getIdentificatie());
         assertEquals("bouwaanduiding", bv.getTypePlanObject());
-        assertEquals("onderdoorgang", bv.getNaam());
+        assertEquals("gestapeld", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
-        assertEquals("NL.IMRO.9cacbcca5a9e412faeaf47df4d75173d", bv.getEnkelbestemming());
+        assertEquals("NL.IMRO.061", bv.getEnkelbestemming());
     }
 
     /**
@@ -282,14 +245,14 @@ public class IMROParser2012_10Test {
 
         assertNotNull(bp);
         assertEquals("bestemmingsplan", bp.getTypePlan());
-        assertEquals("NL.IMRO.0297.BGBBP20140020-OW01", bp.getIdentificatie());
+        assertEquals("NL.IMRO.0999.BP2012000001-9005", bp.getIdentificatie());
         assertEquals("gemeentelijke overheid", bp.getBeleidsmatigeVerantwoordelijkeOverheid());
-        assertEquals("gemeente Zaltbommel", bp.getNaamOverheid());
-        assertEquals("0297", bp.getOverheidsCode());
-        assertEquals("Buitengebied Parapluplan Nieuwe Hollandse Waterlinie", bp.getNaam());
-        assertEquals("ontwerp", bp.getPlanstatusInfo());
+        assertEquals("Durperdam", bp.getNaamOverheid());
+        assertEquals("0999", bp.getOverheidsCode());
+        assertEquals("Bestemmingsplan Durperveld", bp.getNaam());
+        assertEquals("vastgesteld", bp.getPlanstatusInfo());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        assertEquals("2015-05-19", sdf.format(bp.getPlanstatusDatum()));
+        assertEquals("2008-08-13", sdf.format(bp.getPlanstatusDatum()));
         assertNotNull("Geometrie moet gevuld zijn",bp.getGeometrie());
 
     }

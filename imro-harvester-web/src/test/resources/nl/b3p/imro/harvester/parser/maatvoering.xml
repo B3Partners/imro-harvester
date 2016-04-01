@@ -34,6 +34,13 @@
 					<imro:symboolCode>s120</imro:symboolCode>
 				</imro:WaardeEnType>
 			</imro:maatvoeringInfo>
+			<imro:maatvoeringInfo>
+				<imro:WaardeEnType>
+					<imro:waarde>18</imro:waarde>
+					<imro:waardeType>maximum aantal bouwlagen1</imro:waardeType>
+					<imro:symboolCode>s121</imro:symboolCode>
+				</imro:WaardeEnType>
+			</imro:maatvoeringInfo>
 			<imro:geometrie>
 				<gml:Surface gml:id="id5" srsName="urn:ogc:def:crs:EPSG::28992">
 					<gml:patches>
