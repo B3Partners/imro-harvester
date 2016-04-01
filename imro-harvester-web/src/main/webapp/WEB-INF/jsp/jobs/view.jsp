@@ -33,7 +33,7 @@
                             <td>
                                 <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="edit"><stripes:param name="job" value="${job.id}"/></stripes:url>" class="btn btn-info">Bewerk</a>
                                 <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="delete"><stripes:param name="job" value="${job.id}"/></stripes:url>"  class="btn btn-danger">Verwijder</a>
-                                <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="run"><stripes:param name="job" value="${job.id}"/></stripes:url>"  class="btn btn-primary">Run</a>
+                                <c:if test="${not empty actionBean.downloadfolder}" ><a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="run"><stripes:param name="job" value="${job.id}"/></stripes:url>"  class="btn btn-primary">Run</a></c:if>
                             </td>
                         </tr>
                     </c:forEach>

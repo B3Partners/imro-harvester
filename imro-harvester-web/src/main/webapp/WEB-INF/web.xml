@@ -79,6 +79,11 @@
         <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
         <param-value>ViewerResources</param-value>
     </context-param>
+
+    <context-param>
+        <param-name>download.folder</param-name>
+        <param-value>/home/meine/imsro</param-value>
+    </context-param>
     
     <welcome-file-list>
         <welcome-file>action/view</welcome-file>

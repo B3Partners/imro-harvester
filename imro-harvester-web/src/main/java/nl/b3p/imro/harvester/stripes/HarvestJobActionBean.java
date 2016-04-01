@@ -25,12 +25,14 @@ import javax.xml.bind.JAXBException;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.After;
+import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.StrictBinding;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.controller.LifecycleStage;
+import net.sourceforge.stripes.validation.SimpleError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import nl.b3p.imro.harvester.entities.HarvestJob;
@@ -44,7 +46,7 @@ import org.stripesstuff.stripersist.Stripersist;
  */
 @StrictBinding
 @UrlBinding("/action/beheer/jobs/{event}")
-public class HarvestJobActionBean implements ActionBean{
+public class HarvestJobActionBean implements ActionBean {
 
     private ActionBeanContext context;
 
@@ -53,12 +55,12 @@ public class HarvestJobActionBean implements ActionBean{
 
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
 
-    private File downloadfolder;
+    private File downloadfolder = null;
 
     @Validate
     @ValidateNestedProperties({
-            @Validate(field = "url"),
-            @Validate(field = "type")
+        @Validate(field = "url"),
+        @Validate(field = "type")
     })
     private HarvestJob job = new HarvestJob();
 
@@ -89,44 +91,66 @@ public class HarvestJobActionBean implements ActionBean{
         this.job = job;
     }
 
+    public File getDownloadfolder() {
+        return downloadfolder;
+    }
+
+    public void setDownloadfolder(File downloadfolder) {
+        this.downloadfolder = downloadfolder;
+    }
+
     // </editor-fold>
 
+    @Before
+    public void init() {
+        String path = context.getServletContext().getInitParameter("download.folder");
+        if (path == null || path.isEmpty()) {
+            context.getValidationErrors().add("Pad", new SimpleError("Download pad is niet geconfigureerd. Uitvoeren van jobs niet mogelijk."));
+        } else {
+            downloadfolder = new File(path);
+            if (!downloadfolder.exists()) {
+                downloadfolder = null;
+                context.getValidationErrors().add("Pad", new SimpleError("Download pad bestaat niet. Uitvoeren van jobs niet mogelijk."));
+            }
+        }
+    }
+
     @DefaultHandler
-    public Resolution view(){
+    public Resolution view() {
         return new ForwardResolution(JSP_VIEW);
     }
 
-    public Resolution add(){
+    public Resolution add() {
         return new ForwardResolution(JSP_EDIT);
-        
+
     }
 
-    public Resolution delete(){
+    public Resolution delete() {
         EntityManager em = Stripersist.getEntityManager();
         em.remove(job);
         em.getTransaction().commit();
         return new ForwardResolution(JSP_VIEW);
     }
 
-    public Resolution save(){
+    public Resolution save() {
         EntityManager em = Stripersist.getEntityManager();
         em.persist(job);
         em.getTransaction().commit();
         return new ForwardResolution(JSP_VIEW);
     }
 
-    public Resolution edit(){
+    public Resolution edit() {
         return new ForwardResolution(JSP_EDIT);
     }
 
-    public Resolution run() throws JAXBException, JDOMException{
+    public Resolution run() throws JAXBException, JDOMException {
         Processor p = new Processor(Collections.singletonList(job), downloadfolder);
         p.process();
         return new ForwardResolution(JSP_VIEW);
     }
 
     @After(stages = LifecycleStage.EventHandling)
-    private void createLists(){
+    private void createLists() {
         EntityManager em = Stripersist.getEntityManager();
         jobs = em.createQuery("From HarvestJob", HarvestJob.class).getResultList();
     }

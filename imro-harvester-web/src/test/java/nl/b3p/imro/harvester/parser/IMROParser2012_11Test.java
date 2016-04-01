@@ -312,7 +312,7 @@ public class IMROParser2012_11Test {
         assertNotEquals(0, o.size());
     }
 
-    @Test
+   // @Test
     public void testGeomCollections() throws JAXBException{
         URL u = this.getClass().getResource("2012v10GeomCollection.gml");
 
