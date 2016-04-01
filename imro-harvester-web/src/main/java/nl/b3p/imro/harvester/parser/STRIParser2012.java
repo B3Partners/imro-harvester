@@ -67,7 +67,7 @@ public class STRIParser2012 implements STRIParser{
 
         for (URL geleideformulierURL : geleideformulieren) {
             try {
-                Geleideformulier geleideformulier = new Geleideformulier();
+                Geleideformulier geleideformulier = null;
                 Object geleideformulierObject = jaxbUnmarshaller.unmarshal(geleideformulierURL);
                 // Support two versions of the manifest. Sadly, almost the same, but namespaces in xsd differ.
                 if (geleideformulierObject instanceof nl.geonovum.stri._2012._1.GeleideFormulier) {
@@ -75,6 +75,7 @@ public class STRIParser2012 implements STRIParser{
                     nl.geonovum.stri._2012._1.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
                     
                     if (eigenschappen.getType().equals(nl.geonovum.stri._2012._1.TypePlan.BESTEMMINGSPLAN)) {
+                        geleideformulier = new Geleideformulier();
                         nl.geonovum.stri._2012._1.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
 
                         String basisurl = onderdelen.getBasisURL();
@@ -130,6 +131,7 @@ public class STRIParser2012 implements STRIParser{
                     nl.geonovum.stri._2012._2.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
 
                     if (eigenschappen.getType().equals(nl.geonovum.stri._2012._2.TypePlan.BESTEMMINGSPLAN)) {
+                        geleideformulier = new Geleideformulier();
                         nl.geonovum.stri._2012._2.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
                         String basisurl = onderdelen.getBasisURL();
                         String gml = onderdelen.getGML();
@@ -181,7 +183,9 @@ public class STRIParser2012 implements STRIParser{
                         geleideformulier.setImro(onderdelen.getGML());
                     }
                 }
-                urls.add(geleideformulier);
+                if(geleideformulier != null){
+                    urls.add(geleideformulier);
+                }
             } catch (JAXBException ex) {
                 log.trace("Cannot unmarshal geleideformulier" + geleideformulierURL);
             }
