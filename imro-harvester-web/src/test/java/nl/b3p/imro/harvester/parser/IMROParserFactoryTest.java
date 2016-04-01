@@ -35,25 +35,8 @@ public class IMROParserFactoryTest {
      * Test of getParser method, of class IMROParserFactory.
      */
     @Test
-    public void testGetParserGML2012V1() throws Exception {
-        System.out.println("testGetParser2012");
-        final URL inputXmlFullPath = this.getClass().getResource("2012.gml");
-        Geleideformulier geleideformulier = Mockito.mock(Geleideformulier.class);
-
-        Mockito.when(geleideformulier.getGML()).thenAnswer(new Answer() {
-            @Override
-            public URL answer(InvocationOnMock invocation) {
-                return inputXmlFullPath;
-            }
-        });
-
-        IMROParser result = instance.getParser(geleideformulier);
-        assertEquals(IMROParser2012_11.class, result.getClass());
-    }
-
- //  @Test
-    public void testGetParserGML2012V2() throws Exception {
-        System.out.println("testGetParser2012");
+    public void testGetParserGML2012V11() throws Exception {
+        System.out.println("testGetParserGML2012V11");
         final URL inputXmlFullPath = this.getClass().getResource("2012.gml");
         Geleideformulier geleideformulier = Mockito.mock(Geleideformulier.class);
 
@@ -69,20 +52,37 @@ public class IMROParserFactoryTest {
     }
 
     @Test
-    public void testGetROTypeGML2012V1() throws Exception {
-        System.out.println("testGetROType2012");
+    public void testGetParserGML2012V10() throws Exception {
+        System.out.println("testGetParserGML2012V10");
+        final URL inputXmlFullPath = this.getClass().getResource("2012_10.gml");
+        Geleideformulier geleideformulier = Mockito.mock(Geleideformulier.class);
+
+        Mockito.when(geleideformulier.getGML()).thenAnswer(new Answer() {
+            @Override
+            public URL answer(InvocationOnMock invocation) {
+                return inputXmlFullPath;
+            }
+        });
+
+        IMROParser result = instance.getParser(geleideformulier);
+        assertEquals(IMROParser2012_10.class, result.getClass());
+    }
+
+    @Test
+    public void testGetROTypeGML2012V11() throws Exception {
+        System.out.println("testGetROTypeGML2012V11");
         URL inputXmlFullPath = this.getClass().getResource("2012.gml");
         ROType result = IMROParserFactory.getROType(inputXmlFullPath);
-        assertEquals(ROType.IMRO2012, result);
+        assertEquals(ROType.IMRO2012V11, result);
     }
 
 
-    //@Test
-    public void testGetROTypeGML2012V2() throws Exception {
-        System.out.println("testGetROType2012");
-        URL inputXmlFullPath = this.getClass().getResource("2012.gml");
+    @Test
+    public void testGetROTypeGML2012V10() throws Exception {
+        System.out.println("testGetROTypeGML2012V10");
+        URL inputXmlFullPath = this.getClass().getResource("2012_10.gml");
         ROType result = IMROParserFactory.getROType(inputXmlFullPath);
-        assertEquals(ROType.IMRO2012, result);
+        assertEquals(ROType.IMRO2012V10, result);
     }
 
     /**

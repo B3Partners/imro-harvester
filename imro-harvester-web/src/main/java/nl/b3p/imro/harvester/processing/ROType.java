@@ -11,9 +11,10 @@ package nl.b3p.imro.harvester.processing;
  */
 public enum ROType {
     STRI2008("STRI2008"),
-    IMRO2008("IMRO2008"),
     STRI2012("STRI2012"),
-    IMRO2012("IMRO2012");
+    IMRO2008("IMRO2008"),
+    IMRO2012V10("IMRO2012V10"),
+    IMRO2012V11("IMRO2012V11");
 
     private final String value;
 

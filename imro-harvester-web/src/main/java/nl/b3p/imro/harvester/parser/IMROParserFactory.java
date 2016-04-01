@@ -21,14 +21,14 @@ import org.jdom2.input.SAXBuilder;
  */
 public class IMROParserFactory {
 
-    private IMROParser2012_11 imro2012;
+    private IMROParser2012_11 imro2012V11;
     private IMROParser2008 imro2008;
 
     private STRIParser2012 stri2012;
     private STRIParser2008 stri2008;
     
     public IMROParserFactory() throws JAXBException {
-        imro2012 = new IMROParser2012_11();
+        imro2012V11 = new IMROParser2012_11();
         imro2008 = new IMROParser2008();
 
         stri2012 = new STRIParser2012();
@@ -75,8 +75,8 @@ public class IMROParserFactory {
         ROType type = getROType(geleideformulier.getGML());
         if (type.equals(ROType.IMRO2008)) {
             return imro2008;
-        } else if (type.equals(ROType.IMRO2012)) {
-            return imro2012;
+        } else if (type.equals(ROType.IMRO2012V11)) {
+            return imro2012V11;
         } else {
             throw new IllegalArgumentException("Class not yet implented");
         }
@@ -94,7 +94,7 @@ public class IMROParserFactory {
         if (isElementEqual(rootElem, IMRO2008_ROOTELEMENT)) {
             return ROType.IMRO2008;
         } else if (isElementEqual(rootElem, IMRO2012_ROOTELEMENT)) {
-            return ROType.IMRO2012;
+            return ROType.IMRO2012V11;
         } else if(isElementEqual(rootElem, STRI2012V1_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2012V1_ROOTELEMENT_MANIFEST)
                     || isElementEqual(rootElem, STRI2012V2_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2012V2_ROOTELEMENT_MANIFEST)){
             return ROType.STRI2012;
