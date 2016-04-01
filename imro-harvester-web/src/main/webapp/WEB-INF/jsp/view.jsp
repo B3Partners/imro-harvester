@@ -14,8 +14,8 @@
     </stripes:layout-component>
 
     <stripes:layout-component name="content">
-        <h1>Hello World!</h1>
-
+        <h1>Welkom</h1>
+        Welkom op de IMRO harvester. Hier kunt u jobs (manifesten) toevoegen en inladen.
         <script>
             var currentpage = 'home';
         </script>
