@@ -16,24 +16,14 @@
  */
 package nl.b3p.imro.harvester.stripes;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import javax.persistence.EntityManager;
-import javax.xml.bind.JAXBException;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
-import net.sourceforge.stripes.action.After;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.StrictBinding;
 import net.sourceforge.stripes.action.UrlBinding;
-import net.sourceforge.stripes.controller.LifecycleStage;
-import net.sourceforge.stripes.validation.Validate;
-import net.sourceforge.stripes.validation.ValidateNestedProperties;
-import nl.b3p.imro.harvester.entities.HarvestJob;
-import nl.b3p.imro.harvester.processing.Processor;
 import org.stripesstuff.stripersist.Stripersist;
 
 /**
@@ -41,7 +31,7 @@ import org.stripesstuff.stripersist.Stripersist;
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
 @StrictBinding
-@UrlBinding("/action/beheer/jobs/{event}")
+@UrlBinding("/action/beheer/admin/{event}")
 public class AdminActionBean implements ActionBean{
 
     private ActionBeanContext context;

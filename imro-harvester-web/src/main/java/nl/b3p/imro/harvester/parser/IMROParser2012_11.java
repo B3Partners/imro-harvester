@@ -120,6 +120,8 @@ public class IMROParser2012_11 implements IMROParser{
             obj = parseImroFiguur(o);
         } else if ( o instanceof nl.b3p.imro._2012._11.BouwaanduidingType){
             obj = parseImroBouwaanduiding(o);
+        }else if(o instanceof nl.b3p.imro._2012._11.MetadataIMRObestandType){
+            // do nothing
         }else{
             log.error("Unknown type of featuremember when parsing. Class encountered: " + o.getClass().toString());
         }
