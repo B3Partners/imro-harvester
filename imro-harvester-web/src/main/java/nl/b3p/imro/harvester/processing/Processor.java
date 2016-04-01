@@ -17,7 +17,7 @@
 package nl.b3p.imro.harvester.processing;
 
 import nl.b3p.imro.harvester.parser.IMROParser;
-import nl.b3p.imro.harvester.parser.IMROParserFactory;
+import nl.b3p.imro.harvester.parser.ParserFactory;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -51,7 +51,7 @@ public class Processor {
     private static final Log log = LogFactory.getLog(Processor.class);
     private Integer timeout;
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
-    private IMROParserFactory factory;
+    private ParserFactory factory;
     private File downloadfolder;
 
     public Processor(List<HarvestJob> jobs, File downloadfolder) throws JAXBException {
@@ -61,7 +61,7 @@ public class Processor {
     public Processor(List<HarvestJob> jobs, Integer timeout, File downloadfolder) throws JAXBException {
         this.jobs = jobs;
         this.timeout = timeout;
-        this.factory = new IMROParserFactory();
+        this.factory = new ParserFactory();
         this.downloadfolder = downloadfolder;
     }
 
@@ -79,7 +79,7 @@ public class Processor {
                     for (Geleideformulier geleideformulier : geleideformulieren) {
                         log.debug("Processing geleideformulier: " + geleideformulier.toString());
                         try {
-                            IMROParser parser = factory.getParser(geleideformulier);
+                            IMROParser parser = factory.getIMROParser(geleideformulier);
                             List<Object> planObjecten = parser.parseGML(geleideformulier);
 
                             if (!em.getTransaction().isActive()) {

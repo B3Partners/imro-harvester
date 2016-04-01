@@ -5,7 +5,7 @@
  */
 package nl.b3p.imro.harvester.parser;
 
-import nl.b3p.imro.harvester.parser.IMROParserFactory;
+import nl.b3p.imro.harvester.parser.ParserFactory;
 import nl.b3p.imro.harvester.parser.IMROParser2012_11;
 import nl.b3p.imro.harvester.parser.IMROParser2008;
 import nl.b3p.imro.harvester.parser.IMROParser;
@@ -25,14 +25,14 @@ import org.mockito.stubbing.Answer;
  */
 public class IMROParserFactoryTest {
 
-    IMROParserFactory instance = null;
+    ParserFactory instance = null;
 
     public IMROParserFactoryTest() throws JAXBException {
-        instance = new IMROParserFactory();
+        instance = new ParserFactory();
     }
 
     /**
-     * Test of getParser method, of class IMROParserFactory.
+     * Test of getIMROParser method, of class ParserFactory.
      */
     @Test
     public void testGetParserGML2012V11() throws Exception {
@@ -47,7 +47,7 @@ public class IMROParserFactoryTest {
             }
         });
 
-        IMROParser result = instance.getParser(geleideformulier);
+        IMROParser result = instance.getIMROParser(geleideformulier);
         assertEquals(IMROParser2012_11.class, result.getClass());
     }
 
@@ -64,7 +64,7 @@ public class IMROParserFactoryTest {
             }
         });
 
-        IMROParser result = instance.getParser(geleideformulier);
+        IMROParser result = instance.getIMROParser(geleideformulier);
         assertEquals(IMROParser2012_10.class, result.getClass());
     }
 
@@ -72,7 +72,7 @@ public class IMROParserFactoryTest {
     public void testGetROTypeGML2012V11() throws Exception {
         System.out.println("testGetROTypeGML2012V11");
         URL inputXmlFullPath = this.getClass().getResource("2012.gml");
-        ROType result = IMROParserFactory.getROType(inputXmlFullPath);
+        ROType result = ParserFactory.getROType(inputXmlFullPath);
         assertEquals(ROType.IMRO2012V11, result);
     }
 
@@ -81,12 +81,12 @@ public class IMROParserFactoryTest {
     public void testGetROTypeGML2012V10() throws Exception {
         System.out.println("testGetROTypeGML2012V10");
         URL inputXmlFullPath = this.getClass().getResource("2012_10.gml");
-        ROType result = IMROParserFactory.getROType(inputXmlFullPath);
+        ROType result = ParserFactory.getROType(inputXmlFullPath);
         assertEquals(ROType.IMRO2012V10, result);
     }
 
     /**
-     * Test of getSTRIParser method, of class IMROParserFactory.
+     * Test of getSTRIParser method, of class ParserFactory.
      */
     @Test
     public void testGetSTRIParserManifest2012V1() throws Exception {
@@ -97,48 +97,48 @@ public class IMROParserFactoryTest {
     }
 
     /**
-     * Test of getROType method, of class IMROParserFactory.
+     * Test of getROType method, of class ParserFactory.
      */
     @Test
     public void testGetROTypeSTRIManifest2012V1() throws Exception {
         System.out.println("getROType");
         URL u = this.getClass().getResource("manifest2012.xml");
-        ROType result = IMROParserFactory.getROType(u);
+        ROType result = ParserFactory.getROType(u);
         assertEquals(ROType.STRI2012, result);
         // TODO review the generated test code and remove the default call to fail.
     }
 
     /**
-     * Test of getROType method, of class IMROParserFactory.
+     * Test of getROType method, of class ParserFactory.
      */
     @Test
     public void testGetROTypeSTRIManifest2012V2() throws Exception {
         System.out.println("testGetROTypeSTRI2012V2");
         URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
-        ROType result = IMROParserFactory.getROType(u);
+        ROType result = ParserFactory.getROType(u);
         assertEquals(ROType.STRI2012, result);
     }
 
     /**
-     * Test of getROType method, of class IMROParserFactory.
+     * Test of getROType method, of class ParserFactory.
      */
     @Test
     public void testGetROTypeManifestSTRI2012V1() throws Exception {
         System.out.println("testGetROTypeManifestSTRI2012");
         URL u = this.getClass().getResource("manifest2012.xml");
-        ROType result = IMROParserFactory.getROType(u);
+        ROType result = ParserFactory.getROType(u);
         assertEquals(ROType.STRI2012, result);
     }
 
 
     /**
-     * Test of getROType method, of class IMROParserFactory.
+     * Test of getROType method, of class ParserFactory.
      */
     @Test
     public void testGetROTypeManifestSTRI2012V2() throws Exception {
         System.out.println("testGetROTypeManifestSTRI2012");
         URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
-        ROType result = IMROParserFactory.getROType(u);
+        ROType result = ParserFactory.getROType(u);
         assertEquals(ROType.STRI2012, result);
     }
 
@@ -151,18 +151,18 @@ public class IMROParserFactoryTest {
     }
 
     /**
-     * Test of getROType method, of class IMROParserFactory.
+     * Test of getROType method, of class ParserFactory.
      */
     @Test
     public void testGetROTypeManifestSTRI2008() throws Exception {
         System.out.println("getROType");
         URL u = this.getClass().getResource("manifest2008.xml");
-        ROType result = IMROParserFactory.getROType(u);
+        ROType result = ParserFactory.getROType(u);
         assertEquals(ROType.STRI2008, result);
     }
 
     /**
-     * Test of getSTRIParser method, of class IMROParserFactory.
+     * Test of getSTRIParser method, of class ParserFactory.
      */
     @Test
     public void testGetSTRIParserManifest2008() throws Exception {
@@ -173,13 +173,13 @@ public class IMROParserFactoryTest {
     }
 
     /**
-     * Test of getROType method, of class IMROParserFactory.
+     * Test of getROType method, of class ParserFactory.
      */
     @Test
     public void testGetROTypeGML2008() throws Exception {
         System.out.println("testGetROType2008");
         URL inputXmlFullPath = this.getClass().getResource("2008.gml");
-        ROType result = IMROParserFactory.getROType(inputXmlFullPath);
+        ROType result = ParserFactory.getROType(inputXmlFullPath);
         assertEquals(ROType.IMRO2008, result);
     }
 
@@ -196,7 +196,7 @@ public class IMROParserFactoryTest {
             }
         });
 
-        IMROParser result = instance.getParser(geleideformulier);
+        IMROParser result = instance.getIMROParser(geleideformulier);
         assertEquals(IMROParser2008.class, result.getClass());
     }
 }
