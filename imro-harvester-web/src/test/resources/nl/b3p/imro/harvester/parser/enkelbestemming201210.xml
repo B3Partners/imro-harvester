@@ -1,0 +1,93 @@
+		<imro:Enkelbestemming gml:id="NL.IMRO.135" xmlns:imro="http://www.geonovum.nl/imro/2012/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geonovum.nl/imro/2012/1.0 http://schemas.geonovum.nl/imro/2012/1.0/IMRO2012.xsd">
+			<imro:identificatie>
+				<imro:NEN3610ID>
+					<imro:namespace>NL.IMRO</imro:namespace>
+					<imro:lokaalID>135</imro:lokaalID>
+				</imro:NEN3610ID>
+			</imro:identificatie>
+			<imro:typePlanobject>enkelbestemming</imro:typePlanobject>
+			<imro:naam>Agrarisch</imro:naam>
+			<imro:bestemmingshoofdgroep>agrarisch</imro:bestemmingshoofdgroep>
+			<imro:artikelnummer>3</imro:artikelnummer>
+			<imro:verwijzingNaarTekstInfo>
+				<imro:TekstReferentie_BP>
+					<imro:verwijzingNaarTekst>r_NL.IMRO.0999.BP2012000001-0005.htm</imro:verwijzingNaarTekst>
+					<imro:typeTekst>regels</imro:typeTekst>
+				</imro:TekstReferentie_BP>
+			</imro:verwijzingNaarTekstInfo>
+			<imro:labelInfo>
+				<imro:Label>
+					<imro:tekst>A</imro:tekst>
+					<imro:positie>
+						<imro:Labelpositie>
+							<imro:plaatsingspunt>
+								<gml:Point gml:id="d1e419" srsName="urn:ogc:def:crs:EPSG::28992">
+									<gml:pos>222554.534 433457.725 </gml:pos>
+								</gml:Point>
+							</imro:plaatsingspunt>
+						</imro:Labelpositie>
+					</imro:positie>
+				</imro:Label>
+			</imro:labelInfo>
+			<imro:geometrie>
+				<gml:Surface gml:id="d1e432" srsName="urn:ogc:def:crs:EPSG::28992">
+					<gml:patches>
+						<gml:PolygonPatch>
+							<gml:exterior>
+								<gml:Ring>
+									<gml:curveMember>
+										<gml:Curve gml:id="d1e444">
+											<gml:segments>
+												<gml:LineStringSegment>
+													<gml:posList>222649.345 432984.518 222652.938
+												432985.973 222658.477 432988.362 222666.803
+												432994.084 222668.975 432996.283</gml:posList>
+												</gml:LineStringSegment>
+												<gml:Arc>
+													<gml:posList>222668.975 432996.283 222669.846
+												432998.097 222670.5 433000</gml:posList>
+												</gml:Arc>
+												<gml:LineStringSegment>
+													<gml:posList>222670.5 433000 222670.913 433001.876
+												222674.463 433025.336 222676.708 433040.783
+												222677.564 433047.674 222682.628 433084.661
+												222683.996 433098.775 222684.986 433113.62
+												222685.475 433136.181 222685.539 433158.138
+												222685.405 433164.054 222682.695 433233.973
+												222677.918 433285.11 222674.673 433307.539
+												222664.13 433364.084 222655.62 433400.841
+												222641.134 433450.849 222627.358 433493.786
+												222615.587 433525.919 222598.265 433565.294
+												222597.251 433568.147 222597.097 433568.928
+												222588.161 433586.761 222576.17 433609.468
+												222574.024 433614.331 222561.689 433635.784
+												222550.367 433653.105 222519.459 433703.483
+												222514.921 433710.362 222512.045 433712.485
+												222508.768 433712.064 222476.401 433700.564
+												222406.577 433661.995 222393.585 433654.658
+												222494.128 433410.107 222516.208 433356.707
+												222518.364 433351.708 222519.771 433347.375
+												222523.43 433338.377 222556.276 433262.682
+												222549.088 433258.692 222550.042 433256.287
+												222551.766 433250.856 222514.525 433223.943
+												222470.71 433191.905 222477.523 433183.056
+												222494.707 433161.069 222513.085 433137.327
+												222525.072 433122.339 222546.161 433095.079
+												222563.978 433072.439 222595.977 433031.237
+												222609.949 433013.676 222617.29 433005.968
+												222628.664 432994.947 222631.646 432992.262
+												222633.902 432990.521 222636.455 432989.194
+												222642.877 432986.422 222645.853 432985.442
+												222649.345 432984.518</gml:posList>
+												</gml:LineStringSegment>
+											</gml:segments>
+										</gml:Curve>
+									</gml:curveMember>
+								</gml:Ring>
+							</gml:exterior>
+						</gml:PolygonPatch>
+					</gml:patches>
+				</gml:Surface>
+			</imro:geometrie>
+			<imro:plangebied xlink:href="#NL.IMRO.0999.BP2012000001-0005"/>
+		</imro:Enkelbestemming>

@@ -1,0 +1,56 @@
+<imro:Functieaanduiding gml:id="NL.IMRO.376" xmlns:imro="http://www.geonovum.nl/imro/2012/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geonovum.nl/imro/2012/1.0 http://schemas.geonovum.nl/imro/2012/1.0/IMRO2012.xsd">
+	<imro:identificatie>
+		<imro:NEN3610ID>
+			<imro:namespace>NL.IMRO</imro:namespace>
+			<imro:lokaalID>376</imro:lokaalID>
+		</imro:NEN3610ID>
+	</imro:identificatie>
+	<imro:typePlanobject>functieaanduiding</imro:typePlanobject>
+	<imro:plangebied xlink:href="#NL.IMRO.0999.BP2012000001-0005"/>
+	<imro:bestemmingsvlak xlink:href="#NL.IMRO.088"/>
+	<imro:naam>bedrijf tot en met categorie 2</imro:naam>
+
+	<imro:labelInfo>
+		<imro:Label>
+			<imro:tekst>(b≤2)</imro:tekst>
+			<imro:positie>
+				<imro:Labelpositie>
+					<imro:plaatsingspunt>
+						<gml:Point gml:id="d1e10790" srsName="urn:ogc:def:crs:EPSG::28992">
+							<gml:pos>222746.233 433593.014 </gml:pos>
+						</gml:Point>
+					</imro:plaatsingspunt>
+				</imro:Labelpositie>
+			</imro:positie>
+		</imro:Label>
+	</imro:labelInfo>
+	<imro:geometrie>
+		<gml:Surface gml:id="d1e10803" srsName="urn:ogc:def:crs:EPSG::28992">
+			<gml:patches>
+				<gml:PolygonPatch>
+					<gml:exterior>
+						<gml:LinearRing>
+							<gml:posList>222790.177 433592.999 222771.888 433615.332
+								222757.13 433633.5 222720.8 433660.874 222704.559 433639.645
+								222703.397 433636.935 222702.429 433635.128 222701.091
+								433631.038 222700.816 433628.416 222701.009 433625.124
+								222701.655 433622.349 222703.333 433616.669 222706.624
+								433608.215 222708.542 433602.407 222720.411 433572.318
+								222730.618 433544.7 222738.283 433524.899 222743.846
+								433509.695 222754.521 433481.469 222817.333 433498.148
+								222809.877 433527.861 222794.335 433585.553 222790.177
+								433592.999</gml:posList>
+						</gml:LinearRing>
+					</gml:exterior>
+					<gml:interior>
+						<gml:LinearRing>
+							<gml:posList>222714.859 433611.604 222711.44 433610.38
+								222713.569 433604.432 222716.988 433605.656 222714.859
+								433611.604</gml:posList>
+						</gml:LinearRing>
+					</gml:interior>
+				</gml:PolygonPatch>
+			</gml:patches>
+		</gml:Surface>
+	</imro:geometrie>
+</imro:Functieaanduiding>

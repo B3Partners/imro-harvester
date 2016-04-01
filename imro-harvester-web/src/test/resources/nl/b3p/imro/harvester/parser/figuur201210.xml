@@ -1,0 +1,31 @@
+<imro:Figuur gml:id="NL.IMRO.254"  xmlns:imro="http://www.geonovum.nl/imro/2012/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geonovum.nl/imro/2012/1.0 http://schemas.geonovum.nl/imro/2012/1.0/IMRO2012.xsd">
+	<imro:identificatie>
+		<imro:NEN3610ID>
+			<imro:namespace>NL.IMRO</imro:namespace>
+			<imro:lokaalID>254</imro:lokaalID>
+		</imro:NEN3610ID>
+	</imro:identificatie>
+	<imro:typePlanobject>figuur</imro:typePlanobject>
+	<imro:plangebied xlink:href="#NL.IMRO.0999.BP2012000001-0005"/>
+	<imro:bestemmingsvlak xlink:href="#NL.IMRO.054"/>
+	<imro:naam>hartlijn leiding - gas</imro:naam>
+	<imro:geometrie>
+		<gml:Curve gml:id="d1e16911" srsName="urn:ogc:def:crs:EPSG::28992">
+			<gml:segments>
+				<gml:LineStringSegment>
+					<gml:posList>222489.157 433723.993 222507.646 433695.966 222538.539
+						433645.613 222549.752 433628.459 222561.516 433607.998 222563.56
+						433603.366 222575.711 433580.356 222583.769 433564.275 222585.245
+						433560.124 222602.594 433520.687 222614.114 433489.238 222627.742
+						433446.762 222642.061 433397.331 222643.254 433392.111 222650.424
+						433361.212 222660.433 433307.759 222660.843 433305.358 222664.007
+						433283.489 222664.429 433278.716 222668.602 433234.766 222668.715
+						433233.2 222671.411 433163.624 222671.539 433158 222671.475
+						433136.353 222670.996 433114.238 222670.041 433099.916 222668.72
+						433086.286 222663.682 433049.487 222662.833 433042.653 222660.614
+						433027.39 222653.439 432979.972</gml:posList>
+				</gml:LineStringSegment>
+			</gml:segments>
+		</gml:Curve>
+	</imro:geometrie>
+</imro:Figuur>

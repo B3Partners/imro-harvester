@@ -1,0 +1,73 @@
+		<imro:Dubbelbestemming gml:id="NL.IMRO.054" xmlns:imro="http://www.geonovum.nl/imro/2012/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geonovum.nl/imro/2012/1.0 http://schemas.geonovum.nl/imro/2012/1.0/IMRO2012.xsd">
+			<imro:identificatie>
+				<imro:NEN3610ID>
+					<imro:namespace>NL.IMRO</imro:namespace>
+					<imro:lokaalID>054</imro:lokaalID>
+				</imro:NEN3610ID>
+			</imro:identificatie>
+			<imro:typePlanobject>dubbelbestemming</imro:typePlanobject>
+		
+			<imro:naam>Leiding - Gas</imro:naam>
+			<imro:bestemmingshoofdgroep>leiding</imro:bestemmingshoofdgroep>
+			<imro:artikelnummer>20</imro:artikelnummer>
+			<imro:verwijzingNaarTekstInfo>
+				<imro:TekstReferentie_BP>
+					<imro:verwijzingNaarTekst>r_NL.IMRO.0999.BP2012000001-00050.htm</imro:verwijzingNaarTekst>
+					<imro:typeTekst>regels</imro:typeTekst>
+				</imro:TekstReferentie_BP>
+			</imro:verwijzingNaarTekstInfo>
+			<imro:labelInfo>
+				<imro:Label>
+					<imro:tekst>L-G</imro:tekst>
+					<imro:positie>
+						<imro:Labelpositie>
+							<imro:plaatsingspunt>
+								<gml:Point gml:id="d1e10325" srsName="urn:ogc:def:crs:EPSG::28992">
+									<gml:pos>222663.932 433288.051 </gml:pos>
+								</gml:Point>
+							</imro:plaatsingspunt>
+						</imro:Labelpositie>
+					</imro:positie>
+				</imro:Label>
+			</imro:labelInfo>
+			<imro:geometrie>
+				<gml:Surface gml:id="d1e10338" srsName="urn:ogc:def:crs:EPSG::28992">
+					<gml:patches>
+						<gml:PolygonPatch>
+							<gml:exterior>
+								<gml:LinearRing>
+									<gml:posList>222649.937 432983.565 222652.106 432980.077
+										222657.437 432979.656 222664.571 433026.803 222666.797
+										433042.119 222667.648 433048.969 222672.694 433085.822
+										222674.028 433099.59 222674.993 433114.061 222675.475
+										433136.304 222675.539 433158.039 222675.409 433163.747
+										222672.709 433233.421 222672.588 433235.099 222668.413
+										433279.081 222667.981 433283.952 222664.794 433305.981
+										222664.37 433308.464 222654.34 433362.033 222647.152
+										433393.009 222645.935 433398.334 222631.569 433447.93
+										222617.898 433490.537 222606.306 433522.182 222588.965
+										433561.601 222587.582 433565.491 222587.549 433565.662
+										222579.268 433582.186 222567.163 433605.109 222565.09
+										433609.807 222553.162 433630.552 222541.918 433647.753
+										222511.021 433698.114 222492.457 433726.254 222490.989
+										433725.196 222485.812 433721.799 222504.271 433693.818
+										222535.159 433643.472 222546.341 433626.366 222557.943
+										433606.188 222559.958 433601.622 222572.154 433578.525
+										222580.083 433562.704 222581.524 433558.647 222598.881
+										433519.192 222610.33 433487.938 222623.916 433445.594
+										222638.187 433396.328 222639.356 433391.213 222646.509
+										433360.392 222656.495 433307.054 222656.891 433304.734
+										222660.032 433283.026 222660.446 433278.35 222664.615
+										433234.434 222664.72 433232.979 222667.413 433163.502
+										222667.538 433157.96 222667.476 433136.402 222666.999
+										433114.414 222666.054 433100.242 222664.746 433086.751
+										222659.715 433050.004 222658.868 433043.187 222656.658
+										433027.977 222649.937 432983.565</gml:posList>
+								</gml:LinearRing>
+							</gml:exterior>
+						</gml:PolygonPatch>
+					</gml:patches>
+				</gml:Surface>
+			</imro:geometrie>
+				<imro:plangebied xlink:href="#NL.IMRO.0999.BP2012000001-0005"/>
+		</imro:Dubbelbestemming>

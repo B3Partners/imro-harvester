@@ -1,0 +1,59 @@
+
+<imro:Maatvoering gml:id="NL.IMRO.368" xmlns:imro="http://www.geonovum.nl/imro/2012/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geonovum.nl/imro/2012/1.0 http://schemas.geonovum.nl/imro/2012/1.0/IMRO2012.xsd">
+	<imro:identificatie>
+		<imro:NEN3610ID>
+			<imro:namespace>NL.IMRO</imro:namespace>
+			<imro:lokaalID>368</imro:lokaalID>
+		</imro:NEN3610ID>
+	</imro:identificatie>
+	<imro:typePlanobject>maatvoering</imro:typePlanobject>
+	<imro:plangebied xlink:href="#NL.IMRO.0999.BP2012000001-0005"/>
+	<imro:bestemmingsvlak xlink:href="#NL.IMRO.069"/>
+	<imro:naam>maatvoering</imro:naam>
+	<imro:symboolInfo>
+		<imro:SymboolEnPositie>
+			<imro:symboolCode>s111</imro:symboolCode>
+			<imro:positie>
+				<imro:Labelpositie>
+					<imro:plaatsingspunt>
+						<gml:Point gml:id="d1e14717" srsName="urn:ogc:def:crs:EPSG::28992">
+							<gml:pos>222971.517 433352.236 </gml:pos>
+						</gml:Point>
+					</imro:plaatsingspunt>
+				</imro:Labelpositie>
+			</imro:positie>
+		</imro:SymboolEnPositie>
+	</imro:symboolInfo>
+	<imro:maatvoeringInfo>
+		<imro:WaardeEnType>
+			<imro:waarde>6</imro:waarde>
+			<imro:waardeType>maximum goothoogte (m)</imro:waardeType>
+		</imro:WaardeEnType>
+	</imro:maatvoeringInfo>
+	<imro:maatvoeringInfo>
+		<imro:WaardeEnType>
+			<imro:waarde>12</imro:waarde>
+			<imro:waardeType>maximum bouwhoogte (m)</imro:waardeType>
+		</imro:WaardeEnType>
+	</imro:maatvoeringInfo>
+	<imro:geometrie>
+		<gml:Surface gml:id="d1e14754" srsName="urn:ogc:def:crs:EPSG::28992">
+			<gml:patches>
+				<gml:PolygonPatch>
+					<gml:exterior>
+						<gml:LinearRing>
+							<gml:posList>222994.53 433349.12 222995.935 433398.955 222983.03
+								433399.33 222977.489 433399.365 222977.518 433401.931
+								222960.179 433402.407 222959.333 433375.607 222938.815
+								433364.879 222937.404 433367.566 222924.96 433361 222931.891
+								433346.721 222933.34 433343.98 222931.238 433342.851
+								222939.254 433327.68 222940.285 433328.236 222944.73
+								433319.799 222960.82 433328.278 222959.716 433330.397
+								222978.92 433340.35 222994.53 433349.12</gml:posList>
+						</gml:LinearRing>
+					</gml:exterior>
+				</gml:PolygonPatch>
+			</gml:patches>
+		</gml:Surface>
+	</imro:geometrie>
+</imro:Maatvoering>

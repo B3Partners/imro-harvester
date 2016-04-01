@@ -1,0 +1,44 @@
+<imro:Bouwaanduiding gml:id="NL.IMRO.040"  xmlns:imro="http://www.geonovum.nl/imro/2012/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geonovum.nl/imro/2012/1.0 http://schemas.geonovum.nl/imro/2012/1.0/IMRO2012.xsd">
+	<imro:identificatie>
+		<imro:NEN3610ID>
+			<imro:namespace>NL.IMRO</imro:namespace>
+			<imro:lokaalID>040</imro:lokaalID>
+		</imro:NEN3610ID>
+	</imro:identificatie>
+	<imro:typePlanobject>bouwaanduiding</imro:typePlanobject>
+	<imro:plangebied xlink:href="#NL.IMRO.0999.BP2012000001-0005"/>
+	<imro:bestemmingsvlak xlink:href="#NL.IMRO.061"/>
+	<imro:naam>gestapeld</imro:naam>
+	<imro:labelInfo>
+		<imro:Label>
+			<imro:tekst>[gs]</imro:tekst>
+			<imro:positie>
+				<imro:Labelpositie>
+					<imro:plaatsingspunt>
+						<gml:Point gml:id="d1e12821" srsName="urn:ogc:def:crs:EPSG::28992">
+							<gml:pos>222922.814 433674.875 </gml:pos>
+						</gml:Point>
+					</imro:plaatsingspunt>
+				</imro:Labelpositie>
+			</imro:positie>
+		</imro:Label>
+	</imro:labelInfo>
+	<imro:geometrie>
+		<gml:Surface gml:id="d1e12834" srsName="urn:ogc:def:crs:EPSG::28992">
+			<gml:patches>
+				<gml:PolygonPatch>
+					<gml:exterior>
+						<gml:LinearRing>
+							<gml:posList>222958.467 433682.659 222943.734 433686.125
+								222942.786 433682.096 222923.093 433686.728 222924.05
+								433690.797 222921.558 433691.383 222916.928 433671.707
+								222935.806 433667.172 222939.717 433666.615 222946.717
+								433666.353 222955.457 433666.737 222958.467
+								433682.659</gml:posList>
+						</gml:LinearRing>
+					</gml:exterior>
+				</gml:PolygonPatch>
+			</gml:patches>
+		</gml:Surface>
+	</imro:geometrie>
+</imro:Bouwaanduiding>
