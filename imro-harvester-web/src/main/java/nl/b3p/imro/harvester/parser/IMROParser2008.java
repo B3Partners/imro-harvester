@@ -30,6 +30,8 @@ import nl.b3p.imro._2008._11.GebiedsaanduidingType;
 import nl.b3p.imro._2008._11.MaatvoeringType;
 import nl.b3p.imro._2008._11.WaardeEnTypePropertyType;
 import nl.b3p.imro._2008._11.WaardeEnTypeType;
+import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
@@ -333,6 +335,16 @@ public class IMROParser2008 implements IMROParser{
     @Override
     public String getIdentificatie(Object id) {
         return (String)id;
+    }
+
+    @Override
+    public Besluitvlak parseImroBesluitvlak(Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Besluitgebied parseImroBesluitgebied(Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

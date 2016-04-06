@@ -1,0 +1,41 @@
+		<imro:Besluitvlak_X gml:id="NL.IMRO.9999.BG1275133857-00" xmlns:imro="http://www.geonovum.nl/imro/2012/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geonovum.nl/imro/2012/1.1 http://schemas.geonovum.nl/imro/2012/1.1/IMRO2012.xsd">
+			<imro:identificatie>
+				<imro:NEN3610ID>
+					<imro:namespace>NL.IMRO</imro:namespace>
+					<imro:lokaalID>9999.BG1275133857-00</imro:lokaalID>
+				</imro:NEN3610ID>
+			</imro:identificatie>
+			<imro:typePlanobject>besluitvlak_X</imro:typePlanobject>
+			<imro:naam>omgevingsvergunning: ter visie</imro:naam>
+			<imro:verwijzingNaarTekstInfo>
+				<imro:TekstReferentie_XGB>
+					<imro:verwijzingNaarTekst>b_NL.IMRO.9999.vergunning0001-0001.pdf</imro:verwijzingNaarTekst>
+					<imro:typeTekst>bijlage bij besluittekst</imro:typeTekst>
+				</imro:TekstReferentie_XGB>
+			</imro:verwijzingNaarTekstInfo>
+			<imro:geometrie>
+				<gml:Surface gml:id="id1" srsName="urn:ogc:def:crs:EPSG::28992">
+					<gml:patches>
+						<gml:PolygonPatch>
+							<gml:exterior>
+								<gml:Ring>
+									<gml:curveMember>
+										<gml:Curve gml:id="id2">
+											<gml:segments>
+												<gml:LineStringSegment>
+													<gml:posList>25483.137 453077.898 25478.055 453068.261</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>25478.055 453068.261 25476.257 453064.581 25464.302 453034.511 25462.14 453026.881 25456.591 453001.526 25455.556 452990.088 25461.111 452988.672 25516.39 452996.996 25543.468 453039.067 25483.137 453077.898</gml:posList>
+												</gml:LineStringSegment>
+											</gml:segments>
+										</gml:Curve>
+									</gml:curveMember>
+								</gml:Ring>
+							</gml:exterior>
+						</gml:PolygonPatch>
+					</gml:patches>
+				</gml:Surface>
+			</imro:geometrie>
+			<imro:besluitgebied xlink:href="#NL.IMRO.9999.vergunning0001-0001"/>
+		</imro:Besluitvlak_X>

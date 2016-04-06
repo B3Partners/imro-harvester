@@ -35,6 +35,8 @@ import nl.b3p.imro._2012._11.FeatureCollectionIMROType;
 import nl.b3p.imro._2012._11.NEN3610IDType;
 import nl.b3p.imro._2012._11.WaardeEnTypePropertyType;
 import nl.b3p.imro._2012._11.WaardeEnTypeType;
+import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
@@ -120,6 +122,10 @@ public class IMROParser2012_11 implements IMROParser{
             obj = parseImroFiguur(o);
         } else if ( o instanceof nl.b3p.imro._2012._11.BouwaanduidingType){
             obj = parseImroBouwaanduiding(o);
+        } else if ( o instanceof nl.b3p.imro._2012._11.BesluitvlakXType){
+            obj = parseImroBesluitvlak(o);
+        } else if ( o instanceof nl.b3p.imro._2012._11.BesluitgebiedXType){
+            obj = parseImroBesluitgebied(o);
         }else if(o instanceof nl.b3p.imro._2012._11.MetadataIMRObestandType){
             // do nothing
         }else{
@@ -337,6 +343,97 @@ public class IMROParser2012_11 implements IMROParser{
             identificatie += "-" + id.getVersie();
         }
         return identificatie;
+    }
+
+    @Override
+    public Besluitvlak parseImroBesluitvlak(Object o) {
+        Besluitvlak bv = new Besluitvlak();
+        nl.b3p.imro._2012._11.BesluitvlakXType bvt = (nl.b3p.imro._2012._11.BesluitvlakXType) o;
+        String identificatie = getIdentificatie(bvt.getIdentificatie().getNEN3610ID());
+
+        bv.setIdentificatie(identificatie);
+        bv.setNaam(bvt.getNaam().getValue());
+        bv.setTypePlanObject(bvt.getTypePlanobject().value());
+        bv.setVerwijzing(bvt.getVerwijzingNaarTekstInfo().get(0).getTekstReferentieXGB().getVerwijzingNaarTekst());
+
+        try {
+            MultiPolygon g = gc.convertMultiPolygonGeometry(bvt.getGeometrie());
+            bv.setGeometrie(g);
+        } catch (Exception e) {
+        }
+        return bv;
+    }
+
+    @Override
+    public Besluitgebied parseImroBesluitgebied(Object o) {
+        /* private String typePlan;
+    private String beleidsmatigVerantwoordelijkeOverheid;
+    private String naamOverheid;
+    private String overheidsCode;
+    private String naam;
+    private String normadressant;
+    private String locatieNaam;
+    private String planstatusInfo;
+    private String besluitnummer;
+    private String verwijzingNaarVaststellingsbesluit;
+    private String verwijzingNaarTekstInfo;
+    private String ondergrondInfo;
+    private String verwijzingNaarIllustratieInfo;
+    private String verwijzingNaarExternPlanInfo;
+    private String verwijzingNorm;
+
+    @org.hibernate.annotations.Type(type = "org.hibernatespatial.GeometryUserType")
+    private MultiPolygon geometrie;*/
+        Besluitgebied bg = new Besluitgebied();
+        nl.b3p.imro._2012._11.BesluitgebiedXType bgt = (nl.b3p.imro._2012._11.BesluitgebiedXType) o;
+        String identificatie = getIdentificatie(bgt.getIdentificatie().getNEN3610ID());
+
+
+        bg.setBeleidsmatigVerantwoordelijkeOverheid(bgt.getBeleidsmatigVerantwoordelijkeOverheid().value());
+        bg.setBesluitnummer(bgt.getBesluitnummer());
+        bg.setIdentificatie(identificatie);
+        if(bgt.getLocatieNaam().size() > 0){
+            bg.setLocatieNaam(bgt.getLocatieNaam().get(0));
+        }
+        bg.setNaam(bgt.getNaam().getValue());
+        if(bgt.getNaamOverheid().size() > 0){
+            bg.setNaamOverheid(bgt.getNaamOverheid().get(0));
+        }
+        if(bgt.getNormadressant().size() > 0){
+            bg.setNormadressant(bgt.getNormadressant().get(0).value());
+        }
+        if(bgt.getOndergrondInfo().size() > 0){
+            bg.setOndergrondInfo(bgt.getOndergrondInfo().get(0).getOndergrondReferentie().getOndergrondtype());
+        }
+
+        bg.setOverheidsCode(bgt.getOverheidsCode());
+        bg.setPlanstatus(bgt.getPlanstatusInfo().getPlanstatusEnDatum().getPlanstatus().value());
+        bg.setPlanstatusDatum(new Date(bgt.getPlanstatusInfo().getPlanstatusEnDatum().getDatum().getTimeInMillis()));
+        bg.setTypePlan(bgt.getTypePlan().value());
+        if(bgt.getVerwijzingNaarExternPlanInfo().size() > 0){
+            bg.setVerwijzingNaarExternPlanInfo(bgt.getVerwijzingNaarExternPlanInfo().get(0).getExternPlanReferentieXGB().getNaamExternPlan());
+        }
+
+        if(bgt.getVerwijzingNaarIllustratieInfo().size() > 0){
+            bg.setVerwijzingNaarIllustratieInfo(bgt.getVerwijzingNaarIllustratieInfo().get(0).getIllustratieReferentieXGB().getVerwijzingNaarIllustratie());
+        }
+
+        if(bgt.getVerwijzingNaarTekstInfo().size() > 0){
+            bg.setVerwijzingNaarTekstInfo(bgt.getVerwijzingNaarTekstInfo().get(0).getTekstReferentieBGXGB().getVerwijzingNaarTekst());
+        }
+
+        bg.setVerwijzingNaarVaststellingsbesluit(bgt.getVerwijzingNaarVaststellingsbesluit());
+
+        if(bgt.getVerwijzingNorm().size() > 0){
+            bg.setVerwijzingNorm(bgt.getVerwijzingNorm().get(0));
+        }
+
+        try {
+            MultiPolygon g = gc.convertMultiPolygonGeometry(bgt.getGeometrie());
+            bg.setGeometrie(g);
+        } catch (Exception e) {
+        }
+        return bg;
     }
 
 }

@@ -10,6 +10,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import javax.xml.bind.JAXBException;
+import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
@@ -56,6 +58,10 @@ public interface IMROParser {
     Enkelbestemming parseImroEnkelbestemming(Object o);
 
     Maatvoering parseImroMaatvoering(Object o);
+
+    Besluitvlak parseImroBesluitvlak(Object o);
+
+    Besluitgebied parseImroBesluitgebied(Object o);
 
     String getIdentificatie(Object id);
 

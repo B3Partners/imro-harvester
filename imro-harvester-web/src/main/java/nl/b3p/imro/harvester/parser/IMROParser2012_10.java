@@ -35,6 +35,8 @@ import nl.b3p.imro._2012._10.FeatureCollectionIMROType;
 import nl.b3p.imro._2012._10.NEN3610IDType;
 import nl.b3p.imro._2012._10.WaardeEnTypePropertyType;
 import nl.b3p.imro._2012._10.WaardeEnTypeType;
+import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
@@ -337,6 +339,16 @@ public class IMROParser2012_10 implements IMROParser{
             identificatie += "-" + id.getVersie();
         }
         return identificatie;
+    }
+
+    @Override
+    public Besluitvlak parseImroBesluitvlak(Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Besluitgebied parseImroBesluitgebied(Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

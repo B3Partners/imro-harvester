@@ -11,6 +11,8 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.xml.bind.JAXBException;
+import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
@@ -330,6 +332,58 @@ public class IMROParser2012_11Test {
 
         assertEquals(MultiPolygon.class, bp.getGeometrie().getClass());
         assertFalse(bp.getGeometrie().isEmpty());
+
+    }
+
+    @Test
+    public void testOmgevingsvergunning() throws JAXBException {
+        URL u = this.getClass().getResource("omgevingsvergunning2012_11.gml");
+        List<Object> o = instance.parseGML(u);
+        assertNotNull(o);
+        assertEquals(2, o.size());
+    }
+
+    @Test
+    public void testParseBesluitgebiedInhoud() throws JAXBException {
+
+        URL u = this.getClass().getResource("besluitgebied2012_11.xml");
+
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Besluitgebied bp = instance.parseImroBesluitgebied(gba);
+
+        assertNotNull(bp);
+        assertEquals("omgevingsvergunning", bp.getTypePlan());
+        assertEquals("NL.IMRO.9999.vergunning0001-0001", bp.getIdentificatie());
+        assertEquals("gemeente Durperdam", bp.getNaamOverheid());
+        assertEquals("gemeentelijke overheid", bp.getBeleidsmatigVerantwoordelijkeOverheid());
+        assertEquals("9999", bp.getOverheidsCode());
+        assertEquals("Testdata Geonovum NL.IMRO.9999.vergunning0001-0001", bp.getNaam());
+        assertEquals("vastgesteld", bp.getPlanstatus());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        assertEquals("2013-08-08",sdf.format(bp.getPlanstatusDatum()));
+        assertEquals("geen",bp.getBesluitnummer());
+        assertEquals("vb_NL.IMRO.9999.vergunning0001-0001.pdf", bp.getVerwijzingNaarVaststellingsbesluit());
+        assertNotNull("Geometrie moet gevuld zijn",bp.getGeometrie());
+
+    }
+
+    @Test
+    public void testParseBesluitvlakInhoud() throws JAXBException {
+
+        URL u = this.getClass().getResource("besluitvlak2012_11.xml");
+
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Besluitvlak bv = instance.parseImroBesluitvlak(gba);
+
+        assertNotNull(bv);
+        assertEquals("besluitvlak_X", bv.getTypePlanObject());
+        assertEquals("NL.IMRO.9999.BG1275133857-00", bv.getIdentificatie());
+        assertEquals("omgevingsvergunning: ter visie", bv.getNaam());
+        assertNull(bv.getArtikelnummer());
+        assertEquals("b_NL.IMRO.9999.vergunning0001-0001.pdf", bv.getVerwijzing());
+        assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
 
     }
 }

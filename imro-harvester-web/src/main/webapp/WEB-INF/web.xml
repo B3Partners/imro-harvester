@@ -82,7 +82,7 @@
 
     <context-param>
         <param-name>download.folder</param-name>
-        <param-value>/home/meine/imsro</param-value>
+        <param-value>D:\imro</param-value>
     </context-param>
     
     <welcome-file-list>
