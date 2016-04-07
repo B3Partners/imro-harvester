@@ -25,21 +25,21 @@ import org.stripesstuff.stripersist.Stripersist;
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
-public class JobExecutor implements Job{
+public class JobExecutor implements Job {
 
     private static final Log log = LogFactory.getLog(JobExecutor.class);
+
     @Override
     public void execute(JobExecutionContext jec) throws JobExecutionException {
-        Stripersist.requestInit();
-        EntityManager em = Stripersist.getEntityManager();
-
         JobDataMap data = jec.getJobDetail().getJobDataMap();
         String path = data.getString("download.folder");
         File downloadfolder = null;
         if (path == null || path.isEmpty()) {
-            log.error( "Download pad is niet geconfigureerd. Uitvoeren van jobs niet mogelijk.");
+            log.error("Download pad is niet geconfigureerd. Uitvoeren van jobs niet mogelijk.");
         } else {
             try {
+                Stripersist.requestInit();
+                EntityManager em = Stripersist.getEntityManager();
                 downloadfolder = new File(path);
                 if (!downloadfolder.exists()) {
                     downloadfolder = null;
@@ -50,14 +50,15 @@ public class JobExecutor implements Job{
                 Processor p = new Processor(jobs, downloadfolder);
                 p.process();
             } catch (JAXBException ex) {
-                log.error("Cannot create processor: ",ex);
+                log.error("Cannot create processor: ", ex);
             } catch (JDOMException ex) {
-                log.error("Cannot create processor: ",ex);
+                log.error("Cannot create processor: ", ex);
+            }finally{
+                Stripersist.requestComplete();
             }
 
         }
 
-        Stripersist.requestComplete();
     }
 
 }
