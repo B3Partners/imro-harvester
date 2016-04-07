@@ -42,6 +42,7 @@
         </div>
 
         <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="add"/>" class="btn btn-success">Toevoegen</a>
+        <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="testJob"/>" class="btn btn-success">Test</a>
 
         <script>
             var currentpage = 'harvestjobs';

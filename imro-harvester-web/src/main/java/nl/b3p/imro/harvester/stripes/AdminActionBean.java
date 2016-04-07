@@ -16,14 +16,22 @@
  */
 package nl.b3p.imro.harvester.stripes;
 
+import java.io.File;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
+import net.sourceforge.stripes.action.After;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
+import net.sourceforge.stripes.action.SimpleMessage;
 import net.sourceforge.stripes.action.StrictBinding;
 import net.sourceforge.stripes.action.UrlBinding;
+import net.sourceforge.stripes.controller.LifecycleStage;
+import net.sourceforge.stripes.validation.SimpleError;
+import net.sourceforge.stripes.validation.Validate;
+import nl.b3p.imro.harvester.entities.Configuration;
 import org.stripesstuff.stripersist.Stripersist;
 
 /**
@@ -32,17 +40,28 @@ import org.stripesstuff.stripersist.Stripersist;
  */
 @StrictBinding
 @UrlBinding("/action/beheer/admin/{event}")
-public class AdminActionBean implements ActionBean{
+public class AdminActionBean implements ActionBean {
 
     private ActionBeanContext context;
 
+    private static final String CONFIG_CRON = "cronexpression";
+    private static final String CONFIG_DOWNLOADFOLDER = "download.folder";
+
     private final String JSP_VIEW = "/WEB-INF/jsp/admin/view.jsp";
 
+    private Configuration downloadConfig;
+
+    @Validate
     private String cron;
 
+    private Configuration cronConfig;
+
+    @Validate
     private String downloadfolder;
 
     // <editor-fold desc="Getters and Setters" defaultstate="collapsed" >
+
+
     @Override
     public ActionBeanContext getContext() {
         return context;
@@ -69,19 +88,69 @@ public class AdminActionBean implements ActionBean{
         this.downloadfolder = downloadfolder;
     }
 
-
     // </editor-fold>
-
     @DefaultHandler
-    public Resolution view(){
+    public Resolution view() {
         return new ForwardResolution(JSP_VIEW);
     }
 
-
-
-    public Resolution save(){
+    public Resolution save() {
         EntityManager em = Stripersist.getEntityManager();
+        if (cron != null) {
+            Configuration cronConfig = null;
+            try {
+                cronConfig = em.createQuery("FROM Configuration WHERE key = :cronKey", Configuration.class).setParameter("cronKey", CONFIG_CRON).getSingleResult();
+            } catch (NoResultException e) {
+                cronConfig = new Configuration();
+                cronConfig.setKey(CONFIG_CRON);
+            }
+            cronConfig.setValue(cron);
+            em.persist(cronConfig);
+            context.getMessages().add(new SimpleMessage("Cronexpressie opgeslagen"));
+        }
+
+        if (downloadfolder != null) {
+            File f = new File(downloadfolder);
+            if (f.exists() && f.isDirectory()) {
+                Configuration downloadConfig = null;
+                try {
+                    downloadConfig = em.createQuery("FROM Configuration WHERE key = :downloadKey", Configuration.class).setParameter("downloadKey", CONFIG_DOWNLOADFOLDER).getSingleResult();
+                } catch (NoResultException e) {
+                    downloadConfig = new Configuration();
+                    downloadConfig.setKey(CONFIG_DOWNLOADFOLDER);
+                }
+
+                downloadConfig.setValue(downloadfolder);
+                em.persist(downloadConfig);
+                context.getMessages().add(new SimpleMessage("Downloadfolder opgeslagen"));
+            } else {
+                context.getValidationErrors().add("downloadfolder", new SimpleError("Download folder bestaat niet of is geen folder."));
+            }
+        }
+
+        em.getTransaction().commit();
         return new ForwardResolution(JSP_VIEW);
+    }
+
+    @After(stages = LifecycleStage.EventHandling)
+    private void initVars() {
+        EntityManager em = Stripersist.getEntityManager();
+        try {
+            cronConfig = em.createQuery("FROM Configuration WHERE key = :cronKey", Configuration.class).setParameter("cronKey", CONFIG_CRON).getSingleResult();
+            cron = cronConfig.getValue();
+        } catch (NoResultException e) {
+            cronConfig = new Configuration();
+            cronConfig.setKey(CONFIG_CRON);
+        }
+        
+        try {
+            downloadConfig = em.createQuery("FROM Configuration WHERE key = :downloadKey", Configuration.class).setParameter("downloadKey", CONFIG_DOWNLOADFOLDER).getSingleResult();
+            downloadfolder = downloadConfig.getValue();
+        } catch (NoResultException e) {
+            downloadConfig = new Configuration();
+            downloadConfig.setKey(CONFIG_DOWNLOADFOLDER);
+        }
+
     }
 
 }

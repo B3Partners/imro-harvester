@@ -29,11 +29,11 @@
                     <tbody>
                         <tr>
                             <td class="col-md-1">Cron expressie</td>
-                            <td class="col-md-1"><stripes:text name="setting.cron"/></td>
+                            <td class="col-md-1"><stripes:text name="cron"/></td>
                         </tr>
                         <tr>
                             <td class="col-md-1">Download map</td>
-                            <td class="col-md-1"><stripes:text name="setting.downloadfolder"/></td>
+                            <td class="col-md-1"><stripes:text name="downloadfolder"/></td>
                         </tr>
                     </tbody>
                 </table>

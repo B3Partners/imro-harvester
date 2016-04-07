@@ -100,7 +100,6 @@ public class HarvestJobActionBean implements ActionBean {
     }
 
     // </editor-fold>
-
     @Before
     public void init() {
         String path = context.getServletContext().getInitParameter("download.folder");
