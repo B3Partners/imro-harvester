@@ -343,12 +343,75 @@ public class IMROParser2012_10 implements IMROParser{
 
     @Override
     public Besluitvlak parseImroBesluitvlak(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Besluitvlak bv = new Besluitvlak();
+        nl.b3p.imro._2012._10.BesluitvlakXType bvt = (nl.b3p.imro._2012._10.BesluitvlakXType) o;
+        String identificatie = getIdentificatie(bvt.getIdentificatie().getNEN3610ID());
+
+        bv.setIdentificatie(identificatie);
+        bv.setNaam(bvt.getNaam().getValue());
+        bv.setTypePlanObject(bvt.getTypePlanobject().value());
+        bv.setVerwijzing(bvt.getVerwijzingNaarTekstInfo().get(0).getTekstReferentieXGB().getVerwijzingNaarTekst());
+
+        try {
+            MultiPolygon g = gc.convertMultiPolygonGeometry(bvt.getGeometrie());
+            bv.setGeometrie(g);
+        } catch (Exception e) {
+        }
+        return bv;
     }
 
     @Override
     public Besluitgebied parseImroBesluitgebied(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Besluitgebied bg = new Besluitgebied();
+        nl.b3p.imro._2012._10.BesluitgebiedXType bgt = (nl.b3p.imro._2012._10.BesluitgebiedXType) o;
+        String identificatie = getIdentificatie(bgt.getIdentificatie().getNEN3610ID());
+
+
+        bg.setBeleidsmatigVerantwoordelijkeOverheid(bgt.getBeleidsmatigVerantwoordelijkeOverheid().value());
+        bg.setBesluitnummer(bgt.getBesluitnummer());
+        bg.setIdentificatie(identificatie);
+        if(bgt.getLocatieNaam().size() > 0){
+            bg.setLocatieNaam(bgt.getLocatieNaam().get(0));
+        }
+        bg.setNaam(bgt.getNaam().getValue());
+        if(bgt.getNaamOverheid().size() > 0){
+            bg.setNaamOverheid(bgt.getNaamOverheid().get(0));
+        }
+        if(bgt.getNormadressant().size() > 0){
+            bg.setNormadressant(bgt.getNormadressant().get(0).value());
+        }
+        if(bgt.getOndergrondInfo().size() > 0){
+            bg.setOndergrondInfo(bgt.getOndergrondInfo().get(0).getOndergrondReferentie().getOndergrondtype());
+        }
+
+        bg.setOverheidsCode(bgt.getOverheidsCode());
+        bg.setPlanstatus(bgt.getPlanstatusInfo().getPlanstatusEnDatum().getPlanstatus().value());
+        bg.setPlanstatusDatum(new Date(bgt.getPlanstatusInfo().getPlanstatusEnDatum().getDatum().getTimeInMillis()));
+        bg.setTypePlan(bgt.getTypePlan().value());
+        if(bgt.getVerwijzingNaarExternPlanInfo().size() > 0){
+            bg.setVerwijzingNaarExternPlanInfo(bgt.getVerwijzingNaarExternPlanInfo().get(0).getExternPlanReferentieXGB().getNaamExternPlan());
+        }
+
+        if(bgt.getVerwijzingNaarIllustratieInfo().size() > 0){
+            bg.setVerwijzingNaarIllustratieInfo(bgt.getVerwijzingNaarIllustratieInfo().get(0).getIllustratieReferentieXGB().getVerwijzingNaarIllustratie());
+        }
+
+        if(bgt.getVerwijzingNaarTekstInfo().size() > 0){
+            bg.setVerwijzingNaarTekstInfo(bgt.getVerwijzingNaarTekstInfo().get(0).getTekstReferentieBGXGB().getVerwijzingNaarTekst());
+        }
+
+        bg.setVerwijzingNaarVaststellingsbesluit(bgt.getVerwijzingNaarVaststellingsbesluit());
+
+        if(bgt.getVerwijzingNorm().size() > 0){
+            bg.setVerwijzingNorm(bgt.getVerwijzingNorm().get(0));
+        }
+
+        try {
+            MultiPolygon g = gc.convertMultiPolygonGeometry(bgt.getGeometrie());
+            bg.setGeometrie(g);
+        } catch (Exception e) {
+        }
+        return bg;
     }
 
 }
