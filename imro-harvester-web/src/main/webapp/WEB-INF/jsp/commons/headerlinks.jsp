@@ -35,6 +35,7 @@
             <ul class="nav navbar-nav">
                 <li id="home"><a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.ViewActionBean"/>">Home</a></li>
                 <li id="harvestjobs"><a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean"/>">Harvesterjobs</a></li>
+                <li id="harvestjobs"><a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.AdminActionBean"/>">Beheer</a></li>
                
             </ul>
         </div>

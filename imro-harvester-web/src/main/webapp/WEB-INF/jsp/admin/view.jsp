@@ -29,17 +29,17 @@
                     <tbody>
                         <tr>
                             <td class="col-md-1">Cron expressie</td>
-                            <td class="col-md-1"><stripes:text name="setting.cron"/></td>
+                            <td class="col-md-1"><stripes:text name="cron"/></td>
                         </tr>
                         <tr>
                             <td class="col-md-1">Download map</td>
-                            <td class="col-md-1"><stripes:text name="setting.downloadfolder"/></td>
+                            <td class="col-md-1"><stripes:text name="downloadfolder"/></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <stripes:submit name="save"/><stripes:reset name="reset"/>
+            <stripes:submit name="save" class="btn btn-success"/><stripes:reset name="reset" class="btn btn-danger"/>
         </stripes:form>
         <script>
             var currentpage = 'settings';

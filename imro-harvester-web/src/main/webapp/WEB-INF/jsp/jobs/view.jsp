@@ -33,7 +33,7 @@
                             <td>
                                 <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="edit"><stripes:param name="job" value="${job.id}"/></stripes:url>" class="btn btn-info">Bewerk</a>
                                 <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="delete"><stripes:param name="job" value="${job.id}"/></stripes:url>"  class="btn btn-danger">Verwijder</a>
-                                <c:if test="${not empty actionBean.downloadfolder}" ><a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="run"><stripes:param name="job" value="${job.id}"/></stripes:url>"  class="btn btn-primary">Run</a></c:if>
+                                <c:if test="${not empty actionBean.downloadFolder}" ><a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="runSingle"><stripes:param name="job" value="${job.id}"/></stripes:url>"  class="btn btn-primary">Run</a></c:if>
                             </td>
                         </tr>
                     </c:forEach>
@@ -42,6 +42,7 @@
         </div>
 
         <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="add"/>" class="btn btn-success">Toevoegen</a>
+        <a href="<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="runAll"/>" class="btn btn-primary">Alle uitvoeren</a>
 
         <script>
             var currentpage = 'harvestjobs';

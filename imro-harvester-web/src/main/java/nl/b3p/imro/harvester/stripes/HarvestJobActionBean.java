@@ -36,8 +36,13 @@ import net.sourceforge.stripes.validation.SimpleError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import nl.b3p.imro.harvester.entities.HarvestJob;
+import nl.b3p.imro.harvester.processing.HarvesterInitializer;
 import nl.b3p.imro.harvester.processing.Processor;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom2.JDOMException;
+import org.quartz.JobKey;
+import org.quartz.SchedulerException;
 import org.stripesstuff.stripersist.Stripersist;
 
 /**
@@ -48,6 +53,7 @@ import org.stripesstuff.stripersist.Stripersist;
 @UrlBinding("/action/beheer/jobs/{event}")
 public class HarvestJobActionBean implements ActionBean {
 
+    protected final static Log log = LogFactory.getLog(HarvestJobActionBean.class);
     private ActionBeanContext context;
 
     private final String JSP_VIEW = "/WEB-INF/jsp/jobs/view.jsp";
@@ -55,7 +61,7 @@ public class HarvestJobActionBean implements ActionBean {
 
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
 
-    private File downloadfolder = null;
+    private File downloadFolder = null;
 
     @Validate
     @ValidateNestedProperties({
@@ -91,25 +97,23 @@ public class HarvestJobActionBean implements ActionBean {
         this.job = job;
     }
 
-    public File getDownloadfolder() {
-        return downloadfolder;
+    public File getDownloadFolder() {
+        return downloadFolder;
     }
 
-    public void setDownloadfolder(File downloadfolder) {
-        this.downloadfolder = downloadfolder;
+    public void setDownloadfolder(File downloadFolder) {
+        this.downloadFolder = downloadFolder;
     }
 
     // </editor-fold>
-
     @Before
     public void init() {
-        String path = context.getServletContext().getInitParameter("download.folder");
-        if (path == null || path.isEmpty()) {
+        downloadFolder = HarvesterInitializer.getDownloadFolder();
+        if (downloadFolder == null ) {
             context.getValidationErrors().add("Pad", new SimpleError("Download pad is niet geconfigureerd. Uitvoeren van jobs niet mogelijk."));
         } else {
-            downloadfolder = new File(path);
-            if (!downloadfolder.exists()) {
-                downloadfolder = null;
+            if (!downloadFolder.exists()) {
+                downloadFolder = null;
                 context.getValidationErrors().add("Pad", new SimpleError("Download pad bestaat niet. Uitvoeren van jobs niet mogelijk."));
             }
         }
@@ -143,9 +147,19 @@ public class HarvestJobActionBean implements ActionBean {
         return new ForwardResolution(JSP_EDIT);
     }
 
-    public Resolution run() throws JAXBException, JDOMException {
-        Processor p = new Processor(Collections.singletonList(job), downloadfolder);
+    public Resolution runSingle() throws JAXBException, JDOMException {
+        Processor p = new Processor(Collections.singletonList(job), downloadFolder);
         p.process();
+        return new ForwardResolution(JSP_VIEW);
+    }
+
+    public Resolution runAll() throws JAXBException, JDOMException {
+        try {
+            HarvesterInitializer.getScheduler().triggerJob(new JobKey(HarvesterInitializer.JOB_NAME,HarvesterInitializer.GROUP_NAME));
+        } catch (SchedulerException ex) {
+            context.getValidationErrors().add("Pad", new SimpleError("Uitvoeren mislukt."));
+            log.error("Kan niet handmatig alle jobs uitvoeren: ", ex);
+        }
         return new ForwardResolution(JSP_VIEW);
     }
 
