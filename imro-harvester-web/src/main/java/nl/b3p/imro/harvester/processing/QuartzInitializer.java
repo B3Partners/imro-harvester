@@ -16,10 +16,17 @@
  */
 package nl.b3p.imro.harvester.processing;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import nl.b3p.imro.harvester.entities.Configuration;
+import nl.b3p.imro.harvester.stripes.AdminActionBean;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.CronScheduleBuilder;
@@ -30,21 +37,34 @@ import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
+import org.stripesstuff.stripersist.Stripersist;
 
 /**
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
-public class QuartzInitializer implements ServletContextListener{
+public class QuartzInitializer implements Servlet {
 
     protected final static Log log = LogFactory.getLog(QuartzInitializer.class);
 
     public static final String JOB_NAME = "harvestJobsExecutor";
-    
+    private ServletConfig config;
+    private static Scheduler scheduler;
+
     @Override
-    public void contextInitialized(ServletContextEvent sce) {
+    public void init(ServletConfig sc) throws ServletException {
+        this.config = sc;
+        log.debug("Initializing quartz.");
         try {
-            String cronschedule = "0/5 * * * * ?";
+            String cronschedule = "0 0 3 1/1 * ? *";
+
+            Stripersist.requestInit();
+            EntityManager em = Stripersist.getEntityManager("imroPU");
+            try {
+                Configuration cron = em.createQuery("FROM Configuration where key = :cronKey", Configuration.class).setParameter("cronKey", AdminActionBean.CONFIG_CRON).getSingleResult();
+                cronschedule = cron.getValue();
+            } catch (NoResultException e) {
+            }
             JobDetail job = JobBuilder.newJob(JobExecutor.class)
                     .withIdentity(JOB_NAME, "group1").build();
 
@@ -56,21 +76,45 @@ public class QuartzInitializer implements ServletContextListener{
                     .build();
 
             // schedule it
-            Scheduler scheduler = new StdSchedulerFactory().getScheduler();
+            scheduler = new StdSchedulerFactory().getScheduler();
             scheduler.start();
 
             scheduler.scheduleJob(job, trigger);
+            SimpleDateFormat sdf = new SimpleDateFormat("mm:kk dd-MM-yyyy");
+            log.debug("Quartz initialized. Next run is: " + sdf.format(trigger.getNextFireTime()));
         } catch (SchedulerException ex) {
             log.error("Cannot create scheduler", ex);
-        }catch(Exception e){
+        } catch (Exception e) {
             log.error("Error creating scheduler", e); // catch all, to prevent startup problems.
+        } finally {
+            Stripersist.requestComplete();
         }
-        
     }
 
     @Override
-    public void contextDestroyed(ServletContextEvent sce) {
-        
+    public ServletConfig getServletConfig() {
+        return config;
+    }
+
+    @Override
+    public void service(ServletRequest sr, ServletResponse sr1) throws ServletException, IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "Init quartz";
+    }
+
+    @Override
+    public void destroy() {
+        if(scheduler != null){
+            try {
+                scheduler.shutdown();
+            } catch (SchedulerException ex) {
+                log.error("Cannot shutdown quartz scheduler: ", ex);
+            }
+        }
     }
 
 }

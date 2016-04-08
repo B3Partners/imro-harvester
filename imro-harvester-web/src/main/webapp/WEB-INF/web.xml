@@ -75,6 +75,12 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>GeplandeTakenInit</servlet-name>
+        <servlet-class>nl.b3p.imro.harvester.processing.QuartzInitializer</servlet-class>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+
     <context-param>
         <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
         <param-value>ViewerResources</param-value>
