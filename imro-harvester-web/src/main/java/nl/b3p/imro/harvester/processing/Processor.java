@@ -27,11 +27,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.RollbackException;
 import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.parser.Geleideformulier;
@@ -45,6 +49,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.stripesstuff.stripersist.Stripersist;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -116,6 +121,22 @@ public class Processor {
                             em.getTransaction().rollback();
                         } catch (JDOMException ex) {
                             log.error("Cannot retrieve IMROParser " + geleideformulier, ex);
+                            em.getTransaction().rollback();
+                        } catch (MalformedURLException ex) {
+                            log.error("Cannot save entity in plan " + geleideformulier);
+                            log.debug(ex);
+                            em.getTransaction().rollback();
+                        } catch (ParserConfigurationException ex) {
+                            log.error("Cannot save entity in plan " + geleideformulier);
+                            log.debug(ex);
+                            em.getTransaction().rollback();
+                        } catch (SAXException ex) {
+                            log.error("Cannot save entity in plan " + geleideformulier);
+                            log.debug(ex);
+                            em.getTransaction().rollback();
+                        } catch (TransformerException ex) {
+                            log.error("Cannot save entity in plan " + geleideformulier);
+                            log.debug(ex);
                             em.getTransaction().rollback();
                         }
                     }
