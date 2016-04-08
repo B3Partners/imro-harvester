@@ -17,8 +17,8 @@
 package nl.b3p.imro.harvester.stripes;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import net.sourceforge.stripes.action.ActionBean;
@@ -39,8 +39,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.CronExpression;
 import org.quartz.SchedulerException;
-import org.quartz.Trigger;
-import org.quartz.TriggerKey;
 import org.stripesstuff.stripersist.Stripersist;
 
 /**
@@ -64,7 +62,6 @@ public class AdminActionBean implements ActionBean {
 
     @Validate
     private String cron;
-
 
     @Validate
     private String downloadfolder;
@@ -117,10 +114,21 @@ public class AdminActionBean implements ActionBean {
                 }
                 cronConfig.setValue(cron);
                 em.persist(cronConfig);
-                context.getMessages().add(new SimpleMessage("Cronexpressie opgeslagen"));
+                try {
+                    HarvesterInitializer.updateTrigger(cron);
+                } catch (SchedulerException ex) {
+                    log.error("Could not update trigger. ", ex);
+                    context.getValidationErrors().add("cron", new SimpleError("Is opgeslagen, maar niet actief."));
+
+                }
+                context.getMessages().add(new SimpleMessage("Cronexpressie opgeslagen."));
+                try {
+                   context.getMessages().add(new SimpleMessage("Volgende uitvoertijd: " + HarvesterInitializer.getNextExecutionTime()));
+                } catch (SchedulerException ex) {
+                    log.error("Kan volgende uitvoertijd niet ophalen: ", ex);
+                }
             } else {
                 context.getValidationErrors().add("cron", new SimpleError("De cronexpressie is niet correct. Zie ook <a href='https://en.wikipedia.org/wiki/Cron#Configuration_file'>hier</a>"));
-
             }
         }
 

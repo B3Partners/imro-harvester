@@ -19,6 +19,7 @@ package nl.b3p.imro.harvester.processing;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.servlet.Servlet;
@@ -37,6 +38,7 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
+import org.quartz.TriggerKey;
 import org.quartz.impl.StdSchedulerFactory;
 import org.stripesstuff.stripersist.Stripersist;
 
@@ -142,4 +144,25 @@ public class HarvesterInitializer implements Servlet {
         return scheduler;
     }
 
+    public static Trigger getTrigger() throws SchedulerException{
+        return scheduler.getTrigger(new TriggerKey(HarvesterInitializer.TRIGGER_NAME, HarvesterInitializer.GROUP_NAME));
+    }
+
+    public static void updateTrigger(String cronexpression) throws SchedulerException{
+
+        Trigger oldTrigger = getTrigger();
+        TriggerBuilder tb = oldTrigger.getTriggerBuilder();
+
+        Trigger newTrigger = tb.withSchedule(CronScheduleBuilder.cronSchedule(cronexpression)).build();
+
+        scheduler.rescheduleJob(oldTrigger.getKey(), newTrigger);
+    }
+
+    public static String getNextExecutionTime() throws SchedulerException {
+        Trigger t = HarvesterInitializer.getTrigger();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("kk:mm dd-MM-yyyy");
+        Date d = t.getNextFireTime();
+        return sdf.format(d);
+    }
 }
