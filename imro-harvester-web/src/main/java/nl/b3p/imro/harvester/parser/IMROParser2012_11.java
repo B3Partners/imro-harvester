@@ -366,24 +366,6 @@ public class IMROParser2012_11 implements IMROParser{
 
     @Override
     public Besluitgebied parseImroBesluitgebied(Object o) {
-        /* private String typePlan;
-    private String beleidsmatigVerantwoordelijkeOverheid;
-    private String naamOverheid;
-    private String overheidsCode;
-    private String naam;
-    private String normadressant;
-    private String locatieNaam;
-    private String planstatusInfo;
-    private String besluitnummer;
-    private String verwijzingNaarVaststellingsbesluit;
-    private String verwijzingNaarTekstInfo;
-    private String ondergrondInfo;
-    private String verwijzingNaarIllustratieInfo;
-    private String verwijzingNaarExternPlanInfo;
-    private String verwijzingNorm;
-
-    @org.hibernate.annotations.Type(type = "org.hibernatespatial.GeometryUserType")
-    private MultiPolygon geometrie;*/
         Besluitgebied bg = new Besluitgebied();
         nl.b3p.imro._2012._11.BesluitgebiedXType bgt = (nl.b3p.imro._2012._11.BesluitgebiedXType) o;
         String identificatie = getIdentificatie(bgt.getIdentificatie().getNEN3610ID());

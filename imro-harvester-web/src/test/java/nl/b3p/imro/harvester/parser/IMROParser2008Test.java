@@ -5,12 +5,15 @@
  */
 package nl.b3p.imro.harvester.parser;
 
-import nl.b3p.imro.harvester.parser.IMROParser2008;
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
 import nl.b3p.imro._2008._11.BestemmingsplangebiedType;
+import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
@@ -20,7 +23,6 @@ import nl.b3p.imro.harvester.entities.imro.Figuur;
 import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
-import nl.b3p.imro.harvester.parser.Geleideformulier;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -262,11 +264,64 @@ public class IMROParser2008Test {
     }
 
     @Test
-    public void testParse2008Plan() throws JAXBException{
+    public void testParse2008Plan() throws Exception{
         System.out.println("testParse2008Plan");
         URL u = this.getClass().getResource("2008.gml");
         List<Object> o = instance.parseGML(u);
         assertNotNull(o);
         assertNotEquals(218, o.size());
+    }
+
+
+    @Test
+    public void testOmgevingsvergunning() throws Exception {
+        URL u = this.getClass().getResource("omgevingsvergunning2008.gml");
+        List<Object> o = instance.parseGML(u);
+        assertNotNull(o);
+        assertEquals(2, o.size());
+    }
+
+    @Test
+    public void testParseBesluitgebiedInhoud() throws JAXBException {
+
+        URL u = this.getClass().getResource("besluitgebied2008.xml");
+
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Besluitgebied bp = instance.parseImroBesluitgebied(gba);
+
+        assertNotNull(bp);
+        assertEquals("projectbesluit", bp.getTypePlan());
+        assertEquals("NL.IMRO.0114.2011020-0002", bp.getIdentificatie());
+        assertEquals("gemeente", bp.getNaamOverheid());
+        assertEquals("gemeentelijke overheid", bp.getBeleidsmatigVerantwoordelijkeOverheid());
+        assertEquals("0114", bp.getOverheidsCode());
+        assertEquals("Omgevingsvergunning Veenoord, uitbreiding Schakelstation aan de Nieuwe Weg", bp.getNaam());
+        assertEquals("vastgesteld", bp.getPlanstatus());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        assertEquals("2011-08-08",sdf.format(bp.getPlanstatusDatum()));
+        assertEquals("Zaak-7608 (Corsa 11.198901)",bp.getBesluitnummer());
+        assertEquals("vb_NL.IMRO.0114.2011020-0002.pdf", bp.getVerwijzingNaarVaststellingsbesluit());
+        assertNotNull("Geometrie moet gevuld zijn",bp.getGeometrie());
+
+    }
+
+    @Test
+    public void testParseBesluitvlakInhoud() throws Exception{
+
+        URL u = this.getClass().getResource("besluitvlak2008.xml");
+
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Besluitvlak bv = instance.parseImroBesluitvlak(gba);
+
+        assertNotNull(bv);
+        assertEquals("besluitvlak_X", bv.getTypePlanObject());
+        assertEquals("NL.IMRO.38", bv.getIdentificatie());
+        assertEquals("besluitvlak", bv.getNaam());
+        assertNull(bv.getArtikelnummer());
+        assertEquals("b_NL.IMRO.0114.2011020-0002.pdf", bv.getVerwijzing());
+        assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+
     }
 }

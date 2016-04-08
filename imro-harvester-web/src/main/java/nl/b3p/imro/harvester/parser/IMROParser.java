@@ -5,11 +5,14 @@
  */
 package nl.b3p.imro.harvester.parser;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
@@ -22,6 +25,7 @@ import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import nl.b3p.imro.harvester.processing.GeometryConverter;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -31,15 +35,15 @@ public interface IMROParser {
 
     static GeometryConverter gc = new GeometryConverter();
 
-    List<Object> parseGML(Geleideformulier geleideformulier) throws JAXBException, URISyntaxException, MalformedURLException ;
+    List<Object> parseGML(Geleideformulier geleideformulier) throws JAXBException, URISyntaxException, MalformedURLException, IOException, ParserConfigurationException, SAXException, TransformerException ;
 
-    List<Object> parseGML(URL u) throws JAXBException;
+    List<Object> parseGML(URL u) throws JAXBException, IOException, ParserConfigurationException, SAXException, TransformerException;
 
     Object unmarshalUrl(URL u) throws JAXBException ;
 
-    List<Object> processFeatureCollection(Object fc);
+    List<Object> processFeatureCollection(Object fc) throws  IOException, ParserConfigurationException, SAXException, TransformerException;
 
-    Object parseFeatureMember(Object o);
+    Object parseFeatureMember(Object o) throws  IOException, ParserConfigurationException, SAXException, TransformerException;
 
     Bestemmingsplan parseImroBestemmingsplan(Object o);
 
@@ -59,7 +63,7 @@ public interface IMROParser {
 
     Maatvoering parseImroMaatvoering(Object o);
 
-    Besluitvlak parseImroBesluitvlak(Object o);
+    Besluitvlak parseImroBesluitvlak(Object o) throws  IOException, ParserConfigurationException, SAXException, TransformerException;
 
     Besluitgebied parseImroBesluitgebied(Object o);
 

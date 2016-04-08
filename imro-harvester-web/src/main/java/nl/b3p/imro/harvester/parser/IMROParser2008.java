@@ -7,17 +7,23 @@ package nl.b3p.imro.harvester.parser;
 
 import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.MultiPolygon;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import nl.b3p.imro._2008._11.BestemmingsvlakPropertyType;
 import nl.b3p.imro._2008._11.DubbelbestemmingType;
 import nl.b3p.imro._2008._11.FeatureCollectionIMROType;
@@ -45,6 +51,7 @@ import nl.b3p.imro.harvester.entities.imro.WaardeEnType;
 import static nl.b3p.imro.harvester.parser.IMROParser.gc;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -61,12 +68,12 @@ public class IMROParser2008 implements IMROParser{
 
 
     @Override
-    public List<Object> parseGML(Geleideformulier geleideformulier) throws JAXBException, URISyntaxException, MalformedURLException {
+    public List<Object> parseGML(Geleideformulier geleideformulier) throws JAXBException, URISyntaxException, MalformedURLException, IOException, ParserConfigurationException, SAXException, TransformerException{
         return parseGML(geleideformulier.getGML());
     }
 
     @Override
-    public List<Object> parseGML(URL u) throws JAXBException {
+    public List<Object> parseGML(URL u) throws JAXBException, IOException, ParserConfigurationException, SAXException, TransformerException{
         Object value = unmarshalUrl(u);
 
         FeatureCollectionIMROType fc = (FeatureCollectionIMROType) value;
@@ -85,7 +92,7 @@ public class IMROParser2008 implements IMROParser{
     }
 
     @Override
-    public List<Object> processFeatureCollection(Object featureCollection) {
+    public List<Object> processFeatureCollection(Object featureCollection)  throws  IOException, ParserConfigurationException, SAXException, TransformerException{
         FeatureCollectionIMROType fc = (FeatureCollectionIMROType)featureCollection;
         List<Object> objs = new ArrayList<Object>();
         List<FeatureCollectionIMROType.FeatureMember> members = fc.getFeatureMember();
@@ -101,7 +108,7 @@ public class IMROParser2008 implements IMROParser{
     }
 
     @Override
-    public Object parseFeatureMember(Object o) {
+    public Object parseFeatureMember(Object o) throws  IOException, ParserConfigurationException, SAXException, TransformerException {
         Object obj = null;
         if (o instanceof nl.b3p.imro._2008._11.GebiedsaanduidingType) {
             obj = parseImroGebiedsaanduiding(o);
@@ -121,6 +128,10 @@ public class IMROParser2008 implements IMROParser{
             obj = parseImroFiguur(o);
         } else if ( o instanceof nl.b3p.imro._2008._11.BouwaanduidingType){
             obj = parseImroBouwaanduiding(o);
+        } else if ( o instanceof nl.b3p.imro._2008._11.BesluitvlakXType){
+            obj = parseImroBesluitvlak(o);
+        } else if ( o instanceof nl.b3p.imro._2008._11.BesluitgebiedXType){
+            obj = parseImroBesluitgebied(o);
         }else if(o instanceof nl.b3p.imro._2008._11.MetadataIMRObestandType){
             // do nothing
         }else{
@@ -338,13 +349,78 @@ public class IMROParser2008 implements IMROParser{
     }
 
     @Override
-    public Besluitvlak parseImroBesluitvlak(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Besluitvlak parseImroBesluitvlak(Object o) throws  IOException, ParserConfigurationException, SAXException, TransformerException {
+        Besluitvlak bv = new Besluitvlak();
+        nl.b3p.imro._2008._11.BesluitvlakXType bvt = (nl.b3p.imro._2008._11.BesluitvlakXType) o;
+        String identificatie = getIdentificatie(bvt.getIdentificatie());
+
+        bv.setIdentificatie(identificatie);
+        bv.setNaam(bvt.getNaam().getValue());
+        bv.setTypePlanObject(bvt.getTypePlanobject().value());
+        bv.setVerwijzing(bvt.getVerwijzingNaarTekstInfo().get(0).getTekstReferentieXGB().getVerwijzingNaarTekst());
+
+        MultiPolygon g = gc.convertMultiPolygonGeometry(bvt.getGeometrie());
+        bv.setGeometrie(g);
+
+        return bv;
     }
 
     @Override
     public Besluitgebied parseImroBesluitgebied(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Besluitgebied bg = new Besluitgebied();
+        nl.b3p.imro._2008._11.BesluitgebiedXType bgt = (nl.b3p.imro._2008._11.BesluitgebiedXType) o;
+        String identificatie = getIdentificatie(bgt.getIdentificatie());
+
+
+        bg.setBeleidsmatigVerantwoordelijkeOverheid(bgt.getBeleidsmatigVerantwoordelijkeOverheid().value());
+        bg.setBesluitnummer(bgt.getBesluitnummer());
+        bg.setIdentificatie(identificatie);
+        if(bgt.getLocatieNaam().size() > 0){
+            bg.setLocatieNaam(bgt.getLocatieNaam().get(0));
+        }
+        bg.setNaam(bgt.getNaam().getValue());
+        bg.setNaamOverheid(bgt.getNaamOverheid());
+        
+        if(bgt.getNormadressant().size() > 0){
+            bg.setNormadressant(bgt.getNormadressant().get(0).value());
+        }
+        if(bgt.getOndergrond().size() > 0){
+            bg.setOndergrondInfo(bgt.getOndergrond().get(0));
+        }
+
+        bg.setOverheidsCode(bgt.getOverheidsCode());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        bg.setPlanstatus(bgt.getPlanstatusInfo().getPlanstatusEnDatumXGB().getPlanstatus().value());
+        try {
+            bg.setPlanstatusDatum(sdf.parse(bgt.getPlanstatusInfo().getPlanstatusEnDatumXGB().getDatum()));
+        } catch (ParseException ex) {
+            log.error("Cannot parse date: ",ex);
+        }
+        bg.setTypePlan(bgt.getTypePlan().value());
+        if(bgt.getVerwijzingNaarExternPlanInfo().size() > 0){
+            bg.setVerwijzingNaarExternPlanInfo(bgt.getVerwijzingNaarExternPlanInfo().get(0).getExternPlanReferentieXGB().getNaamExternPlan());
+        }
+
+        if(bgt.getVerwijzingNaarIllustratieInfo().size() > 0){
+            bg.setVerwijzingNaarIllustratieInfo(bgt.getVerwijzingNaarIllustratieInfo().get(0).getIllustratieReferentieXGB().getVerwijzingNaarIllustratie());
+        }
+
+        if(bgt.getVerwijzingNaarTekstInfo().size() > 0){
+            bg.setVerwijzingNaarTekstInfo(bgt.getVerwijzingNaarTekstInfo().get(0).getTekstReferentieBGXGB().getVerwijzingNaarTekst());
+        }
+
+        bg.setVerwijzingNaarVaststellingsbesluit(bgt.getVerwijzingNaarVaststellingsbesluit());
+
+        if(bgt.getVerwijzingNorm().size() > 0){
+            bg.setVerwijzingNorm(bgt.getVerwijzingNorm().get(0));
+        }
+
+        try {
+            MultiPolygon g = gc.convertMultiPolygonGeometry(bgt.getGeometrie());
+            bg.setGeometrie(g);
+        } catch (Exception e) {
+        }
+        return bg;
     }
 
 }
