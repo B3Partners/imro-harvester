@@ -94,7 +94,7 @@ public class IMROParser2008 implements IMROParser{
         List<Object> objs = new ArrayList<Object>();
         List<FeatureCollectionIMROType.FeatureMember> members = fc.getFeatureMember();
         for (FeatureCollectionIMROType.FeatureMember member : members) {
-            Object o = member.getFeature();
+            Object o = member.getFeature().getValue();
 
             Object parsed = parseFeatureMember(o);
             if (parsed != null) {
