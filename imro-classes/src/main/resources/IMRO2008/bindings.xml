@@ -41,9 +41,6 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 			<bindings node="xsd:complexType[@name='Besluitvlak_XType']//xsd:element[@name='geometrie']">
 				<dom/>
 			</bindings>
-			<bindings node="xsd:complexType[@name='Besluitvlak_XType']//xsd:element[@name='besluitgebied']">
-				<dom/>
-			</bindings>
 			<bindings node="xsd:complexType[@name='GeometrieStructuurvisieObjectType']//xsd:element[@name='geometrie']">
 				<dom/>
 			</bindings>
