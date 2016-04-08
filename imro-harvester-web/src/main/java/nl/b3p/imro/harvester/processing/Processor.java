@@ -104,6 +104,10 @@ public class Processor {
                             }
                             downloadFiles(geleideformulier);
                             em.getTransaction().commit();
+                        } catch (RollbackException | MalformedURLException | ParserConfigurationException | SAXException | TransformerException ex) {
+                            log.error("Cannot save entity in plan " + geleideformulier);
+                            log.debug(ex);
+                            em.getTransaction().rollback();
                         } catch (JAXBException ex) {
                             log.error("Cannot parse url " + geleideformulier);
                             log.debug(ex);
@@ -112,31 +116,11 @@ public class Processor {
                             log.error("Error concerning URI:");
                             log.debug(ex);
                             em.getTransaction().rollback();
-                        } catch (RollbackException e) {
-                            log.error("Cannot save entity in plan " + geleideformulier);
-                            log.debug(e);
-                            em.getTransaction().rollback();
-                        } catch (PersistenceException e) {
-                            log.error("Cannot save entity in plan " + geleideformulier, e);
+                        } catch (PersistenceException ex) {
+                            log.error("Cannot save entity in plan " + geleideformulier, ex);
                             em.getTransaction().rollback();
                         } catch (JDOMException ex) {
                             log.error("Cannot retrieve IMROParser " + geleideformulier, ex);
-                            em.getTransaction().rollback();
-                        } catch (MalformedURLException ex) {
-                            log.error("Cannot save entity in plan " + geleideformulier);
-                            log.debug(ex);
-                            em.getTransaction().rollback();
-                        } catch (ParserConfigurationException ex) {
-                            log.error("Cannot save entity in plan " + geleideformulier);
-                            log.debug(ex);
-                            em.getTransaction().rollback();
-                        } catch (SAXException ex) {
-                            log.error("Cannot save entity in plan " + geleideformulier);
-                            log.debug(ex);
-                            em.getTransaction().rollback();
-                        } catch (TransformerException ex) {
-                            log.error("Cannot save entity in plan " + geleideformulier);
-                            log.debug(ex);
                             em.getTransaction().rollback();
                         }
                     }
