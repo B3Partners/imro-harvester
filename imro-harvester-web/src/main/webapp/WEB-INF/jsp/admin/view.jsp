@@ -39,7 +39,7 @@
                 </table>
             </div>
 
-            <stripes:submit name="save"/><stripes:reset name="reset"/>
+            <stripes:submit name="save" class="btn btn-success"/><stripes:reset name="reset" class="btn btn-danger"/>
         </stripes:form>
         <script>
             var currentpage = 'settings';
