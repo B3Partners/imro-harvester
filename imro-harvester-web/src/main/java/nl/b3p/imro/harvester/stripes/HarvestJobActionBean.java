@@ -38,7 +38,11 @@ import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import nl.b3p.imro.harvester.processing.HarvesterInitializer;
 import nl.b3p.imro.harvester.processing.Processor;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom2.JDOMException;
+import org.quartz.JobKey;
+import org.quartz.SchedulerException;
 import org.stripesstuff.stripersist.Stripersist;
 
 /**
@@ -49,6 +53,7 @@ import org.stripesstuff.stripersist.Stripersist;
 @UrlBinding("/action/beheer/jobs/{event}")
 public class HarvestJobActionBean implements ActionBean {
 
+    protected final static Log log = LogFactory.getLog(HarvestJobActionBean.class);
     private ActionBeanContext context;
 
     private final String JSP_VIEW = "/WEB-INF/jsp/jobs/view.jsp";
@@ -149,8 +154,12 @@ public class HarvestJobActionBean implements ActionBean {
     }
 
     public Resolution runAll() throws JAXBException, JDOMException {
-        Processor p = new Processor(Collections.singletonList(job), downloadFolder);
-        p.process();
+        try {
+            HarvesterInitializer.getScheduler().triggerJob(new JobKey(HarvesterInitializer.JOB_NAME,HarvesterInitializer.GROUP_NAME));
+        } catch (SchedulerException ex) {
+            context.getValidationErrors().add("Pad", new SimpleError("Uitvoeren mislukt."));
+            log.error("Kan niet handmatig alle jobs uitvoeren: ", ex);
+        }
         return new ForwardResolution(JSP_VIEW);
     }
 

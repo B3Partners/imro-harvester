@@ -41,15 +41,14 @@ public class JobExecutor implements Job {
     @Override
     public void execute(JobExecutionContext jec) throws JobExecutionException {
         JobDataMap data = jec.getJobDetail().getJobDataMap();
-        String path = data.getString("download.folder");
-        File downloadfolder = null;
-        if (path == null || path.isEmpty()) {
+        
+        File downloadfolder = HarvesterInitializer.getDownloadFolder();
+        if (downloadfolder == null) {
             log.error("Download pad is niet geconfigureerd. Uitvoeren van jobs niet mogelijk.");
         } else {
             try {
                 Stripersist.requestInit();
                 EntityManager em = Stripersist.getEntityManager();
-                downloadfolder = new File(path);
                 if (!downloadfolder.exists()) {
                     downloadfolder = null;
                     log.error("Download pad bestaat niet. Uitvoeren van jobs niet mogelijk.");
@@ -65,9 +64,6 @@ public class JobExecutor implements Job {
             }finally{
                 Stripersist.requestComplete();
             }
-
         }
-
     }
-
 }

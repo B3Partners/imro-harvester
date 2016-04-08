@@ -49,6 +49,8 @@ public class HarvesterInitializer implements Servlet {
     protected final static Log log = LogFactory.getLog(HarvesterInitializer.class);
 
     public static final String JOB_NAME = "harvestJobsExecutor";
+    public static final String TRIGGER_NAME = "harvestJobsTrigger";
+    public static final String GROUP_NAME = "harvestGroup";
     private ServletConfig config;
     private static Scheduler scheduler;
 
@@ -69,11 +71,11 @@ public class HarvesterInitializer implements Servlet {
             } catch (NoResultException e) {
             }
             JobDetail job = JobBuilder.newJob(JobExecutor.class)
-                    .withIdentity(JOB_NAME, "group1").build();
+                    .withIdentity(JOB_NAME, GROUP_NAME).build();
 
             Trigger trigger = TriggerBuilder
                     .newTrigger()
-                    .withIdentity("dummyTriggerName", "group1")
+                    .withIdentity(TRIGGER_NAME, GROUP_NAME)
                     .withSchedule(
                             CronScheduleBuilder.cronSchedule(cronschedule))
                     .build();
@@ -135,4 +137,9 @@ public class HarvesterInitializer implements Servlet {
     public static File getDownloadFolder() {
         return downloadFolder;
     }
+
+    public static Scheduler getScheduler() {
+        return scheduler;
+    }
+
 }
