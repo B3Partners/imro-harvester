@@ -17,8 +17,10 @@
 package nl.b3p.imro.harvester.stripes;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.xml.bind.JAXBException;
@@ -38,11 +40,14 @@ import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import nl.b3p.imro.harvester.processing.HarvesterInitializer;
 import nl.b3p.imro.harvester.processing.Processor;
+import static nl.b3p.imro.harvester.stripes.AdminActionBean.log;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom2.JDOMException;
 import org.quartz.JobKey;
 import org.quartz.SchedulerException;
+import org.quartz.Trigger;
+import org.quartz.TriggerKey;
 import org.stripesstuff.stripersist.Stripersist;
 
 /**
@@ -69,6 +74,8 @@ public class HarvestJobActionBean implements ActionBean {
         @Validate(field = "type")
     })
     private HarvestJob job = new HarvestJob();
+
+    private String nextExecutionTime;
 
     // <editor-fold desc="Getters and Setters" defaultstate="collapsed" >
     @Override
@@ -105,7 +112,15 @@ public class HarvestJobActionBean implements ActionBean {
         this.downloadFolder = downloadFolder;
     }
 
+    public String getNextExecutionTime() {
+        return nextExecutionTime;
+    }
+
+    public void setNextExecutionTime(String nextExecutionTime) {
+        this.nextExecutionTime = nextExecutionTime;
+    }
     // </editor-fold>
+
     @Before
     public void init() {
         downloadFolder = HarvesterInitializer.getDownloadFolder();
@@ -167,5 +182,14 @@ public class HarvestJobActionBean implements ActionBean {
     private void createLists() {
         EntityManager em = Stripersist.getEntityManager();
         jobs = em.createQuery("From HarvestJob", HarvestJob.class).getResultList();
+         try {
+            Trigger t = HarvesterInitializer.getScheduler().getTrigger(new TriggerKey(HarvesterInitializer.TRIGGER_NAME, HarvesterInitializer.GROUP_NAME));
+
+            SimpleDateFormat sdf = new SimpleDateFormat("kk:mm dd-MM-yyyy");
+            Date d = t.getNextFireTime();
+            nextExecutionTime = sdf.format(d);
+        } catch (SchedulerException ex) {
+            log.error("Cannot get trigger", ex);
+        }
     }
 }

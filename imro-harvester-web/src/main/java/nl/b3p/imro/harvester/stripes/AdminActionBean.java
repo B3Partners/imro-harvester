@@ -17,6 +17,8 @@
 package nl.b3p.imro.harvester.stripes;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import net.sourceforge.stripes.action.ActionBean;
@@ -32,7 +34,13 @@ import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.validation.SimpleError;
 import net.sourceforge.stripes.validation.Validate;
 import nl.b3p.imro.harvester.entities.Configuration;
+import nl.b3p.imro.harvester.processing.HarvesterInitializer;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.quartz.CronExpression;
+import org.quartz.SchedulerException;
+import org.quartz.Trigger;
+import org.quartz.TriggerKey;
 import org.stripesstuff.stripersist.Stripersist;
 
 /**
@@ -43,6 +51,7 @@ import org.stripesstuff.stripersist.Stripersist;
 @UrlBinding("/action/beheer/admin/{event}")
 public class AdminActionBean implements ActionBean {
 
+    protected final static Log log = LogFactory.getLog(AdminActionBean.class);
     private ActionBeanContext context;
 
     public static final String CONFIG_CRON = "cronexpression";
@@ -51,11 +60,11 @@ public class AdminActionBean implements ActionBean {
     private final String JSP_VIEW = "/WEB-INF/jsp/admin/view.jsp";
 
     private Configuration downloadConfig;
+    private Configuration cronConfig;
 
     @Validate
     private String cron;
 
-    private Configuration cronConfig;
 
     @Validate
     private String downloadfolder;

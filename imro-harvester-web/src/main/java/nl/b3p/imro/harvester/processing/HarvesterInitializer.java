@@ -85,7 +85,7 @@ public class HarvesterInitializer implements Servlet {
             scheduler.start();
 
             scheduler.scheduleJob(job, trigger);
-            SimpleDateFormat sdf = new SimpleDateFormat("mm:kk dd-MM-yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("kk:mm dd-MM-yyyy");
             log.debug("Quartz initialized. Next run is: " + sdf.format(trigger.getNextFireTime()));
         } catch (SchedulerException ex) {
             log.error("Cannot create scheduler", ex);
