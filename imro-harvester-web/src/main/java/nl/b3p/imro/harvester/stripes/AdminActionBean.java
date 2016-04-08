@@ -32,6 +32,7 @@ import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.validation.SimpleError;
 import net.sourceforge.stripes.validation.Validate;
 import nl.b3p.imro.harvester.entities.Configuration;
+import org.quartz.CronExpression;
 import org.stripesstuff.stripersist.Stripersist;
 
 /**
@@ -44,8 +45,8 @@ public class AdminActionBean implements ActionBean {
 
     private ActionBeanContext context;
 
-    private static final String CONFIG_CRON = "cronexpression";
-    private static final String CONFIG_DOWNLOADFOLDER = "download.folder";
+    public static final String CONFIG_CRON = "cronexpression";
+    public static final String CONFIG_DOWNLOADFOLDER = "download.folder";
 
     private final String JSP_VIEW = "/WEB-INF/jsp/admin/view.jsp";
 
@@ -97,16 +98,21 @@ public class AdminActionBean implements ActionBean {
     public Resolution save() {
         EntityManager em = Stripersist.getEntityManager();
         if (cron != null) {
-            Configuration cronConfig = null;
-            try {
-                cronConfig = em.createQuery("FROM Configuration WHERE key = :cronKey", Configuration.class).setParameter("cronKey", CONFIG_CRON).getSingleResult();
-            } catch (NoResultException e) {
-                cronConfig = new Configuration();
-                cronConfig.setKey(CONFIG_CRON);
+            if (CronExpression.isValidExpression(cron)) {
+                Configuration cronConfig = null;
+                try {
+                    cronConfig = em.createQuery("FROM Configuration WHERE key = :cronKey", Configuration.class).setParameter("cronKey", CONFIG_CRON).getSingleResult();
+                } catch (NoResultException e) {
+                    cronConfig = new Configuration();
+                    cronConfig.setKey(CONFIG_CRON);
+                }
+                cronConfig.setValue(cron);
+                em.persist(cronConfig);
+                context.getMessages().add(new SimpleMessage("Cronexpressie opgeslagen"));
+            } else {
+                context.getValidationErrors().add("cron", new SimpleError("De cronexpressie is niet correct. Zie ook <a href='https://en.wikipedia.org/wiki/Cron#Configuration_file'>hier</a>"));
+
             }
-            cronConfig.setValue(cron);
-            em.persist(cronConfig);
-            context.getMessages().add(new SimpleMessage("Cronexpressie opgeslagen"));
         }
 
         if (downloadfolder != null) {
