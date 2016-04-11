@@ -136,6 +136,10 @@ public class HarvesterInitializer implements Servlet {
         }
     }
 
+    public static void setDownloadFolder(File downloadFolder) {
+        HarvesterInitializer.downloadFolder = downloadFolder;
+    }
+
     public static File getDownloadFolder() {
         return downloadFolder;
     }

@@ -17,8 +17,6 @@
 package nl.b3p.imro.harvester.stripes;
 
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import net.sourceforge.stripes.action.ActionBean;
@@ -145,6 +143,7 @@ public class AdminActionBean implements ActionBean {
 
                 downloadConfig.setValue(downloadfolder);
                 em.persist(downloadConfig);
+                HarvesterInitializer.setDownloadFolder(f);
                 context.getMessages().add(new SimpleMessage("Downloadfolder opgeslagen"));
             } else {
                 context.getValidationErrors().add("downloadfolder", new SimpleError("Download folder bestaat niet of is geen folder."));
