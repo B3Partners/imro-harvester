@@ -26,9 +26,8 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
@@ -78,7 +77,13 @@ public class Processor {
     public void process() throws JDOMException {
         EntityManager em = Stripersist.getEntityManager();
         for (HarvestJob job : jobs) {
+            StatusReport report = new StatusReport();
             try {
+                job.setStatus(HarvestJob.HarvestJobStatus.BEZIG);
+                em.persist(job);
+                em.getTransaction().commit();
+                em.getTransaction().begin();
+
                 URL manifestUrl = getManifestURL(job);
                 STRIParser striParser = factory.getSTRIParser(manifestUrl);
                 List<URL> geleideformulierenURLS = striParser.getGeleideformulierURLSFromManifest(manifestUrl);
@@ -87,7 +92,9 @@ public class Processor {
                     List<Geleideformulier> geleideformulieren = striParser.retrieveGeleideformulieren(geleideformulierenURLS);
 
                     for (Geleideformulier geleideformulier : geleideformulieren) {
-                        if(checkIfExists(geleideformulier, em)){
+                        report.addProcessed();
+                        if (checkIfExists(geleideformulier, em)) {
+                            report.addSkipped();
                             log.debug("Geleideformulier already in db: " + geleideformulier.toString());
                             continue;
                         }
@@ -103,27 +110,48 @@ public class Processor {
                                 em.persist(plan);
                             }
                             downloadFiles(geleideformulier);
+                            report.addLoaded(geleideformulier.getIdentificatie());
                             em.getTransaction().commit();
                         } catch (RollbackException | MalformedURLException | ParserConfigurationException | SAXException | TransformerException | JAXBException | URISyntaxException ex) {
-                            log.error("Cannot save entity in plan " + geleideformulier);
-                            log.debug(ex);
+                            log.error("Cannot save entity in plan " + geleideformulier, ex);
                             em.getTransaction().rollback();
+                            report.addErrored(geleideformulier.getIdentificatie(), ex);
                         } catch (PersistenceException | JDOMException ex) {
-                            log.error("Cannot save entity in plan " + geleideformulier);
-                            log.debug(ex);
+                            log.error("Cannot save entity in plan " + geleideformulier, ex);
                             em.getTransaction().rollback();
+                            report.addErrored(geleideformulier.getIdentificatie(), ex);
                         }
                     }
 
                 } catch (IOException ex) {
                     log.error("Cannot get manifest url for HarvestJob " + job.getId() + " - " + job.getUrl(), ex);
+                    report.addErrored(null, ex);
                 } catch (ParseException ex) {
-                    log.error("Cannot parse date"+  job.getId() + " - " + job.getUrl(), ex);
+                    log.error("Cannot parse date" + job.getId() + " - " + job.getUrl(), ex);
+                    report.addErrored(null,  ex);
                 }
             } catch (IOException ex) {
                 log.error("Cannot parse manifest", ex);
+                report.addFatal("Cannot parse manifest: " + ex.getMessage());
             } catch (JAXBException ex) {
                 log.error("Cannot unmarshal manifest", ex);
+                report.addFatal("Cannot unmarshal manifest: " + ex.getMessage());
+            }finally{
+                job = em.find(HarvestJob.class, job.getId());
+                if(report.wasFatal()){
+                    job.setStatus(HarvestJob.HarvestJobStatus.FATAAL);
+                }else if(report.getPlansErrored().size() > 0){
+                    job.setStatus(HarvestJob.HarvestJobStatus.MEDIUMPROBLEEM);
+                }else{
+                    job.setStatus(HarvestJob.HarvestJobStatus.GOED);
+                }
+                job.setLog(report.getLog());
+                if(!em.getTransaction().isActive()){
+                    em.getTransaction().begin();
+                }
+                job.setLastRunTime(new Date());
+                em.persist(job);
+                em.getTransaction().commit();
             }
         }
     }
@@ -151,22 +179,21 @@ public class Processor {
         return new URL(url);
     }
 
-    public boolean checkIfExists(Geleideformulier formulier,EntityManager em) throws ParseException{
+    public boolean checkIfExists(Geleideformulier formulier, EntityManager em) throws ParseException {
         Query q = em.createQuery("FROM Bestemmingsplan WHERE naam = :naam and typePlan = :typePlan and planstatusDatum = :datum and planstatusInfo = :status "
-                + "and identificatie = :identificatie",Bestemmingsplan.class)
+                + "and identificatie = :identificatie", Bestemmingsplan.class)
                 .setParameter("naam", formulier.getNaam())
                 .setParameter("typePlan", formulier.getType())
                 .setParameter("status", formulier.getStatus())
                 .setParameter("identificatie", formulier.getIdentificatie())
                 .setParameter("datum", sdf.parse(formulier.getDatum()));
-  
-        List<Bestemmingsplan> plannen = q .getResultList();
+
+        List<Bestemmingsplan> plannen = q.getResultList();
         return plannen.size() > 0;
     }
     // </editor-fold>
 
     // <editor-fold desc="Geleideformulier verwerk methodes" defaultstate="collapsed">
-    
     protected void downloadFiles(Geleideformulier formulier) throws IOException {
         File newDir = new File(downloadfolder, formulier.getIdentificatie());
         boolean created = newDir.mkdir();
@@ -182,10 +209,10 @@ public class Processor {
 
     private void downloadUrl(URL url, File dir) throws IOException {
         String filename = url.getFile();
-        if(filename.indexOf("/") != -1){
+        if (filename.indexOf("/") != -1) {
             filename = filename.substring(filename.lastIndexOf("/") + 1);
         }
-        FileUtils.copyURLToFile(url, new File (dir, filename));
+        FileUtils.copyURLToFile(url, new File(dir, filename));
     }
     // </editor-fold>
 

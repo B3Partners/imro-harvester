@@ -57,6 +57,7 @@ public class HarvestJobActionBean implements ActionBean {
     private ActionBeanContext context;
 
     private final String JSP_VIEW = "/WEB-INF/jsp/jobs/view.jsp";
+    private final String JSP_LOG = "/WEB-INF/jsp/jobs/log.jsp";
     private final String JSP_EDIT = "/WEB-INF/jsp/jobs/edit.jsp";
 
     private List<HarvestJob> jobs = new ArrayList<HarvestJob>();
@@ -136,7 +137,10 @@ public class HarvestJobActionBean implements ActionBean {
 
     public Resolution add() {
         return new ForwardResolution(JSP_EDIT);
+    }
 
+    public Resolution viewLog(){
+        return new ForwardResolution(JSP_LOG);
     }
 
     public Resolution delete() {

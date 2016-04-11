@@ -81,8 +81,12 @@ body.editor {
     text-decoration: none;
 }
 .viewportcontainer{
-    width: 1000px;
-
+    width: 1100px;
     margin-right: auto;
     margin-left: auto;
+}
+
+.modal-body{
+    overflow:auto;
+    height:60%;
 }

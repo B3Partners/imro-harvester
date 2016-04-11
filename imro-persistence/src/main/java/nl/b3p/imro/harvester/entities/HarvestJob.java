@@ -16,12 +16,17 @@
  */
 package nl.b3p.imro.harvester.entities;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.Type;
 
 /**
  *
@@ -38,6 +43,17 @@ public class HarvestJob {
 
     @Enumerated(EnumType.STRING)
     private HarvestJob.HarvestJobType type;
+
+    @Enumerated(EnumType.STRING)
+    private HarvestJob.HarvestJobStatus status;
+
+    @Lob
+    @Type(type = "org.hibernate.type.StringClobType")
+    private String log;
+
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastRunTime;
 
     public int getId() {
         return id;
@@ -63,10 +79,33 @@ public class HarvestJob {
         this.type = type;
     }
 
+    public HarvestJobStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(HarvestJobStatus status) {
+        this.status = status;
+    }
+
+    public String getLog() {
+        return log;
+    }
+
+    public void setLog(String log) {
+        this.log = log;
+    }
+
+    public Date getLastRunTime() {
+        return lastRunTime;
+    }
+
+    public void setLastRunTime(Date lastRunTime) {
+        this.lastRunTime = lastRunTime;
+    }
 
     public enum HarvestJobType {
-        RUIMTELIJKEPLANNENSCRAPER("roonline"),
-        DIRECT("direct");
+        RUIMTELIJKEPLANNENSCRAPER("Ruimtelijke plannen"),
+        DIRECT("Directe URL");
 
         private final String value;
 
@@ -84,6 +123,38 @@ public class HarvestJob {
 
         public static HarvestJob.HarvestJobType fromValue(String v) {
             for (HarvestJob.HarvestJobType c : HarvestJob.HarvestJobType.values()) {
+                if (c.value.equals(v)) {
+                    return c;
+                }
+            }
+            throw new IllegalArgumentException(v);
+        }
+
+    }
+
+
+    public enum HarvestJobStatus {
+        FATAAL("Fataal"),
+        GOED("Goed"),
+        BEZIG("Bezig"),
+        MEDIUMPROBLEEM("Medium probleem");
+
+        private final String value;
+
+        HarvestJobStatus(String v) {
+            value = v;
+        }
+
+        public String value() {
+            return value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public static HarvestJob.HarvestJobStatus fromValue(String v) {
+            for (HarvestJob.HarvestJobStatus c : HarvestJob.HarvestJobStatus.values()) {
                 if (c.value.equals(v)) {
                     return c;
                 }
