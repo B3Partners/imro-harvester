@@ -2,7 +2,7 @@
 Project om imro 2008 (v1.1) en 2012 (v1.0 en v1.1) plannen in te lezen, en om te zetten naar een postgis database.
 
 
-Dit project is onderverdeeld in 4 subprojecten
+Dit project is onderverdeeld in 5 subprojecten
 
 * stri-classes
 STRI is het datamodel dat de manifesten en geleideformulieren definieert. In dit project zitten de XSD's en de daarop gebaseerde JAXB classes, gegenereerd met XJC.
@@ -16,6 +16,6 @@ IMRO is het datamodel dat de bestemmingsplannen (e.a. typen) definieert. In dit 
 Het datamodel waarnaar de GML bestanden worden geconverteerd. Dit zijn hibernate classes.
 * imro-harvester-web
 Het webproject. Hierin zit alle logica met betrekking tot het transformeren van de JAXB classes, naar het datamodel zoals gebruikt in de postgis database. Ook zitten hier de entities voor de werking van het project in: Gebruiker/Role, Configuration en HarvestJob.
-*sld
+* sld
 De sld's om de bestemmingsplannen te verbeelden in bijvoorbeeld geoserver.
 
