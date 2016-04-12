@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2016 B3Partners B.V.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package nl.b3p.imro.harvester.parser;
 
@@ -59,7 +70,7 @@ public class IMROParser2012_11Test {
         assertEquals(8, result.size());
     }
 
-    //@Test
+    @Test
     public void testStationsPleinZuidOost() throws JAXBException {
         System.out.println("testParsePlanInhoudGebiedsaanduiding");
         URL u = this.getClass().getResource("stationspleinzuidoost.gml");
@@ -100,9 +111,6 @@ public class IMROParser2012_11Test {
         assertEquals(28, o.size());
     }
 
-    /**
-     * Test of parseGML method, of class IMROParser2012_11.
-     */
     @Test
     public void testParseGML_URL() throws JAXBException, MalformedURLException {
         System.out.println("testParseGML_URL");
@@ -111,9 +119,6 @@ public class IMROParser2012_11Test {
         assertEquals(8, result.size());
     }
 
-    /**
-     * Test of parsePlan method, of class Processor.
-     */
     @Test
     public void testParseGebiedsaanduiding() throws JAXBException {
         System.out.println("testParsePlanInhoudGebiedsaanduiding");
@@ -130,9 +135,6 @@ public class IMROParser2012_11Test {
         }
     }
 
-    /**
-     * Test of parsePlan method, of class Processor.
-     */
     @Test
     public void testParseGebiedsaanduidingInhoud() throws JAXBException {
         System.out.println("testParseGebiedsaanduidingInhoud");
@@ -275,9 +277,6 @@ public class IMROParser2012_11Test {
         assertEquals("NL.IMRO.9cacbcca5a9e412faeaf47df4d75173d", bv.getEnkelbestemming());
     }
 
-    /**
-     * Test of parsePlan method, of class Processor.
-     */
     @Test
     public void testParseBestemmingsplanInhoud() throws JAXBException {
         System.out.println("testParsePlanInhoudBestemmingsplan");
@@ -302,9 +301,6 @@ public class IMROParser2012_11Test {
 
     }
 
-    /**
-     * Test of parsePlan method, of class Processor.
-     */
     @Test
     public void testParsePlan() throws JAXBException {
         System.out.println("testParsePlan");
@@ -314,20 +310,13 @@ public class IMROParser2012_11Test {
         assertNotEquals(0, o.size());
     }
 
-   // @Test
+    @Test
     public void testGeomCollections() throws JAXBException{
         URL u = this.getClass().getResource("2012v10GeomCollection.gml");
+        Object o = instance.unmarshalUrl(u);
 
-        List<Object> o = instance.parseGML(u);
         assertNotNull(o);
-        assertEquals(16, o.size());
-        Bestemmingsplan bp = null;
-        for (Object obj : o) {
-            if(obj instanceof Bestemmingsplan){
-                bp = (Bestemmingsplan)obj;
-                break;
-            }
-        }
+        Bestemmingsplan bp = instance.parseImroBestemmingsplan(o);
         assertNotNull(bp);
 
         assertEquals(MultiPolygon.class, bp.getGeometrie().getClass());
