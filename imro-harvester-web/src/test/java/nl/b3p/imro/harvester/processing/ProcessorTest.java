@@ -21,10 +21,16 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
+import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
+import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
+import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
 import nl.b3p.imro.harvester.parser.Geleideformulier;
 import nl.b3p.imro.harvester.parser.STRIParser2012;
 import org.jdom2.JDOMException;
@@ -101,4 +107,71 @@ public class ProcessorTest {
         instance.process();
     }
 
+    /**
+     * Test of postprocess method, of class Processor.
+     */
+    @Test
+    public void testPostprocessBP() {
+        System.out.println("postprocess");
+        Bestemmingsplan bp  = new Bestemmingsplan();
+        bp.setId(16);
+        Enkelbestemming eb = new Enkelbestemming();
+        List<Object> planObjecten = new ArrayList<Object>();
+        planObjecten.add(bp);
+        planObjecten.add(eb);
+        assertNull(eb.getBestemmingsplan());
+        EntityManager em = null;
+        instance.postprocess(planObjecten, em);
+        assertNotNull(eb.getBestemmingsplan());
+        assertEquals(16, eb.getBestemmingsplan().getId());
+        
+    }
+    /**
+     * Test of postprocess method, of class Processor.
+     */
+    @Test
+    public void testPostprocessOV() {
+        System.out.println("postprocess");
+        Besluitgebied bg  = new Besluitgebied();
+        bg.setId(16);
+        Besluitvlak bv = new Besluitvlak();
+        List<Object> planObjecten = new ArrayList<Object>();
+        planObjecten.add(bg);
+        planObjecten.add(bv);
+        assertNull(bv.getBesluitgebied());
+        EntityManager em = null;
+        instance.postprocess(planObjecten, em);
+        assertNotNull(bv.getBesluitgebied());
+        assertEquals(16, bv.getBesluitgebied().getId());
+    }
+
+    /**
+     * Test of getRoType method, of class Processor.
+     */
+    @Test
+    public void testGetRoTypeBP() {
+        System.out.println("getRoType");
+        List<Object> planObjecten = new ArrayList<Object>();
+        planObjecten.add(new Bestemmingsplan());
+        planObjecten.add(new Enkelbestemming());
+
+        Processor.PlanType expResult = Processor.PlanType.BESTEMMINGSPLANGEBIED;
+        Processor.PlanType result = instance.getPlanType(planObjecten);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getRoType method, of class Processor.
+     */
+    @Test
+    public void testGetRoTypeOmgevingsvergunning() {
+        System.out.println("getRoType");
+        List<Object> planObjecten = new ArrayList<Object>();
+        planObjecten.add(new Besluitvlak());
+        planObjecten.add(new Besluitgebied());
+
+        Processor.PlanType expResult = Processor.PlanType.OMGEVINGSVERGUNNING;
+        Processor.PlanType result = instance.getPlanType(planObjecten);
+        assertEquals(expResult, result);
+    }
 }

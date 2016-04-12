@@ -36,6 +36,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
+import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.parser.Geleideformulier;
 import nl.b3p.imro.harvester.parser.STRIParser;
@@ -110,6 +112,7 @@ public class Processor {
                                 em.persist(plan);
                             }
                             downloadFiles(geleideformulier);
+                            postprocess(planObjecten, em);
                             report.addLoaded(geleideformulier.getIdentificatie());
                             em.getTransaction().commit();
                         } catch (RollbackException | MalformedURLException | ParserConfigurationException | SAXException | TransformerException | JAXBException | URISyntaxException ex) {
@@ -154,6 +157,32 @@ public class Processor {
                 em.getTransaction().commit();
             }
         }
+    }
+
+    protected void postprocess(List<Object> planObjecten, EntityManager em){
+        PlanType pt = getPlanType(planObjecten);
+        if(pt == PlanType.BESTEMMINGSPLANGEBIED){
+
+        }else if(pt == PlanType.OMGEVINGSVERGUNNING){
+
+        }else{
+            throw new IllegalArgumentException("Plantype unknown. " + pt);
+        }
+        
+    }
+
+    protected PlanType getPlanType(List<Object> planObjecten){
+        PlanType type = null;;
+        for (Object planObject : planObjecten) {
+            if(planObject instanceof Bestemmingsplan){
+                type = PlanType.BESTEMMINGSPLANGEBIED;
+                break;
+            }else if(planObject instanceof Besluitgebied || planObject instanceof Besluitvlak){
+                type = PlanType.OMGEVINGSVERGUNNING;
+                break;
+            }
+        }
+        return type;
     }
 
     // <editor-fold desc="Manifest ophaalmethods" defaultstate="Collapsed">
@@ -216,4 +245,29 @@ public class Processor {
     }
     // </editor-fold>
 
+
+    public enum PlanType {
+        BESTEMMINGSPLANGEBIED("bestemmingplangebied"),
+        OMGEVINGSVERGUNNING("omgevingsvergunning");
+
+        private final String value;
+
+        PlanType(String v) {
+            value = v;
+        }
+
+        public String value() {
+            return value;
+        }
+
+        public static PlanType fromValue(String v) {
+            for (PlanType c: PlanType.values()) {
+                if (c.value.equals(v)) {
+                    return c;
+                }
+            }
+            throw new IllegalArgumentException(v);
+        }
+
+    }
 }
