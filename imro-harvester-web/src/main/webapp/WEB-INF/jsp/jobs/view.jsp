@@ -58,7 +58,7 @@
                     <div class="modal-body" id="modal-body">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="test(${job.id})">Sluit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Sluit</button>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
             var currentpage = 'harvestjobs';
             var url = "<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="viewLog"/>";
             function openLog(id){
-                $( "#modal-body" ).load( url + "&job=1");
+                $( "#modal-body" ).load( url + "&job=" + id);
                 $('#myModal').modal('show');
             }
         </script>
