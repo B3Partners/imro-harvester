@@ -323,7 +323,7 @@ public class IMROParser2012_11 implements IMROParser{
         }
         for (WaardeEnTypePropertyType maatvoeringInfo : ebt.getMaatvoeringInfo()) {
             WaardeEnTypeType wett = maatvoeringInfo.getWaardeEnType();
-            WaardeEnType wet = new WaardeEnType(wett.getWaarde(),wett.getWaardeType(), wett.getSymboolCode());
+            WaardeEnType wet = new WaardeEnType(wett.getWaarde(),wett.getWaardeType(), wett.getSymboolCode(), mv);
             mv.getWaardeEnType().add(wet);
         }
         

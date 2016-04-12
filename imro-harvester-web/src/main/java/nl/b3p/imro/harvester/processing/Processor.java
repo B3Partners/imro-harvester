@@ -41,6 +41,8 @@ import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Figuur;
 import nl.b3p.imro.harvester.entities.imro.ImroEntity;
+import nl.b3p.imro.harvester.entities.imro.Maatvoering;
+import nl.b3p.imro.harvester.entities.imro.WaardeEnType;
 import nl.b3p.imro.harvester.parser.Geleideformulier;
 import nl.b3p.imro.harvester.parser.STRIParser;
 import org.apache.commons.io.FileUtils;
@@ -141,6 +143,9 @@ public class Processor {
             } catch (JAXBException ex) {
                 log.error("Cannot unmarshal manifest", ex);
                 report.addFatal("Cannot unmarshal manifest: " + ex.getMessage());
+            }catch(Exception e){
+                log.error("Fatal error occured", e);
+                report.addFatal("Fatal: " + e.getMessage());
             }finally{
                 job = em.find(HarvestJob.class, job.getId());
                 if(report.wasFatal()){
@@ -178,6 +183,12 @@ public class Processor {
                 }else if(obj instanceof Figuur){
                     Figuur f = (Figuur)obj;
                     f.setBestemmingsplan(bp);
+                }if (obj instanceof Maatvoering){
+                    Maatvoering mv = (Maatvoering)obj;
+                    for (WaardeEnType waardeEnType : mv.getWaardeEnType()) {
+                        waardeEnType.setMaatvoering(mv);
+                        em.persist(waardeEnType);
+                    }
                 }
                 em.persist(obj);
             }

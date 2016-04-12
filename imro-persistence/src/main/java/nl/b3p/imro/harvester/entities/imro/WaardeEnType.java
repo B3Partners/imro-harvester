@@ -34,10 +34,11 @@ public class WaardeEnType {
     }
 
     
-    public WaardeEnType(String waarde, String waardeType, String symboolCode) {
+    public WaardeEnType(String waarde, String waardeType, String symboolCode, Maatvoering mv) {
         this.waarde = waarde;
         this.waardeType = waardeType;
         this.symboolCode = symboolCode;
+        this.maatvoering = mv;
     }
 
     @Id
@@ -74,6 +75,14 @@ public class WaardeEnType {
 
     public void setSymboolCode(String symboolCode) {
         this.symboolCode = symboolCode;
+    }
+
+    public Maatvoering getMaatvoering() {
+        return maatvoering;
+    }
+
+    public void setMaatvoering(Maatvoering maatvoering) {
+        this.maatvoering = maatvoering;
     }
 
     public int getId() {
