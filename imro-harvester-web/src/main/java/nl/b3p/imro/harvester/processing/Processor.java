@@ -39,6 +39,8 @@ import nl.b3p.imro.harvester.entities.HarvestJob;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
+import nl.b3p.imro.harvester.entities.imro.Figuur;
+import nl.b3p.imro.harvester.entities.imro.ImroEntity;
 import nl.b3p.imro.harvester.parser.Geleideformulier;
 import nl.b3p.imro.harvester.parser.STRIParser;
 import org.apache.commons.io.FileUtils;
@@ -162,9 +164,39 @@ public class Processor {
     protected void postprocess(List<Object> planObjecten, EntityManager em){
         PlanType pt = getPlanType(planObjecten);
         if(pt == PlanType.BESTEMMINGSPLANGEBIED){
-
+            Bestemmingsplan bp = null;
+            for (Object obj : planObjecten) {
+                if(obj instanceof Bestemmingsplan){
+                    bp = (Bestemmingsplan)obj;
+                    break;
+                }
+            }
+            for (Object obj : planObjecten) {
+                if(obj instanceof ImroEntity){
+                    ImroEntity ie = (ImroEntity)obj;
+                    ie.setBestemmingsplan(bp);
+                }else if(obj instanceof Figuur){
+                    Figuur f = (Figuur)obj;
+                    f.setBestemmingsplan(bp);
+                }
+                em.persist(obj);
+            }
         }else if(pt == PlanType.OMGEVINGSVERGUNNING){
-
+            Besluitgebied bg = null;
+            for (Object obj : planObjecten) {
+                if(obj instanceof Besluitgebied){
+                    bg = (Besluitgebied) obj;
+                    break;
+                }
+            }
+            if(bg != null){
+                for (Object obj : planObjecten) {
+                    if(obj instanceof Besluitvlak){
+                        Besluitvlak bv = (Besluitvlak)obj;
+                        bv.setBesluitgebied(bg);
+                    }
+                }
+            }
         }else{
             throw new IllegalArgumentException("Plantype unknown. " + pt);
         }

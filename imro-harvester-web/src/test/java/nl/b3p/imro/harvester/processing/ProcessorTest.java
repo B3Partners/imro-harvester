@@ -31,12 +31,14 @@ import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
+import nl.b3p.imro.harvester.entities.imro.Figuur;
 import nl.b3p.imro.harvester.parser.Geleideformulier;
 import nl.b3p.imro.harvester.parser.STRIParser2012;
 import org.jdom2.JDOMException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
+import org.mockito.Mockito;
 
 /**
  *
@@ -116,21 +118,24 @@ public class ProcessorTest {
         Bestemmingsplan bp  = new Bestemmingsplan();
         bp.setId(16);
         Enkelbestemming eb = new Enkelbestemming();
+        Figuur f = new Figuur();
         List<Object> planObjecten = new ArrayList<Object>();
         planObjecten.add(bp);
         planObjecten.add(eb);
+        planObjecten.add(f);
         assertNull(eb.getBestemmingsplan());
-        EntityManager em = null;
+        EntityManager em = Mockito.mock(EntityManager.class);
         instance.postprocess(planObjecten, em);
         assertNotNull(eb.getBestemmingsplan());
         assertEquals(16, eb.getBestemmingsplan().getId());
+        assertEquals(16, f.getBestemmingsplan().getId());
         
     }
     /**
      * Test of postprocess method, of class Processor.
      */
     @Test
-    public void testPostprocessOV() {
+    public void testPostprocessOV1() {
         System.out.println("postprocess");
         Besluitgebied bg  = new Besluitgebied();
         bg.setId(16);
@@ -139,10 +144,23 @@ public class ProcessorTest {
         planObjecten.add(bg);
         planObjecten.add(bv);
         assertNull(bv.getBesluitgebied());
-        EntityManager em = null;
+        EntityManager em = Mockito.mock(EntityManager.class);
         instance.postprocess(planObjecten, em);
         assertNotNull(bv.getBesluitgebied());
         assertEquals(16, bv.getBesluitgebied().getId());
+    }
+
+    @Test
+    public void testPostprocessOV2() {
+        System.out.println("postprocess");
+        Besluitvlak bv = new Besluitvlak();
+        List<Object> planObjecten = new ArrayList<Object>();
+        planObjecten.add(bv);
+        assertNull(bv.getBesluitgebied());
+        EntityManager em = Mockito.mock(EntityManager.class);
+        instance.postprocess(planObjecten, em);
+        assertNull(bv.getBesluitgebied());
+        
     }
 
     /**
