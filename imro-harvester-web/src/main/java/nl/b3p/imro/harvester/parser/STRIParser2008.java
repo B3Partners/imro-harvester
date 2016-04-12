@@ -47,7 +47,7 @@ public class STRIParser2008 implements STRIParser {
             List<Plan> plannen = manifest.getPlan();
             for (Plan plan : plannen) {
                 Eigenschappen eigenschappen = plan.getEigenschappen();
-                if (eigenschappen.getType().equals(TypePlan.BESTEMMINGSPLAN)) {
+                if (eigenschappen.getType().equals(TypePlan.BESTEMMINGSPLAN) || eigenschappen.getType().equals(TypePlan.PROJECTBESLUIT) ) {
                     Geleideformulier geleideformulier = new Geleideformulier();
                     Onderdelen onderdelen = plan.getOnderdelen();
                     Plan.Supplementen supplementen = plan.getSupplementen();

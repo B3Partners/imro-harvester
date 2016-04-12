@@ -74,7 +74,7 @@ public class STRIParser2012 implements STRIParser{
                     nl.geonovum.stri._2012._1.GeleideFormulier gf = (nl.geonovum.stri._2012._1.GeleideFormulier) geleideformulierObject;
                     nl.geonovum.stri._2012._1.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
                     
-                    if (eigenschappen.getType().equals(nl.geonovum.stri._2012._1.TypePlan.BESTEMMINGSPLAN)) {
+                    if (eigenschappen.getType().equals(nl.geonovum.stri._2012._1.TypePlan.BESTEMMINGSPLAN) || eigenschappen.getType().equals(nl.geonovum.stri._2012._1.TypePlan.OMGEVINGSVERGUNNING)) {
                         geleideformulier = new Geleideformulier();
                         nl.geonovum.stri._2012._1.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
 
@@ -130,7 +130,7 @@ public class STRIParser2012 implements STRIParser{
                     nl.geonovum.stri._2012._2.GeleideFormulier gf = (nl.geonovum.stri._2012._2.GeleideFormulier) geleideformulierObject;
                     nl.geonovum.stri._2012._2.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
 
-                    if (eigenschappen.getType().equals(nl.geonovum.stri._2012._2.TypePlan.BESTEMMINGSPLAN)) {
+                    if (eigenschappen.getType().equals(nl.geonovum.stri._2012._2.TypePlan.BESTEMMINGSPLAN) || eigenschappen.getType().equals(nl.geonovum.stri._2012._2.TypePlan.OMGEVINGSVERGUNNING)) {
                         geleideformulier = new Geleideformulier();
                         nl.geonovum.stri._2012._2.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
                         String basisurl = onderdelen.getBasisURL();
