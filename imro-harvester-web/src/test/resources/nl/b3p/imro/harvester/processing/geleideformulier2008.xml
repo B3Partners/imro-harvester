@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?><GeleideFormulier OverheidsCode="0687" NaamOverheid="Middelburg" Datum="2014-07-14T15:53:25" xmlns="http://www.geonovum.nl/stri/2008/1">
+    <Plan Id="NL.IMRO.0687.BPMOR-VW02" Historisch="false">
+        <Eigenschappen>
+            <Naam>Mortiere</Naam>
+            <Type>bestemmingsplan</Type>
+            <Status>vastgesteld</Status>
+            <Datum>2014-07-07T00:00:00</Datum>
+            <VersieIMRO>IMRO2008</VersieIMRO>
+            <VersiePraktijkRichtlijn>PRBP2008</VersiePraktijkRichtlijn>
+        </Eigenschappen>
+        <Supplementen>
+            <CSS>http://ro.middelburg.nl/70BB02BE-C637-4335-9CE4-59D3E447D8AC/IMRO-PT.css</CSS>
+            <CSS>http://ro.middelburg.nl/70BB02BE-C637-4335-9CE4-59D3E447D8AC/opmaak.css</CSS>
+        </Supplementen>
+        <Onderdelen BasisURL="http://ro.middelburg.nl/70BB02BE-C637-4335-9CE4-59D3E447D8AC/">
+            <IMRO>NL.IMRO.0687.BPMOR-VW02.gml</IMRO>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_1.1.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_1.2.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_1.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.10.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.11.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.12.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.13.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.14.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.15.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.16.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.17.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.18.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.19.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.20.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.21.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.22.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.23.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.24.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.3.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.4.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.5.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.6.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.7.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.8.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.9.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_2.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_3.25.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_3.26.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_3.27.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_3.28.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_3.29.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_3.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_4.30.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_4.31.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_4.html</Regels>
+            <Regels>r_NL.IMRO.0687.BPMOR-VW02_index.html</Regels>
+            <RegelsBijlage>rb_NL.IMRO.0687.BPMOR-VW02_1.pdf</RegelsBijlage>
+            <RegelsBijlage>rb_NL.IMRO.0687.BPMOR-VW02_2.pdf</RegelsBijlage>
+            <RegelsBijlage>rb_NL.IMRO.0687.BPMOR-VW02_index.html</RegelsBijlage>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_1.1.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_1.2.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_1.3.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_1.4.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_1.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_2.1.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_2.2.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_2.3.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_2.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_3.1.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_3.2.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_3.3.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_3.4.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_3.5.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_3.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_4.1.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_4.2.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_4.3.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_4.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_5.1.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_5.2.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_5.3.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_5.html</Toelichting>
+            <Toelichting>t_NL.IMRO.0687.BPMOR-VW02_index.html</Toelichting>
+            <ToelichtingBijlage>tb_NL.IMRO.0687.BPMOR-VW02_1.pdf</ToelichtingBijlage>
+            <ToelichtingBijlage>tb_NL.IMRO.0687.BPMOR-VW02_10.pdf</ToelichtingBijlage>
+            <ToelichtingBijlage>tb_NL.IMRO.0687.BPMOR-VW02_11.pdf</ToelichtingBijlage>
+            <ToelichtingBijlage>tb_NL.IMRO.0687.BPMOR-VW02_2.pdf</ToelichtingBijlage>
+            <ToelichtingBijlage>tb_NL.IMRO.0687.BPMOR-VW02_3.pdf</ToelichtingBijlage>
+            <ToelichtingBijlage>tb_NL.IMRO.0687.BPMOR-VW02_4.pdf</ToelichtingBijlage>
+            <ToelichtingBijlage>tb_NL.IMRO.0687.BPMOR-VW02_5.pdf</ToelichtingBijlage>
+            <ToelichtingBijlage>tb_NL.IMRO.0687.BPMOR-VW02_6.pdf</ToelichtingBijlage>
+            <ToelichtingBijlage>tb_NL.IMRO.0687.BPMOR-VW02_7.pdf</ToelichtingBijlage>
+            <ToelichtingBijlage>tb_NL.IMRO.0687.BPMOR-VW02_8.pdf</ToelichtingBijlage>
+            <ToelichtingBijlage>tb_NL.IMRO.0687.BPMOR-VW02_9.pdf</ToelichtingBijlage>
+            <ToelichtingBijlage>tb_NL.IMRO.0687.BPMOR-VW02_index.html</ToelichtingBijlage>
+            <Illustratie>i_NL.IMRO.0687.BPMOR-VW02_0001.jpg</Illustratie>
+            <Illustratie>i_NL.IMRO.0687.BPMOR-VW02_0002.jpg</Illustratie>
+            <Illustratie>i_NL.IMRO.0687.BPMOR-VW02_0003.jpg</Illustratie>
+            <Illustratie>i_NL.IMRO.0687.BPMOR-VW02_0004.png</Illustratie>
+            <Illustratie>i_NL.IMRO.0687.BPMOR-VW02_0005.png</Illustratie>
+            <Illustratie>i_NL.IMRO.0687.BPMOR-VW02_0006.png</Illustratie>
+            <Illustratie>i_NL.IMRO.0687.BPMOR-VW02_0007.png</Illustratie>
+            <VaststellingsBesluit>vb_NL.IMRO.0687.BPMOR-VW02.pdf</VaststellingsBesluit>
+            <PlanTeksten>pt_NL.IMRO.0687.BPMOR-VW02.xml</PlanTeksten>
+            <GeleideFormulier>g_NL.IMRO.0687.BPMOR-VW02.xml</GeleideFormulier>
+        </Onderdelen>
+    </Plan>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+            <CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+            <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+            <Reference URI="">
+                <Transforms>
+                    <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+                </Transforms>
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>FohGnp5k4aDt1dAwdVSkps93vgQ=</DigestValue>
+            </Reference>
+            <Reference URI="NL.IMRO.0687.BPMOR-VW02.gml">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>OLr35QjiIEkpm2UA2oqOsvsbzos=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_1.1.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>kDh4klm350gFKtk7vF17s7mihTQ=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_1.2.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>NRBY0UPyf+0PT8rtn7zsF5eM2ow=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_1.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>kayweoU351SsJ5PM25gM27nN1ow=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.10.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>OR5xN7ewBhdqIFAotc4EHfCcOdQ=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.11.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>1e/Ha2iC0BEvhg7zm/ll3juy3NI=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.12.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>6pYAwOFfvqFzWC+cuVgaeEuH8kw=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.13.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>HDJ4SyupUNwzrKmHzZ4lyB2KEMg=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.14.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>9TThAIH8gi9bBXzVSmnbWOTr/o4=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.15.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>P46YzxdXyoMelbNN7Zj7ZukQ4EM=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.16.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>gE1xfBxL/K6o9ymkHpgfiNkAD9A=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.17.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>n9TT0il44echHm+2GGboleK9mbk=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.18.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>voW2DwzV/X8QxvVsjAIlTWrJCxw=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.19.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>y4mwIDt52HTOHU1zfHOMqDlEfyU=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.20.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>/5/oFj+9Z5zV7AghEk6NUAUZHng=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.21.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>MbrAPHGAyDt3m1XD4zMOxkKFuaw=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.22.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>0wbQ8w/1mzxMNlakj9BOhP46bOU=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.23.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>59i68R13ZAv1IafA+9k4aKmkius=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.24.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>rdj+hc9pHyLzsiHpWkG6eNF1vE0=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.3.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>/A+NEwDCuwCT49HHA65DN+Bzvdg=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.4.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>UWHRKHQRrfxowKQKGGxSpnpqLig=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.5.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>y/b/lUXRxHhNVqoJDOX/r0DNviA=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.6.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>sT2+7fg0mtZvcBjwzSLHUUi+rdw=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.7.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>cZX9iqATX6cah7y1aBlM89emRSY=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.8.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>Xo0jGLjY1aIv+D6wWXPTRV3HIjA=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.9.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>XlBIR2claYgNgVYNo3H4BarmhJ4=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_2.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>n/cEOu5J+MNlX+R9uZMLe0GatvQ=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_3.25.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>yl+wXP+CCHYeIOLG3AolJSN/PKY=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_3.26.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>2pkMnjYN4qU5Cl0DjDrKay9iUjw=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_3.27.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>CqtjEUplwWpuN8xKEoh3HDEgCbg=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_3.28.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>kf6thubP9kUpJzypGpwjHwPNDco=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_3.29.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>7dFVEEfnWwRF1GSUBNBUu5Zr1C8=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_3.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>udY6kmIKZiQCwzMT3EGg7Xo2cnI=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_4.30.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>JDOQuQbNrJriQaknelqup4/4gBU=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_4.31.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>YA6e/jKzB3gZ/2zGu+G975rW3Ks=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_4.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>mV206R5D4qhSQQen9TeEXSgyYh0=</DigestValue>
+            </Reference>
+            <Reference URI="r_NL.IMRO.0687.BPMOR-VW02_index.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>hLxAq3rYvNj9NV5kYDRCv1q8aZQ=</DigestValue>
+            </Reference>
+            <Reference URI="rb_NL.IMRO.0687.BPMOR-VW02_1.pdf">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>bLsxL1GGgX9/Mct9XaD8XO9a/8E=</DigestValue>
+            </Reference>
+            <Reference URI="rb_NL.IMRO.0687.BPMOR-VW02_2.pdf">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>QKHb7oAvlQEV9GB25opHpw3fJ2k=</DigestValue>
+            </Reference>
+            <Reference URI="rb_NL.IMRO.0687.BPMOR-VW02_index.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>EMksBJ94iQ8ycEPxdvSqElDAOS0=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_1.1.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>YGDtjYr7IST9wG1Rsb+ZmhDAhpQ=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_1.2.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>qlA+WmNFbLjSI/G9a9zDlbDjjhk=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_1.3.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>/PxJBiK3sccAQniWjhXWrMau25o=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_1.4.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>N8M9aKP0I+cSfZm7MirkuUq65aQ=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_1.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>fiOfhmZue8/8dvAj2We4+HipCPU=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_2.1.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>dsiOJJUKL/dObV9Bp9PHBPtBtN0=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_2.2.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>INCyDHLB842UWNiF9Nt2L0FhKLI=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_2.3.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>0u39et62kbtax37PSo6Swu/RWXc=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_2.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>XARB79cGfYeaxvy1YcbB0oCvnXM=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_3.1.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>LkIAfCKjOpEkGSAOhJdHAhX4qOo=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_3.2.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>7oT86BD8kKCY6QgqDdA10Vjd0xE=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_3.3.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>L6DriSq1HW27BJAqazrsl8iJO1A=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_3.4.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>Kp1QqdSqw+Sll/bUSc2pS1M74uk=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_3.5.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>CszVEaP7bMzv7cmokS7ntkVwa3A=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_3.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>jbNHXETWAt/7Jgb/rF/94sxoHlY=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_4.1.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>i4JlM8/BxGxTZ+W16mbMMRMUtVw=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_4.2.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>c89JriQdraDMxEmoDH5dvc8sfPQ=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_4.3.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>RRtEIAnSxU2l6vCnBrH4w0CaFWU=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_4.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>ifGEPg3in2Vq5p5DVDvEsozLoKk=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_5.1.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>u89oxSCihzlkYiOoc/q0S1Apeys=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_5.2.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>UyGGwPj48Mqr7mc0k29j7SAdRjg=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_5.3.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>zgrZqT7JKI8CotJyVe4Vfqans9k=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_5.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>GaX2bsH1dNsJOSyzFkKbqEJHO5c=</DigestValue>
+            </Reference>
+            <Reference URI="t_NL.IMRO.0687.BPMOR-VW02_index.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>tOZYtCikhrxrZHfLcraC/MRoYHg=</DigestValue>
+            </Reference>
+            <Reference URI="tb_NL.IMRO.0687.BPMOR-VW02_1.pdf">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>7fZnm7XxNMyMmW43pOmKDdnGovA=</DigestValue>
+            </Reference>
+            <Reference URI="tb_NL.IMRO.0687.BPMOR-VW02_10.pdf">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>faaQUpOcp52hSdnFmwZze4LAW7E=</DigestValue>
+            </Reference>
+            <Reference URI="tb_NL.IMRO.0687.BPMOR-VW02_11.pdf">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>Wen3FASPMq/LViR7riOuMufurX0=</DigestValue>
+            </Reference>
+            <Reference URI="tb_NL.IMRO.0687.BPMOR-VW02_2.pdf">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>9xzFjBTu0VAf2QXwXiVdp9zz3ys=</DigestValue>
+            </Reference>
+            <Reference URI="tb_NL.IMRO.0687.BPMOR-VW02_3.pdf">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>Uu8wLKI+pBFkvvzt4kT5y+wTr+0=</DigestValue>
+            </Reference>
+            <Reference URI="tb_NL.IMRO.0687.BPMOR-VW02_4.pdf">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>JVzhF0FvsgYzl+z3PKCZQVhZvqc=</DigestValue>
+            </Reference>
+            <Reference URI="tb_NL.IMRO.0687.BPMOR-VW02_5.pdf">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>s8kYaeJtqEYc3g+yxI4TTP35IRI=</DigestValue>
+            </Reference>
+            <Reference URI="tb_NL.IMRO.0687.BPMOR-VW02_6.pdf">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>9r5FkcZ9/nKzqs4q0t30H3Jo4gY=</DigestValue>
+            </Reference>
+            <Reference URI="tb_NL.IMRO.0687.BPMOR-VW02_7.pdf">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>II7anVLDNpsS2DCX5HKYK129yN4=</DigestValue>
+            </Reference>
+            <Reference URI="tb_NL.IMRO.0687.BPMOR-VW02_8.pdf">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>UHdcKO1R+Jr1XYyIPyLK9Za0Za4=</DigestValue>
+            </Reference>
+            <Reference URI="tb_NL.IMRO.0687.BPMOR-VW02_9.pdf">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>GdsPYweJSMarcS9ycCz9S/KBjoI=</DigestValue>
+            </Reference>
+            <Reference URI="tb_NL.IMRO.0687.BPMOR-VW02_index.html">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>b0Fukg2A5mG28LTpqWzUrj+9QMc=</DigestValue>
+            </Reference>
+            <Reference URI="i_NL.IMRO.0687.BPMOR-VW02_0001.jpg">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>blQVlkPmfhi53B9qgsaRMaGyeAI=</DigestValue>
+            </Reference>
+            <Reference URI="i_NL.IMRO.0687.BPMOR-VW02_0002.jpg">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>173yjOaJkQNzvN8KYgSW0YW4BYo=</DigestValue>
+            </Reference>
+            <Reference URI="i_NL.IMRO.0687.BPMOR-VW02_0003.jpg">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>8ry8yN6JGoUzRBp38KWL+boGgDk=</DigestValue>
+            </Reference>
+            <Reference URI="i_NL.IMRO.0687.BPMOR-VW02_0004.png">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>mrmu4GgymfB82O4bLFm6Nq3HZPM=</DigestValue>
+            </Reference>
+            <Reference URI="i_NL.IMRO.0687.BPMOR-VW02_0005.png">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>YNGkKIglZxmWz7G6GkucP/grkTg=</DigestValue>
+            </Reference>
+            <Reference URI="i_NL.IMRO.0687.BPMOR-VW02_0006.png">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>zAfF3dm4EIXpN9VM4a/U3Y0fJps=</DigestValue>
+            </Reference>
+            <Reference URI="i_NL.IMRO.0687.BPMOR-VW02_0007.png">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>1uB4+O+ySVPjhFI5Eohp/VAeyJE=</DigestValue>
+            </Reference>
+            <Reference URI="vb_NL.IMRO.0687.BPMOR-VW02.pdf">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>wt3BZc9hGm03nWljx7/ApXuj/IA=</DigestValue>
+            </Reference>
+            <Reference URI="pt_NL.IMRO.0687.BPMOR-VW02.xml">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>d02ypCJhIP3MvMBWds3hhb+mDP0=</DigestValue>
+            </Reference>
+        </SignedInfo>
+        <SignatureValue>eQD3r5nJNkzDxjwawIkcwFIJljnKeNPo5sxxKKxWWhFUe+PkYL0QG3OyldOP2w+y75zKNZQY5aby+lYSxH1t/e4fy77f14oiHNnHv1m7bKPTJ58kPCBIF2tAXZEkZOZGCBrTJ8jeDBaR0ked28o71DSKM/YhQJ3Ss49boFMtRSqEUEZfp0yHEVr78QWoBF+aoDC/TX7NPG07wZkBzuUiogMnYxTDhYMeCPK/rSFuLsmu78OkphOJp2OfQcmFaBoBMvfR6vBD/VFXCJVmcX2xDzAa9orfC5KOmk9aELOJgqbmQwrxpShy49ZHeHpeCIxnIqfIjMst+jujiFCWYjsJjg==</SignatureValue>
+        <KeyInfo>
+            <X509Data>
+                <X509Certificate>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</X509Certificate>
+            </X509Data>
+        </KeyInfo>
+    </Signature>
+</GeleideFormulier>

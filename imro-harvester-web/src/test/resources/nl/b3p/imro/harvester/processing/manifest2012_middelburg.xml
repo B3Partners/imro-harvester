@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Manifest OverheidsCode="0687" NaamOverheid="Middelburg" Datum="2014-08-04" xmlns="http://www.geonovum.nl/stri/2012/1.0">
+    <Dossier Id="NL.IMRO.0687.BPMOR" Status="geheel onherroepelijk in werking">
+        <Plan Id="NL.IMRO.0687.BPMOR-VW02">
+            <Naam>Mortiere</Naam>
+            <Datum>2014-07-07</Datum>
+            <GeleideFormulier>http://files.b3p.nl/imroharvester/geleideformulier2008.xml</GeleideFormulier>
+        </Plan>
+    </Dossier>
+    <Dossier Id="NL.IMRO.0687.BPMO3" Status="geheel onherroepelijk in werking">
+        <Plan Id="NL.IMRO.0687.BPMO3-VW02">
+            <Naam>test2012</Naam>
+            <Datum>2014-07-07</Datum>
+            <GeleideFormulier>http://files.b3p.nl/imroharvester/geleideformulier2012.xml</GeleideFormulier>
+        </Plan>
+    </Dossier>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+            <CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+            <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+            <Reference URI="">
+                <Transforms>
+                    <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+                </Transforms>
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <DigestValue>zO/OHMsCd1o7cPYOc7jQ3FMkIVc=</DigestValue>
+            </Reference>
+        </SignedInfo>
+        <SignatureValue>Aog4QMXA67vj5gz5P84rdgvtmTQeeb1y5uTPT900b4jnAUYkb2NV7V9R6rZ7AR8Mi7ZsHUBonT0ykwOZx0PJCqRCy8JXA5U0dGRXoEYduBSjK18pid0I7to52jYvvoAe/5lGLPk12P99hKnkQ8tMuM+LFVK9UqVYPx0llirqGjX32LqPt/EM9CzaHe/a6SlbeikFx8ZU3UMFdIcjp0oaHPS12rrvXXSebBIDFW0jrt0oPBR+0DCwcM0P2j8PA/DZNyOoMUDmBBINyeUXf/Wup1NB3tK1/AXSpxSk1VVI1Fi4ZNVeTFmEDwh/bVmRm3qXo+aVOgXJ0hmXi/zKpOQwuw==</SignatureValue>
+        <KeyInfo>
+            <X509Data>
+                <X509Certificate>MIIGvDCCBKSgAwIBAgIQY6plpkF7aTxN5YtXdfF/fDANBgkqhkiG9w0BAQsFADBmMQswCQYDVQQGEwJOTDEgMB4GA1UECgwXS1BOIENvcnBvcmF0ZSBNYXJrZXQgQlYxNTAzBgNVBAMMLEtQTiBDb3Jwb3JhdGUgTWFya2V0IENTUCBPcmdhbmlzYXRpZSBDQSAtIEcyMB4XDTE0MDkyNDAwMDAwMFoXDTE3MDkyMzIzNTk1OVowgZIxCzAJBgNVBAYTAk5MMRAwDgYDVQQIDAdaZWVsYW5kMRMwEQYDVQQHDApNaWRkZWxidXJnMRwwGgYDVQQKDBNHZW1lZW50ZSBNaWRkZWxidXJnMR0wGwYDVQQFExQwMDAwMDAwMTAwMjEyODAzMjAwMDEfMB0GA1UEAwwWd2Fhcm1lcmsubWlkZGVsYnVyZy5ubDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAI27hERQ2NfX4OWlxvXx2XeZKfh7o7SaifbWkkGpMiwA0nKwlQSxZdTU/TsONux2VyZhBkdNSyCOeG3xcRyvVvclOiIox0KtQV5Tw6ZowftSws++rvcFX574rY5r4Pv0mNaqtbScRmvAxaJ/AYQXgJujHbVmGdQpBEnOsMSnbNsJHKZWzRiCwcmU7azSXPv8OJECS0J5rdlw2FrCNb3DRJ6pyRFr0Eg5wpWV1i6JIhVK/mETLphEBFpzV31rf4KLax0qbjyY2/Xpppx08FGLdK9yUI3s5EBDqgqhshv0Es+VW0q3IayzXAMJRLXgYzZvEuUfDo2KeLSsKJK9Zb8xgAcCAwEAAaOCAjcwggIzMAwGA1UdEwEB/wQCMAAwYgYDVR0fBFswWTBXoFWgU4ZRaHR0cDovL2NlcnQubWFuYWdlZHBraS5jb20vY3JsL0tQTkNvcnBvcmF0ZU1hcmtldENTUE9yZ2FuaXNhdGllQ0FHMi9MYXRlc3RDUkwuY3JsMA4GA1UdDwEB/wQEAwIDqDCBpwYDVR0gBIGfMIGcMIGZBgpghBABh2sBAgUGMIGKMDcGCCsGAQUFBwIBFitodHRwczovL2NlcnRpZmljYWF0Lmtwbi5jb20vcGtpb3ZlcmhlaWQvY3BzME8GCCsGAQUFBwICMEMaQU9wIGRpdCBjZXJ0aWZpY2FhdCBpcyBoZXQgQ1BTIFBLSW92ZXJoZWlkIHZhbiBLUE4gdmFuIHRvZXBhc3NpbmcuMB8GA1UdIwQYMBaAFCbQZRPx7npvYQgo3k2YBxJIeLTvMB0GA1UdDgQWBBSNi0nU3vEMFcKDA8GTHyAB0gs+zjAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwbQYDVR0RBGYwZIIWd2Fhcm1lcmsubWlkZGVsYnVyZy5ubKBKBgorBgEEAYI3FAIDoDwMOjIuMTYuNTI4LjEuMTAwMy4xLjMuNS45LjEuMTcxNDQ4Nzk4N2RmMzI0MjczYTE5ZDlhZjQ5MDY3NjYwNwYIKwYBBQUHAQEEKzApMCcGCCsGAQUFBzABhhtodHRwOi8vb2NzcDMubWFuYWdlZHBraS5jb20wDQYJKoZIhvcNAQELBQADggIBAMm33MuhIoNOnx8XzxWeEW3sPKwECzM8Xac+8gfL368utz4fz0oCjQRG2e1+qYQWCcLqe9s4JcA95VWX0Tz1zRRHCaQAKPRg06Vi862j/THh6y2eluex+sLeqe8hczkEmcObUf1HFU/PBgrbkcHIGeTToxknClGe+c8w4gqZnJuof48VxBMT4Itl/C1P6NLMun6P3ZLRkTKFAg3BQ0kGErNl4JKj6h0GCynz8ByNV+NIy4FWObxe3tbyTCUNNZzhLqg6/MC9VfowrQOd13+j6R41omkKTPAd+M0FLghvZNIncvxavszxFTPWaEYM4EigLWaGpZWQFA6F2LkLUSIJCvakFfceoTGRz7nr9E3MD4DSR8ESQlnmGk3GvW/Tb8hdPe8+SBfNMzJ9ceXoN7GF2/wS5encbCm58dazqGmnkb7ffTBCUC0IIdiSv2kuOG0zA0/tyncHcKsMlG/YhaJrJ0jRuL7ctaoWaUXHzS7R43t3uNjvdYvU6qKfHgsmgdJoJaHKO3dLw1meauKcwvstwjPJgBj/GeltbxOEZZ0u2G0id0R50JU7dq6qvGuFzDYCJFVLIET+0wHfJ/neoZq6pHvSncjlDD739eG8aM99vS48shSTEv2HG2ND4VIRsp64+p6B4+dhqtc2TFwFiTkMnJ2EfP1MwLZ/hVcJDu3En4eH</X509Certificate>
+            </X509Data>
+        </KeyInfo>
+    </Signature>
+</Manifest>
