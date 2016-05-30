@@ -80,6 +80,7 @@ public class STRIParser2008 implements STRIParser {
                 geleideformulier.setDatum(eigenschappen.getDatum().toString());
                 geleideformulier.setVersie(eigenschappen.getVersieIMRO());
                 geleideformulier.setBasisURL(basisURL);
+                geleideformulier.setImro(onderdelen.getIMRO());
 
                 for (String regel : onderdelen.getRegels()) {
                     geleideformulier.getBijlages().add(new URL(basisURL + regel));

@@ -26,6 +26,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -268,7 +269,7 @@ public class Processor {
         List<URL> geleideformulierenURLS = striParser.getGeleideformulierURLSFromManifest(manifest);
         for (URL geleideformulierURL : geleideformulierenURLS) {
             striParser = factory.getSTRIParser(geleideformulierURL);
-            forms.addAll(striParser.retrieveGeleideformulieren(geleideformulierenURLS));
+            forms.addAll(striParser.retrieveGeleideformulieren(Collections.singletonList(geleideformulierURL)));
         }
         return forms;
     }

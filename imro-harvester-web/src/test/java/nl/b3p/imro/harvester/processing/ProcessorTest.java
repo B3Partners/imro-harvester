@@ -184,7 +184,7 @@ public class ProcessorTest {
     }
 
     @Test
-    public void testgetGeleideformulierFrom2012Manifest() throws IOException, JDOMException, JAXBException{
+    public void testget2008and2012GeleideformulierenFrom2012Manifest() throws IOException, JDOMException, JAXBException{
         final URL inputXmlFullPath = this.getClass().getResource("manifest2012_middelburg.xml");
 
         List<Geleideformulier> forms = instance.getGeleideformulierenFromManifestURL(inputXmlFullPath);
