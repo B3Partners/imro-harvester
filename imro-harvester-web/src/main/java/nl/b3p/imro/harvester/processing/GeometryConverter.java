@@ -31,8 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.geotools.gml3.ArcParameters;
-import org.geotools.gml3.CircleRadiusTolerance;
+import org.geotools.gml3.GMLConfiguration;
 import org.geotools.xml.Parser;
 import org.jdom2.input.DOMBuilder;
 import org.jdom2.output.XMLOutputter;
@@ -48,23 +47,17 @@ public class GeometryConverter {
     protected final static Log log = LogFactory.getLog(GeometryConverter.class);
 
     private final static double DISTANCE_TOLERANCE = 0.001;
-    //private int simplifierCounter = 0;
-    //private final static int SIMPLIFIED_COUNTER_MAX = 1;
 
     private Parser parser;
     private GeometryFactory geometryFactory;
 
     protected final static int SRID = 28992;
-    protected final static double LINEARIZATION_TOLERANCE_MULTIPLIER = 0.01;//0.001;
 
     public GeometryConverter() {
         GeometryFactory gf = new GeometryFactory(new PrecisionModel(), SRID);
-        ArcParameters arcParameters = new ArcParameters(new CircleRadiusTolerance(LINEARIZATION_TOLERANCE_MULTIPLIER));//new AbsoluteTolerance(LINEARIZATION_TOLERANCE));
 
-        org.geotools.gml3.GMLConfiguration gml3Config = new org.geotools.gml3.GMLConfiguration();
-        gml3Config.getContext().registerComponentInstance(gf);
-        gml3Config.getContext().registerComponentInstance(arcParameters);
-
+        GMLConfiguration gml3Config = new GMLConfiguration(true);
+        gml3Config.setGeometryFactory(gf);
         parser = new Parser(gml3Config);
         this.geometryFactory = gf;
     }
