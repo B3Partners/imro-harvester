@@ -86,7 +86,6 @@ public class IMROParser2012_10Test {
         URL u = this.getClass().getResource("2012_10.gml");
         Object result = instance.unmarshalUrl(u);
         assertEquals(FeatureCollectionIMROType.class, result.getClass());
-        // TODO review the generated test code and remove the default call to fail.
     }
 
     /**

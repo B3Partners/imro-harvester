@@ -29,11 +29,11 @@ import org.mockito.stubbing.Answer;
  *
  * @author Meine Toonen <meinetoonen@b3partners.nl>
  */
-public class IMROParserFactoryTest {
+public class ParserFactoryTest {
 
     ParserFactory instance = null;
 
-    public IMROParserFactoryTest() throws JAXBException {
+    public ParserFactoryTest() throws JAXBException {
         instance = new ParserFactory();
     }
 
@@ -205,4 +205,5 @@ public class IMROParserFactoryTest {
         IMROParser result = instance.getIMROParser(geleideformulier);
         assertEquals(IMROParser2008.class, result.getClass());
     }
+
 }

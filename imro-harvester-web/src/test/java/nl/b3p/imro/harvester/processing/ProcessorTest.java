@@ -39,6 +39,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 /**
  *
@@ -67,7 +69,7 @@ public class ProcessorTest {
 
     }
 
-    @Test 
+    @Test
     public void testGetManifestUrlScraper() throws JAXBException, JDOMException, IOException {
         job = new HarvestJob();
         job.setType(HarvestJob.HarvestJobType.RUIMTELIJKEPLANNENSCRAPER);
@@ -77,9 +79,8 @@ public class ProcessorTest {
         assertEquals(new URL("http://ruimtelijkeplannen.zaltbommel.nl/manifest.xml"), u);
     }
 
-    /*
-     * Test of getManifestURL method, of class Processor.
-     */
+
+    
     @Test
     public void testGetManifestUrlDirect() throws MalformedURLException, IOException {
         URL expResult = new URL("http://files.b3p.nl/imroharvester/manifest.xml");
@@ -109,9 +110,6 @@ public class ProcessorTest {
         instance.process();
     }
 
-    /**
-     * Test of postprocess method, of class Processor.
-     */
     @Test
     public void testPostprocessBP() {
         System.out.println("postprocess");
@@ -131,9 +129,7 @@ public class ProcessorTest {
         assertEquals(16, f.getBestemmingsplan().getId());
         
     }
-    /**
-     * Test of postprocess method, of class Processor.
-     */
+
     @Test
     public void testPostprocessOV1() {
         System.out.println("postprocess");
@@ -163,9 +159,6 @@ public class ProcessorTest {
         
     }
 
-    /**
-     * Test of getRoType method, of class Processor.
-     */
     @Test
     public void testGetRoTypeBP() {
         System.out.println("getRoType");
@@ -178,9 +171,6 @@ public class ProcessorTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of getRoType method, of class Processor.
-     */
     @Test
     public void testGetRoTypeOmgevingsvergunning() {
         System.out.println("getRoType");
@@ -191,5 +181,15 @@ public class ProcessorTest {
         Processor.PlanType expResult = Processor.PlanType.OMGEVINGSVERGUNNING;
         Processor.PlanType result = instance.getPlanType(planObjecten);
         assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testgetGeleideformulierFrom2012Manifest() throws IOException, JDOMException, JAXBException{
+        final URL inputXmlFullPath = this.getClass().getResource("manifest2012_middelburg.xml");
+
+        List<Geleideformulier> forms = instance.getGeleideformulierenFromManifestURL(inputXmlFullPath);
+        assertEquals(2,forms.size());
+        assertEquals(new URL("http://ro.middelburg.nl/70BB02BE-C637-4335-9CE4-59D3E447D8AC/NL.IMRO.0687.BPMOR-VW02.gml"), forms.get(0).getGML());
+        assertEquals(new URL("http://files.b3p.nl/imroharvester/1.txt"), forms.get(1).getGML());
     }
 }

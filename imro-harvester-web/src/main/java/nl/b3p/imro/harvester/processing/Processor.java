@@ -91,11 +91,9 @@ public class Processor {
                 em.getTransaction().begin();
 
                 URL manifestUrl = getManifestURL(job);
-                STRIParser striParser = factory.getSTRIParser(manifestUrl);
-                List<URL> geleideformulierenURLS = striParser.getGeleideformulierURLSFromManifest(manifestUrl);
 
                 try {
-                    List<Geleideformulier> geleideformulieren = striParser.retrieveGeleideformulieren(geleideformulierenURLS);
+                    List<Geleideformulier> geleideformulieren = getGeleideformulierenFromManifestURL(manifestUrl);
 
                     for (Geleideformulier geleideformulier : geleideformulieren) {
                         report.addProcessed();
@@ -262,6 +260,17 @@ public class Processor {
 
         List<Bestemmingsplan> plannen = q.getResultList();
         return plannen.size() > 0;
+    }
+
+    public List<Geleideformulier> getGeleideformulierenFromManifestURL(URL manifest) throws IOException, JDOMException, JAXBException {
+        List<Geleideformulier> forms = new ArrayList<Geleideformulier>();
+        STRIParser striParser = factory.getSTRIParser(manifest);
+        List<URL> geleideformulierenURLS = striParser.getGeleideformulierURLSFromManifest(manifest);
+        for (URL geleideformulierURL : geleideformulierenURLS) {
+            striParser = factory.getSTRIParser(geleideformulierURL);
+            forms.addAll(striParser.retrieveGeleideformulieren(geleideformulierenURLS));
+        }
+        return forms;
     }
     // </editor-fold>
 

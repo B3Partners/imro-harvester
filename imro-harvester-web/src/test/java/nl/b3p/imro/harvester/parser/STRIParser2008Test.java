@@ -41,8 +41,7 @@ public class STRIParser2008Test {
         STRIParser2008 instance = new STRIParser2008();
         List<URL> result = instance.getGeleideformulierURLSFromManifest(u);
         assertEquals(1, result.size());
-        assertEquals(u, result.get(0));
-        // TODO review the generated test code and remove the default call to fail.
+        assertEquals(new URL("http://www.durperdam.nl/ro/BP0013/g_NL.IMRO.1234.BP0013-0001.xml"), result.get(0));
         
     }
 
@@ -52,7 +51,26 @@ public class STRIParser2008Test {
     @Test
     public void testRetrieveGeleideformulieren() throws Exception {
         System.out.println("retrieveGeleideformulieren");
-        URL u = this.getClass().getResource("manifest2008.xml");
+        URL u = this.getClass().getResource("geleideformulier2008.xml");
+   //     URL u = this.getClass().getResource("manifest2008.xml");
+        List<URL> geleideformulieren = Collections.singletonList(u);
+        STRIParser2008 instance = new STRIParser2008();
+        List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren);
+        assertEquals(1, result.size());
+        Geleideformulier form = result.get(0);
+
+        assertEquals("Mortiere",form.getNaam());
+        assertEquals("bestemmingsplan",form.getType());
+        assertEquals("vastgesteld",form.getStatus());
+        assertEquals("2014-07-07T00:00:00",form.getDatum());
+        assertEquals("IMRO2008",form.getVersie());
+        assertEquals(86, form.getBijlages().size());
+    }
+/*
+    @Test
+    public void testGetGeleideformulierURLSFromGeleideformulier() throws Exception {
+        System.out.println("retrieveGeleideformulieren");
+        URL u = this.getClass().getResource("geleideformulier2008.xml");
         List<URL> geleideformulieren = Collections.singletonList(u);
         STRIParser2008 instance = new STRIParser2008();
         List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren);
@@ -65,6 +83,6 @@ public class STRIParser2008Test {
         assertEquals("2008-07-01T00:00:00.000+02:00",form.getDatum());
         assertEquals("2008",form.getVersie());
         assertEquals(5, form.getBijlages().size());
-    }
+    }*/
 
 }

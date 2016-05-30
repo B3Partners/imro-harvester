@@ -373,6 +373,40 @@ public class IMROParser2012_11Test {
         assertNull(bv.getArtikelnummer());
         assertEquals("b_NL.IMRO.9999.vergunning0001-0001.pdf", bv.getVerwijzing());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
-
     }
+
+
+
+    @Test
+    public void testGeomCollections2() throws JAXBException{
+
+        URL u = this.getClass().getResource("2012v11geomcollection.gml");
+        Object o = instance.unmarshalUrl(u);
+
+        assertNotNull(o);
+        Bestemmingsplan bp = instance.parseImroBestemmingsplan(o);
+        assertNotNull(bp);
+
+        assertEquals(MultiPolygon.class, bp.getGeometrie().getClass());
+        assertFalse(bp.getGeometrie().isEmpty());
+    }
+
+    @Test
+    public void testGebFout() throws JAXBException{
+        URL u = this.getClass().getResource("geb_fout.gml");
+        Object o = instance.unmarshalUrl(u);
+
+        assertNotNull(o);
+        List<Object> objs = instance.processFeatureCollection(o);
+        assertNotNull(objs);
+        for (Object obj : objs) {
+            if(obj instanceof Gebiedsaanduiding){
+                Gebiedsaanduiding ga = (Gebiedsaanduiding)obj;
+                if (ga.getGeometrie() != null && ga.getGeometrie().isEmpty()){
+                    int a= 0;
+                }
+            }
+        }
+    }
+
 }

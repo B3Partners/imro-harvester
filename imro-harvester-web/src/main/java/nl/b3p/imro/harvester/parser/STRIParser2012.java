@@ -25,6 +25,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jdom2.Document;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.transform.JDOMSource;
 
 /**
  *
@@ -66,6 +69,8 @@ public class STRIParser2012 implements STRIParser{
                     geleideformulieren.add(new URL(plan.getGeleideFormulier()));
                 }
             }
+        }else{
+            log.error("Manifest of unknown version. Object: " + m.getClass());
         }
         return geleideformulieren;
     }
@@ -75,7 +80,10 @@ public class STRIParser2012 implements STRIParser{
         List<Geleideformulier> urls = new ArrayList<Geleideformulier>();
 
         Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
-
+/*
+        Document inputXml = new SAXBuilder().build("");
+        JDOMSource s = new JDOMSource(inputXml);
+        jaxbUnmarshaller.unmarshal(s);*/
         for (URL geleideformulierURL : geleideformulieren) {
             try {
                 Geleideformulier geleideformulier = null;
@@ -198,7 +206,7 @@ public class STRIParser2012 implements STRIParser{
                     urls.add(geleideformulier);
                 }
             } catch (JAXBException ex) {
-                log.trace("Cannot unmarshal geleideformulier" + geleideformulierURL);
+                log.debug("Cannot unmarshal geleideformulier" + geleideformulierURL);
             }
         }
 
