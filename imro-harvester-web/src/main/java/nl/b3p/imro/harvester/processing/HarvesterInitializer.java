@@ -19,7 +19,9 @@ package nl.b3p.imro.harvester.processing;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.servlet.Servlet;
@@ -29,6 +31,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import nl.b3p.imro.harvester.entities.Configuration;
 import nl.b3p.imro.harvester.stripes.AdminActionBean;
+import nl.b3p.stri._2008._1.TypePlan;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.CronScheduleBuilder;
@@ -57,6 +60,9 @@ public class HarvesterInitializer implements Servlet {
     private static Scheduler scheduler;
 
     private static File downloadFolder = null;
+
+
+    public static final List<String> SUPPORTED_PLAN_TYPES = new ArrayList<String>();
 
     @Override
     public void init(ServletConfig sc) throws ServletException {
@@ -108,6 +114,11 @@ public class HarvesterInitializer implements Servlet {
         } catch (Exception e) {
             log.error("Cannot load downloadfolder configuration: ", e);
         }
+
+        SUPPORTED_PLAN_TYPES.add(TypePlan.BESTEMMINGSPLAN.value());
+        SUPPORTED_PLAN_TYPES.add(TypePlan.PROJECTBESLUIT.value());
+        SUPPORTED_PLAN_TYPES.add(TypePlan.WIJZIGINGSPLAN.value());
+        SUPPORTED_PLAN_TYPES.add(nl.geonovum.stri._2012._1.TypePlan.OMGEVINGSVERGUNNING.value());
     }
 
     @Override
@@ -168,5 +179,9 @@ public class HarvesterInitializer implements Servlet {
         SimpleDateFormat sdf = new SimpleDateFormat("kk:mm dd-MM-yyyy");
         Date d = t.getNextFireTime();
         return sdf.format(d);
+    }
+
+    public static boolean canProcessPlantype(String type){
+        return SUPPORTED_PLAN_TYPES.contains(type);
     }
 }

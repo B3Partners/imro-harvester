@@ -159,7 +159,9 @@ public class IMROParser2008 implements IMROParser{
         bp.setBeleidsmatigeVerantwoordelijkeOverheid(bpgt.getBeleidsmatigVerantwoordelijkeOverheid().value());
         bp.setBesluitnummer(bpgt.getBesluitnummer());
         bp.setNaam(bpgt.getNaam().getValue());
-        bp.setLocatieNaam(bpgt.getLocatieNaam().get(0));
+        if(bpgt.getLocatieNaam().size() > 0){
+            bp.setLocatieNaam(bpgt.getLocatieNaam().get(0));
+        }
         bp.setNaamOverheid(bpgt.getNaamOverheid());
         bp.setOverheidsCode(bpgt.getOverheidsCode());
         bp.setPlanstatusInfo(bpgt.getPlanstatusInfo().getPlanstatusEnDatumBP().getPlanstatus().value());

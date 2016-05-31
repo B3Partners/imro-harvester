@@ -24,6 +24,7 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import nl.b3p.imro.harvester.processing.HarvesterInitializer;
 import nl.b3p.stri._2008._1.Manifest;
 import nl.b3p.stri._2008._1.Plan;
 import nl.b3p.stri._2008._1.Plan.Eigenschappen;
@@ -66,7 +67,7 @@ public class STRIParser2008 implements STRIParser {
             Plan plan = striGeleideform.getPlan();
 
             Eigenschappen eigenschappen = plan.getEigenschappen();
-            if (eigenschappen.getType().equals(TypePlan.BESTEMMINGSPLAN) || eigenschappen.getType().equals(TypePlan.PROJECTBESLUIT)) {
+            if (HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())){
                 Geleideformulier geleideformulier = new Geleideformulier();
                 Onderdelen onderdelen = plan.getOnderdelen();
                 Plan.Supplementen supplementen = plan.getSupplementen();
@@ -140,6 +141,8 @@ public class STRIParser2008 implements STRIParser {
 
                 geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getIMRO()));
                 formulieren.add(geleideformulier);
+            }else {
+                throw new IllegalArgumentException("plantype onbekend: " + eigenschappen.getType());
             }
         }
         return formulieren;

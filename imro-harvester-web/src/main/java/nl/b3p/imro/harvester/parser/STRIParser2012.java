@@ -23,11 +23,9 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import nl.b3p.imro.harvester.processing.HarvesterInitializer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jdom2.Document;
-import org.jdom2.input.SAXBuilder;
-import org.jdom2.transform.JDOMSource;
 
 /**
  *
@@ -80,10 +78,6 @@ public class STRIParser2012 implements STRIParser{
         List<Geleideformulier> urls = new ArrayList<Geleideformulier>();
 
         Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
-/*
-        Document inputXml = new SAXBuilder().build("");
-        JDOMSource s = new JDOMSource(inputXml);
-        jaxbUnmarshaller.unmarshal(s);*/
         for (URL geleideformulierURL : geleideformulieren) {
             try {
                 Geleideformulier geleideformulier = null;
@@ -92,8 +86,8 @@ public class STRIParser2012 implements STRIParser{
                 if (geleideformulierObject instanceof nl.geonovum.stri._2012._1.GeleideFormulier) {
                     nl.geonovum.stri._2012._1.GeleideFormulier gf = (nl.geonovum.stri._2012._1.GeleideFormulier) geleideformulierObject;
                     nl.geonovum.stri._2012._1.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
-                    
-                    if (eigenschappen.getType().equals(nl.geonovum.stri._2012._1.TypePlan.BESTEMMINGSPLAN) || eigenschappen.getType().equals(nl.geonovum.stri._2012._1.TypePlan.OMGEVINGSVERGUNNING)) {
+
+                if (HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())){
                         geleideformulier = new Geleideformulier();
                         nl.geonovum.stri._2012._1.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
 
@@ -144,12 +138,15 @@ public class STRIParser2012 implements STRIParser{
                         geleideformulier.setVersie(eigenschappen.getVersieIMRO());
                         geleideformulier.setType(eigenschappen.getType().value());
                         geleideformulier.setImro(onderdelen.getIMRO());
+                    }else{
+                        throw new IllegalArgumentException("plantype onbekend: " + eigenschappen.getType());
                     }
                 } else if (geleideformulierObject instanceof nl.geonovum.stri._2012._2.GeleideFormulier) {
                     nl.geonovum.stri._2012._2.GeleideFormulier gf = (nl.geonovum.stri._2012._2.GeleideFormulier) geleideformulierObject;
                     nl.geonovum.stri._2012._2.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
 
-                    if (eigenschappen.getType().equals(nl.geonovum.stri._2012._2.TypePlan.BESTEMMINGSPLAN) || eigenschappen.getType().equals(nl.geonovum.stri._2012._2.TypePlan.OMGEVINGSVERGUNNING)) {
+
+                    if (HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())){
                         geleideformulier = new Geleideformulier();
                         nl.geonovum.stri._2012._2.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
                         String basisurl = onderdelen.getBasisURL();
@@ -200,6 +197,8 @@ public class STRIParser2012 implements STRIParser{
                         geleideformulier.setVersie(eigenschappen.getVersieGML());
                         geleideformulier.setType(eigenschappen.getType().value());
                         geleideformulier.setImro(onderdelen.getGML());
+                    }else{
+                        throw new IllegalArgumentException("plantype onbekend: " + eigenschappen.getType());
                     }
                 }
                 if(geleideformulier != null){
