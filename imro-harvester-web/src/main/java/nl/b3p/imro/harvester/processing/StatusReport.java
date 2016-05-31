@@ -52,6 +52,8 @@ public class StatusReport {
         StringWriter sw = new StringWriter();
         log.printStackTrace(new PrintWriter(sw));
         String exceptionAsString = sw.toString();
+        this.log += "<br/>";
+        this.log += plan + "<br/>";
         this.log += exceptionAsString;
     }
 
@@ -77,14 +79,19 @@ public class StatusReport {
     }
 
     public String getLog() {
-        String logString = "Aantal plannen geprocessed: " + plansProcessed + "<br/>";
+        String logString  = "Totaal plannen in manifest: " + (plansProcessed + plansErrored.size()) + "<br/>";
+        logString += "Aantal plannen geprocessed: " + plansProcessed + "<br/>";
         logString += "Aantal plannen overgeslagen: " + plansSkipped + "<br/>";
         logString += "Aantal plannen mislukt: " + plansErrored.size() + "<br/>";
+
+        logString += "<hr/> Plannen die fout gegaan zijn: <br/>";
         if(plansErrored.size() > 0){
             for (String plan : plansErrored) {
                 logString += plan + "<br/>";
             }
         }
+
+        logString += "<hr/> Foutmeldingen: <br/>";
         logString += log;
         return logString;
     }
