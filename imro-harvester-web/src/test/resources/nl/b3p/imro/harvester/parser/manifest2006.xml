@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NedPlan 3.1.1 NedGraphics BV -->
+<Manifest
+ xmlns="http://www.geonovum.nl/stri/2006/1"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ Datum="2015-10-14T13:53:06+02:00"
+ NaamOverheid="gemeente Reimerswaal"
+ OverheidsCode="0703">
+ <Plan Historisch="false" Contour="true" Id="NL.IMRO.07030000BTOPBP2H-">
+  <Eigenschappen>
+   <Naam>Bestemmingsplan Bedrijventerrein Olzendepolder, 2e herziening</Naam>
+   <Type>gemeentelijk plan; bestemmingsplan artikel 10</Type>
+   <Status>onherroepelijk</Status>
+   <Datum>2008-10-28T00:00:00</Datum>
+   <VersieIMRO>IMRO2008</VersieIMRO>
+   <VersiePraktijkRichtlijn>PRPCP2008</VersiePraktijkRichtlijn>
+  </Eigenschappen>
+  <Onderdelen BasisURL="http://ro.reimerswaal.nl/test/NL.IMRO.07030000BTOPBP2H-/">
+   <IMRO>NL.IMRO.07030000BTOPBP2H-.gml</IMRO>
+   <Voorschriften>v_NL.IMRO.07030000BTOPBP2H-.pdf</Voorschriften>
+   <Toelichting>t_NL.IMRO.07030000BTOPBP2H-.pdf</Toelichting>
+   <PlanKaart>p_NL.IMRO.07030000BTOPBP2H-.pdf</PlanKaart>
+   <GeleideFormulier>g_NL.IMRO.07030000BTOPBP2H-.xml</GeleideFormulier>
+  </Onderdelen>
+  <Supplementen BasisURL="http://ro.reimerswaal.nl/test/NL.IMRO.07030000BTOPBP2H-/">
+  </Supplementen>
+ </Plan>
+</Manifest>

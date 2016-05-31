@@ -1,0 +1,21 @@
+<GeleideFormulier xmlns="http://www.geonovum.nl/stri/2006/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OverheidsCode="0654" NaamOverheid="Borsele" Datum="2010-03-23T00:00:00+01:00">
+  <Plan Id="NL.IMRO.06540000BS4376-" Historisch="false">
+    <Eigenschappen>
+      <Naam>kern s heer abtskerke</Naam>
+      <Type>gemeentelijk plan; bestemmingsplan artikel 10</Type>
+      <Status>vastgesteld</Status>
+      <Datum>2007-06-07T00:00:00+02:00</Datum>
+      <VersieIMRO>IMRO2006</VersieIMRO>
+      <VersiePraktijkRichtlijn>PRBP2006</VersiePraktijkRichtlijn>
+    </Eigenschappen>
+    <Onderdelen BasisURL="http://www.borsele.eu/plannen/NL.IMRO.06540000BS4376-/NL.IMRO.06540000BS4376-/">
+      <IMRO>NL.IMRO.06540000BS4376-.gml</IMRO>
+      <Voorschriften>v_NL.IMRO.06540000BS4376-.htm</Voorschriften>
+      <VoorschriftenBijlage>vb_NL.IMRO.06540000BS4376-.pdf</VoorschriftenBijlage>
+      <Toelichting>t_NL.IMRO.06540000BS4376-.pdf</Toelichting>
+      <ToelichtingBijlage>tb_NL.IMRO.06540000BS4376-.pdf</ToelichtingBijlage>
+      <GeleideFormulier>g_NL.IMRO.06540000BS4376-.xml</GeleideFormulier>
+    </Onderdelen>
+    <Supplementen />
+  </Plan>
+</GeleideFormulier>
