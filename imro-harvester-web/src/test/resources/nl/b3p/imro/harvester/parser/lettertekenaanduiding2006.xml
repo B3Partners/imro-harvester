@@ -1,5 +1,10 @@
 
-		<imro:Lettertekenaanduiding xmlns:imro="http://www.ravi.nl/imro2006" gml:id="localidLP1664">
+		<imro:Lettertekenaanduiding xmlns:imro="http://www.ravi.nl/imro2006" gml:id="localidLP1664"
+	gml:id="localidEP577" 
+	xmlns:gml="http://www.opengis.net/gml" 
+	xmlns:xlink="http://www.w3.org/1999/xlink" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.opengis.net/gml base/gml.xsd http://www.ravi.nl/imro2006 IMRO2006.xsd">
 			<imro:identificatie>LP1664</imro:identificatie>
 			<imro:typePlanobject>aanduiding; lettertekenaanduiding</imro:typePlanobject>
 			<imro:naam>Zonder gebouwen</imro:naam>

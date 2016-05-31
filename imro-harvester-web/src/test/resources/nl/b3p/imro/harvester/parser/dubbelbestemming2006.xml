@@ -1,0 +1,62 @@
+<imro:Dubbelbestemming
+      gml:id="e4"
+  gml:id="localidEP577" 
+  xmlns:gml="http://www.opengis.net/gml" 
+  xmlns:xlink="http://www.w3.org/1999/xlink" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.opengis.net/gml base/gml.xsd http://www.ravi.nl/imro2006 IMRO2006.xsd">
+      <imro:identificatie>e4</imro:identificatie>
+      <imro:typePlanobject>bestemmingsvlak; dubbelbestemming</imro:typePlanobject>
+      <imro:artikelnummer>1</imro:artikelnummer>
+      <imro:bestemmingsfunctieInfo>
+        <imro:BestemmingsfunctieElement>
+          <imro:functieniveau>hoofdfunctie</imro:functieniveau>
+          <imro:bestemmingsfunctie>voorzieningen</imro:bestemmingsfunctie>
+        </imro:BestemmingsfunctieElement>
+      </imro:bestemmingsfunctieInfo>
+      <imro:bestemmingshoofdgroep>water</imro:bestemmingshoofdgroep>
+      <imro:geometrie>
+        <imro:PuntLijnVlak>
+          <imro:geometrieVlak>
+            <gml:Surface
+              srsName="urn:ogc:def:crs:EPSG::28992">
+              <gml:patches>
+                <gml:PolygonPatch>
+                  <gml:exterior>
+                    <gml:Ring>
+                      <gml:curveMember>
+                        <gml:Curve>
+                          <gml:segments>
+                            <gml:LineStringSegment>
+                              <gml:posList> 157905.765 415836.356 157945.241 415737.645 157956.268 415742.029</gml:posList>
+                            </gml:LineStringSegment>
+                            <gml:Arc>
+                              <gml:posList> 157956.268 415742.029 157958.852 415744.893 157958.607 415748.743</gml:posList>
+                            </gml:Arc>
+                            <gml:LineStringSegment>
+                              <gml:posList> 157958.607 415748.743 157922.781 415838.274</gml:posList>
+                            </gml:LineStringSegment>
+                            <gml:Arc>
+                              <gml:posList> 157922.781 415838.274 157920.536 415840.866 157917.109 415840.964</gml:posList>
+                            </gml:Arc>
+                            <gml:LineStringSegment>
+                              <gml:posList> 157917.109 415840.964 157905.765 415836.356</gml:posList>
+                            </gml:LineStringSegment>
+                          </gml:segments>
+                        </gml:Curve>
+                      </gml:curveMember>
+                    </gml:Ring>
+                  </gml:exterior>
+                </gml:PolygonPatch>
+              </gml:patches>
+            </gml:Surface>
+          </imro:geometrieVlak>
+        </imro:PuntLijnVlak>
+      </imro:geometrie>
+      <imro:maxHoogteliggingVlak>0</imro:maxHoogteliggingVlak>
+      <imro:minHoogteliggingVlak>0</imro:minHoogteliggingVlak>
+      <imro:naam>INFILTRATIEVOORZIENING</imro:naam>
+      <imro:verwijzingNaarTekst>v_NL.IMRO.16710000Heiduinen-.htm</imro:verwijzingNaarTekst>
+      <imro:plangebied
+        xlink:href="#NL.IMRO.16710000Heiduinen-" />
+    </imro:Dubbelbestemming>

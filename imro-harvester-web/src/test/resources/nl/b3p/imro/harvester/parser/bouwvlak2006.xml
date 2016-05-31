@@ -1,4 +1,9 @@
-<imro:Bouwvlak xmlns:imro="http://www.ravi.nl/imro2006" gml:id="localidBP943">
+<imro:Bouwvlak xmlns:imro="http://www.ravi.nl/imro2006" gml:id="localidBP943"
+	gml:id="localidEP577" 
+	xmlns:gml="http://www.opengis.net/gml" 
+	xmlns:xlink="http://www.w3.org/1999/xlink" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.opengis.net/gml base/gml.xsd http://www.ravi.nl/imro2006 IMRO2006.xsd">
 	<imro:identificatie>BP943</imro:identificatie>
 	<imro:typePlanobject>aanduiding; bouwvlak</imro:typePlanobject>
 	<imro:naam>Woondoeleinden lintbebouwing</imro:naam>

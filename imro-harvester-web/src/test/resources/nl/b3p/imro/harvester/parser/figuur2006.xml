@@ -1,4 +1,9 @@
-<imro:Figuur xmlns:imro="http://www.ravi.nl/imro2006" gml:id="localidFL1328">
+<imro:Figuur xmlns:imro="http://www.ravi.nl/imro2006" gml:id="localidFL1328"
+	gml:id="localidEP577" 
+	xmlns:gml="http://www.opengis.net/gml" 
+	xmlns:xlink="http://www.w3.org/1999/xlink" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.opengis.net/gml base/gml.xsd http://www.ravi.nl/imro2006 IMRO2006.xsd">
 			<imro:identificatie>FL1328</imro:identificatie>
 			<imro:typePlanobject>aanduiding; figuur</imro:typePlanobject>
 			<imro:naam>voorste bebouwingsgrens</imro:naam>

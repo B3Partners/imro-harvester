@@ -1,4 +1,9 @@
-	<imro:Bestemmingsplangebied xmlns:imro="http://www.ravi.nl/imro2006" gml:id="NL.IMRO.06540000BS4376-">
+	<imro:Bestemmingsplangebied xmlns:imro="http://www.ravi.nl/imro2006" gml:id="NL.IMRO.06540000BS4376-"
+	gml:id="localidEP577" 
+	xmlns:gml="http://www.opengis.net/gml" 
+	xmlns:xlink="http://www.w3.org/1999/xlink" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.opengis.net/gml base/gml.xsd http://www.ravi.nl/imro2006 IMRO2006.xsd">
 			<imro:identificatie>NL.IMRO.06540000BS4376-</imro:identificatie>
 			<imro:typePlan>gemeentelijk plan; bestemmingsplan artikel 10</imro:typePlan>
 			<imro:gebruikteOndergrond>gk-060112-borsele-blad 3 .dgn</imro:gebruikteOndergrond>
