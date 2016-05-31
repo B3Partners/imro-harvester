@@ -39,8 +39,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 /**
  *
@@ -79,8 +77,6 @@ public class ProcessorTest {
         assertEquals(new URL("http://ruimtelijkeplannen.zaltbommel.nl/manifest.xml"), u);
     }
 
-
-    
     @Test
     public void testGetManifestUrlDirect() throws MalformedURLException, IOException {
         URL expResult = new URL("http://files.b3p.nl/imroharvester/manifest.xml");
@@ -102,7 +98,7 @@ public class ProcessorTest {
         assertEquals(16, realDir.listFiles().length);
     }
 
-    @Test
+   // @Test
     public void testStationsPlein() throws JAXBException, JDOMException {
         job = new HarvestJob();
         job.setUrl("http://files.b3p.nl/imroharvester/manifest_station.xml");
@@ -113,7 +109,7 @@ public class ProcessorTest {
     @Test
     public void testPostprocessBP() {
         System.out.println("postprocess");
-        Bestemmingsplan bp  = new Bestemmingsplan();
+        Bestemmingsplan bp = new Bestemmingsplan();
         bp.setId(16);
         Enkelbestemming eb = new Enkelbestemming();
         Figuur f = new Figuur();
@@ -127,13 +123,13 @@ public class ProcessorTest {
         assertNotNull(eb.getBestemmingsplan());
         assertEquals(16, eb.getBestemmingsplan().getId());
         assertEquals(16, f.getBestemmingsplan().getId());
-        
+
     }
 
     @Test
     public void testPostprocessOV1() {
         System.out.println("postprocess");
-        Besluitgebied bg  = new Besluitgebied();
+        Besluitgebied bg = new Besluitgebied();
         bg.setId(16);
         Besluitvlak bv = new Besluitvlak();
         List<Object> planObjecten = new ArrayList<Object>();
@@ -156,7 +152,7 @@ public class ProcessorTest {
         EntityManager em = Mockito.mock(EntityManager.class);
         instance.postprocess(planObjecten, em);
         assertNull(bv.getBesluitgebied());
-        
+
     }
 
     @Test
@@ -184,11 +180,11 @@ public class ProcessorTest {
     }
 
     @Test
-    public void testget2008and2012GeleideformulierenFrom2012Manifest() throws IOException, JDOMException, JAXBException{
+    public void testget2008and2012GeleideformulierenFrom2012Manifest() throws IOException, JDOMException, JAXBException {
         final URL inputXmlFullPath = this.getClass().getResource("manifest2012_middelburg.xml");
 
-        List<Geleideformulier> forms = instance.getGeleideformulierenFromManifestURL(inputXmlFullPath);
-        assertEquals(2,forms.size());
+        List<Geleideformulier> forms = instance.getGeleideformulierenFromManifestURL(inputXmlFullPath, new StatusReport());
+        assertEquals(2, forms.size());
         assertEquals(new URL("http://ro.middelburg.nl/70BB02BE-C637-4335-9CE4-59D3E447D8AC/NL.IMRO.0687.BPMOR-VW02.gml"), forms.get(0).getGML());
         assertEquals(new URL("http://files.b3p.nl/imroharvester/1.txt"), forms.get(1).getGML());
     }

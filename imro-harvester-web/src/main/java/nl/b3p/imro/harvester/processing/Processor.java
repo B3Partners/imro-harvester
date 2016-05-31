@@ -94,7 +94,7 @@ public class Processor {
                 URL manifestUrl = getManifestURL(job);
 
                 try {
-                    List<Geleideformulier> geleideformulieren = getGeleideformulierenFromManifestURL(manifestUrl);
+                    List<Geleideformulier> geleideformulieren = getGeleideformulierenFromManifestURL(manifestUrl,report);
 
                     for (Geleideformulier geleideformulier : geleideformulieren) {
                         report.addProcessed();
@@ -123,6 +123,10 @@ public class Processor {
                             em.getTransaction().rollback();
                             report.addErrored(geleideformulier.getIdentificatie(), ex);
                         } catch (PersistenceException | JDOMException ex) {
+                            log.error("Cannot save entity in plan " + geleideformulier, ex);
+                            em.getTransaction().rollback();
+                            report.addErrored(geleideformulier.getIdentificatie(), ex);
+                        }catch(Exception ex){ // catch all to prevent stop the parsing of the entire geleideformulier
                             log.error("Cannot save entity in plan " + geleideformulier, ex);
                             em.getTransaction().rollback();
                             report.addErrored(geleideformulier.getIdentificatie(), ex);
@@ -251,7 +255,8 @@ public class Processor {
     }
 
     public boolean checkIfExists(Geleideformulier formulier, EntityManager em) throws ParseException {
-        Query q = em.createQuery("FROM Bestemmingsplan WHERE naam = :naam and typePlan = :typePlan and planstatusDatum = :datum and planstatusInfo = :status "
+        Query q = em.createQuery("FROM Bestemmingsplan"
+                + " WHERE naam = :naam and typePlan = :typePlan and planstatusDatum = :datum and planstatusInfo = :status "
                 + "and identificatie = :identificatie", Bestemmingsplan.class)
                 .setParameter("naam", formulier.getNaam())
                 .setParameter("typePlan", formulier.getType())
@@ -260,16 +265,41 @@ public class Processor {
                 .setParameter("datum", sdf.parse(formulier.getDatum()));
 
         List<Bestemmingsplan> plannen = q.getResultList();
-        return plannen.size() > 0;
+        if(plannen.size() > 0){
+            return true;
+        }else{
+            q = em.createQuery("FROM Besluitgebied"
+                + " WHERE naam = :naam and typePlan = :typePlan and planstatusDatum = :datum and planstatus = :status "
+                + "and identificatie = :identificatie", Besluitgebied.class)
+                .setParameter("naam", formulier.getNaam())
+                .setParameter("typePlan", formulier.getType())
+                .setParameter("status", formulier.getStatus())
+                .setParameter("identificatie", formulier.getIdentificatie())
+                .setParameter("datum", sdf.parse(formulier.getDatum()));
+
+            List<Besluitgebied> gebieden = q.getResultList();
+            return gebieden.size() > 0;
+        }
     }
 
-    public List<Geleideformulier> getGeleideformulierenFromManifestURL(URL manifest) throws IOException, JDOMException, JAXBException {
+    public List<Geleideformulier> getGeleideformulierenFromManifestURL(URL manifest, StatusReport report) throws IOException, JDOMException, JAXBException {
         List<Geleideformulier> forms = new ArrayList<Geleideformulier>();
         STRIParser striParser = factory.getSTRIParser(manifest);
         List<URL> geleideformulierenURLS = striParser.getGeleideformulierURLSFromManifest(manifest);
         for (URL geleideformulierURL : geleideformulierenURLS) {
-            striParser = factory.getSTRIParser(geleideformulierURL);
-            forms.addAll(striParser.retrieveGeleideformulieren(Collections.singletonList(geleideformulierURL)));
+            try{
+                striParser = factory.getSTRIParser(geleideformulierURL);
+                forms.addAll(striParser.retrieveGeleideformulieren(Collections.singletonList(geleideformulierURL)));
+            }catch (IOException ex){
+                log.debug("Cannot retrieve geleideformulier: " +geleideformulierURL + " " +  ex.getLocalizedMessage());
+                report.addErrored(geleideformulierURL.toExternalForm(), ex);
+            }catch(JAXBException  | JDOMException ex) {
+                log.debug("Parsing failed of geleideformulier: " + geleideformulierURL,ex);
+                report.addErrored(geleideformulierURL.toExternalForm(), ex);
+            } catch (IllegalArgumentException ex) {
+                log.debug("Plan uit geleideformulier: " + geleideformulierURL + " niet verwerkt, reden: " + ex.getLocalizedMessage() );
+                report.addErrored(geleideformulierURL.toExternalForm(), ex);
+            }
         }
         return forms;
     }
