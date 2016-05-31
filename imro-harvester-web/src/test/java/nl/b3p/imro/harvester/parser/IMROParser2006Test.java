@@ -92,9 +92,21 @@ public class IMROParser2006Test {
     /**
      * Test of parseImroDubbelbestemming method, of class IMROParser2006.
      */
-    @Test(expected = NoSuchMethodException.class)
+    @Test
     public void testParseImroDubbelbestemming() throws JAXBException {
-        Dubbelbestemming db = instance.parseImroDubbelbestemming(null);
+        URL u = this.getClass().getResource("dubbelbestemming2006.xml");
+
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Dubbelbestemming db = instance.parseImroDubbelbestemming(gba);
+
+        assertEquals("e4", db.getIdentificatie());
+        assertEquals("bestemmingsvlak; dubbelbestemming", db.getTypePlanObject());
+        assertEquals("INFILTRATIEVOORZIENING", db.getNaam());
+        assertEquals("v_NL.IMRO.16710000Heiduinen-.htm", db.getVerwijzing());
+        assertEquals("water", db.getBestemmingshoofdgroep());
+        assertEquals("1", db.getArtikelnummer());
+        assertNotNull("Geometrie moet gevuld zijn",db.getGeometrie());
     }
 
     /**
@@ -112,7 +124,7 @@ public class IMROParser2006Test {
         assertEquals("GP2546", ga.getIdentificatie());
         assertEquals("aanduiding; gebiedsaanduiding", ga.getTypePlanObject());
         assertEquals("Archeologisch waardevol terrein", ga.getNaam());
-        assertEquals("hoofdfunctie", ga.getGebiedsaanduidinggroep());
+        assertEquals("cultuurhistorie en archeologie", ga.getGebiedsaanduidinggroep());
         assertEquals("18", ga.getArtikelnummer());
         assertNotNull("Geometrie moet gevuld zijn",ga.getGeometrie());
     }
@@ -176,7 +188,7 @@ public class IMROParser2006Test {
      * Test of parseImroBouwaanduiding method, of class IMROParser2006.
      */
     @Test(expected = NoSuchMethodException.class)
-    public void testParseImroBouwaanduiding() throws JAXBException {
+    public void testParseImroBouwaanduiding() throws JAXBException, NoSuchMethodException {
         Bouwaanduiding bv = instance.parseImroBouwaanduiding(null);
     }
 
