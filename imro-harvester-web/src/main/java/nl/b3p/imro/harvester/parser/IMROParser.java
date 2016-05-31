@@ -68,13 +68,13 @@ public interface IMROParser {
 
     Figuur parseImroFiguur(Object o);
 
-    Bouwaanduiding parseImroBouwaanduiding(Object o);
+    Bouwaanduiding parseImroBouwaanduiding(Object o) throws NoSuchMethodException;
 
     Enkelbestemming parseImroEnkelbestemming(Object o);
 
     Maatvoering parseImroMaatvoering(Object o);
 
-    Besluitvlak parseImroBesluitvlak(Object o) throws  IOException, ParserConfigurationException, SAXException, TransformerException;
+    Besluitvlak parseImroBesluitvlak(Object o) throws  IOException, ParserConfigurationException, SAXException, TransformerException, NoSuchMethodException;
 
     Besluitgebied parseImroBesluitgebied(Object o);
 
