@@ -1,0 +1,40 @@
+
+<imro:Gebiedsaanduiding xmlns:imro="http://www.ravi.nl/imro2006" gml:id="localidGP2546">
+	<imro:identificatie>GP2546</imro:identificatie>
+	<imro:typePlanobject>aanduiding; gebiedsaanduiding</imro:typePlanobject>
+	<imro:naam>Archeologisch waardevol terrein</imro:naam>
+	<imro:plangebied xlink:href="#NL.IMRO.06540000BS4376-"/>
+	<imro:bestemmingsfunctieInfo>
+		<imro:BestemmingsfunctieElement>
+			<imro:functieniveau>hoofdfunctie</imro:functieniveau>
+			<imro:bestemmingsfunctie>cultuurhistorie en archeologie</imro:bestemmingsfunctie>
+		</imro:BestemmingsfunctieElement>
+	</imro:bestemmingsfunctieInfo>
+	<imro:verwijzingNaarTekst>v_NL.IMRO.06540000BS4376-.htm#art18</imro:verwijzingNaarTekst>
+	<imro:artikelnummer>18</imro:artikelnummer>
+	<imro:geometrie>
+		<imro:PuntLijnVlak>
+			<imro:geometrieVlak>
+				<gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
+					<gml:patches>
+						<gml:PolygonPatch>
+							<gml:exterior>
+								<gml:Ring>
+									<gml:curveMember>
+										<gml:Curve>
+											<gml:segments>
+												<gml:LineStringSegment>
+													<gml:posList srsDimension="2" count="54">50431.388 387885.114 50431.172 387885.563 50427.359 387890.625 50472.059 387958.187 50398.41 388078.563 50388.874 388072.289 50397.959 388059.749 50396.26 388058.43 50391.51 388054.72 50381.24 388048.79 50376.24 388045.88 50369.58 388042.53 50353.33 388034.31 50344.65 388029.93 50340.574 388035.175 50339.07 388037.11 50331.72 388041.64 50331.168 388042.403 50329.578 388043 50325.77 388041.75 50318.398 388039.187 50313.32 388034.875 50299.609 388030.313 50205.391 387978.75 50294.789 387827.625 50305.449 387810.125 50310.789 387800.969 50315.102 387797.156 50320.441 387795.125 50325.262 387793.875 50331.359 387794.625 50341.262 387795.375 50347.102 387797.687 50353.961 387801.5 50361.07 387807.594 50365.898 387808.344 50371.488 387809.375 50379.871 387814.937 50387.488 387820.781 50394.34 387823.594 50401.199 387826.125 50408.309 387827.125 50413.391 387826.625 50422.031 387827.125 50427.871 387829.937 50432.191 387835 50435.488 387839.844 50437.52 387846.437 50439.039 387852.031 50439.112 387852.687 50434.97 387865.44 50428.96 387874.39 50425.933 387877.652 50431.388 387885.114</gml:posList>
+												</gml:LineStringSegment>
+											</gml:segments>
+										</gml:Curve>
+									</gml:curveMember>
+								</gml:Ring>
+							</gml:exterior>
+						</gml:PolygonPatch>
+					</gml:patches>
+				</gml:Surface>
+			</imro:geometrieVlak>
+		</imro:PuntLijnVlak>
+	</imro:geometrie>
+</imro:Gebiedsaanduiding>

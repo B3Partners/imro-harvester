@@ -1,0 +1,53 @@
+
+		<imro:Lettertekenaanduiding xmlns:imro="http://www.ravi.nl/imro2006" gml:id="localidLP1664">
+			<imro:identificatie>LP1664</imro:identificatie>
+			<imro:typePlanobject>aanduiding; lettertekenaanduiding</imro:typePlanobject>
+			<imro:naam>Zonder gebouwen</imro:naam>
+			<imro:plangebied xlink:href="#NL.IMRO.06540000BS4376-"/>
+			<imro:bestemmingsvlak xlink:href="#localidEP729"/>
+			<imro:typeLettertekenaanduiding>
+				<imro:LettertekenCodeEnLabel>
+					<imro:labelInfo>
+						<imro:Label>
+							<imro:tekst>(z)</imro:tekst>
+							<imro:positie>
+								<imro:Labelpositie>
+									<imro:hoek>0</imro:hoek>
+									<imro:plaatsingspunt>
+										<gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
+											<gml:pos>50231.936 387739.65</gml:pos>
+										</gml:Point>
+									</imro:plaatsingspunt>
+								</imro:Labelpositie>
+							</imro:positie>
+						</imro:Label>
+					</imro:labelInfo>
+					<imro:lettertekenCode>(z)</imro:lettertekenCode>
+				</imro:LettertekenCodeEnLabel>
+			</imro:typeLettertekenaanduiding>
+			<imro:geometrie>
+				<imro:PuntLijnVlakMulti>
+					<imro:geometrieVlak>
+						<gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
+							<gml:patches>
+								<gml:PolygonPatch>
+									<gml:exterior>
+										<gml:Ring>
+											<gml:curveMember>
+												<gml:Curve>
+													<gml:segments>
+														<gml:LineStringSegment>
+															<gml:posList srsDimension="2" count="36">50240.05 387744.83 50218.533 387765.125 50210.25 387781.64 50209.998 387781.34 50201.672 387797.535 50198.16 387799.77 50204.108 387809.138 50207.267 387814.113 50214.825 387826.019 50228.513 387817.332 50225.29 387820.43 50214.13 387827.509 50213.046 387827.32 50211.98 387827.05 50207.75 387820.39 50203.18 387813.21 50198.64 387806.03 50197.67 387804.48 50196.88 387803.03 50196.26 387801.5 50207.905 387778.85 50206.77 387777.5 50209.03 387772.92 50230.78 387729.55 50231.22 387728.66 50232.697 387727.952 50234.29 387727.57 50245.25 387739.95 50249.88 387745.81 50253 387750.69 50255.94 387755.74 50259.92 387767.64 50261.69 387778.87 50247.217 387763.895 50253.001 387758.488 50240.05 387744.83</gml:posList>
+														</gml:LineStringSegment>
+													</gml:segments>
+												</gml:Curve>
+											</gml:curveMember>
+										</gml:Ring>
+									</gml:exterior>
+								</gml:PolygonPatch>
+							</gml:patches>
+						</gml:Surface>
+					</imro:geometrieVlak>
+				</imro:PuntLijnVlakMulti>
+			</imro:geometrie>
+		</imro:Lettertekenaanduiding>

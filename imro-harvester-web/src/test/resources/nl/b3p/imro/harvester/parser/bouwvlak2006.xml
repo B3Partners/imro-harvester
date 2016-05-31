@@ -1,0 +1,32 @@
+<imro:Bouwvlak xmlns:imro="http://www.ravi.nl/imro2006" gml:id="localidBP943">
+	<imro:identificatie>BP943</imro:identificatie>
+	<imro:typePlanobject>aanduiding; bouwvlak</imro:typePlanobject>
+	<imro:naam>Woondoeleinden lintbebouwing</imro:naam>
+	<imro:plangebied xlink:href="#NL.IMRO.06540000BS4376-"/>
+	<imro:bestemmingsvlak xlink:href="#localidEP697"/>
+	<imro:geometrie>
+		<imro:VlakMultiVlak>
+			<imro:geometrieVlak>
+				<gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
+					<gml:patches>
+						<gml:PolygonPatch>
+							<gml:exterior>
+								<gml:Ring>
+									<gml:curveMember>
+										<gml:Curve>
+											<gml:segments>
+												<gml:LineStringSegment>
+													<gml:posList srsDimension="2" count="10">50486.387 388057.19 50486.359 388057.174 50474.079 388050.388 50478.544 388042.351 50488.886 388028.81 50489.187 388028.556 50498.54 388035.42 50496.966 388038.266 50492.85 388045.71 50486.387 388057.19</gml:posList>
+												</gml:LineStringSegment>
+											</gml:segments>
+										</gml:Curve>
+									</gml:curveMember>
+								</gml:Ring>
+							</gml:exterior>
+						</gml:PolygonPatch>
+					</gml:patches>
+				</gml:Surface>
+			</imro:geometrieVlak>
+		</imro:VlakMultiVlak>
+	</imro:geometrie>
+</imro:Bouwvlak>

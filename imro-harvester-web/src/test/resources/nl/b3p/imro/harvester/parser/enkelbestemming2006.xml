@@ -1,0 +1,55 @@
+<imro:Enkelbestemming xmlns:imro="http://www.ravi.nl/imro2006" gml:id="localidEP577">
+	<imro:identificatie>EP577</imro:identificatie>
+	<imro:typePlanobject>bestemmingsvlak; enkelbestemming</imro:typePlanobject>
+	<imro:artikelnummer>8</imro:artikelnummer>
+	<imro:bestemmingsfunctieInfo>
+		<imro:BestemmingsfunctieElement>
+			<imro:functieniveau>hoofdfunctie</imro:functieniveau>
+			<imro:bestemmingsfunctie>voorzieningen; maatschappelijke voorzieningen</imro:bestemmingsfunctie>
+		</imro:BestemmingsfunctieElement>
+	</imro:bestemmingsfunctieInfo>
+	<imro:bestemmingshoofdgroep>maatschappelijk</imro:bestemmingshoofdgroep>
+	<imro:geometrie>
+		<imro:PuntLijnVlak>
+			<imro:geometrieVlak>
+				<gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
+					<gml:patches>
+						<gml:PolygonPatch>
+							<gml:exterior>
+								<gml:Ring>
+									<gml:curveMember>
+										<gml:Curve>
+											<gml:segments>
+												<gml:LineStringSegment>
+													<gml:posList srsDimension="2" count="11">50363.54 387915.31 50384.68 387925.31 50396.07 387949.41 50395.17 387958.22 50389.45 387966.56 50370.98 387980.96 50350.95 387964.19 50342.17 387949.04 50343.07 387939.31 50350.83 387915.59 50363.54 387915.31</gml:posList>
+												</gml:LineStringSegment>
+											</gml:segments>
+										</gml:Curve>
+									</gml:curveMember>
+								</gml:Ring>
+							</gml:exterior>
+						</gml:PolygonPatch>
+					</gml:patches>
+				</gml:Surface>
+			</imro:geometrieVlak>
+		</imro:PuntLijnVlak>
+	</imro:geometrie>
+	<imro:labelInfo>
+		<imro:Label>
+			<imro:tekst>M</imro:tekst>
+			<imro:positie>
+				<imro:Labelpositie>
+					<imro:hoek>0</imro:hoek>
+					<imro:plaatsingspunt>
+						<gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
+							<gml:pos>50360.377 387946.941</gml:pos>
+						</gml:Point>
+					</imro:plaatsingspunt>
+				</imro:Labelpositie>
+			</imro:positie>
+		</imro:Label>
+	</imro:labelInfo>
+	<imro:naam>Maatschappelijke Doeleinden</imro:naam>
+	<imro:verwijzingNaarTekst>v_NL.IMRO.06540000BS4376-.htm#art08</imro:verwijzingNaarTekst>
+	<imro:plangebied xlink:href="#NL.IMRO.06540000BS4376-"/>
+</imro:Enkelbestemming>
