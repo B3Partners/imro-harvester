@@ -38,6 +38,7 @@ public class ParserFactory {
 
     private STRIParser2012 stri2012;
     private STRIParser2008 stri2008;
+    private STRIParser2006 stri2006;
 
     public ParserFactory() throws JAXBException {
         imro2008 = new IMROParser2008();
@@ -46,7 +47,11 @@ public class ParserFactory {
 
         stri2012 = new STRIParser2012();
         stri2008 = new STRIParser2008();
+        stri2006 = new STRIParser2006();
     }
+
+    protected final static Element STRI2006_ROOTELEMENT_MANIFEST = new Element("Manifest", Namespace.getNamespace("http://www.geonovum.nl/stri/2006/1"));
+    protected final static Element STRI2006_ROOTELEMENT_GELEIDEFORMULIER = new Element("GeleideFormulier", Namespace.getNamespace("http://www.geonovum.nl/stri/2006/1"));
 
     protected final static Element STRI2008_ROOTELEMENT_MANIFEST = new Element("Manifest", Namespace.getNamespace("http://www.geonovum.nl/stri/2008/1"));
     protected final static Element STRI2008_ROOTELEMENT_GELEIDEFORMULIER = new Element("GeleideFormulier", Namespace.getNamespace("http://www.geonovum.nl/stri/2008/1"));
@@ -70,6 +75,8 @@ public class ParserFactory {
             return stri2012;
         } else if (type.equals(ROType.STRI2008)) {
             return stri2008;
+        } else if (type.equals(ROType.STRI2006)) {
+            return stri2006;
         } else {
             throw new UnsupportedOperationException("Not Yet implemented stri version " + type);
         }
@@ -109,6 +116,8 @@ public class ParserFactory {
             return ROType.STRI2012;
         } else if (isElementEqual(rootElem, STRI2008_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2008_ROOTELEMENT_MANIFEST)) {
             return ROType.STRI2008;
+        } else if (isElementEqual(rootElem, STRI2006_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2006_ROOTELEMENT_MANIFEST)) {
+            return ROType.STRI2006;
         } else {
             throw new IllegalArgumentException("Unrecognized root element: " + rootElem);
         }

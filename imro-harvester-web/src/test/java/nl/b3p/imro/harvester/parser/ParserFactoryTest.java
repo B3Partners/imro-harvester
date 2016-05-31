@@ -206,4 +206,35 @@ public class ParserFactoryTest {
         assertEquals(IMROParser2008.class, result.getClass());
     }
 
+
+    /**
+     * Test of getROType method, of class ParserFactory.
+     */
+    @Test
+    public void testGetROTypeManifestSTRI2006() throws Exception {
+        URL u = this.getClass().getResource("manifest2006.xml");
+        ROType result = ParserFactory.getROType(u);
+        assertEquals(ROType.STRI2006, result);
+    }
+    /**
+     * Test of getROType method, of class ParserFactory.
+     */
+    @Test
+    public void testGetROTypeGeleideformulierSTRI2006() throws Exception {
+        URL u = this.getClass().getResource("geleideformulier2006.xml");
+        ROType result = ParserFactory.getROType(u);
+        assertEquals(ROType.STRI2006, result);
+    }
+
+    /**
+     * Test of getSTRIParser method, of class ParserFactory.
+     */
+    @Test
+    public void testGetSTRIParserManifest2006() throws Exception {
+        URL u = this.getClass().getResource("manifest2006.xml");
+        STRIParser result = instance.getSTRIParser(u);
+        assertEquals(STRIParser2006.class, result.getClass());
+    }
+
+
 }
