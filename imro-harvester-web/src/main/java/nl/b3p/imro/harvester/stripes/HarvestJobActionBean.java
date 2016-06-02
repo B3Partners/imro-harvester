@@ -180,7 +180,7 @@ public class HarvestJobActionBean implements ActionBean {
     @After(stages = LifecycleStage.EventHandling)
     private void createLists() {
         EntityManager em = Stripersist.getEntityManager();
-        jobs = em.createQuery("From HarvestJob", HarvestJob.class).getResultList();
+        jobs = em.createQuery("From HarvestJob order by id", HarvestJob.class).getResultList();
 
         try {
             nextExecutionTime = HarvesterInitializer.getNextExecutionTime();

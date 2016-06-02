@@ -79,8 +79,7 @@ public class StatusReport {
     }
 
     public String getLog() {
-        String logString  = "Totaal plannen in manifest: " + (plansProcessed + plansErrored.size()) + "<br/>";
-        logString += "Aantal plannen geprocessed: " + plansProcessed + "<br/>";
+        String logString  = "Totaal plannen in manifest: " + plansProcessed + "<br/>";
         logString += "Aantal plannen overgeslagen: " + plansSkipped + "<br/>";
         logString += "Aantal plannen mislukt: " + plansErrored.size() + "<br/>";
 
