@@ -105,12 +105,12 @@ public class Processor {
                         }
                         log.debug("Processing geleideformulier: " + geleideformulier.toString());
                         try {
-                            IMROParser parser = factory.getIMROParser(geleideformulier);
-                            List<Object> planObjecten = parser.parseGML(geleideformulier);
-
                             if (!em.getTransaction().isActive()) {
                                 em.getTransaction().begin();
                             }
+                            IMROParser parser = factory.getIMROParser(geleideformulier);
+                            List<Object> planObjecten = parser.parseGML(geleideformulier);
+
                             for (Object plan : planObjecten) {
                                 em.persist(plan);
                             }
