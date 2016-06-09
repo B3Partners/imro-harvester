@@ -34,7 +34,13 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 		<bindings node="xsd:complexType[@name='ComplexType']//xsd:element[@name='geometrie']">
 			<dom/>
 		</bindings>
-		<bindings node="xsd:complexType[@name='BestemmingsvlakType']//xsd:element[@name='geometrie']">
+		<bindings node="xsd:complexType[@name='PuntLijnVlakType']//xsd:element[@name='geometrieLijn']">
+			<dom/>
+		</bindings>
+		<bindings node="xsd:complexType[@name='PuntLijnVlakType']//xsd:element[@name='geometriePunt']">
+			<dom/>
+		</bindings>
+		<bindings node="xsd:complexType[@name='PuntLijnVlakType']//xsd:element[@name='geometrieVlak']">
 			<dom/>
 		</bindings>
 		<bindings node="xsd:complexType[@name='NationaalPlangebiedType']//xsd:element[@name='geometrie']">

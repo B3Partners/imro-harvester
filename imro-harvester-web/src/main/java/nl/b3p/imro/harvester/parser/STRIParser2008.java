@@ -67,7 +67,7 @@ public class STRIParser2008 implements STRIParser {
             Plan plan = striGeleideform.getPlan();
 
             Eigenschappen eigenschappen = plan.getEigenschappen();
-            if (HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())){
+            if (eigenschappen.getType() != null && HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())){
                 Geleideformulier geleideformulier = new Geleideformulier();
                 Onderdelen onderdelen = plan.getOnderdelen();
                 Plan.Supplementen supplementen = plan.getSupplementen();

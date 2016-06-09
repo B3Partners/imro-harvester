@@ -66,9 +66,9 @@ public class StatusReport {
         return plansProcessed;
     }
 
-    public void setPlansProcessed(int plansProcessed) {
+    /*public void setPlansProcessed(int plansProcessed) {
         this.plansProcessed = plansProcessed;
-    }
+    }*/
 
     public int getPlansSkipped() {
         return plansSkipped;

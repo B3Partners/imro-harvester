@@ -31,6 +31,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.geotools.gml3.ArcParameters;
+import org.geotools.gml3.CircleRadiusTolerance;
 import org.geotools.gml3.GMLConfiguration;
 import org.geotools.xml.Parser;
 import org.jdom2.input.DOMBuilder;
@@ -47,6 +49,7 @@ public class GeometryConverter {
     protected final static Log log = LogFactory.getLog(GeometryConverter.class);
 
     private final static double DISTANCE_TOLERANCE = 0.001;
+    protected final static double LINEARIZATION_TOLERANCE_MULTIPLIER = 0.01;//0.001;
 
     private Parser parser;
     private GeometryFactory geometryFactory;
@@ -56,8 +59,17 @@ public class GeometryConverter {
     public GeometryConverter() {
         GeometryFactory gf = new GeometryFactory(new PrecisionModel(), SRID);
 
-        GMLConfiguration gml3Config = new GMLConfiguration(true);
+      /*  GMLConfiguration gml3Config = new GMLConfiguration(true);
         gml3Config.setGeometryFactory(gf);
+        gml3Config.setExtendedArcSurfaceSupport(true);*/
+
+
+        ArcParameters arcParameters = new ArcParameters(new CircleRadiusTolerance(LINEARIZATION_TOLERANCE_MULTIPLIER));//new AbsoluteTolerance(LINEARIZATION_TOLERANCE));
+
+        org.geotools.gml3.GMLConfiguration gml3Config = new org.geotools.gml3.GMLConfiguration();
+        gml3Config.setExtendedArcSurfaceSupport(true);
+        gml3Config.getContext().registerComponentInstance(gf);
+        gml3Config.getContext().registerComponentInstance(arcParameters);
         parser = new Parser(gml3Config);
         this.geometryFactory = gf;
     }
@@ -100,9 +112,10 @@ public class GeometryConverter {
         org.jdom2.Element elem = new DOMBuilder().build((org.w3c.dom.Element) el);
         String gmlString = new XMLOutputter().outputString(elem);
         gmlString = gmlString.replaceAll("gml:", "");
+        //tySstem.out.println("gmlString:" + gmlString);
      //   parser.getNamespaces().declarePrefix("gml", "http://www.opengis.net/gml/3.2");
         Object parsedObject = parser.parse(new StringReader(gmlString));
-
+        System.out.println("Lalal:" + parsedObject);
         if (parsedObject instanceof Geometry) {
             Geometry geom = (Geometry) parsedObject;
             if (!geom.isValid()) {

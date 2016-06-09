@@ -123,7 +123,7 @@ public class HarvesterInitializer implements Servlet {
         SUPPORTED_PLAN_TYPES.add(TypePlan.WIJZIGINGSPLAN.value());
         SUPPORTED_PLAN_TYPES.add(nl.geonovum.stri._2012._1.TypePlan.OMGEVINGSVERGUNNING.value());
         SUPPORTED_PLAN_TYPES.add(nl.b3p.stri._2006._12b.TypePlan.GEMEENTELIJK_PLAN_BESTEMMINGSPLAN_ARTIKEL_10.value());
-        SUPPORTED_PLAN_TYPES.add(nl.b3p.stri._2006._12b.TypePlan.GEMEENTELIJK_PLAN_WIJZIGINGSPLAN_ARTIKEL_11.value());
+    ///    SUPPORTED_PLAN_TYPES.add(nl.b3p.stri._2006._12b.TypePlan.GEMEENTELIJK_PLAN_WIJZIGINGSPLAN_ARTIKEL_11.value());
     }
 
     @Override
@@ -142,7 +142,7 @@ public class HarvesterInitializer implements Servlet {
     }
 
     @Override
-    public void destroy() {
+   public void destroy() {
         if(scheduler != null){
             try {
                 scheduler.shutdown();

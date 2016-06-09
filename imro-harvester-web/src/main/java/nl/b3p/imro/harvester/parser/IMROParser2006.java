@@ -22,7 +22,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import nl.b3p.imro._2006._1.BesluitgebiedType;
-import nl.b3p.imro._2006._1.BesluittypeType;
 import nl.b3p.imro._2006._1.BestemmingsplangebiedType;
 import nl.b3p.imro._2006._1.BestemmingsvlakPropertyType;
 import nl.b3p.imro._2006._1.BouwvlakType;
@@ -33,7 +32,6 @@ import nl.b3p.imro._2006._1.GebiedsaanduidingType;
 import nl.b3p.imro._2006._1.LettertekenaanduidingType;
 import nl.b3p.imro._2006._1.MaatvoeringType;
 import nl.b3p.imro._2006._1.MatrixEnWaardePropertyType;
-import nl.b3p.imro._2006._1.MatrixEnWaardeType;
 import nl.b3p.imro._2006._1.MetadataIMRObestandType;
 import nl.b3p.imro._2006._1.OmvangWaardeBPPropertyType;
 import nl.b3p.imro._2006._1.OmvangWaardeBPType;
@@ -51,7 +49,7 @@ import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import nl.b3p.imro.harvester.entities.imro.WaardeEnType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import static org.geotools.gml3.GML.FeatureCollection;
+import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 /**
@@ -192,8 +190,8 @@ public class IMROParser2006 implements IMROParser{
             db.setVerwijzing(dbt.getVerwijzingNaarTekst().get(0));
         }
         try {
-            MultiPolygon g = gc.convertMultiPolygonGeometry(dbt.getGeometrie());
-            db.setGeometrie(g);
+           // MultiPolygon g = gc.convertMultiPolygonGeometry(dbt.getGeometrie());
+           // db.setGeometrie(g);
         } catch (Exception e) {
         }
 
@@ -313,9 +311,10 @@ public class IMROParser2006 implements IMROParser{
             eb.setVerwijzing(ebt.getVerwijzingNaarTekst().get(0));
         }
         try {
-            MultiPolygon g = gc.convertMultiPolygonGeometry(ebt.getGeometrie());
+            MultiPolygon g = gc.convertMultiPolygonGeometry((Element)ebt.getGeometrie().getPuntLijnVlak().getGeometrieLijn().getFirstChild());
             eb.setGeometrie(g);
         } catch (Exception e) {
+            log.error("Fout parsing",e);
         }
         return eb;    }
 

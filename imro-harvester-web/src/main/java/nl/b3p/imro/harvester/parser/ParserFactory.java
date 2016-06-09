@@ -63,6 +63,7 @@ public class ParserFactory {
     protected final static Element STRI2012V2_ROOTELEMENT_GELEIDEFORMULIER = new Element("GeleideFormulier", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/2.0"));
 
     protected final static Element IMRO2008_ROOTELEMENT = new Element("FeatureCollectionIMRO", Namespace.getNamespace("http://www.geonovum.nl/imro/2008/1"));
+   // protected final static Element IMRO2008_PCPROOTELEMENT = new Element("Plangebied_PCP", Namespace.getNamespace("http://www.geonovum.nl/imro/pcp/2008/1"));
 
     protected final static Element IMRO2012V10_ROOTELEMENT = new Element("FeatureCollectionIMRO", Namespace.getNamespace("http://www.geonovum.nl/imro/2012/1.0"));
     
@@ -105,7 +106,7 @@ public class ParserFactory {
         }
         Element rootElem = inputXml.getRootElement();
 
-        if (isElementEqual(rootElem, IMRO2008_ROOTELEMENT)) {
+        if (isElementEqual(rootElem, IMRO2008_ROOTELEMENT)){// || isElementEqual(rootElem, IMRO2008_PCPROOTELEMENT)) {
             return ROType.IMRO2008;
         } else if (isElementEqual(rootElem, IMRO2012V10_ROOTELEMENT)) {
             return ROType.IMRO2012V10;
