@@ -25,7 +25,7 @@ import javax.persistence.ManyToOne;
 
 /**
  * Does not extend from ImroEntity, because it has a linestring as geometrytype
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 @Entity
 public class Figuur{

@@ -50,7 +50,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  *
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 public class IMROParser2012_10 implements IMROParser{
     

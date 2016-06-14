@@ -23,7 +23,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 @Entity
 public class Maatvoering extends ImroEntity {

@@ -99,11 +99,11 @@ public class SecurityRealm implements SecurityRealmInterface {
 	/**
       * Methode om hash te maken van wachtwoord met salt
      * 
-     * @param salt de salt als String
+     * @param saltHex de salt als String
      * @param phrase het wachtwoord
      * @return de hash
-     * @throws NoSuchAlgorithmException
-     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException No algorithm found when digesting the salted phrase
+     * @throws UnsupportedEncodingException If UTF-8 for the phrase is not available
      */
     public static String getHexSha1(String saltHex, String phrase) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         saltHex = saltHex.trim();
@@ -131,8 +131,8 @@ public class SecurityRealm implements SecurityRealmInterface {
      * @param salt de salt als byte array
      * @param phrase het wachtwoord
      * @return de hash
-     * @throws NoSuchAlgorithmException
-     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException No algorithm found when digesting the salted phrase
+     * @throws UnsupportedEncodingException If UTF-8 for the phrase is not available
      */
     public static String getHexSha1(byte[] salt, String phrase) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         byte[] phraseUTF8 = phrase.getBytes("UTF8");

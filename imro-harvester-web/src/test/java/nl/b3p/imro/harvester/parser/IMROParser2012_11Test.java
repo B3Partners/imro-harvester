@@ -39,7 +39,7 @@ import org.junit.Before;
 
 /**
  *
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 public class IMROParser2012_11Test {
 

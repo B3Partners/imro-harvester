@@ -28,7 +28,7 @@ import org.jdom2.input.SAXBuilder;
 
 /**
  *
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 public class ParserFactory {
     

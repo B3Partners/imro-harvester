@@ -38,7 +38,7 @@ import org.mockito.stubbing.Answer;
 
 /**
  *
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 public class IMROParser2012_10Test {
     private IMROParser2012_10 instance ;

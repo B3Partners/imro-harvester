@@ -32,7 +32,7 @@ import nl.b3p.stri._2006._12b.Plan.Onderdelen;
 
 /**
  *
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 public class STRIParser2006 implements STRIParser {
 

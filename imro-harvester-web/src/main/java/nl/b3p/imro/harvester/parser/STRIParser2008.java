@@ -33,7 +33,7 @@ import nl.b3p.stri._2008._1.TypePlan;
 
 /**
  *
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 public class STRIParser2008 implements STRIParser {
 

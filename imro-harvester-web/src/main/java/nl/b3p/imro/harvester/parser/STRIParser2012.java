@@ -29,7 +29,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  *
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 public class STRIParser2012 implements STRIParser{
 

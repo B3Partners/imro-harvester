@@ -20,7 +20,7 @@ import javax.persistence.Entity;
 
 /**
  *
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 @Entity
 public class Bouwaanduiding extends ImroEntity{

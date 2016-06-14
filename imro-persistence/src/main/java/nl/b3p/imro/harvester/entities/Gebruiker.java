@@ -29,7 +29,7 @@ import javax.persistence.ManyToMany;
 
 /**
  *
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 @Entity
 public class Gebruiker implements Principal{

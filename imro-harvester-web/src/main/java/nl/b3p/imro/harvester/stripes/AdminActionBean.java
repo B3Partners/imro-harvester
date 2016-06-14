@@ -41,7 +41,7 @@ import org.stripesstuff.stripersist.Stripersist;
 
 /**
  *
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 @StrictBinding
 @UrlBinding("/action/beheer/admin/{event}")

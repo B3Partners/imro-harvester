@@ -27,7 +27,7 @@ import javax.persistence.MappedSuperclass;
 
 /**
  *
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 @MappedSuperclass
 @Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)

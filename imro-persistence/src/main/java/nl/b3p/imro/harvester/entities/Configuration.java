@@ -23,7 +23,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 @Entity
 public class Configuration {

@@ -23,7 +23,7 @@ import javax.xml.bind.JAXBException;
 
 /**
  *
- * @author Meine Toonen <meinetoonen@b3partners.nl>
+ * @author Meine Toonen meinetoonen@b3partners.nl
  */
 public interface STRIParser {
 
