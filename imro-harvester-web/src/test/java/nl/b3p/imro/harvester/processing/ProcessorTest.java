@@ -110,7 +110,8 @@ public class ProcessorTest {
     public void testPostprocessBP() {
         System.out.println("postprocess");
         Bestemmingsplan bp = new Bestemmingsplan();
-        bp.setId(16);
+        bp.setIdentificatie("16");
+        //bp.setId(16);
         Enkelbestemming eb = new Enkelbestemming();
         Figuur f = new Figuur();
         List<Object> planObjecten = new ArrayList<Object>();
@@ -121,8 +122,8 @@ public class ProcessorTest {
         EntityManager em = Mockito.mock(EntityManager.class);
         instance.postprocess(planObjecten, em);
         assertNotNull(eb.getBestemmingsplan());
-        assertEquals(16, eb.getBestemmingsplan().getId());
-        assertEquals(16, f.getBestemmingsplan().getId());
+        assertEquals("16", eb.getBestemmingsplan().getIdentificatie());
+        assertEquals("16", f.getBestemmingsplan().getIdentificatie());
 
     }
 

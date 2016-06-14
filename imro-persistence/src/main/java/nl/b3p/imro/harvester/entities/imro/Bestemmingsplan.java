@@ -19,8 +19,6 @@ package nl.b3p.imro.harvester.entities.imro;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,10 +30,12 @@ import javax.persistence.TemporalType;
 @Entity
 public class Bestemmingsplan {
 
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;
+    protected int id;*/
 
+
+    @Id
     protected String identificatie;
 
     protected String naam;
@@ -59,14 +59,6 @@ public class Bestemmingsplan {
     private Date planstatusDatum;
 
     private String besluitnummer;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getIdentificatie() {
         return identificatie;
