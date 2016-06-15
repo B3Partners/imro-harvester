@@ -115,7 +115,6 @@ public class GeometryConverter {
         //tySstem.out.println("gmlString:" + gmlString);
      //   parser.getNamespaces().declarePrefix("gml", "http://www.opengis.net/gml/3.2");
         Object parsedObject = parser.parse(new StringReader(gmlString));
-        System.out.println("Lalal:" + parsedObject);
         if (parsedObject instanceof Geometry) {
             Geometry geom = (Geometry) parsedObject;
             if (!geom.isValid()) {
