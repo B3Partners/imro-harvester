@@ -98,7 +98,7 @@ public class ProcessorTest {
         assertEquals(16, realDir.listFiles().length);
     }
 
-   // @Test
+   //@Test
     public void testStationsPlein() throws JAXBException, JDOMException {
         job = new HarvestJob();
         job.setUrl("http://files.b3p.nl/imroharvester/manifest_station.xml");

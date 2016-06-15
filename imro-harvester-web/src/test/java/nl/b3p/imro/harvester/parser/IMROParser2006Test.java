@@ -5,20 +5,27 @@
  */
 package nl.b3p.imro.harvester.parser;
 
-import com.vividsolutions.jts.geom.MultiPolygon;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.xml.bind.JAXBException;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
+import nl.b3p.imro._2008._11.BestemmingsplangebiedType;
+import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
+import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
+import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
+import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
+import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
-import nl.b3p.imro.harvester.processing.GeometryConverter;
+import nl.b3p.imro.harvester.entities.imro.Figuur;
+import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
+import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
+import nl.b3p.imro.harvester.entities.imro.Maatvoering;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -29,6 +36,10 @@ public class IMROParser2006Test {
     private IMROParser2006 instance ;
     public IMROParser2006Test() throws JAXBException {
         instance = new IMROParser2006();
+        
+        Logger root = Logger.getRootLogger();
+        root.addAppender(new ConsoleAppender(
+                new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
     }
 
     /**
@@ -44,7 +55,7 @@ public class IMROParser2006Test {
 
         List<Object> result = instance.parseGML(geleideformulier);
         assertEquals(317, result.size());
-    }
+    }*/
 
     @Test
     public void testParseGML_URL() throws Exception {
@@ -54,7 +65,7 @@ public class IMROParser2006Test {
         List<Object> result = instance.parseGML(u);
         assertEquals(317, result.size());
     }
-
+/*
     @Test
     public void testParseImroBestemmingsplan() throws JAXBException {
         System.out.println("testParsePlanInhoudBestemmingsplan");
@@ -164,10 +175,8 @@ public class IMROParser2006Test {
         Bouwaanduiding bv = instance.parseImroBouwaanduiding(null);
     }
 */
-    /**
-     * Test of parseImroEnkelbestemming method, of class IMROParser2006.
-     */
-  //  @Test
+    
+   /* @Test
     public void testParseImroEnkelbestemming() throws JAXBException {
         System.out.println("parseImroEnkelbestemming");
         URL u = this.getClass().getResource("enkelbestemming2006.xml");
@@ -182,11 +191,12 @@ public class IMROParser2006Test {
         assertEquals("8", eb.getArtikelnummer());
         assertEquals("maatschappelijk", eb.getBestemmingshoofdgroep());
         assertNotNull("Geometrie moet gevuld zijn",eb.getGeometrie());
+        assertFalse(eb.getGeometrie().isEmpty());
     }
 
 
 
-    /*
+    
     @Test
     public void testParseImroMaatvoering() throws JAXBException {
         System.out.println("testParseMaatvoeringInhoud");
@@ -229,7 +239,7 @@ public class IMROParser2006Test {
         assertEquals(317, o.size());
     }
 
-    //@Test
+    @Test
     public void testParseBesluitgebiedInhoud() throws JAXBException {
         // Geen besluitgebied voorbeeld gevonden
         URL u = this.getClass().getResource("besluitgebied2006.xml");
@@ -254,7 +264,7 @@ public class IMROParser2006Test {
 
     }
 
-    //@Test
+    @Test
     public void testParseBesluitvlakInhoud() throws Exception{
 
         URL u = this.getClass().getResource("besluitvlak2006.xml");
