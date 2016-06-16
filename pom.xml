@@ -13,7 +13,7 @@
     <properties>
         <harvester.version>1.2-SNAPSHOT</harvester.version>
         <hibernate.version>3.6.10.Final</hibernate.version>
-        <geotools.version>15.0</geotools.version>
+        <geotools.version>16-SNAPSHOT</geotools.version>
         <hsqldb.version>2.3.3</hsqldb.version>
     </properties>
     <scm>
@@ -221,6 +221,12 @@
         <repository>
             <id>Hibernate Spatial repo</id>
             <url>http://www.hibernatespatial.org/repository</url>
+        </repository>
+
+        <repository>
+            <id>boundless</id>
+            <name>Boundless Snapshot Repository</name>
+            <url>https://repo.boundlessgeo.com/snapshot/</url>
         </repository>
     </repositories>
     <distributionManagement>
