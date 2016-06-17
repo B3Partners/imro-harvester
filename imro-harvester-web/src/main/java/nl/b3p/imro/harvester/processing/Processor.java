@@ -127,7 +127,8 @@ public class Processor {
                             em.getTransaction().rollback();
                             report.addErrored(geleideformulier.getIdentificatie(), ex);
                         }catch(Exception ex){ // catch all to prevent stop the parsing of the entire geleideformulier
-                            log.error("Cannot save entity in plan " + geleideformulier, ex);
+                            log.error("Cannot save entity in plan " + geleideformulier);
+                            log.debug("",ex);
                             em.getTransaction().rollback();
                             report.addErrored(geleideformulier.getIdentificatie(), ex);
                         }
