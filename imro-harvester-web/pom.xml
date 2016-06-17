@@ -147,21 +147,6 @@
     </dependencies>
 
     <build>
-        <!-- Filter om connectiegegevens niet te committen/deploybaar te maken. Verander src/main/resources/postgres.properties met de juiste connectiegegevens. Format:
-        imro.username=XXX
-        imro.password=XXX
-        imro.url=jdbc:postgresql://localhost:5432/imro
-        -->
-        <filters>
-            <filter>${project.basedir}/src/main/resources/postgres.properties</filter>
-        </filters>
-        <resources>
-            <resource>
-                <directory>${project.basedir}/src/main/resources/META-INF</directory>
-                <targetPath>META-INF</targetPath>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>

@@ -21,10 +21,10 @@
         <class>nl.b3p.imro.harvester.entities.imro.Besluitvlak</class>
     <properties>
 
-            <property name="hibernate.connection.url" value="${imro.url}" />
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost/imro" />
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
-            <property name="hibernate.connection.username" value="${imro.username}"/>
-            <property name="hibernate.connection.password" value="${imro.password}"/>
+            <property name="hibernate.connection.username" value="imro"/>
+            <property name="hibernate.connection.password" value="imro"/>
             <property name="hibernate.default_schema" value="public"/>
 
             <!--property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/-->
