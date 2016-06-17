@@ -11,7 +11,6 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro._2006._1.BestemmingsplangebiedType;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
-import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
@@ -20,6 +19,7 @@ import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Figuur;
 import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
+import nl.b3p.imro.harvester.entities.imro.ImroEntity;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
@@ -239,6 +239,14 @@ public class IMROParser2006Test {
         List<Object> o = instance.parseGML(u);
         assertNotNull(o);
         assertEquals(318, o.size());
+        int nullCounter = 0;;
+        for (Object o1 : o) {
+            if(o1 instanceof ImroEntity){
+                ImroEntity ie = (ImroEntity) o1;
+                assertNotNull("Geometrie null van " + ie.getIdentificatie(), ie.getGeometrie());
+                assertFalse(ie.getGeometrie().isEmpty());
+            }
+        }
     }
 
     //@Test

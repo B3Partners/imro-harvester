@@ -5,6 +5,7 @@
  */
 package nl.b3p.imro.harvester.parser;
 
+import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import java.io.IOException;
@@ -37,6 +38,7 @@ import nl.b3p.imro._2006._1.MatrixEnWaardePropertyType;
 import nl.b3p.imro._2006._1.MetadataIMRObestandType;
 import nl.b3p.imro._2006._1.OmvangWaardeBPPropertyType;
 import nl.b3p.imro._2006._1.OmvangWaardeBPType;
+import nl.b3p.imro._2006._1.PuntLijnVlakPropertyType;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
@@ -192,8 +194,7 @@ public class IMROParser2006 implements IMROParser{
             db.setVerwijzing(dbt.getVerwijzingNaarTekst().get(0));
         }
         try {
-           // MultiPolygon g = gc.convertMultiPolygonGeometry(dbt.getGeometrie());
-           // db.setGeometrie(g);
+            db.setGeometrie(getGeom(dbt.getGeometrie()));
         } catch (Exception e) {
         }
 
@@ -313,12 +314,12 @@ public class IMROParser2006 implements IMROParser{
             eb.setVerwijzing(ebt.getVerwijzingNaarTekst().get(0));
         }
         try {
-            MultiPolygon g = gc.convertMultiPolygonGeometry((Element)ebt.getGeometrie().getPuntLijnVlak().getGeometrieLijn().getFirstChild());
-            eb.setGeometrie(g);
+            eb.setGeometrie(getGeom(ebt.getGeometrie()));
         } catch (Exception e) {
             log.error("Fout parsing",e);
         }
-        return eb;    }
+        return eb;
+    }
 
     @Override
     public Maatvoering parseImroMaatvoering(Object o) {
@@ -400,5 +401,20 @@ public class IMROParser2006 implements IMROParser{
         } catch (Exception e) {
         }
         return bg;
+    }
+
+    private MultiPolygon getGeom(PuntLijnVlakPropertyType plv) throws IOException, ParserConfigurationException, SAXException, TransformerException{
+        Element el = null;
+        if (plv.getPuntLijnVlak().getGeometrieLijn() != null) {
+            el = (Element) plv.getPuntLijnVlak().getGeometrieLijn().getChildNodes().item(0);
+        } else if (plv.getPuntLijnVlak().getGeometriePunt() != null) {
+            el = (Element) plv.getPuntLijnVlak().getGeometriePunt().getChildNodes().item(0);
+        } else if (plv.getPuntLijnVlak().getGeometrieVlak() != null) {
+            el = (Element) plv.getPuntLijnVlak().getGeometrieVlak().getChildNodes().item(0);
+        }
+        if (el != null) {
+            return gc.convertMultiPolygonGeometry(el);
+        }
+        return null;
     }
 }
