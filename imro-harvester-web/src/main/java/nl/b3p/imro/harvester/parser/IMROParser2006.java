@@ -128,20 +128,21 @@ public class IMROParser2006 implements IMROParser{
             obj = parseImroFunctieaanduiding(o);
         } else if ( o instanceof FiguurType){
             obj = parseImroFiguur(o);
-        } /*else if ( o instanceof BouwaanduidingType){
-            // bouwaanduidingen bestaan nog niet in imro2006. Deze zijn er vanaf imro 2008.
-            Lettertekenaanduidingen worden in imro2008 vervangen door bouwaanduidingen en
-            functieaanduidingen. Voor nu mappen we alle lettertekenaanduidingen naar functieaanduidingen
-            obj = parseImroBouwaanduiding(o);
-        } *//*else if ( o instanceof BesluitvlakXType){ bestaat niet in imro2006
-            obj = parseImroBesluitvlak(o);
-        } else*/ if ( o instanceof BesluitgebiedType){
+        } else if ( o instanceof BesluitgebiedType){
             obj = parseImroBesluitgebied(o);
         }else if(o instanceof MetadataIMRObestandType){
             // do nothing
         }else{
             log.error("Unknown type of featuremember when parsing. Class encountered: " + o.getClass().toString());
         }
+        /*else if ( o instanceof BouwaanduidingType){
+            // bouwaanduidingen bestaan nog niet in imro2006. Deze zijn er vanaf imro 2008.
+            Lettertekenaanduidingen worden in imro2008 vervangen door bouwaanduidingen en
+            functieaanduidingen. Voor nu mappen we alle lettertekenaanduidingen naar functieaanduidingen
+            obj = parseImroBouwaanduiding(o);
+        } *//*else if ( o instanceof BesluitvlakXType){ bestaat niet in imro2006
+            obj = parseImroBesluitvlak(o);
+        } else*/
         return obj;
     }
 

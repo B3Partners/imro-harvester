@@ -239,7 +239,6 @@ public class IMROParser2006Test {
         List<Object> o = instance.parseGML(u);
         assertNotNull(o);
         assertEquals(318, o.size());
-        int nullCounter = 0;;
         for (Object o1 : o) {
             if(o1 instanceof ImroEntity){
                 ImroEntity ie = (ImroEntity) o1;
