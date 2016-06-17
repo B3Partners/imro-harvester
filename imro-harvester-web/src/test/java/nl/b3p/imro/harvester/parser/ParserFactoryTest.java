@@ -236,5 +236,34 @@ public class ParserFactoryTest {
         assertEquals(STRIParser2006.class, result.getClass());
     }
 
+     /**
+     * Test of getROType method, of class ParserFactory.
+     */
+    @Test
+    public void testGetROTypeGML2006() throws Exception {
+        System.out.println("testGetROType2006");
+        URL inputXmlFullPath = this.getClass().getResource("2006.gml");
+        ROType result = ParserFactory.getROType(inputXmlFullPath);
+        assertEquals(ROType.IMRO2006, result);
+    }
+
+    @Test
+    public void testGetParserGML2006() throws Exception {
+        System.out.println("testGetParser2006");
+        final URL inputXmlFullPath = this.getClass().getResource("2006.gml");
+        Geleideformulier geleideformulier = Mockito.mock(Geleideformulier.class);
+
+        Mockito.when(geleideformulier.getGML()).thenAnswer(new Answer() {
+            @Override
+            public URL answer(InvocationOnMock invocation) {
+                return inputXmlFullPath;
+            }
+        });
+
+        IMROParser result = instance.getIMROParser(geleideformulier);
+        assertEquals(IMROParser2006.class, result.getClass());
+    }
+
+
 
 }

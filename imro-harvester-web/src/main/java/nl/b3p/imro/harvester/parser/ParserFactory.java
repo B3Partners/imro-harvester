@@ -32,6 +32,7 @@ import org.jdom2.input.SAXBuilder;
  */
 public class ParserFactory {
     
+    private IMROParser2006 imro2006;
     private IMROParser2008 imro2008;
     private IMROParser2012_10 imro2012V10;
     private IMROParser2012_11 imro2012V11;
@@ -41,6 +42,7 @@ public class ParserFactory {
     private STRIParser2006 stri2006;
 
     public ParserFactory() throws JAXBException {
+        imro2006 = new IMROParser2006();
         imro2008 = new IMROParser2008();
         imro2012V10 = new IMROParser2012_10();
         imro2012V11 = new IMROParser2012_11();
@@ -61,6 +63,8 @@ public class ParserFactory {
 
     protected final static Element STRI2012V2_ROOTELEMENT_MANIFEST = new Element("Manifest", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/2.0"));
     protected final static Element STRI2012V2_ROOTELEMENT_GELEIDEFORMULIER = new Element("GeleideFormulier", Namespace.getNamespace("http://www.geonovum.nl/stri/2012/2.0"));
+
+    protected final static Element IMRO2006_ROOTELEMENT = new Element("FeatureCollection", Namespace.getNamespace("http://www.opengis.net/gml"));
 
     protected final static Element IMRO2008_ROOTELEMENT = new Element("FeatureCollectionIMRO", Namespace.getNamespace("http://www.geonovum.nl/imro/2008/1"));
    // protected final static Element IMRO2008_PCPROOTELEMENT = new Element("Plangebied_PCP", Namespace.getNamespace("http://www.geonovum.nl/imro/pcp/2008/1"));
@@ -86,7 +90,9 @@ public class ParserFactory {
     public IMROParser getIMROParser(Geleideformulier geleideformulier) throws IOException, JDOMException, JAXBException {
 
         ROType type = getROType(geleideformulier.getGML());
-        if (type.equals(ROType.IMRO2008)) {
+         if (type.equals(ROType.IMRO2006)) {
+            return imro2006;
+        }else if (type.equals(ROType.IMRO2008)) {
             return imro2008;
         }else if(type.equals(ROType.IMRO2012V10)){
             return imro2012V10;
@@ -106,7 +112,9 @@ public class ParserFactory {
         }
         Element rootElem = inputXml.getRootElement();
 
-        if (isElementEqual(rootElem, IMRO2008_ROOTELEMENT)){// || isElementEqual(rootElem, IMRO2008_PCPROOTELEMENT)) {
+        if (isElementEqual(rootElem, IMRO2006_ROOTELEMENT)){// || isElementEqual(rootElem, IMRO2008_PCPROOTELEMENT)) {
+            return ROType.IMRO2006;
+        } else if (isElementEqual(rootElem, IMRO2008_ROOTELEMENT)){// || isElementEqual(rootElem, IMRO2008_PCPROOTELEMENT)) {
             return ROType.IMRO2008;
         } else if (isElementEqual(rootElem, IMRO2012V10_ROOTELEMENT)) {
             return ROType.IMRO2012V10;
