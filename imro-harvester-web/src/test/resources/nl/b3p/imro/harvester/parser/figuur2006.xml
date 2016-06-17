@@ -1,29 +1,28 @@
 <imro:Figuur xmlns:imro="http://www.ravi.nl/imro2006" gml:id="localidFL1328"
-	gml:id="localidEP577" 
-	xmlns:gml="http://www.opengis.net/gml" 
-	xmlns:xlink="http://www.w3.org/1999/xlink" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://www.opengis.net/gml base/gml.xsd http://www.ravi.nl/imro2006 IMRO2006.xsd">
-			<imro:identificatie>FL1328</imro:identificatie>
-			<imro:typePlanobject>aanduiding; figuur</imro:typePlanobject>
-			<imro:naam>voorste bebouwingsgrens</imro:naam>
-			<imro:plangebied xlink:href="#NL.IMRO.031000003VA01-"/>
-			<imro:bestemmingsvlak xlink:href="#localidEP893"/>
-			<imro:verwijzingNaarTekst>v_NL.IMRO.031000003VA01-.htm</imro:verwijzingNaarTekst>
-			<imro:verwijzingNaarTekst>v_NL.IMRO.031000003VA01-.htm</imro:verwijzingNaarTekst>
-			<imro:artikelnummer>1</imro:artikelnummer>
-			<imro:artikelnummer>2</imro:artikelnummer>
-			<imro:geometrie>
-				<imro:PuntLijnVlakCombi>
-					<imro:geometrieLijn>
-						<gml:Curve srsName="urn:ogc:def:crs:EPSG::28992">
-							<gml:segments>
-								<gml:LineStringSegment>
-									<gml:posList srsDimension="2" count="2">140485.785 458905.697 140503.945 458949.275</gml:posList>
-								</gml:LineStringSegment>
-							</gml:segments>
-						</gml:Curve>
-					</imro:geometrieLijn>
-				</imro:PuntLijnVlakCombi>
-			</imro:geometrie>
-		</imro:Figuur>
+             xmlns:gml="http://www.opengis.net/gml"
+             xmlns:xlink="http://www.w3.org/1999/xlink"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.opengis.net/gml base/gml.xsd http://www.ravi.nl/imro2006 IMRO2006.xsd">
+    <imro:identificatie>FL1328</imro:identificatie>
+    <imro:typePlanobject>aanduiding; figuur</imro:typePlanobject>
+    <imro:naam>voorste bebouwingsgrens</imro:naam>
+    <imro:plangebied xlink:href="#NL.IMRO.031000003VA01-"/>
+    <imro:bestemmingsvlak xlink:href="#localidEP893"/>
+    <imro:verwijzingNaarTekst>v_NL.IMRO.031000003VA01-.htm</imro:verwijzingNaarTekst>
+    <imro:verwijzingNaarTekst>v_NL.IMRO.031000003VA01-.htm</imro:verwijzingNaarTekst>
+    <imro:artikelnummer>1</imro:artikelnummer>
+    <imro:artikelnummer>2</imro:artikelnummer>
+    <imro:geometrie>
+        <imro:PuntLijnVlakCombi>
+            <imro:geometrieLijn>
+                <gml:Curve srsName="urn:ogc:def:crs:EPSG::28992">
+                    <gml:segments>
+                        <gml:LineStringSegment>
+                            <gml:posList srsDimension="2" count="2">140485.785 458905.697 140503.945 458949.275</gml:posList>
+                        </gml:LineStringSegment>
+                    </gml:segments>
+                </gml:Curve>
+            </imro:geometrieLijn>
+        </imro:PuntLijnVlakCombi>
+    </imro:geometrie>
+</imro:Figuur>

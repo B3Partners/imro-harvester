@@ -19,8 +19,10 @@ package nl.b3p.imro.harvester.parser;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
+import nl.b3p.imro.harvester.processing.HarvesterInitializer;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -29,6 +31,11 @@ import static org.junit.Assert.*;
 public class STRIParser2008Test {
 
     public STRIParser2008Test() {
+    }
+
+    @BeforeClass
+    public static void init(){
+        HarvesterInitializer.initPlantypes();
     }
 
     /**
@@ -66,7 +73,7 @@ public class STRIParser2008Test {
         assertEquals("IMRO2008",form.getVersie());
         assertEquals(86, form.getBijlages().size());
     }
-/*
+
     @Test
     public void testGetGeleideformulierURLSFromGeleideformulier() throws Exception {
         System.out.println("retrieveGeleideformulieren");
@@ -77,12 +84,12 @@ public class STRIParser2008Test {
         assertEquals(1, result.size());
         Geleideformulier form = result.get(0);
 
-        assertEquals("Bestemmingsplan Rengerswetering",form.getNaam());
+        assertEquals("Mortiere",form.getNaam());
         assertEquals("bestemmingsplan",form.getType());
-        assertEquals("ontwerp",form.getStatus());
-        assertEquals("2008-07-01T00:00:00.000+02:00",form.getDatum());
-        assertEquals("2008",form.getVersie());
-        assertEquals(5, form.getBijlages().size());
-    }*/
+        assertEquals("vastgesteld",form.getStatus());
+        assertEquals("2014-07-07T00:00:00",form.getDatum());
+        assertEquals("IMRO2008",form.getVersie());
+        assertEquals(86, form.getBijlages().size());
+    }
 
 }

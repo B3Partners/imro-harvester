@@ -1,7 +1,7 @@
 <imro:Dubbelbestemming
-      gml:id="e4"
   gml:id="localidEP577" 
-  xmlns:gml="http://www.opengis.net/gml" 
+  xmlns:gml="http://www.opengis.net/gml"
+   xmlns:imro="http://www.ravi.nl/imro2006"
   xmlns:xlink="http://www.w3.org/1999/xlink" 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xsi:schemaLocation="http://www.opengis.net/gml base/gml.xsd http://www.ravi.nl/imro2006 IMRO2006.xsd">

@@ -403,7 +403,7 @@ public class IMROParser2012_11Test {
             if(obj instanceof Gebiedsaanduiding){
                 Gebiedsaanduiding ga = (Gebiedsaanduiding)obj;
                 if (ga.getGeometrie() != null && ga.getGeometrie().isEmpty()){
-                    int a= 0;
+                    fail();
                 }
             }
         }

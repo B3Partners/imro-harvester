@@ -9,7 +9,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.xml.bind.JAXBException;
-import nl.b3p.imro._2008._11.BestemmingsplangebiedType;
+import nl.b3p.imro._2006._1.BestemmingsplangebiedType;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
@@ -45,7 +45,7 @@ public class IMROParser2006Test {
     /**
      * Test of parseGML method, of class IMROParser2006.
      */
-  /* @Test
+   @Test
     public void testParseGML_Geleideformulier() throws Exception {
         System.out.println("parseGML");
 
@@ -55,7 +55,7 @@ public class IMROParser2006Test {
 
         List<Object> result = instance.parseGML(geleideformulier);
         assertEquals(317, result.size());
-    }*/
+    }
 
     @Test
     public void testParseGML_URL() throws Exception {
@@ -65,7 +65,7 @@ public class IMROParser2006Test {
         List<Object> result = instance.parseGML(u);
         assertEquals(317, result.size());
     }
-/*
+
     @Test
     public void testParseImroBestemmingsplan() throws JAXBException {
         System.out.println("testParsePlanInhoudBestemmingsplan");
@@ -105,6 +105,8 @@ public class IMROParser2006Test {
         assertEquals("water", db.getBestemmingshoofdgroep());
         assertEquals("1", db.getArtikelnummer());
         assertNotNull("Geometrie moet gevuld zijn",db.getGeometrie());
+        assertFalse(db.getGeometrie().isEmpty());
+
     }
 
     @Test
@@ -135,7 +137,7 @@ public class IMROParser2006Test {
         assertEquals("aanduiding; bouwvlak", bv.getTypePlanObject());
         assertEquals("Woondoeleinden lintbebouwing", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
-        assertEquals("#localidEP697", bv.getEnkelbestemming());;
+        assertEquals("localidEP697", bv.getEnkelbestemming());;
     }
 
     @Test
@@ -151,7 +153,7 @@ public class IMROParser2006Test {
         assertEquals("aanduiding; lettertekenaanduiding", bv.getTypePlanObject());
         assertEquals("Zonder gebouwen", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
-        assertEquals("#localidEP729", bv.getEnkelbestemming());
+        assertEquals("localidEP729", bv.getEnkelbestemming());
     }
 
     @Test
@@ -166,7 +168,7 @@ public class IMROParser2006Test {
         assertEquals("aanduiding; figuur", bv.getTypePlanObject());
         assertEquals("voorste bebouwingsgrens", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
-        assertEquals("#localidEP893", bv.getEnkelbestemming());
+        assertEquals("localidEP893", bv.getEnkelbestemming());
 //        assertEquals("NL.IMRO.0395.DP2215540997-00", bv.getEnkelbestemming()); // apparently, there can be multiple bestemmingsvlakken
     }
 
@@ -174,9 +176,9 @@ public class IMROParser2006Test {
     public void testParseImroBouwaanduiding() throws JAXBException, NoSuchMethodException {
         Bouwaanduiding bv = instance.parseImroBouwaanduiding(null);
     }
-*/
+
     
-   /* @Test
+    @Test
     public void testParseImroEnkelbestemming() throws JAXBException {
         System.out.println("parseImroEnkelbestemming");
         URL u = this.getClass().getResource("enkelbestemming2006.xml");
@@ -225,7 +227,7 @@ public class IMROParser2006Test {
         Object gba = instance.unmarshalUrl(u);
         BestemmingsplangebiedType bpgt = (BestemmingsplangebiedType)gba;
 
-        String expResult = "L.IMRO.06540000BS4376-";
+        String expResult = "NL.IMRO.06540000BS4376-";
         String result = instance.getIdentificatie(bpgt.getIdentificatie());
         assertEquals(expResult, result);
     }
@@ -239,7 +241,7 @@ public class IMROParser2006Test {
         assertEquals(317, o.size());
     }
 
-    @Test
+    //@Test
     public void testParseBesluitgebiedInhoud() throws JAXBException {
         // Geen besluitgebied voorbeeld gevonden
         URL u = this.getClass().getResource("besluitgebied2006.xml");
@@ -263,7 +265,7 @@ public class IMROParser2006Test {
         assertNotNull("Geometrie moet gevuld zijn",bp.getGeometrie());
 
     }
-
+/*
     @Test
     public void testParseBesluitvlakInhoud() throws Exception{
 
