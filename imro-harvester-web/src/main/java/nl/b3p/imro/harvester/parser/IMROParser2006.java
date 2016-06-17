@@ -27,6 +27,8 @@ import nl.b3p.imro._2006._1.BestemmingsvlakPropertyType;
 import nl.b3p.imro._2006._1.BouwvlakType;
 import nl.b3p.imro._2006._1.DubbelbestemmingType;
 import nl.b3p.imro._2006._1.EnkelbestemmingType;
+import nl.b3p.imro._2006._1.FeatureCollectionType;
+import nl.b3p.imro._2006._1.FeaturePropertyType;
 import nl.b3p.imro._2006._1.FiguurType;
 import nl.b3p.imro._2006._1.GebiedsaanduidingType;
 import nl.b3p.imro._2006._1.LettertekenaanduidingType;
@@ -91,17 +93,17 @@ public class IMROParser2006 implements IMROParser{
 
     @Override
     public List<Object> processFeatureCollection(Object featureCollection)  throws  IOException, ParserConfigurationException, SAXException, TransformerException{
-        //*FeatureCollection fc = (FeatureCollection)featureCollection;
+        FeatureCollectionType fc = (FeatureCollectionType)featureCollection;
         List<Object> objs = new ArrayList<Object>();
-        /*List<FeatureCollectionIMROType.FeatureMember> members = fc.getFeatureMember();
-        for (FeatureCollectionIMROType.FeatureMember member : members) {
+        List<FeaturePropertyType> members = fc.getFeatureMember();
+        for (FeaturePropertyType member : members) {
             Object o = member.getFeature().getValue();
 
             Object parsed = parseFeatureMember(o);
             if (parsed != null) {
                 objs.add(parsed);
             }
-        }*/
+        }
         return objs;
     }
 

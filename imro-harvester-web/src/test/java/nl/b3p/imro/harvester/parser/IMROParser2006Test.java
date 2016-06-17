@@ -54,7 +54,7 @@ public class IMROParser2006Test {
         geleideformulier.setImro("2006.gml");
 
         List<Object> result = instance.parseGML(geleideformulier);
-        assertEquals(317, result.size());
+        assertEquals(318, result.size());
     }
 
     @Test
@@ -63,7 +63,7 @@ public class IMROParser2006Test {
         URL u = new URL("http://files.b3p.nl/imroharvester/2006.gml");
 
         List<Object> result = instance.parseGML(u);
-        assertEquals(317, result.size());
+        assertEquals(318, result.size());
     }
 
     @Test
@@ -238,7 +238,7 @@ public class IMROParser2006Test {
         URL u = this.getClass().getResource("2006.gml");
         List<Object> o = instance.parseGML(u);
         assertNotNull(o);
-        assertEquals(317, o.size());
+        assertEquals(318, o.size());
     }
 
     //@Test
