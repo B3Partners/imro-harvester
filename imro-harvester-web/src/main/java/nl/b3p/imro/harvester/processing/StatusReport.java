@@ -19,7 +19,9 @@ package nl.b3p.imro.harvester.processing;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -28,19 +30,23 @@ import java.util.List;
 public class StatusReport {
 
     private int plansProcessed = 0;
-    private int plansSkipped = 0;
     private boolean wasFatal = false;
     
     private List<String>  plansErrored = new ArrayList<String>();
     private List<String> loadedPlans = new ArrayList<String>();
+    private Map<String, Integer> skipped = new HashMap<>();
+    
     private String log = "";
 
     public void addProcessed(){
         plansProcessed++;
     }
 
-    public void addSkipped(){
-        plansSkipped++;
+    public void addSkipped(String reason){
+        if(!skipped.containsKey(reason)){
+            skipped.put(reason, 0);
+        }
+        skipped.put(reason,skipped.get(reason) +1);
     }
 
     public void addLoaded(String plan){
@@ -70,17 +76,19 @@ public class StatusReport {
         this.plansProcessed = plansProcessed;
     }*/
 
-    public int getPlansSkipped() {
-        return plansSkipped;
-    }
-
-    public void setPlansSkipped(int plansSkipped) {
-        this.plansSkipped = plansSkipped;
+    public int getNumPlansSkipped() {
+        return skipped.size();
     }
 
     public String getLog() {
         String logString  = "Totaal plannen in manifest: " + plansProcessed + "<br/>";
-        logString += "Aantal plannen overgeslagen: " + plansSkipped + "<br/>";
+        logString += "Aantal plannen ingeladen: " + loadedPlans.size() + "<br/>";
+        int total = 0;
+        for (String key : skipped.keySet()) {
+            total += skipped.get(key);
+            logString += "Aantal plannen overgeslagen met reden: "  + key +" : " + skipped.get(key) + "<br/>";
+        }
+        logString += "Totaal aantal plannen overgeslagen: " + total + "<br/>";
         logString += "Aantal plannen mislukt: " + plansErrored.size() + "<br/>";
 
         logString += "<hr/> Plannen die fout gegaan zijn: <br/>";
