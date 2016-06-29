@@ -38,6 +38,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitsubvlak;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Figuur;
@@ -99,7 +100,7 @@ public class Processor {
                     for (Geleideformulier geleideformulier : geleideformulieren) {
                         report.addProcessed();
                         if (checkIfExists(geleideformulier, em)) {
-                            report.addSkipped();
+                            report.addSkipped("Bestaat al.");
                             log.debug("Geleideformulier already in db: " + geleideformulier.toString());
                             continue;
                         }
@@ -109,6 +110,10 @@ public class Processor {
                                 em.getTransaction().begin();
                             }
                             IMROParser parser = factory.getIMROParser(geleideformulier);
+                            if(parser == null){
+                                report.addSkipped("Type niet ondersteund.");
+                                continue;
+                            }
                             List<Object> planObjecten = parser.parseGML(geleideformulier);
 
                             for (Object plan : planObjecten) {
@@ -136,10 +141,10 @@ public class Processor {
 
                 } catch (IOException ex) {
                     log.error("Cannot get manifest url for HarvestJob " + job.getId() + " - " + job.getUrl(), ex);
-                    report.addErrored(null, ex);
+                    report.addErrored("Manifest: " + manifestUrl.toExternalForm(), ex);
                 } catch (ParseException ex) {
                     log.error("Cannot parse date" + job.getId() + " - " + job.getUrl(), ex);
-                    report.addErrored(null,  ex);
+                    report.addErrored("Manifest: " + manifestUrl.toExternalForm(),  ex);
                 }
             } catch (IOException ex) {
                 log.error("Cannot parse manifest", ex);

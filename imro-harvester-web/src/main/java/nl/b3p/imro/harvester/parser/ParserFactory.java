@@ -19,7 +19,10 @@ package nl.b3p.imro.harvester.parser;
 import java.io.IOException;
 import java.net.URL;
 import javax.xml.bind.JAXBException;
+import nl.b3p.imro.harvester.processing.Processor;
 import nl.b3p.imro.harvester.processing.ROType;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -31,6 +34,7 @@ import org.jdom2.input.SAXBuilder;
  * @author Meine Toonen meinetoonen@b3partners.nl
  */
 public class ParserFactory {
+    private static final Log log = LogFactory.getLog(ParserFactory.class);
     
     private IMROParser2006 imro2006;
     private IMROParser2008 imro2008;
@@ -98,8 +102,8 @@ public class ParserFactory {
             return imro2012V10;
         } else if (type.equals(ROType.IMRO2012V11)) {
             return imro2012V11;
-        } else {
-            throw new IllegalArgumentException("Class not yet implented");
+        } else{
+            return null;
         }
     }
 
@@ -128,7 +132,8 @@ public class ParserFactory {
         } else if (isElementEqual(rootElem, STRI2006_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2006_ROOTELEMENT_MANIFEST)) {
             return ROType.STRI2006;
         } else {
-            throw new IllegalArgumentException("Unrecognized root element: " + rootElem);
+            log.error("Unrecognized root element: " + rootElem);
+            return ROType.UNKNOWN;
         }
     }
 
