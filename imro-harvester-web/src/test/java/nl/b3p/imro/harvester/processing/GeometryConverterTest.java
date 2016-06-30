@@ -90,6 +90,7 @@ public class GeometryConverterTest {
         Object mp = instance.convertMultiPolygonGeometry(el);
         assertNotNull(mp);
         assertTrue(mp instanceof MultiPolygon);
+        assertFalse(((MultiPolygon)mp).isEmpty());
     }
 
     @Test
@@ -102,6 +103,7 @@ public class GeometryConverterTest {
             if (o instanceof Gebiedsaanduiding) {
                 Gebiedsaanduiding g = (Gebiedsaanduiding) o;
                 assertNotNull("Geometrie moet gevuld zijn", g.getGeometrie());
+                assertFalse("Geometrie moet gevuld zijn", g.getGeometrie().isEmpty());
             }
         }
     }
@@ -116,6 +118,7 @@ public class GeometryConverterTest {
             if (o instanceof Dubbelbestemming) {
                 Dubbelbestemming g = (Dubbelbestemming) o;
                 assertNotNull("Geometrie moet gevuld zijn", g.getGeometrie());
+                assertFalse("Geometrie moet gevuld zijn", g.getGeometrie().isEmpty());
             }
         }
     }
@@ -135,7 +138,7 @@ public class GeometryConverterTest {
         Object mp = instance.convertMultiPolygonGeometry(el);
         assertNotNull(mp);
         assertTrue(mp instanceof MultiPolygon);
-        int a = 0;
+        assertFalse(((MultiPolygon)mp).isEmpty());
     }
 
     @Test
