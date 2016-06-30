@@ -38,7 +38,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
-import nl.b3p.imro.harvester.entities.imro.Besluitsubvlak;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Figuur;
@@ -85,6 +84,10 @@ public class Processor {
     public void process() throws JDOMException {
         EntityManager em = Stripersist.getEntityManager();
         for (HarvestJob job : jobs) {
+            if (!em.getTransaction().isActive()) {
+                em.getTransaction().begin();
+            }
+            job = em.find(HarvestJob.class, job.getId());
             StatusReport report = new StatusReport();
             try {
                 job.setStatus(HarvestJob.HarvestJobStatus.BEZIG);
