@@ -20,4 +20,4 @@ select addgeometrycolumn ('public','functieaanduiding', 'geometrie',28992, 'MULT
 select addgeometrycolumn ('public','gebiedsaanduiding', 'geometrie',28992, 'MULTIPOLYGON',2);
 select addgeometrycolumn ('public','maatvoering', 'geometrie',28992, 'MULTIPOLYGON',2);
 select addgeometrycolumn ('public','besluitgebied', 'geometrie',28992, 'MULTIPOLYGON',2);
-select addgeometrycolumn ('public','besluitvlak ', 'geometrie',28992, 'MULTIPOLYGON',2);
+select addgeometrycolumn ('public','besluitvlak', 'geometrie',28992, 'MULTIPOLYGON',2);
