@@ -298,7 +298,7 @@ public class Processor {
         for (URL geleideformulierURL : geleideformulierenURLS) {
             try{
                 striParser = factory.getSTRIParser(geleideformulierURL);
-                forms.addAll(striParser.retrieveGeleideformulieren(Collections.singletonList(geleideformulierURL)));
+                forms.addAll(striParser.retrieveGeleideformulieren(Collections.singletonList(geleideformulierURL), report));
             }catch (IOException ex){
                 log.debug("Cannot retrieve geleideformulier: " +geleideformulierURL + " " +  ex.getLocalizedMessage());
                 report.addErrored(geleideformulierURL.toExternalForm(), ex);

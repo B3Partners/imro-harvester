@@ -24,6 +24,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import nl.b3p.imro.harvester.processing.HarvesterInitializer;
+import nl.b3p.imro.harvester.processing.StatusReport;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -74,7 +75,7 @@ public class STRIParser2012 implements STRIParser{
     }
 
     @Override
-    public List<Geleideformulier> retrieveGeleideformulieren(List<URL> geleideformulieren) throws MalformedURLException, JAXBException {
+    public List<Geleideformulier> retrieveGeleideformulieren(List<URL> geleideformulieren, StatusReport report) throws MalformedURLException, JAXBException {
         List<Geleideformulier> urls = new ArrayList<Geleideformulier>();
 
         Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
@@ -139,6 +140,7 @@ public class STRIParser2012 implements STRIParser{
                         geleideformulier.setType(eigenschappen.getType().value());
                         geleideformulier.setImro(onderdelen.getIMRO());
                     }else{
+                        report.addSkipped("Type niet ondersteund: " + eigenschappen.getType().value());
                         throw new IllegalArgumentException("plantype onbekend: " + eigenschappen.getType());
                     }
                 } else if (geleideformulierObject instanceof nl.geonovum.stri._2012._2.GeleideFormulier) {
@@ -198,6 +200,7 @@ public class STRIParser2012 implements STRIParser{
                         geleideformulier.setType(eigenschappen.getType().value());
                         geleideformulier.setImro(onderdelen.getGML());
                     }else{
+                        report.addSkipped("Type niet ondersteund: " + eigenschappen.getType().value());
                         throw new IllegalArgumentException("plantype onbekend: " + eigenschappen.getType());
                     }
                 }

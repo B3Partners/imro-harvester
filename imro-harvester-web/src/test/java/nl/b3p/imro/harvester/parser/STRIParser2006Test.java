@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.processing.HarvesterInitializer;
+import nl.b3p.imro.harvester.processing.StatusReport;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -20,7 +21,7 @@ import static org.junit.Assert.*;
 public class STRIParser2006Test {
 
     private STRIParser2006 instance;
-    
+    private StatusReport report = new StatusReport();
     public STRIParser2006Test() throws JAXBException {
         instance = new STRIParser2006();
         HarvesterInitializer.initPlantypes();
@@ -47,7 +48,7 @@ public class STRIParser2006Test {
         URL u = this.getClass().getResource("geleideformulier2006.xml");
    //     URL u = this.getClass().getResource("manifest2008.xml");
         List<URL> geleideformulieren = Collections.singletonList(u);
-        List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren);
+        List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren, report);
         assertEquals(1, result.size());
         Geleideformulier form = result.get(0);
 

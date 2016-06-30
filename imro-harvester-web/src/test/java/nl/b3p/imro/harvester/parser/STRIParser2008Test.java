@@ -19,7 +19,9 @@ package nl.b3p.imro.harvester.parser;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
+import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.processing.HarvesterInitializer;
+import nl.b3p.imro.harvester.processing.StatusReport;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
@@ -30,12 +32,15 @@ import org.junit.BeforeClass;
  */
 public class STRIParser2008Test {
 
+    private StatusReport report = new StatusReport();
+    private static STRIParser2008 instance;
     public STRIParser2008Test() {
     }
 
     @BeforeClass
-    public static void init(){
+    public static void init() throws JAXBException{
         HarvesterInitializer.initPlantypes();
+        instance = new STRIParser2008();
     }
 
     /**
@@ -45,7 +50,6 @@ public class STRIParser2008Test {
     public void testGetGeleideformulierURLSFromManifest() throws Exception {
         System.out.println("getGeleideformulierURLSFromManifest");
         URL u = this.getClass().getResource("manifest2008.xml");
-        STRIParser2008 instance = new STRIParser2008();
         List<URL> result = instance.getGeleideformulierURLSFromManifest(u);
         assertEquals(1, result.size());
         assertEquals(new URL("http://www.durperdam.nl/ro/BP0013/g_NL.IMRO.1234.BP0013-0001.xml"), result.get(0));
@@ -61,8 +65,7 @@ public class STRIParser2008Test {
         URL u = this.getClass().getResource("geleideformulier2008.xml");
    //     URL u = this.getClass().getResource("manifest2008.xml");
         List<URL> geleideformulieren = Collections.singletonList(u);
-        STRIParser2008 instance = new STRIParser2008();
-        List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren);
+        List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren, report);
         assertEquals(1, result.size());
         Geleideformulier form = result.get(0);
 
@@ -79,8 +82,7 @@ public class STRIParser2008Test {
         System.out.println("retrieveGeleideformulieren");
         URL u = this.getClass().getResource("geleideformulier2008.xml");
         List<URL> geleideformulieren = Collections.singletonList(u);
-        STRIParser2008 instance = new STRIParser2008();
-        List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren);
+        List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren, report);
         assertEquals(1, result.size());
         Geleideformulier form = result.get(0);
 

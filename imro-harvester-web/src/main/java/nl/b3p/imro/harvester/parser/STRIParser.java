@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import javax.xml.bind.JAXBException;
+import nl.b3p.imro.harvester.processing.StatusReport;
 
 /**
  *
@@ -28,6 +29,6 @@ import javax.xml.bind.JAXBException;
 public interface STRIParser {
 
     List<URL> getGeleideformulierURLSFromManifest(URL manifestURL) throws JAXBException, MalformedURLException;
-    List<Geleideformulier> retrieveGeleideformulieren(List<URL> geleideformulieren) throws MalformedURLException, JAXBException;
+    List<Geleideformulier> retrieveGeleideformulieren(List<URL> geleideformulieren, StatusReport report) throws MalformedURLException, JAXBException;
 
 }

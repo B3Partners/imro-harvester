@@ -25,6 +25,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import nl.b3p.imro.harvester.processing.HarvesterInitializer;
+import nl.b3p.imro.harvester.processing.StatusReport;
 import nl.b3p.stri._2008._1.Manifest;
 import nl.b3p.stri._2008._1.Plan;
 import nl.b3p.stri._2008._1.Plan.Eigenschappen;
@@ -57,7 +58,7 @@ public class STRIParser2008 implements STRIParser {
     }
 
     @Override
-    public List<Geleideformulier> retrieveGeleideformulieren(List<URL> geleideformulieren) throws MalformedURLException, JAXBException {
+    public List<Geleideformulier> retrieveGeleideformulieren(List<URL> geleideformulieren, StatusReport report) throws MalformedURLException, JAXBException {
         List<Geleideformulier> formulieren = new ArrayList<Geleideformulier>();
 
         Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
@@ -142,6 +143,7 @@ public class STRIParser2008 implements STRIParser {
                 geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getIMRO()));
                 formulieren.add(geleideformulier);
             }else {
+                report.addSkipped("Type niet ondersteund: " + eigenschappen.getType().value());
                 throw new IllegalArgumentException("plantype onbekend: " + eigenschappen.getType());
             }
         }

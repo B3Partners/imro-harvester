@@ -23,6 +23,7 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import nl.b3p.imro.harvester.processing.HarvesterInitializer;
+import nl.b3p.imro.harvester.processing.StatusReport;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -34,6 +35,7 @@ public class STRIParser2012Test {
 
     private STRIParser2012 instance = null;
     private HarvestJob job = null;
+    private StatusReport report = new StatusReport();
     public STRIParser2012Test() throws JAXBException, MalformedURLException {
         instance = new STRIParser2012();
 
@@ -68,7 +70,7 @@ public class STRIParser2012Test {
 
         URL u = this.getClass().getResource("geleideformulier2012.xml");
         List<URL> geleideformulieren = Collections.singletonList(u);
-        List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren);
+        List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren, report);
         assertEquals(1, result.size());
         Geleideformulier form = result.get(0);
         URL expResult = new URL("http://files.b3p.nl/imroharvester/1.txt");
@@ -87,7 +89,7 @@ public class STRIParser2012Test {
     public void testParseGeleideformulierV2() throws MalformedURLException, JAXBException {
         URL expResult = new URL("http://www.rijksplannen.nl/NL.IMRO.0000.AD16081970/V037/NL.IMRO.0000.AD16081970-V037.gml");
         URL u = this.getClass().getResource("v2.0_STRI2012-geleideformulier-voorbeeld.xml");
-        List<Geleideformulier> result = instance.retrieveGeleideformulieren(Collections.singletonList(u));
+        List<Geleideformulier> result = instance.retrieveGeleideformulieren(Collections.singletonList(u), report);
         assertEquals(1, result.size());
         Geleideformulier form = result.get(0);
         assertEquals(expResult, form.getGML());

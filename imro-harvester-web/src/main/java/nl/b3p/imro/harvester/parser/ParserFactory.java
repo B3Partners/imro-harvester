@@ -71,7 +71,7 @@ public class ParserFactory {
     protected final static Element IMRO2006_ROOTELEMENT = new Element("FeatureCollection", Namespace.getNamespace("http://www.opengis.net/gml"));
 
     protected final static Element IMRO2008_ROOTELEMENT = new Element("FeatureCollectionIMRO", Namespace.getNamespace("http://www.geonovum.nl/imro/2008/1"));
-   // protected final static Element IMRO2008_PCPROOTELEMENT = new Element("Plangebied_PCP", Namespace.getNamespace("http://www.geonovum.nl/imro/pcp/2008/1"));
+    protected final static Element IMRO2008_PCPROOTELEMENT = new Element("Plangebied_PCP", Namespace.getNamespace("http://www.geonovum.nl/imro/pcp/2008/1"));
 
     protected final static Element IMRO2012V10_ROOTELEMENT = new Element("FeatureCollectionIMRO", Namespace.getNamespace("http://www.geonovum.nl/imro/2012/1.0"));
     
