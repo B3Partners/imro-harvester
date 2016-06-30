@@ -120,6 +120,7 @@ public class IMROParser2012_10Test {
         assertEquals("vrijwaringszone", ga.getGebiedsaanduidinggroep());
         assertEquals("25", ga.getArtikelnummer());
         assertNotNull("Geometrie moet gevuld zijn",ga.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",ga.getGeometrie().isEmpty());
     }
 
     @Test
@@ -137,6 +138,7 @@ public class IMROParser2012_10Test {
         assertEquals("leiding", db.getBestemmingshoofdgroep());
         assertEquals("20", db.getArtikelnummer());
         assertNotNull("Geometrie moet gevuld zijn",db.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",db.getGeometrie().isEmpty());
     }
 
     @Test
@@ -154,6 +156,7 @@ public class IMROParser2012_10Test {
         assertEquals("agrarisch", eb.getBestemmingshoofdgroep());
         assertEquals("3", eb.getArtikelnummer());
         assertNotNull("Geometrie moet gevuld zijn",eb.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",eb.getGeometrie().isEmpty());
     }
 
     @Test
@@ -169,6 +172,7 @@ public class IMROParser2012_10Test {
         assertEquals("maatvoering", mv.getTypePlanObject());
         assertEquals("maatvoering", mv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",mv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",mv.getGeometrie().isEmpty());
         assertEquals(2, mv.getWaardeEnType().size());
         assertEquals("maximum goothoogte (m)", mv.getWaardeEnType().get(0).getWaardeType());
         assertEquals("6", mv.getWaardeEnType().get(0).getWaarde());
@@ -189,6 +193,7 @@ public class IMROParser2012_10Test {
         assertEquals("bouwvlak", bv.getTypePlanObject());
         assertEquals("bouwvlak", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
         assertEquals("NL.IMRO.058", bv.getEnkelbestemming());
     }
 
@@ -205,6 +210,7 @@ public class IMROParser2012_10Test {
         assertEquals("figuur", bv.getTypePlanObject());
         assertEquals("hartlijn leiding - gas", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
         assertEquals("NL.IMRO.054", bv.getEnkelbestemming());
     }
 
@@ -221,6 +227,7 @@ public class IMROParser2012_10Test {
         assertEquals("functieaanduiding", bv.getTypePlanObject());
         assertEquals("bedrijf tot en met categorie 2", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
         assertEquals("NL.IMRO.088", bv.getEnkelbestemming());
     }
 
@@ -237,6 +244,7 @@ public class IMROParser2012_10Test {
         assertEquals("bouwaanduiding", bv.getTypePlanObject());
         assertEquals("gestapeld", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
         assertEquals("NL.IMRO.061", bv.getEnkelbestemming());
     }
 
@@ -264,6 +272,7 @@ public class IMROParser2012_10Test {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         assertEquals("2008-08-13", sdf.format(bp.getPlanstatusDatum()));
         assertNotNull("Geometrie moet gevuld zijn",bp.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bp.getGeometrie().isEmpty());
 
     }
 }

@@ -124,6 +124,7 @@ public class IMROParser2006Test {
         assertEquals("cultuurhistorie en archeologie", ga.getGebiedsaanduidinggroep());
         assertEquals("18", ga.getArtikelnummer());
         assertNotNull("Geometrie moet gevuld zijn",ga.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",ga.getGeometrie().isEmpty());
     }
 
     @Test
@@ -137,7 +138,8 @@ public class IMROParser2006Test {
         assertEquals("aanduiding; bouwvlak", bv.getTypePlanObject());
         assertEquals("Woondoeleinden lintbebouwing", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
-        assertEquals("localidEP697", bv.getEnkelbestemming());;
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
+        assertEquals("localidEP697", bv.getEnkelbestemming());
     }
 
     @Test
@@ -153,6 +155,7 @@ public class IMROParser2006Test {
         assertEquals("aanduiding; lettertekenaanduiding", bv.getTypePlanObject());
         assertEquals("Zonder gebouwen", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
         assertEquals("localidEP729", bv.getEnkelbestemming());
     }
 
@@ -168,6 +171,7 @@ public class IMROParser2006Test {
         assertEquals("aanduiding; figuur", bv.getTypePlanObject());
         assertEquals("voorste bebouwingsgrens", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
         assertEquals("localidEP893", bv.getEnkelbestemming());
 //        assertEquals("NL.IMRO.0395.DP2215540997-00", bv.getEnkelbestemming()); // apparently, there can be multiple bestemmingsvlakken
     }
@@ -193,6 +197,7 @@ public class IMROParser2006Test {
         assertEquals("8", eb.getArtikelnummer());
         assertEquals("maatschappelijk", eb.getBestemmingshoofdgroep());
         assertNotNull("Geometrie moet gevuld zijn",eb.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",eb.getGeometrie().isEmpty());
         assertFalse(eb.getGeometrie().isEmpty());
     }
 
@@ -212,6 +217,7 @@ public class IMROParser2006Test {
         assertEquals("aanduiding; maatvoering", mv.getTypePlanObject());
         assertEquals("Maatvoering", mv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",mv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",mv.getGeometrie().isEmpty());
         assertEquals(2,mv.getWaardeEnType().size());
         assertEquals("4.5", mv.getWaardeEnType().get(0).getWaarde());
         assertEquals("maatvoering; hoogte; goothoogte; maximum goothoogte (m)", mv.getWaardeEnType().get(0).getWaardeType());
@@ -270,6 +276,7 @@ public class IMROParser2006Test {
         assertEquals("Zaak-7608 (Corsa 11.198901)",bp.getBesluitnummer());
         assertEquals("vb_NL.IMRO.0114.2011020-0002.pdf", bp.getVerwijzingNaarVaststellingsbesluit());
         assertNotNull("Geometrie moet gevuld zijn",bp.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bp.getGeometrie().isEmpty());
 
     }
 /*

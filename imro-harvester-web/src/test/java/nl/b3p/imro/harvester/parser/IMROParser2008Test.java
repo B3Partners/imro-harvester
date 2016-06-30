@@ -96,6 +96,7 @@ public class IMROParser2008Test {
         assertEquals("2009-07-07", sdf.format(bp.getPlanstatusDatum()));
         assertEquals("concept", bp.getPlanstatusInfo());
         assertNotNull(bp.getGeometrie());
+        assertFalse(bp.getGeometrie().isEmpty());
 
     }
 
@@ -117,6 +118,7 @@ public class IMROParser2008Test {
         assertEquals("leiding", db.getBestemmingshoofdgroep());
         assertEquals("21", db.getArtikelnummer());
         assertNotNull("Geometrie moet gevuld zijn",db.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",db.getGeometrie().isEmpty());
     }
 
     /**
@@ -137,6 +139,7 @@ public class IMROParser2008Test {
         assertEquals("overig", ga.getGebiedsaanduidinggroep());
         assertEquals("27", ga.getArtikelnummer());
         assertNotNull("Geometrie moet gevuld zijn",ga.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",ga.getGeometrie().isEmpty());
     }
 
     /**
@@ -153,6 +156,7 @@ public class IMROParser2008Test {
         assertEquals("bouwvlak", bv.getTypePlanObject());
         assertEquals("bouwvlak", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
         assertEquals("NL.IMRO.108", bv.getEnkelbestemming());;
     }
 
@@ -172,6 +176,7 @@ public class IMROParser2008Test {
         assertEquals("functieaanduiding", bv.getTypePlanObject());
         assertEquals("specifieke vorm van bedrijf - landbouwmechanisatiebedrijf", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
         assertEquals("NL.IMRO.176", bv.getEnkelbestemming());
     }
 
@@ -190,6 +195,7 @@ public class IMROParser2008Test {
         assertEquals("figuur", bv.getTypePlanObject());
         assertEquals("gevellijn", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
         assertEquals("NL.IMRO.0395.EP5215540645-00", bv.getEnkelbestemming());
 //        assertEquals("NL.IMRO.0395.DP2215540997-00", bv.getEnkelbestemming()); // apparently, there can be multiple bestemmingsvlakken
     }
@@ -210,6 +216,7 @@ public class IMROParser2008Test {
         assertEquals("bouwaanduiding", bv.getTypePlanObject());
         assertEquals("karakteristiek", bv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
         assertNotEquals("NL.IMRO.1680.1800030105-0000", bv.getEnkelbestemming());
     }
 
@@ -231,6 +238,7 @@ public class IMROParser2008Test {
         assertEquals("17", eb.getArtikelnummer());
         assertEquals("groen", eb.getBestemmingshoofdgroep());
         assertNotNull("Geometrie moet gevuld zijn",eb.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",eb.getGeometrie().isEmpty());
     }
 
     /**
@@ -249,6 +257,7 @@ public class IMROParser2008Test {
         assertEquals("maatvoering", mv.getTypePlanObject());
         assertEquals("maximum oppervlakte (m2)", mv.getNaam());
         assertNotNull("Geometrie moet gevuld zijn",mv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",mv.getGeometrie().isEmpty());
         assertEquals(2,mv.getWaardeEnType().size());
         assertEquals("371", mv.getWaardeEnType().get(0).getWaarde());
         assertEquals("other: vrije tekst1", mv.getWaardeEnType().get(0).getWaardeType());
@@ -312,6 +321,7 @@ public class IMROParser2008Test {
         assertEquals("Zaak-7608 (Corsa 11.198901)",bp.getBesluitnummer());
         assertEquals("vb_NL.IMRO.0114.2011020-0002.pdf", bp.getVerwijzingNaarVaststellingsbesluit());
         assertNotNull("Geometrie moet gevuld zijn",bp.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bp.getGeometrie().isEmpty());
 
     }
 
@@ -331,6 +341,7 @@ public class IMROParser2008Test {
         assertNull(bv.getArtikelnummer());
         assertEquals("b_NL.IMRO.0114.2011020-0002.pdf", bv.getVerwijzing());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
 
     }
 }
