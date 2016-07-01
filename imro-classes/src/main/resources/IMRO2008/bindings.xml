@@ -77,15 +77,6 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 			<bindings node="xsd:complexType[@name='Besluitsubvlak_XType']//xsd:element[@name='geometrie']">
 				<dom/>
 			</bindings>
-			<bindings node="xsd:complexType[@name='Besluitsubvlak_XType']//xsd:element[@name='besluitgebied']">
-				<dom/>
-			</bindings>
-			<bindings node="xsd:complexType[@name='Besluitsubvlak_XType']//xsd:element[@name='besluitvlak']">
-				<dom/>
-			</bindings>
-			<bindings node="xsd:complexType[@name='Besluitsubvlak_XType']//xsd:element[@name='besluitsubvlak']">
-				<dom/>
-			</bindings>
 			<bindings node="xsd:complexType[@name='BestemmingsvlakType']//xsd:element[@name='geometrie']">
 				<dom/>
 			</bindings>
