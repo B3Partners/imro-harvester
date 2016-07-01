@@ -38,6 +38,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitsubvlak;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Figuur;
@@ -216,6 +217,9 @@ public class Processor {
                 for (Object obj : planObjecten) {
                     if(obj instanceof Besluitvlak){
                         Besluitvlak bv = (Besluitvlak)obj;
+                        bv.setBesluitgebied(bg);
+                    }else if(obj instanceof Besluitsubvlak){
+                        Besluitsubvlak bv = (Besluitsubvlak)obj;
                         bv.setBesluitgebied(bg);
                     }
                 }

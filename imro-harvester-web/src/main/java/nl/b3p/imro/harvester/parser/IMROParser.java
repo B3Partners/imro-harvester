@@ -25,6 +25,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitsubvlak;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
@@ -75,6 +76,8 @@ public interface IMROParser {
     Maatvoering parseImroMaatvoering(Object o);
 
     Besluitvlak parseImroBesluitvlak(Object o) throws  IOException, ParserConfigurationException, SAXException, TransformerException, NoSuchMethodException;
+
+    Besluitsubvlak parseImroBesluitsubvlak(Object o) throws  IOException, ParserConfigurationException, SAXException, TransformerException, NoSuchMethodException;
 
     Besluitgebied parseImroBesluitgebied(Object o);
 

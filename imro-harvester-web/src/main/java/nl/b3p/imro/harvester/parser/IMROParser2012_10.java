@@ -18,6 +18,7 @@ package nl.b3p.imro.harvester.parser;
 
 import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.MultiPolygon;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -28,6 +29,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import nl.b3p.imro._2012._10.BestemmingsvlakPropertyType;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
@@ -36,6 +39,7 @@ import nl.b3p.imro._2012._10.NEN3610IDType;
 import nl.b3p.imro._2012._10.WaardeEnTypePropertyType;
 import nl.b3p.imro._2012._10.WaardeEnTypeType;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitsubvlak;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
@@ -47,6 +51,7 @@ import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import nl.b3p.imro.harvester.entities.imro.WaardeEnType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -412,6 +417,11 @@ public class IMROParser2012_10 implements IMROParser{
         } catch (Exception e) {
         }
         return bg;
+    }
+
+    @Override
+    public Besluitsubvlak parseImroBesluitsubvlak(Object o) throws IOException, ParserConfigurationException, SAXException, TransformerException, NoSuchMethodException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

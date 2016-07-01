@@ -45,6 +45,7 @@ import nl.b3p.imro._2008._11.MaatvoeringType;
 import nl.b3p.imro._2008._11.WaardeEnTypePropertyType;
 import nl.b3p.imro._2008._11.WaardeEnTypeType;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitsubvlak;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
@@ -431,6 +432,11 @@ public class IMROParser2008 implements IMROParser{
         } catch (Exception e) {
         }
         return bg;
+    }
+
+    @Override
+    public Besluitsubvlak parseImroBesluitsubvlak(Object o) throws IOException, ParserConfigurationException, SAXException, TransformerException, NoSuchMethodException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

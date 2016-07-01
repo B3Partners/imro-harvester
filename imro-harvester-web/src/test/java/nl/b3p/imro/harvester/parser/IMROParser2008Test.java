@@ -22,6 +22,7 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro._2008._11.BestemmingsplangebiedType;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitsubvlak;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
@@ -343,5 +344,24 @@ public class IMROParser2008Test {
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
         assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
 
+    }
+
+    @Test
+    public void testParseBesluitsubvlakInhoud() throws Exception{
+        URL u = this.getClass().getResource("besluitsubvlak2008.xml");
+
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Besluitsubvlak bv = instance.parseImroBesluitsubvlak(gba);
+
+        assertNotNull(bv);
+        assertEquals("besluitsubvlak_X", bv.getTypePlanObject());
+        assertEquals("NL.IMRO.2", bv.getIdentificatie());
+        assertEquals("brug", bv.getNaam());
+        assertEquals("t_NL.IMRO.0513.0601PBLandpark-OB01_index.html", bv.getVerwijzing());
+        assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
+        assertEquals("NL.IMRO.0513.0601PBLandpark-OB01", bv.getBesluitgebied().getIdentificatie());
+        assertEquals("NL.IMRO.13", bv.getBesluitvlakken().get(0));
     }
 }

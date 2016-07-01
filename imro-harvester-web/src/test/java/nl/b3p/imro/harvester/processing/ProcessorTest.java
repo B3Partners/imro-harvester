@@ -28,6 +28,7 @@ import javax.persistence.EntityManager;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitsubvlak;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
@@ -155,6 +156,24 @@ public class ProcessorTest {
         assertNull(bv.getBesluitgebied());
 
     }
+    
+    
+    @Test
+    public void testPostprocessOV3() {
+        System.out.println("postprocess");
+        Besluitgebied bg = new Besluitgebied();
+        bg.setIdentificatie("16");
+        Besluitsubvlak bv = new Besluitsubvlak();
+        List<Object> planObjecten = new ArrayList<Object>();
+        planObjecten.add(bg);
+        planObjecten.add(bv);
+        assertNull(bv.getBesluitgebied());
+        EntityManager em = Mockito.mock(EntityManager.class);
+        instance.postprocess(planObjecten, em);
+        assertNotNull(bv.getBesluitgebied());
+        assertEquals("16", bv.getBesluitgebied().getIdentificatie());
+    }
+
 
     @Test
     public void testGetRoTypeBP() {

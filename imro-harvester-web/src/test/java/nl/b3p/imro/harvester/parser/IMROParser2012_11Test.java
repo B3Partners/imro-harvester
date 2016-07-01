@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitsubvlak;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
@@ -419,6 +420,25 @@ public class IMROParser2012_11Test {
                 }
             }
         }
+    }
+
+    @Test
+    public void testParseBesluitsubvlakInhoud() throws Exception{
+        URL u = this.getClass().getResource("besluitsubvlak2012_11.xml");
+
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Besluitsubvlak bv = instance.parseImroBesluitsubvlak(gba);
+
+        assertNotNull(bv);
+        assertEquals("besluitsubvlak_X", bv.getTypePlanObject());
+        assertEquals("NL.IMRO.1903.BG2300893462-00", bv.getIdentificatie());
+        assertEquals("Besluitsubvlak X", bv.getNaam());
+        assertEquals("d_NL.IMRO.1903.OMG01020-DO01.pdf", bv.getVerwijzing());
+        assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
+        
+        assertEquals("NL.IMRO.1903.BG2279200449-00", bv.getBesluitvlakken().get(0));
     }
 
 }

@@ -40,6 +40,7 @@ import nl.b3p.imro._2006._1.OmvangWaardeBPPropertyType;
 import nl.b3p.imro._2006._1.OmvangWaardeBPType;
 import nl.b3p.imro._2006._1.PuntLijnVlakPropertyType;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitsubvlak;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
@@ -417,5 +418,10 @@ public class IMROParser2006 implements IMROParser{
             return gc.convertMultiPolygonGeometry(el);
         }
         return null;
+    }
+
+    @Override
+    public Besluitsubvlak parseImroBesluitsubvlak(Object o) throws IOException, ParserConfigurationException, SAXException, TransformerException, NoSuchMethodException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

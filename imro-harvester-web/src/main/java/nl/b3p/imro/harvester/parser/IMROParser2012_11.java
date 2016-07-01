@@ -18,6 +18,7 @@ package nl.b3p.imro.harvester.parser;
 
 import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.MultiPolygon;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -28,6 +29,11 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import nl.b3p.imro._2012._11.BesluitsubvlakXPropertyType;
+import nl.b3p.imro._2012._11.BesluitsubvlakXType;
+import nl.b3p.imro._2012._11.BesluitvlakXPropertyType;
 import nl.b3p.imro._2012._11.BestemmingsvlakPropertyType;
 import nl.b3p.imro.harvester.entities.imro.Bestemmingsplan;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
@@ -36,6 +42,7 @@ import nl.b3p.imro._2012._11.NEN3610IDType;
 import nl.b3p.imro._2012._11.WaardeEnTypePropertyType;
 import nl.b3p.imro._2012._11.WaardeEnTypeType;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
+import nl.b3p.imro.harvester.entities.imro.Besluitsubvlak;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
 import nl.b3p.imro.harvester.entities.imro.Bouwaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Bouwvlak;
@@ -47,6 +54,8 @@ import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import nl.b3p.imro.harvester.entities.imro.WaardeEnType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -416,6 +425,36 @@ public class IMROParser2012_11 implements IMROParser{
         } catch (Exception e) {
         }
         return bg;
+    }
+
+    @Override
+    public Besluitsubvlak parseImroBesluitsubvlak(Object o) throws IOException, ParserConfigurationException, SAXException, TransformerException, NoSuchMethodException {
+        Besluitsubvlak bsv = new Besluitsubvlak();
+
+        BesluitsubvlakXType bs = (BesluitsubvlakXType)o;
+        
+        String identificatie = getIdentificatie(bs.getIdentificatie().getNEN3610ID());
+
+        bsv.setIdentificatie(identificatie);
+        bsv.setNaam(bs.getNaam().getValue());
+
+        MultiPolygon g = gc.convertMultiPolygonGeometry(bs.getGeometrie());
+        bsv.setGeometrie(g);
+
+        bsv.setTypePlanObject(bs.getTypePlanobject().value());
+        if(bs.getVerwijzingNaarTekstInfo().size()>0){
+            bsv.setVerwijzing(bs.getVerwijzingNaarTekstInfo().get(0).getTekstReferentieXGB().getVerwijzingNaarTekst());
+        }
+
+        for (BesluitvlakXPropertyType besluitvlak : bs.getBesluitvlak()) {
+            bsv.getBesluitvlakken().add(besluitvlak.getHref().substring(1));
+        }
+
+        for (BesluitsubvlakXPropertyType besluitsubvlak : bs.getBesluitsubvlak()) {
+            bsv.getBesluitsubvlakken().add(besluitsubvlak.getHref().substring(1));
+        }
+
+        return bsv;
     }
 
 }
