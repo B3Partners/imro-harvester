@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>nl.b3p.imro</groupId>
     <artifactId>harvester</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
     <packaging>pom</packaging>
     <name>imro-harvester</name>
     <url>https://github.com/B3Partners/imro-harvester</url>
@@ -11,7 +11,7 @@
         <maven>3.2.5</maven>
     </prerequisites>
     <properties>
-        <harvester.version>1.2-SNAPSHOT</harvester.version>
+        <harvester.version>1.2</harvester.version>
         <hibernate.version>3.6.10.Final</hibernate.version>
         <geotools.version>16-SNAPSHOT</geotools.version>
         <hsqldb.version>2.3.3</hsqldb.version>
@@ -20,7 +20,7 @@
         <connection>scm:git:git@github.com:B3Partners/imro-harvester.git</connection>
         <developerConnection>scm:git:git@github.com:B3Partners/imro-harvester.git</developerConnection>
         <url>https://github.com/B3Partners/imro-harvester</url>
-        <tag>HEAD</tag>
+        <tag>v1.2</tag>
     </scm>
     <dependencyManagement>
         <dependencies>
@@ -163,27 +163,27 @@
             <dependency>
                 <groupId>org.geotools</groupId>
                 <artifactId>gt-xml</artifactId>
-                <version>${geotools.version}</version>
+                <version>16-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.geotools</groupId>
                 <artifactId>gt-epsg-hsql</artifactId>
-                <version>${geotools.version}</version>
+                <version>16-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.geotools.xsd</groupId>
                 <artifactId>gt-xsd-core</artifactId>
-                <version>${geotools.version}</version>
+                <version>16-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.geotools.xsd</groupId>
                 <artifactId>gt-xsd-gml3</artifactId>
-                <version>${geotools.version}</version>
+                <version>16-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.geotools.xsd</groupId>
                 <artifactId>gt-xsd-gml2</artifactId>
-                <version>${geotools.version}</version>
+                <version>16-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
