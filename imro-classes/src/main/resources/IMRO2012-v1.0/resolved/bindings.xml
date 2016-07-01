@@ -40,9 +40,6 @@
 			<bindings node="xsd:complexType[@name='Besluitvlak_XType']//xsd:element[@name='geometrie']">
 				<dom/>
 			</bindings>
-			<bindings node="xsd:complexType[@name='Besluitvlak_XType']//xsd:element[@name='besluitgebied']">
-				<dom/>
-			</bindings>
 			<bindings node="xsd:complexType[@name='GeometrieStructuurvisieObjectType']//xsd:element[@name='geometrie']">
 				<dom/>
 			</bindings>
@@ -77,15 +74,6 @@
 				<dom/>
 			</bindings>
 			<bindings node="xsd:complexType[@name='Besluitsubvlak_XType']//xsd:element[@name='geometrie']">
-				<dom/>
-			</bindings>
-			<bindings node="xsd:complexType[@name='Besluitsubvlak_XType']//xsd:element[@name='besluitgebied']">
-				<dom/>
-			</bindings>
-			<bindings node="xsd:complexType[@name='Besluitsubvlak_XType']//xsd:element[@name='besluitvlak']">
-				<dom/>
-			</bindings>
-			<bindings node="xsd:complexType[@name='Besluitsubvlak_XType']//xsd:element[@name='besluitsubvlak']">
 				<dom/>
 			</bindings>
 			<bindings node="xsd:complexType[@name='BestemmingsvlakType']//xsd:element[@name='geometrie']">
