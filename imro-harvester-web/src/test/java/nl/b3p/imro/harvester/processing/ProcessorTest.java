@@ -131,7 +131,7 @@ public class ProcessorTest {
     public void testPostprocessOV1() {
         System.out.println("postprocess");
         Besluitgebied bg = new Besluitgebied();
-        bg.setId(16);
+        bg.setIdentificatie("16");
         Besluitvlak bv = new Besluitvlak();
         List<Object> planObjecten = new ArrayList<Object>();
         planObjecten.add(bg);
@@ -140,7 +140,7 @@ public class ProcessorTest {
         EntityManager em = Mockito.mock(EntityManager.class);
         instance.postprocess(planObjecten, em);
         assertNotNull(bv.getBesluitgebied());
-        assertEquals(16, bv.getBesluitgebied().getId());
+        assertEquals("16", bv.getBesluitgebied().getIdentificatie());
     }
 
     @Test
