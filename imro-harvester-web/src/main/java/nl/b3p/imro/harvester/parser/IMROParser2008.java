@@ -32,6 +32,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import nl.b3p.imro._2008._11.BesluitsubvlakXPropertyType;
+import nl.b3p.imro._2008._11.BesluitsubvlakXType;
+import nl.b3p.imro._2008._11.BesluitvlakXPropertyType;
 import nl.b3p.imro._2008._11.BestemmingsvlakPropertyType;
 import nl.b3p.imro._2008._11.DubbelbestemmingType;
 import nl.b3p.imro._2008._11.FeatureCollectionIMROType;
@@ -436,7 +439,32 @@ public class IMROParser2008 implements IMROParser{
 
     @Override
     public Besluitsubvlak parseImroBesluitsubvlak(Object o) throws IOException, ParserConfigurationException, SAXException, TransformerException, NoSuchMethodException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Besluitsubvlak bsv = new Besluitsubvlak();
+
+        BesluitsubvlakXType bs = (BesluitsubvlakXType)o;
+
+        String identificatie = bs.getIdentificatie();
+
+        bsv.setIdentificatie(identificatie);
+        bsv.setNaam(bs.getNaam().getValue());
+
+        MultiPolygon g = gc.convertMultiPolygonGeometry(bs.getGeometrie());
+        bsv.setGeometrie(g);
+
+        bsv.setTypePlanObject(bs.getTypePlanobject().value());
+        if(bs.getVerwijzingNaarTekstInfo().size()>0){
+            bsv.setVerwijzing(bs.getVerwijzingNaarTekstInfo().get(0).getTekstReferentieXGB().getVerwijzingNaarTekst());
+        }
+
+        for (BesluitvlakXPropertyType besluitvlak : bs.getBesluitvlak()) {
+            bsv.getBesluitvlakken().add(besluitvlak.getHref().substring(1));
+        }
+
+        for (BesluitsubvlakXPropertyType besluitsubvlak : bs.getBesluitsubvlak()) {
+            bsv.getBesluitsubvlakken().add(besluitsubvlak.getHref().substring(1));
+        }
+
+        return bsv;
     }
 
 }

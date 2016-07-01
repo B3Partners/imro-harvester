@@ -361,7 +361,6 @@ public class IMROParser2008Test {
         assertEquals("t_NL.IMRO.0513.0601PBLandpark-OB01_index.html", bv.getVerwijzing());
         assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
         assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
-        assertEquals("NL.IMRO.0513.0601PBLandpark-OB01", bv.getBesluitgebied().getIdentificatie());
         assertEquals("NL.IMRO.13", bv.getBesluitvlakken().get(0));
     }
 }
