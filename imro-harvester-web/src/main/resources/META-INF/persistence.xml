@@ -19,6 +19,7 @@
         <class>nl.b3p.imro.harvester.entities.imro.Figuur</class>
         <class>nl.b3p.imro.harvester.entities.imro.Besluitgebied</class>
         <class>nl.b3p.imro.harvester.entities.imro.Besluitvlak</class>
+        <class>nl.b3p.imro.harvester.entities.imro.Besluitsubvlak</class>
     <properties>
 
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost/imro" />
