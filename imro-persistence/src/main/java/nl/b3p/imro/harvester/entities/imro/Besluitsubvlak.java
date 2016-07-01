@@ -17,14 +17,12 @@
 package nl.b3p.imro.harvester.entities.imro;
 
 import com.vividsolutions.jts.geom.MultiPolygon;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -41,8 +39,6 @@ public class Besluitsubvlak {
     @org.hibernate.annotations.Type(type = "org.hibernatespatial.GeometryUserType")
     private MultiPolygon geometrie;
 
-    private String artikelnummer;
-
     private String verwijzing;
 
     private String typePlanObject;
@@ -50,11 +46,11 @@ public class Besluitsubvlak {
     @ManyToOne
     private Besluitgebied besluitgebied;
 
-    @OneToMany
-    private List<Besluitvlak> besluitvlakken;
+    @ElementCollection
+    private List<String> besluitvlakken = new ArrayList<>();
 
-    @OneToMany
-    private List<Besluitsubvlak> besluitsubvlakken;
+    @ElementCollection
+    private List<String> besluitsubvlakken = new ArrayList<>();;
 
     public String getIdentificatie() {
         return identificatie;
@@ -80,14 +76,6 @@ public class Besluitsubvlak {
         this.geometrie = geometrie;
     }
 
-    public String getArtikelnummer() {
-        return artikelnummer;
-    }
-
-    public void setArtikelnummer(String artikelnummer) {
-        this.artikelnummer = artikelnummer;
-    }
-
     public String getVerwijzing() {
         return verwijzing;
     }
@@ -104,6 +92,22 @@ public class Besluitsubvlak {
         this.typePlanObject = typePlanObject;
     }
 
+    public List<String> getBesluitvlakken() {
+        return besluitvlakken;
+    }
+
+    public void setBesluitvlakken(List<String> besluitvlakken) {
+        this.besluitvlakken = besluitvlakken;
+    }
+
+    public List<String> getBesluitsubvlakken() {
+        return besluitsubvlakken;
+    }
+
+    public void setBesluitsubvlakken(List<String> besluitsubvlakken) {
+        this.besluitsubvlakken = besluitsubvlakken;
+    }
+
     public Besluitgebied getBesluitgebied() {
         return besluitgebied;
     }
@@ -111,23 +115,5 @@ public class Besluitsubvlak {
     public void setBesluitgebied(Besluitgebied besluitgebied) {
         this.besluitgebied = besluitgebied;
     }
-
-    public List<Besluitvlak> getBesluitvlakken() {
-        return besluitvlakken;
-    }
-
-    public void setBesluitvlakken(List<Besluitvlak> besluitvlakken) {
-        this.besluitvlakken = besluitvlakken;
-    }
-
-    public List<Besluitsubvlak> getBesluitsubvlakken() {
-        return besluitsubvlakken;
-    }
-
-    public void setBesluitsubvlakken(List<Besluitsubvlak> besluitsubvlakken) {
-        this.besluitsubvlakken = besluitsubvlakken;
-    }
-
-    
     
 }
