@@ -18,7 +18,7 @@
 				'true'						zal alle 'xs:restriction' constructies oplossen.
 				'false'					zal alle 'xs:restriction' constructies intact laten. In dit geval worden alleen de 'xs:include' opgelost. -->
 		<application:restrictionMode>true</application:restrictionMode>
-		<application:path>D:\XSD-Resolver\</application:path>
+		<application:path>/home/meine/dev/imro-harvester/imro-classes/src/main/resources/flattended_xsd</application:path>
 	</application:processingParameters>
 	<!-- Standaard worden alleen de berichten meegenomen die gedefinieerd zijn in het mainschema van de te verwerken berichtencatalogus of koppelvlak.
 		  Daarnaast kunnen ook berichten in andere namespaces gewenst zijn.
@@ -285,7 +285,7 @@
 		<!-- ===== Basis folder van het sectormodel ========================================== -->
 		<!-- In het 'path' element moet het path vermeld worden waar het te converteren sectormodel te vinden is.
 			  Evt. backslashes worden geconverteerd naar gewone slashes. -->
-		<application:pathSectormodel>D:\IMRO2012-v1.3.1\20120209-IMRO2012-Schema-Lokaal</application:pathSectormodel>
+		<application:pathSectormodel>/home/meine/dev/imro-harvester/imro-classes/src/main/resources/IMRO2012-v1.3.1/20120209-IMRO2012-Schema-Lokaal</application:pathSectormodel>
 		<application:resolve>
 			<application:schema>
 				<application:schemaName>IMRO2012.xsd</application:schemaName>

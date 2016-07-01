@@ -1,0 +1,40 @@
+<imro:Besluitsubvlak_X gml:id="NL.IMRO.2" xmlns:imro="http://www.geonovum.nl/imro/2008/1" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.geonovum.nl/imro/2008/1 http://schemas.geonovum.nl/imro/2008/1.1/IMRO2008.xsd">
+     <imro:identificatie>NL.IMRO.2</imro:identificatie>
+     <imro:typePlanobject>besluitsubvlak_X</imro:typePlanobject>
+     <imro:naam>brug</imro:naam>
+     <imro:verwijzingNaarTekstInfo>
+        <imro:TekstReferentie_XGB>
+           <imro:verwijzingNaarTekst>t_NL.IMRO.0513.0601PBLandpark-OB01_index.html</imro:verwijzingNaarTekst>
+           <imro:typeTekst>toelichting</imro:typeTekst>
+        </imro:TekstReferentie_XGB>
+     </imro:verwijzingNaarTekstInfo>
+     <imro:geometrie>
+        <gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
+           <gml:patches>
+              <gml:PolygonPatch>
+                 <gml:exterior>
+                    <gml:Ring>
+                       <gml:curveMember>
+                          <gml:Curve>
+                             <gml:segments>
+                                <gml:LineStringSegment>
+                                   <gml:posList>106736.15 447428.93 106734.98 447431.68 106726.62 447432.67 106725.01 447436.63 106730.25 447443.21 106729.12 447445.91 106725.132 447447.233 106713.906 447445.128</gml:posList>
+                                </gml:LineStringSegment>
+                                <gml:Arc>
+                                   <gml:posList>106713.906 447445.128 106715.624 447443.312 106716.663 447441.039</gml:posList>
+                                </gml:Arc>
+                                <gml:LineStringSegment>
+                                   <gml:posList>106716.663 447441.039 106717.55 447438.59 106717.85 447437.77 106719.36 447434.26 106721.01 447430.14 106721.43 447429.3 106723.128 447425.511 106726.272 447419.18 106726.76 447418.068 106735.483 447421.741 106733.461 447426.339 106735.953 447427.937 106736.15 447428.93</gml:posList>
+                                </gml:LineStringSegment>
+                             </gml:segments>
+                          </gml:Curve>
+                       </gml:curveMember>
+                    </gml:Ring>
+                 </gml:exterior>
+              </gml:PolygonPatch>
+           </gml:patches>
+        </gml:Surface>
+     </imro:geometrie>
+     <imro:besluitgebied xlink:href="#NL.IMRO.0513.0601PBLandpark-OB01" />
+     <imro:besluitvlak xlink:href="#NL.IMRO.13" />
+  </imro:Besluitsubvlak_X>
