@@ -30,7 +30,11 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Besluitvlak {
 
+    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected int id;
+
     private String identificatie;
 
     private String naam;
@@ -46,6 +50,16 @@ public class Besluitvlak {
 
     @ManyToOne
     private Besluitgebied besluitgebied;
+    
+        protected String parentIdentificatie;
+
+    public String getParentIdentificatie() {
+        return parentIdentificatie;
+    }
+
+    public void setParentIdentificatie(String parentIdentificatie) {
+        this.parentIdentificatie = parentIdentificatie;
+    }
 
     public String getIdentificatie() {
         return identificatie;
@@ -101,6 +115,14 @@ public class Besluitvlak {
 
     public void setBesluitgebied(Besluitgebied besluitgebied) {
         this.besluitgebied = besluitgebied;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 

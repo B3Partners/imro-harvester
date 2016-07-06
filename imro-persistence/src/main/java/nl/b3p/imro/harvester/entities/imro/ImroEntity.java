@@ -49,6 +49,8 @@ public abstract class ImroEntity {
     protected String verwijzing;
 
     protected String typePlanObject;
+    
+    protected String parentIdentificatie;
 
 
     @ManyToOne
@@ -116,6 +118,14 @@ public abstract class ImroEntity {
 
     public void setTypePlanObject(String typePlanObject) {
         this.typePlanObject = typePlanObject;
+    }
+
+    public String getParentIdentificatie() {
+        return parentIdentificatie;
+    }
+
+    public void setParentIdentificatie(String parentIdentificatie) {
+        this.parentIdentificatie = parentIdentificatie;
     }
 
 }

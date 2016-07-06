@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -32,6 +34,9 @@ import javax.persistence.ManyToOne;
 public class Besluitsubvlak {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected int id;
+
     private String identificatie;
 
     private String naam;
@@ -52,6 +57,16 @@ public class Besluitsubvlak {
     @ElementCollection
     private List<String> besluitsubvlakken = new ArrayList<>();;
 
+    protected String parentIdentificatie;
+
+    public String getParentIdentificatie() {
+        return parentIdentificatie;
+    }
+
+    public void setParentIdentificatie(String parentIdentificatie) {
+        this.parentIdentificatie = parentIdentificatie;
+    }
+    
     public String getIdentificatie() {
         return identificatie;
     }
@@ -115,5 +130,12 @@ public class Besluitsubvlak {
     public void setBesluitgebied(Besluitgebied besluitgebied) {
         this.besluitgebied = besluitgebied;
     }
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

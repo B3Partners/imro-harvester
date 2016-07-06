@@ -49,6 +49,15 @@ public class Figuur{
 
     private String enkelbestemming;
 
+    protected String parentIdentificatie;
+
+    public String getParentIdentificatie() {
+        return parentIdentificatie;
+    }
+
+    public void setParentIdentificatie(String parentIdentificatie) {
+        this.parentIdentificatie = parentIdentificatie;
+    }
 
     @ManyToOne
     private Bestemmingsplan bestemmingsplan;

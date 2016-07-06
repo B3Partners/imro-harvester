@@ -9,6 +9,7 @@ alter table gebiedsaanduiding drop column geometrie;
 alter table maatvoering drop column geometrie;
 alter table besluitgebied drop column geometrie;
 alter table besluitvlak drop column geometrie;
+alter table besluitsubvlak drop column geometrie;
 
 select addgeometrycolumn ('public','bestemmingsplan', 'geometrie',28992, 'MULTIPOLYGON',2);
 select addgeometrycolumn ('public','bouwaanduiding', 'geometrie',28992, 'MULTIPOLYGON',2);
@@ -21,3 +22,4 @@ select addgeometrycolumn ('public','gebiedsaanduiding', 'geometrie',28992, 'MULT
 select addgeometrycolumn ('public','maatvoering', 'geometrie',28992, 'MULTIPOLYGON',2);
 select addgeometrycolumn ('public','besluitgebied', 'geometrie',28992, 'MULTIPOLYGON',2);
 select addgeometrycolumn ('public','besluitvlak', 'geometrie',28992, 'MULTIPOLYGON',2);
+select addgeometrycolumn ('public','besluitsubvlak', 'geometrie',28992, 'MULTIPOLYGON',2);

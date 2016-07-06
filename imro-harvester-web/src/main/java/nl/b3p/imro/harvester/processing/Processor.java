@@ -193,13 +193,16 @@ public class Processor {
                 if(obj instanceof ImroEntity){
                     ImroEntity ie = (ImroEntity)obj;
                     ie.setBestemmingsplan(bp);
+                    ie.setParentIdentificatie(bp.getIdentificatie());
                 }else if(obj instanceof Figuur){
                     Figuur f = (Figuur)obj;
                     f.setBestemmingsplan(bp);
+                    f.setParentIdentificatie(bp.getIdentificatie());
                 }if (obj instanceof Maatvoering){
                     Maatvoering mv = (Maatvoering)obj;
                     for (WaardeEnType waardeEnType : mv.getWaardeEnType()) {
                         waardeEnType.setMaatvoering(mv);
+                        waardeEnType.setParentIdentificatie(mv.getIdentificatie());
                         em.persist(waardeEnType);
                     }
                 }
@@ -218,10 +221,13 @@ public class Processor {
                     if(obj instanceof Besluitvlak){
                         Besluitvlak bv = (Besluitvlak)obj;
                         bv.setBesluitgebied(bg);
+                        bv.setParentIdentificatie(bg.getIdentificatie());
                     }else if(obj instanceof Besluitsubvlak){
                         Besluitsubvlak bv = (Besluitsubvlak)obj;
                         bv.setBesluitgebied(bg);
+                        bv.setParentIdentificatie(bg.getIdentificatie());
                     }
+                    em.persist(obj);
                 }
             }
         }else{
@@ -292,8 +298,8 @@ public class Processor {
 
             List<Besluitgebied> gebieden = q.getResultList();
             return gebieden.size() > 0;
+            }
         }
-    }
 
     public List<Geleideformulier> getGeleideformulierenFromManifestURL(URL manifest, StatusReport report) throws IOException, JDOMException, JAXBException {
         List<Geleideformulier> forms = new ArrayList<Geleideformulier>();

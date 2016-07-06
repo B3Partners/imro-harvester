@@ -33,6 +33,9 @@ import javax.persistence.TemporalType;
 public class Besluitgebied {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected int id;
+    
     private String identificatie;
     private String typePlan;
     private String beleidsmatigVerantwoordelijkeOverheid;
@@ -199,5 +202,12 @@ public class Besluitgebied {
     public void setPlanstatusDatum(Date planstatusDatum) {
         this.planstatusDatum = planstatusDatum;
     }
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

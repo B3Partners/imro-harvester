@@ -53,6 +53,16 @@ public class WaardeEnType {
     private String waardeType;
     private String symboolCode;
 
+    protected String parentIdentificatie;
+
+    public String getParentIdentificatie() {
+        return parentIdentificatie;
+    }
+
+    public void setParentIdentificatie(String parentIdentificatie) {
+        this.parentIdentificatie = parentIdentificatie;
+    }
+    
     public String getWaarde() {
         return waarde;
     }
