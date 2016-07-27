@@ -144,7 +144,7 @@ public class STRIParser2008 implements STRIParser {
                 formulieren.add(geleideformulier);
             }else {
                 report.addSkipped("Type niet ondersteund: " + eigenschappen.getType().value());
-                throw new IllegalArgumentException("plantype onbekend: " + eigenschappen.getType());
+                throw new IllegalArgumentException("Type onbekend: " + eigenschappen.getType());
             }
         }
         return formulieren;

@@ -108,7 +108,6 @@ public class ParserFactory {
     }
 
     public static ROType getROType(URL inputXmlFullPath) throws IOException, JDOMException {
-
         Document inputXml = new SAXBuilder().build(inputXmlFullPath);
 
         if (!inputXml.hasRootElement()) {

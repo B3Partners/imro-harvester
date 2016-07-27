@@ -141,7 +141,7 @@ public class STRIParser2012 implements STRIParser{
                         geleideformulier.setImro(onderdelen.getIMRO());
                     }else{
                         report.addSkipped("Type niet ondersteund: " + eigenschappen.getType().value());
-                        throw new IllegalArgumentException("plantype onbekend: " + eigenschappen.getType());
+                        throw new IllegalArgumentException("Type onbekend: " + eigenschappen.getType());
                     }
                 } else if (geleideformulierObject instanceof nl.geonovum.stri._2012._2.GeleideFormulier) {
                     nl.geonovum.stri._2012._2.GeleideFormulier gf = (nl.geonovum.stri._2012._2.GeleideFormulier) geleideformulierObject;
@@ -201,7 +201,7 @@ public class STRIParser2012 implements STRIParser{
                         geleideformulier.setImro(onderdelen.getGML());
                     }else{
                         report.addSkipped("Type niet ondersteund: " + eigenschappen.getType().value());
-                        throw new IllegalArgumentException("plantype onbekend: " + eigenschappen.getType());
+                        throw new IllegalArgumentException("Type onbekend: " + eigenschappen.getType());
                     }
                 }
                 if(geleideformulier != null){

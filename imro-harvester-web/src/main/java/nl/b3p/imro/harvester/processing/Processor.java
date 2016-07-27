@@ -317,7 +317,7 @@ public class Processor {
                 report.addErrored(geleideformulierURL.toExternalForm(), ex);
             } catch (IllegalArgumentException ex) {
                 log.debug("Plan uit geleideformulier: " + geleideformulierURL + " niet verwerkt, reden: " + ex.getLocalizedMessage() );
-                report.addErrored(geleideformulierURL.toExternalForm(), ex);
+                report.addSkipped( ex.getLocalizedMessage());
             }
         }
         return forms;
