@@ -1,5 +1,5 @@
 # imro-harvester
-Project om imro 2008 (v1.1) en 2012 (v1.0 en v1.1) plannen in te lezen, en om te zetten naar een postgis database.
+Project om imro 2006 (v1), 2008 (v1.1) en 2012 (v1.0 en v1.1) plannen in te lezen, en om te zetten naar een postgis database.
 
 
 Dit project is onderverdeeld in 5 subprojecten
