@@ -143,8 +143,16 @@ public class STRIParser2008 implements STRIParser {
                 geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getIMRO()));
                 formulieren.add(geleideformulier);
             }else {
-                report.addSkipped("Type niet ondersteund: " + eigenschappen.getType().value());
-                throw new IllegalArgumentException("Type onbekend: " + eigenschappen.getType());
+                String message = "Type niet ondersteund: " + eigenschappen.getType();
+                if(eigenschappen.getType() != null){
+                    message +=  " - " + eigenschappen.getType().value();
+                    report.addSkipped( message);
+                    throw new IllegalArgumentException(message);
+                }else{
+                    IllegalArgumentException e = new IllegalArgumentException(message);
+                    report.addErrored(plan.getId(), e);
+                    throw e;
+                }
             }
         }
         return formulieren;
