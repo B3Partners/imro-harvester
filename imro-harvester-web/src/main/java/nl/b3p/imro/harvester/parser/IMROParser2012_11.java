@@ -221,9 +221,11 @@ public class IMROParser2012_11 implements IMROParser{
         bv.setIdentificatie(identificatie);
         bv.setNaam(bvt.getNaam().getValue());
         bv.setTypePlanObject(bvt.getTypePlanobject().value());
-        BestemmingsvlakPropertyType bt=  bvt.getBestemmingsvlak().get(0);
+        if(!bvt.getBestemmingsvlak().isEmpty()){
+            BestemmingsvlakPropertyType bt=  bvt.getBestemmingsvlak().get(0);
+            bv.setEnkelbestemming(bt.getHref().substring(1));
+        }
 
-        bv.setEnkelbestemming(bt.getHref().substring(1));
         try {
             MultiPolygon g = gc.convertMultiPolygonGeometry(bvt.getPlangebied());
             bv.setGeometrie(g);
