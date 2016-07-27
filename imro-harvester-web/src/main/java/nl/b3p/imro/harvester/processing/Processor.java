@@ -85,6 +85,11 @@ public class Processor {
     public void process() throws JDOMException {
         EntityManager em = Stripersist.getEntityManager();
         for (HarvestJob job : jobs) {
+            job.setStatus(HarvestJob.HarvestJobStatus.STANDBY);
+            em.persist(job);            
+        }
+        em.getTransaction().commit();
+        for (HarvestJob job : jobs) {
             if (!em.getTransaction().isActive()) {
                 em.getTransaction().begin();
             }

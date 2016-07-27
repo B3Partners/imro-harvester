@@ -137,6 +137,7 @@ public class HarvestJob {
         FATAAL("Fataal"),
         GOED("Goed"),
         BEZIG("Bezig"),
+        STANDBY("Standby"),
         MEDIUMPROBLEEM("Medium probleem");
 
         private final String value;
