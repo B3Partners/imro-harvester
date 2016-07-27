@@ -19,7 +19,6 @@ package nl.b3p.imro.harvester.parser;
 import java.io.IOException;
 import java.net.URL;
 import javax.xml.bind.JAXBException;
-import nl.b3p.imro.harvester.processing.Processor;
 import nl.b3p.imro.harvester.processing.ROType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -16,8 +16,10 @@
  */
 package nl.b3p.imro.harvester.processing;
 
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,14 +55,21 @@ public class StatusReport {
         loadedPlans.add(plan);
     }
 
-    public void addErrored(String plan, Exception log){
+    public void addErrored(String plan, Exception log) {
         plansErrored.add(plan);
         StringWriter sw = new StringWriter();
         log.printStackTrace(new PrintWriter(sw));
         String exceptionAsString = sw.toString();
         this.log += "<br/>";
         this.log += plan + "<br/>";
-        this.log += exceptionAsString;
+
+        if (log instanceof ConnectException) {
+            this.log += "Server onbereikbaar";
+        } else if(log instanceof FileNotFoundException){
+            this.log += "Bestand niet gevonden";
+        }else {
+            this.log += exceptionAsString;
+        }
     }
 
     public void addFatal (String log){
