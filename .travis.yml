@@ -4,9 +4,9 @@ install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 script:
+  - mvn -e clean test -B
   # run code coverage
   - mvn cobertura:cobertura
-  - mvn -e clean test -B
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
