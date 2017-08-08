@@ -14,7 +14,7 @@ after_success:
 
 jdk:
   - oraclejdk8
-  #- openjdk8
+  - openjdk8
 
 os:
   - linux
