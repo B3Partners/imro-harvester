@@ -14,7 +14,7 @@ environment:
 init:
   - cd c:\
   - appveyor DownloadFile http://cert.pkioverheid.nl/RootCA-G2.cer
-  - keytool -importcert -file RootCA-G2.cer -alias "Staat der Nederlanden Root CA G2" -keystore C:\Program Files\Java\jdk1.8.0\jre\lib\security\cacerts -storepass:changeit
+  - keytool -importcert -file RootCA-G2.cer -alias "Staat der Nederlanden Root CA G2" -keystore "C:\Program Files\Java\jdk1.8.0\jre\lib\security\cacerts" -storepass:changeit
   
 install:
   - cmd: echo %PATH%
