@@ -21,3 +21,5 @@ De sld's om de bestemmingsplannen te verbeelden in bijvoorbeeld geoserver.
 
 
 [![Build Status](https://travis-ci.org/B3Partners/imro-harvester.svg?branch=master)](https://travis-ci.org/B3Partners/imro-harvester)
+[![Build status](https://ci.appveyor.com/api/projects/status/h7kcu64kml8647ta/branch/master?svg=true)](https://ci.appveyor.com/project/mtoonen/imro-harvester/branch/master)
+[![codecov](https://codecov.io/gh/B3Partners/imro-harvester/branch/master/graph/badge.svg)](https://codecov.io/gh/B3Partners/imro-harvester)
