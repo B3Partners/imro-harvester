@@ -11,6 +11,11 @@ environment:
   - JDK: JDK8
     JAVA_HOME: C:\Program Files\Java\jdk1.8.0
 
+init:
+  - cd /tmp
+  - wget http://cert.pkioverheid.nl/RootCA-G2.cer
+  - keytool -importcert -file RootCA-G2.cer -alias "Staat der Nederlanden Root CA G2" -keystore C:\Program Files\Java\jdk1.8.0\jre\lib\security\cacerts -storepass:changeit
+  
 install:
   - cmd: echo %PATH%
   #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-http-proxy.ps1'))
