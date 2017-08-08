@@ -18,7 +18,7 @@ init:
   
 install:
   - cmd: echo %PATH%
-  - cd 
+  - cd C:\projects\imro-harvester
   #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-http-proxy.ps1'))
   #- ps: .\.appveyor\set-maven-proxy.ps1
   - mvn install -U -DskipTests -B -V -fae -q
