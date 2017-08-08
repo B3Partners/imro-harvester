@@ -5,7 +5,7 @@ sudo: false
 #  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 script:
-  - travis_wait mvn -e clean test -B
+  - mvn -e clean test -B
   # run code coverage
   - mvn cobertura:cobertura
 
