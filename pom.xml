@@ -15,6 +15,7 @@
         <hibernate.version>3.6.10.Final</hibernate.version>
         <geotools.version>16-SNAPSHOT</geotools.version>
         <hsqldb.version>2.3.3</hsqldb.version>
+        <maven.surefire.version>2.20</maven.surefire.version>
     </properties>
     <scm>
         <connection>scm:git:git@github.com:B3Partners/imro-harvester.git</connection>
@@ -233,6 +234,12 @@
                         </formats>
                         <check />
                     </configuration>
+                </plugin>
+                
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
