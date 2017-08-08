@@ -19,6 +19,5 @@ Het webproject. Hierin zit alle logica met betrekking tot het transformeren van 
 * sld  
 De sld's om de bestemmingsplannen te verbeelden in bijvoorbeeld geoserver.
 
-## Let op
-Dit project gebruikt geotools voor het omzetten van de geometriën uit de GML's naar JTS geomtriën. Voor bepaalde geometriën zit er een bug in geotools. Dit is opgelost dmv PR https://github.com/geotools/geotools/pull/1227, maar dit zit nog niet in master. Op het moment van schrijven, wordt voor geotools 16-SNAPSHOT gebruikt, waarin dit PR zit. Mochten er een berg unit tests failen, moet je geotools bouwen met dit PR. Hierna zouden de unittests moeten slagen.
 
+[![Build Status](https://travis-ci.org/B3Partners/imro-harvester.svg?branch=master)](https://travis-ci.org/B3Partners/imro-harvester)
