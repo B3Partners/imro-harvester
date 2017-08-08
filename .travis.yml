@@ -34,7 +34,11 @@ install:
 
 script:
   - mvn -e clean test -B
+  # run code coverage
+  - mvn cobertura:cobertura
 
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 jdk:
   - oraclejdk8
