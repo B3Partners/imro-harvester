@@ -4,13 +4,17 @@ install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 script:
+  # run code coverage
+  - mvn cobertura:cobertura
   - mvn -e clean test -B
 
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 jdk:
   - oraclejdk8
   - openjdk8
-  
+
 os:
   - linux
 
