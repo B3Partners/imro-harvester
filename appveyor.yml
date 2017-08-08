@@ -12,13 +12,15 @@ environment:
     JAVA_HOME: C:\Program Files\Java\jdk1.8.0
 
 init:
+  - pwd
   - cd c:\
   - appveyor DownloadFile http://cert.pkioverheid.nl/RootCA-G2.cer
   - keytool -importcert -file RootCA-G2.cer -alias "Staat der Nederlanden Root CA G2" -keystore "C:\Program Files\Java\jdk1.8.0\jre\lib\security\cacerts" -storepass changeit -noprompt
+  - cd C:\projects\imro-harvester
   
 install:
+  - pwd
   - cmd: echo %PATH%
-  - cd C:\projects\imro-harvester
   #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-http-proxy.ps1'))
   #- ps: .\.appveyor\set-maven-proxy.ps1
   - mvn install -U -DskipTests -B -V -fae -q
