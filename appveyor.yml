@@ -25,11 +25,7 @@ install:
   #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-http-proxy.ps1'))
   #- ps: .\.appveyor\set-maven-proxy.ps1
   - mvn install -U -DskipTests -B -V -fae -q
-  - mvn cobertura:cobertura
-  
-after_test:
-  #- bash <(curl -s https://codecov.io/bash)
-  - codecov
+
 cache:
   - C:\Users\appveyor\.m2\repository -> pom.xml
 

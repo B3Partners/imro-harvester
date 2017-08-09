@@ -35,6 +35,7 @@ install:
 script:
   - mvn -e clean test -B
   # run code coverage
+  - mvn clean
   - mvn cobertura:cobertura
 
 after_success:
