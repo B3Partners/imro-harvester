@@ -19,6 +19,7 @@ init:
   - cd C:\projects\imro-harvester
   
 install:
+  - "python.exe -m pip install codecov"
   - pwd
   - cmd: echo %PATH%
   #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-http-proxy.ps1'))
@@ -27,7 +28,8 @@ install:
   - mvn cobertura:cobertura
   
 after_test:
-  - bash <(curl -s https://codecov.io/bash)
+  #- bash <(curl -s https://codecov.io/bash)
+  - codecov
 cache:
   - C:\Users\appveyor\.m2\repository -> pom.xml
 
