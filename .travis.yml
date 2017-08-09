@@ -30,10 +30,10 @@
 language: java
 
 install:
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  #- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 script:
-  - mvn -e clean test -B
+  #- mvn -e clean test -B
   # run code coverage
   - mvn clean
   - mvn cobertura:cobertura
