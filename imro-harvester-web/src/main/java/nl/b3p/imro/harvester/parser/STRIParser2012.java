@@ -43,8 +43,8 @@ public class STRIParser2012 implements STRIParser{
     }
 
     @Override
-    public List<URL> getGeleideformulierURLSFromManifest(URL manifestUrl) throws JAXBException, MalformedURLException {
-        List<URL> geleideformulieren = new ArrayList<URL>();
+    public List<Geleideformulier> getGeleideformulierURLSFromManifest(URL manifestUrl, StatusReport report) throws JAXBException, MalformedURLException {
+        List<Geleideformulier> geleideformulieren = new ArrayList<>();
 
         Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
         Object m = jaxbUnmarshaller.unmarshal(manifestUrl);
@@ -56,7 +56,8 @@ public class STRIParser2012 implements STRIParser{
             for (nl.geonovum.stri._2012._1.Dossier dossier : dossiers) {
                 List<nl.geonovum.stri._2012._1.Dossier.Plan> plannen = dossier.getPlan();
                 for (nl.geonovum.stri._2012._1.Dossier.Plan plan : plannen) {
-                    geleideformulieren.add(new URL(plan.getGeleideFormulier()));
+                    List<Geleideformulier> f = retrieveGeleideformulieren(new URL(plan.getGeleideFormulier()), report, dossier.getStatus().toString());
+                    geleideformulieren.addAll(f);
                 }
             }
         } else if (m instanceof nl.geonovum.stri._2012._2.Manifest) {
@@ -65,7 +66,8 @@ public class STRIParser2012 implements STRIParser{
             for (nl.geonovum.stri._2012._2.Dossier dossier : dossiers) {
                 List<nl.geonovum.stri._2012._2.Dossier.Plan> plannen = dossier.getPlan();
                 for (nl.geonovum.stri._2012._2.Dossier.Plan plan : plannen) {
-                    geleideformulieren.add(new URL(plan.getGeleideFormulier()));
+                    List<Geleideformulier> f = retrieveGeleideformulieren(new URL(plan.getGeleideFormulier()), report, dossier.getStatus().toString());
+                    geleideformulieren.addAll(f);
                 }
             }
         }else{
@@ -74,142 +76,138 @@ public class STRIParser2012 implements STRIParser{
         return geleideformulieren;
     }
 
-    @Override
-    public List<Geleideformulier> retrieveGeleideformulieren(List<URL> geleideformulieren, StatusReport report) throws MalformedURLException, JAXBException {
+    public List<Geleideformulier> retrieveGeleideformulieren(URL geleideformulierURL, StatusReport report, String status) throws MalformedURLException, JAXBException {
         List<Geleideformulier> urls = new ArrayList<Geleideformulier>();
 
         Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
-        for (URL geleideformulierURL : geleideformulieren) {
-            try {
-                Geleideformulier geleideformulier = null;
-                Object geleideformulierObject = jaxbUnmarshaller.unmarshal(geleideformulierURL);
-                // Support two versions of the manifest. Sadly, almost the same, but namespaces in xsd differ.
-                if (geleideformulierObject instanceof nl.geonovum.stri._2012._1.GeleideFormulier) {
-                    nl.geonovum.stri._2012._1.GeleideFormulier gf = (nl.geonovum.stri._2012._1.GeleideFormulier) geleideformulierObject;
-                    nl.geonovum.stri._2012._1.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
+        try {
+            Geleideformulier geleideformulier = null;
+            Object geleideformulierObject = jaxbUnmarshaller.unmarshal(geleideformulierURL);
+            // Support two versions of the manifest. Sadly, almost the same, but namespaces in xsd differ.
+            if (geleideformulierObject instanceof nl.geonovum.stri._2012._1.GeleideFormulier) {
+                nl.geonovum.stri._2012._1.GeleideFormulier gf = (nl.geonovum.stri._2012._1.GeleideFormulier) geleideformulierObject;
+                nl.geonovum.stri._2012._1.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
 
-                if (HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())){
-                        geleideformulier = new Geleideformulier();
-                        nl.geonovum.stri._2012._1.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
+                if (HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())) {
+                    geleideformulier = new Geleideformulier();
+                    nl.geonovum.stri._2012._1.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
 
-                        String basisurl = onderdelen.getBasisURL();
-                        String gml = onderdelen.getIMRO();
+                    String basisurl = onderdelen.getBasisURL();
+                    String gml = onderdelen.getIMRO();
 
-                        geleideformulier.getBijlages().add(new URL(basisurl + gml));
+                    geleideformulier.getBijlages().add(new URL(basisurl + gml));
 
-                        if (onderdelen.getRegels() != null) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getRegels()));
-                        }
-
-                        if (onderdelen.getToelichting() != null) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getToelichting()));
-                        }
-
-                        if (onderdelen.getGeleideFormulier() != null) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getGeleideFormulier()));
-                        }
-
-                        if (onderdelen.getVaststellingsBesluit() != null) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getVaststellingsBesluit()));
-                        }
-
-                        if (onderdelen.getPlanTeksten() != null) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getPlanTeksten()));
-                        }
-
-                        if (onderdelen.getBeleidsOfBesluitDocument() != null) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getBeleidsOfBesluitDocument()));
-                        }
-
-                        List<String> bijlages = onderdelen.getBijlage();
-                        for (String bijlage : bijlages) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + bijlage));
-                        }
-
-                        List<String> illustraties = onderdelen.getIllustratie();
-                        for (String illustratie : illustraties) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + illustratie));
-                        }
-
-                        geleideformulier.setIdentificatie(gf.getPlan().getId());
-                        geleideformulier.setBasisURL(basisurl);
-                        geleideformulier.setDatum(eigenschappen.getDatum().toString());
-                        geleideformulier.setNaam(eigenschappen.getNaam());
-                        geleideformulier.setStatus(eigenschappen.getStatus().value());
-                        geleideformulier.setVersie(eigenschappen.getVersieIMRO());
-                        geleideformulier.setType(eigenschappen.getType().value());
-                        geleideformulier.setImro(onderdelen.getIMRO());
-                    }else{
-                        report.addSkipped("Type niet ondersteund: " + eigenschappen.getType().value());
-                        throw new IllegalArgumentException("Type onbekend: " + eigenschappen.getType());
+                    if (onderdelen.getRegels() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getRegels()));
                     }
-                } else if (geleideformulierObject instanceof nl.geonovum.stri._2012._2.GeleideFormulier) {
-                    nl.geonovum.stri._2012._2.GeleideFormulier gf = (nl.geonovum.stri._2012._2.GeleideFormulier) geleideformulierObject;
-                    nl.geonovum.stri._2012._2.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
 
-
-                    if (HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())){
-                        geleideformulier = new Geleideformulier();
-                        nl.geonovum.stri._2012._2.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
-                        String basisurl = onderdelen.getBasisURL();
-                        String gml = onderdelen.getGML();
-                        URL u = new URL(basisurl + gml);
-
-                        geleideformulier.getBijlages().add(new URL(basisurl + gml));
-
-                        if (onderdelen.getRegels() != null) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getRegels()));
-                        }
-
-                        if (onderdelen.getToelichting() != null) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getToelichting()));
-                        }
-
-                        if (onderdelen.getGeleideFormulier() != null) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getGeleideFormulier()));
-                        }
-
-                        if (onderdelen.getVaststellingsBesluit() != null) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getVaststellingsBesluit()));
-                        }
-
-                        if (onderdelen.getPlanTeksten() != null) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getPlanTeksten()));
-                        }
-
-                        if (onderdelen.getBeleidsOfBesluitDocument() != null) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getBeleidsOfBesluitDocument()));
-                        }
-
-                        List<String> bijlages = onderdelen.getBijlage();
-                        for (String bijlage : bijlages) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + bijlage));
-                        }
-
-                        List<String> illustraties = onderdelen.getIllustratie();
-                        for (String illustratie : illustraties) {
-                            geleideformulier.getBijlages().add(new URL(basisurl + illustratie));
-                        }
-
-                        geleideformulier.setIdentificatie(gf.getPlan().getId());
-                        geleideformulier.setBasisURL(basisurl);
-                        geleideformulier.setDatum(eigenschappen.getDatum().toString());
-                        geleideformulier.setNaam(eigenschappen.getNaam());
-                        geleideformulier.setStatus(eigenschappen.getStatus().value());
-                        geleideformulier.setVersie(eigenschappen.getVersieGML());
-                        geleideformulier.setType(eigenschappen.getType().value());
-                        geleideformulier.setImro(onderdelen.getGML());
-                    }else{
-                        report.addSkipped("Type niet ondersteund: " + eigenschappen.getType().value());
-                        throw new IllegalArgumentException("Type onbekend: " + eigenschappen.getType());
+                    if (onderdelen.getToelichting() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getToelichting()));
                     }
+
+                    if (onderdelen.getGeleideFormulier() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getGeleideFormulier()));
+                    }
+
+                    if (onderdelen.getVaststellingsBesluit() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getVaststellingsBesluit()));
+                    }
+
+                    if (onderdelen.getPlanTeksten() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getPlanTeksten()));
+                    }
+
+                    if (onderdelen.getBeleidsOfBesluitDocument() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getBeleidsOfBesluitDocument()));
+                    }
+
+                    List<String> bijlages = onderdelen.getBijlage();
+                    for (String bijlage : bijlages) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + bijlage));
+                    }
+
+                    List<String> illustraties = onderdelen.getIllustratie();
+                    for (String illustratie : illustraties) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + illustratie));
+                    }
+
+                    geleideformulier.setIdentificatie(gf.getPlan().getId());
+                    geleideformulier.setBasisURL(basisurl);
+                    geleideformulier.setDatum(eigenschappen.getDatum().toString());
+                    geleideformulier.setNaam(eigenschappen.getNaam());
+                    geleideformulier.setStatus(eigenschappen.getStatus().value());
+                    geleideformulier.setVersie(eigenschappen.getVersieIMRO());
+                    geleideformulier.setType(eigenschappen.getType().value());
+                    geleideformulier.setImro(onderdelen.getIMRO());
+                } else {
+                    report.addSkipped("Type niet ondersteund: " + eigenschappen.getType().value());
+                    throw new IllegalArgumentException("Type onbekend: " + eigenschappen.getType());
                 }
-                if(geleideformulier != null){
-                    urls.add(geleideformulier);
+            } else if (geleideformulierObject instanceof nl.geonovum.stri._2012._2.GeleideFormulier) {
+                nl.geonovum.stri._2012._2.GeleideFormulier gf = (nl.geonovum.stri._2012._2.GeleideFormulier) geleideformulierObject;
+                nl.geonovum.stri._2012._2.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
+
+                if (HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())) {
+                    geleideformulier = new Geleideformulier();
+                    nl.geonovum.stri._2012._2.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
+                    String basisurl = onderdelen.getBasisURL();
+                    String gml = onderdelen.getGML();
+                    URL u = new URL(basisurl + gml);
+
+                    geleideformulier.getBijlages().add(new URL(basisurl + gml));
+
+                    if (onderdelen.getRegels() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getRegels()));
+                    }
+
+                    if (onderdelen.getToelichting() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getToelichting()));
+                    }
+
+                    if (onderdelen.getGeleideFormulier() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getGeleideFormulier()));
+                    }
+
+                    if (onderdelen.getVaststellingsBesluit() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getVaststellingsBesluit()));
+                    }
+
+                    if (onderdelen.getPlanTeksten() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getPlanTeksten()));
+                    }
+
+                    if (onderdelen.getBeleidsOfBesluitDocument() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + onderdelen.getBeleidsOfBesluitDocument()));
+                    }
+
+                    List<String> bijlages = onderdelen.getBijlage();
+                    for (String bijlage : bijlages) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + bijlage));
+                    }
+
+                    List<String> illustraties = onderdelen.getIllustratie();
+                    for (String illustratie : illustraties) {
+                        geleideformulier.getBijlages().add(new URL(basisurl + illustratie));
+                    }
+
+                    geleideformulier.setIdentificatie(gf.getPlan().getId());
+                    geleideformulier.setBasisURL(basisurl);
+                    geleideformulier.setDatum(eigenschappen.getDatum().toString());
+                    geleideformulier.setNaam(eigenschappen.getNaam());
+                    geleideformulier.setStatus(eigenschappen.getStatus().value());
+                    geleideformulier.setVersie(eigenschappen.getVersieGML());
+                    geleideformulier.setType(eigenschappen.getType().value());
+                    geleideformulier.setImro(onderdelen.getGML());
+                } else {
+                    report.addSkipped("Type niet ondersteund: " + eigenschappen.getType().value());
+                    throw new IllegalArgumentException("Type onbekend: " + eigenschappen.getType());
                 }
-            } catch (JAXBException ex) {
-                log.debug("Cannot unmarshal geleideformulier" + geleideformulierURL);
             }
+            if (geleideformulier != null) {
+                urls.add(geleideformulier);
+            }
+        } catch (JAXBException ex) {
+            log.debug("Cannot unmarshal geleideformulier" + geleideformulierURL);
         }
 
         return urls;

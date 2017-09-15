@@ -43,8 +43,10 @@ public class Geleideformulier {
     private String type;
 
     private String imro;
-
+    
     private List<URL> bijlages = new ArrayList<URL>();
+    
+    private String dossierstatus;
 
     public String getType() {
         return type;
@@ -121,6 +123,14 @@ public class Geleideformulier {
 
     public void setBijlages(List<URL> bijlages) {
         this.bijlages = bijlages;
+    }
+
+    public String getDossierstatus() {
+        return dossierstatus;
+    }
+
+    public void setDossierstatus(String dossierstatus) {
+        this.dossierstatus = dossierstatus;
     }
 
     @Override

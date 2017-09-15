@@ -50,7 +50,7 @@ public class STRIParser2008Test {
     public void testGetGeleideformulierURLSFromManifest() throws Exception {
         System.out.println("getGeleideformulierURLSFromManifest");
         URL u = this.getClass().getResource("manifest2008.xml");
-        List<URL> result = instance.getGeleideformulierURLSFromManifest(u);
+        List<Geleideformulier> result = instance.getGeleideformulierURLSFromManifest(u,report);
         assertEquals(1, result.size());
         assertEquals(new URL("http://www.durperdam.nl/ro/BP0013/g_NL.IMRO.1234.BP0013-0001.xml"), result.get(0));
         
@@ -64,8 +64,7 @@ public class STRIParser2008Test {
         System.out.println("retrieveGeleideformulieren");
         URL u = this.getClass().getResource("geleideformulier2008.xml");
    //     URL u = this.getClass().getResource("manifest2008.xml");
-        List<URL> geleideformulieren = Collections.singletonList(u);
-        List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren, report);
+        List<Geleideformulier> result = instance.getGeleideformulierURLSFromManifest(u, report);
         assertEquals(1, result.size());
         Geleideformulier form = result.get(0);
 
@@ -81,8 +80,7 @@ public class STRIParser2008Test {
     public void testGetGeleideformulierURLSFromGeleideformulier() throws Exception {
         System.out.println("retrieveGeleideformulieren");
         URL u = this.getClass().getResource("geleideformulier2008.xml");
-        List<URL> geleideformulieren = Collections.singletonList(u);
-        List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren, report);
+        List<Geleideformulier> result = instance.getGeleideformulierURLSFromManifest(u, report);
         assertEquals(1, result.size());
         Geleideformulier form = result.get(0);
 

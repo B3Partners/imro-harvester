@@ -28,7 +28,7 @@ import nl.b3p.imro.harvester.processing.StatusReport;
  */
 public interface STRIParser {
 
-    List<URL> getGeleideformulierURLSFromManifest(URL manifestURL) throws JAXBException, MalformedURLException;
-    List<Geleideformulier> retrieveGeleideformulieren(List<URL> geleideformulieren, StatusReport report) throws MalformedURLException, JAXBException;
+    List<Geleideformulier> getGeleideformulierURLSFromManifest(URL manifestURL, StatusReport report) throws JAXBException, MalformedURLException;
+    //List<Geleideformulier> retrieveGeleideformulieren(URL geleideformulierURL, StatusReport report, String status) throws MalformedURLException, JAXBException;
 
 }

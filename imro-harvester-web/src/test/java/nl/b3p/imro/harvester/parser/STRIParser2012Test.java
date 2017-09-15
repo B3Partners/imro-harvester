@@ -57,7 +57,7 @@ public class STRIParser2012Test {
         URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
 
         STRIParser2012 instance = new STRIParser2012();
-        List<URL> result = instance.getGeleideformulierURLSFromManifest(u);
+        List<Geleideformulier> result = instance.getGeleideformulierURLSFromManifest(u, report);
         assertEquals(2, result.size());
     }
 
@@ -69,8 +69,7 @@ public class STRIParser2012Test {
         System.out.println("testRetrieveGeleideformulierV1");
 
         URL u = this.getClass().getResource("geleideformulier2012.xml");
-        List<URL> geleideformulieren = Collections.singletonList(u);
-        List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren, report);
+        List<Geleideformulier> result = instance.getGeleideformulierURLSFromManifest(u, report);
         assertEquals(1, result.size());
         Geleideformulier form = result.get(0);
         URL expResult = new URL("http://files.b3p.nl/imroharvester/1.txt");
@@ -89,7 +88,7 @@ public class STRIParser2012Test {
     public void testParseGeleideformulierV2() throws MalformedURLException, JAXBException {
         URL expResult = new URL("http://www.rijksplannen.nl/NL.IMRO.0000.AD16081970/V037/NL.IMRO.0000.AD16081970-V037.gml");
         URL u = this.getClass().getResource("v2.0_STRI2012-geleideformulier-voorbeeld.xml");
-        List<Geleideformulier> result = instance.retrieveGeleideformulieren(Collections.singletonList(u), report);
+        List<Geleideformulier> result = instance.getGeleideformulierURLSFromManifest(u, report);
         assertEquals(1, result.size());
         Geleideformulier form = result.get(0);
         assertEquals(expResult, form.getGML());
@@ -109,7 +108,7 @@ public class STRIParser2012Test {
     public void testGetPlannenManifestSTRItV1() {
         try {
             System.out.println("testGetPlannenManifestV1");
-            List<URL> result = instance.getGeleideformulierURLSFromManifest(new URL(job.getUrl()));
+            List<Geleideformulier> result = instance.getGeleideformulierURLSFromManifest(new URL(job.getUrl()), report);
             assertEquals(1, result.size());
         } catch (Exception e) {
             fail("Exception occured: " + e.getLocalizedMessage());
@@ -123,7 +122,7 @@ public class STRIParser2012Test {
     public void testGetPlannenManifestV2() throws JAXBException, MalformedURLException {
         System.out.println("testGetPlannenManifestV2");
         URL u = this.getClass().getResource("v2.0_STRI2012-manifest-voorbeeld.xml");
-        List<URL> result = instance.getGeleideformulierURLSFromManifest(u);
+        List<Geleideformulier> result = instance.getGeleideformulierURLSFromManifest(u, report);
         assertEquals(2, result.size());
     }
 }

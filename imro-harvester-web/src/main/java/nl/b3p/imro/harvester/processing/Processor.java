@@ -307,10 +307,9 @@ public class Processor {
         }
 
     public List<Geleideformulier> getGeleideformulierenFromManifestURL(URL manifest, StatusReport report) throws IOException, JDOMException, JAXBException {
-        List<Geleideformulier> forms = new ArrayList<Geleideformulier>();
         STRIParser striParser = factory.getSTRIParser(manifest);
-        List<URL> geleideformulierenURLS = striParser.getGeleideformulierURLSFromManifest(manifest);
-        for (URL geleideformulierURL : geleideformulierenURLS) {
+        List<Geleideformulier> forms = striParser.getGeleideformulierURLSFromManifest(manifest, report);
+        /*for (URL geleideformulierURL : geleideformulierenURLS) {
             try{
                 striParser = factory.getSTRIParser(geleideformulierURL);
                 forms.addAll(striParser.retrieveGeleideformulieren(Collections.singletonList(geleideformulierURL), report));
@@ -324,7 +323,7 @@ public class Processor {
                 log.debug("Plan uit geleideformulier: " + geleideformulierURL + " niet verwerkt, reden: " + ex.getLocalizedMessage() );
                 report.addSkipped( ex.getLocalizedMessage());
             }
-        }
+        }*/
         return forms;
     }
     // </editor-fold>

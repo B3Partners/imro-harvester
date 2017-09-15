@@ -34,7 +34,7 @@ public class STRIParser2006Test {
     public void testGetGeleideformulierURLSFromManifest() throws Exception {
       System.out.println("getGeleideformulierURLSFromManifest");
         URL u = this.getClass().getResource("manifest2006.xml");
-        List<URL> result = instance.getGeleideformulierURLSFromManifest(u);
+        List<Geleideformulier> result = instance.getGeleideformulierURLSFromManifest(u,report);
         assertEquals(1, result.size());
         assertEquals(new URL("http://ro.reimerswaal.nl/test/NL.IMRO.07030000BTOPBP2H-/g_NL.IMRO.07030000BTOPBP2H-.xml"), result.get(0));
     }
@@ -47,8 +47,7 @@ public class STRIParser2006Test {
          System.out.println("retrieveGeleideformulieren");
         URL u = this.getClass().getResource("geleideformulier2006.xml");
    //     URL u = this.getClass().getResource("manifest2008.xml");
-        List<URL> geleideformulieren = Collections.singletonList(u);
-        List<Geleideformulier> result = instance.retrieveGeleideformulieren(geleideformulieren, report);
+        List<Geleideformulier> result = instance.getGeleideformulierURLSFromManifest(u, report);
         assertEquals(1, result.size());
         Geleideformulier form = result.get(0);
 
