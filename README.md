@@ -19,6 +19,13 @@ Het webproject. Hierin zit alle logica met betrekking tot het transformeren van 
 * sld  
 De sld's om de bestemmingsplannen te verbeelden in bijvoorbeeld geoserver.
 
+# Installatie
+* Maak imro database aan
+* create extension postgis
+* Met de correcte user:
+  * voer uit imro-harvester-web/target/ddlscripts het bestand schemaexport.sql uiot
+  * voer uit imro-harvester-web/src/main/resources/db 1.geometrycolumns.sq en 2.inserts.sql uit
+* Pas in de .war de persistence.xml aan met de juiste db gegevens
 
 [![Build Status](https://travis-ci.org/B3Partners/imro-harvester.svg?branch=master)](https://travis-ci.org/B3Partners/imro-harvester)
 [![Build status](https://ci.appveyor.com/api/projects/status/h7kcu64kml8647ta/branch/master?svg=true)](https://ci.appveyor.com/project/mtoonen/imro-harvester/branch/master)
