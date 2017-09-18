@@ -56,6 +56,7 @@ public class ProcessorTest {
 
     @Before
     public void initTests() throws MalformedURLException, JAXBException {
+        HarvesterInitializer.initPlantypes();
         job = new HarvestJob();
         downloadfolder = new File("target");
 
@@ -90,7 +91,7 @@ public class ProcessorTest {
         URL u = this.getClass().getResource("geleideformulier2012.xml"); //new URL("http://ruimtelijkeplannen.zaltbommel.nl/NL.IMRO.0297.BGBBP20140020-VS01/g_NL.IMRO.0297.BGBBP20140020-VS01.xml");//
         File realDir = new File(new File(downloadfolder.toURI()), "NL.IMRO.0297.BGBBP20140020-OW01");
         STRIParser2012 parser = new STRIParser2012();
-        List<Geleideformulier> forms = parser.getGeleideformulierURLSFromManifest(u, new StatusReport());
+        List<Geleideformulier> forms = parser.retrieveGeleideformulieren(u, new StatusReport(), "pietje");
         assertEquals(1, forms.size());
         Geleideformulier form = forms.get(0);
         instance.downloadFiles(form);
