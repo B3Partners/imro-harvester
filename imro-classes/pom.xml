@@ -4,7 +4,7 @@
     <parent>
         <groupId>nl.b3p.imro</groupId>
         <artifactId>harvester</artifactId>
-        <version>1.4</version>
+        <version>1.5-SNAPSHOT</version>
     </parent>
     <artifactId>imro-classes</artifactId>
     <packaging>jar</packaging>
