@@ -1,83 +1,83 @@
 <imro:Maatvoering xmlns:imro="http://www.ravi.nl/imro2006"
                   gml:id="localidMP2076"
-	xmlns:gml="http://www.opengis.net/gml" 
-	xmlns:xlink="http://www.w3.org/1999/xlink" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://www.opengis.net/gml base/gml.xsd http://www.ravi.nl/imro2006 IMRO2006.xsd">
-	<imro:identificatie>MP2076</imro:identificatie>
-	<imro:typePlanobject>aanduiding; maatvoering</imro:typePlanobject>
-	<imro:naam>Maatvoering</imro:naam>
-	<imro:plangebied xlink:href="#NL.IMRO.06540000BS4376-"/>
-	<imro:maatvoering>
-		<imro:MatrixEnWaarde>
-			<imro:omvangWaarde>
-				<imro:OmvangWaardeBP>
-					<imro:waarde>4.5</imro:waarde>
-					<imro:waardeType>maatvoering; hoogte; goothoogte; maximum goothoogte (m)</imro:waardeType>
-					<imro:labelInfo>
-						<imro:Label>
-							<imro:tekst>4.5</imro:tekst>
-							<imro:positie>
-								<imro:Labelpositie>
-									<imro:hoek>0</imro:hoek>
-									<imro:plaatsingspunt>
-										<gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
-											<gml:pos>50123.571 388049.579</gml:pos>
-										</gml:Point>
-									</imro:plaatsingspunt>
-								</imro:Labelpositie>
-							</imro:positie>
-						</imro:Label>
-					</imro:labelInfo>
-				</imro:OmvangWaardeBP>
-			</imro:omvangWaarde>
-			<imro:omvangWaarde>
-				<imro:OmvangWaardeBP>
-					<imro:waarde>8.5</imro:waarde>
-					<imro:waardeType>maatvoering; hoogte; maximum hoogte (m)</imro:waardeType>
-					<imro:labelInfo>
-						<imro:Label>
-							<imro:tekst>/ 8.5</imro:tekst>
-							<imro:positie>
-								<imro:Labelpositie>
-									<imro:hoek>0</imro:hoek>
-									<imro:plaatsingspunt>
-										<gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
-											<gml:pos>50127.869 388049.548</gml:pos>
-										</gml:Point>
-									</imro:plaatsingspunt>
-								</imro:Labelpositie>
-							</imro:positie>
-						</imro:Label>
-					</imro:labelInfo>
-				</imro:OmvangWaardeBP>
-			</imro:omvangWaarde>
-		</imro:MatrixEnWaarde>
-	</imro:maatvoering>
-	<imro:geometrie>
-		<imro:PuntLijnVlakMulti>
-			<imro:geometrieVlak>
-				<gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
-					<gml:patches>
-						<gml:PolygonPatch>
-							<gml:exterior>
-								<gml:Ring>
-									<gml:curveMember>
-										<gml:Curve>
-											<gml:segments>
-												<gml:LineStringSegment>
-													<gml:posList srsDimension="2" count="11">50135.765 388021.608 50155.248 388037.172 50155.257 388037.178 50142.638 388052.942 50139.776 388052.079 50139.373 388070.78 50133.141 388078.567 50107.755 388058.56 50117.2 388045.27 50124.69 388035.48 50135.765 388021.608</gml:posList>
-												</gml:LineStringSegment>
-											</gml:segments>
-										</gml:Curve>
-									</gml:curveMember>
-								</gml:Ring>
-							</gml:exterior>
-						</gml:PolygonPatch>
-					</gml:patches>
-				</gml:Surface>
-			</imro:geometrieVlak>
-		</imro:PuntLijnVlakMulti>
-	</imro:geometrie>
-	<imro:aanduiding xlink:href="#localidBP1038"/>
+                  xmlns:gml="http://www.opengis.net/gml" 
+                  xmlns:xlink="http://www.w3.org/1999/xlink" 
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                  xsi:schemaLocation="http://www.opengis.net/gml base/gml.xsd http://www.ravi.nl/imro2006 IMRO2006.xsd">
+    <imro:identificatie>MP2076</imro:identificatie>
+    <imro:typePlanobject>aanduiding; maatvoering</imro:typePlanobject>
+    <imro:naam>Maatvoering</imro:naam>
+    <imro:plangebied xlink:href="#NL.IMRO.06540000BS4376-"/>
+    <imro:maatvoering>
+        <imro:MatrixEnWaarde>
+            <imro:omvangWaarde>
+                <imro:OmvangWaardeBP>
+                    <imro:waarde>4.5</imro:waarde>
+                    <imro:waardeType>maatvoering; hoogte; goothoogte; maximum goothoogte (m)</imro:waardeType>
+                    <imro:labelInfo>
+                        <imro:Label>
+                            <imro:tekst>4.5</imro:tekst>
+                            <imro:positie>
+                                <imro:Labelpositie>
+                                    <imro:hoek>0</imro:hoek>
+                                    <imro:plaatsingspunt>
+                                        <gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
+                                            <gml:pos>50123.571 388049.579</gml:pos>
+                                        </gml:Point>
+                                    </imro:plaatsingspunt>
+                                </imro:Labelpositie>
+                            </imro:positie>
+                        </imro:Label>
+                    </imro:labelInfo>
+                </imro:OmvangWaardeBP>
+            </imro:omvangWaarde>
+            <imro:omvangWaarde>
+                <imro:OmvangWaardeBP>
+                    <imro:waarde>8.5</imro:waarde>
+                    <imro:waardeType>maatvoering; hoogte; maximum hoogte (m)</imro:waardeType>
+                    <imro:labelInfo>
+                        <imro:Label>
+                            <imro:tekst>/ 8.5</imro:tekst>
+                            <imro:positie>
+                                <imro:Labelpositie>
+                                    <imro:hoek>0</imro:hoek>
+                                    <imro:plaatsingspunt>
+                                        <gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
+                                            <gml:pos>50127.869 388049.548</gml:pos>
+                                        </gml:Point>
+                                    </imro:plaatsingspunt>
+                                </imro:Labelpositie>
+                            </imro:positie>
+                        </imro:Label>
+                    </imro:labelInfo>
+                </imro:OmvangWaardeBP>
+            </imro:omvangWaarde>
+        </imro:MatrixEnWaarde>
+    </imro:maatvoering>
+    <imro:geometrie>
+        <imro:PuntLijnVlakMulti>
+            <imro:geometrieVlak>
+                <gml:Surface srsName="urn:ogc:def:crs:EPSG::28992">
+                    <gml:patches>
+                        <gml:PolygonPatch>
+                            <gml:exterior>
+                                <gml:Ring>
+                                    <gml:curveMember>
+                                        <gml:Curve>
+                                            <gml:segments>
+                                                <gml:LineStringSegment>
+                                                    <gml:posList srsDimension="2" count="11">50135.765 388021.608 50155.248 388037.172 50155.257 388037.178 50142.638 388052.942 50139.776 388052.079 50139.373 388070.78 50133.141 388078.567 50107.755 388058.56 50117.2 388045.27 50124.69 388035.48 50135.765 388021.608</gml:posList>
+                                                </gml:LineStringSegment>
+                                            </gml:segments>
+                                        </gml:Curve>
+                                    </gml:curveMember>
+                                </gml:Ring>
+                            </gml:exterior>
+                        </gml:PolygonPatch>
+                    </gml:patches>
+                </gml:Surface>
+            </imro:geometrieVlak>
+        </imro:PuntLijnVlakMulti>
+    </imro:geometrie>
+    <imro:aanduiding xlink:href="#localidBP1038"/>
 </imro:Maatvoering>

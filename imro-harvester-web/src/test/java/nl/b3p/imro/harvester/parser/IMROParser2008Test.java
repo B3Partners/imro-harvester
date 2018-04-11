@@ -257,6 +257,8 @@ public class IMROParser2008Test {
         assertEquals("NL.IMRO.281", mv.getIdentificatie());
         assertEquals("maatvoering", mv.getTypePlanObject());
         assertEquals("maximum oppervlakte (m2)", mv.getNaam());
+        assertEquals("s130s",mv.getWaardeEnType().get(0).getSymboolCode());
+        assertEquals("s130s",mv.getWaardeEnType().get(1).getSymboolCode());
         assertNotNull("Geometrie moet gevuld zijn",mv.getGeometrie());
         assertFalse("Geometrie moet gevuld zijn",mv.getGeometrie().isEmpty());
         assertEquals(2,mv.getWaardeEnType().size());

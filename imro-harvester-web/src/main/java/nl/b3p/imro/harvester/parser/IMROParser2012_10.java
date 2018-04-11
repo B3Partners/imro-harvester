@@ -298,7 +298,7 @@ public class IMROParser2012_10 implements IMROParser{
         Enkelbestemming eb = new Enkelbestemming();
         nl.b3p.imro._2012._10.EnkelbestemmingType ebt = (nl.b3p.imro._2012._10.EnkelbestemmingType) o;
         String identificatie = getIdentificatie(ebt.getIdentificatie().getNEN3610ID());
-
+        
         eb.setArtikelnummer(ebt.getArtikelnummer());
         eb.setBestemmingshoofdgroep(ebt.getBestemmingshoofdgroep().value());
         eb.setIdentificatie(identificatie);
@@ -316,23 +316,23 @@ public class IMROParser2012_10 implements IMROParser{
     @Override
     public Maatvoering parseImroMaatvoering(Object o){
         Maatvoering mv = new Maatvoering();
-        nl.b3p.imro._2012._10.MaatvoeringType ebt = (nl.b3p.imro._2012._10.MaatvoeringType) o;
-        String identificatie = getIdentificatie(ebt.getIdentificatie().getNEN3610ID());
-
+        nl.b3p.imro._2012._10.MaatvoeringType mvt = (nl.b3p.imro._2012._10.MaatvoeringType) o;
+        String identificatie = getIdentificatie(mvt.getIdentificatie().getNEN3610ID());
+        String symboolcode = mvt.getSymboolInfo() != null ? mvt.getSymboolInfo().get(0).getSymboolEnPositie().getSymboolCode() : null;
         mv.setIdentificatie(identificatie);
-        mv.setNaam(ebt.getNaam().getValue());
-        mv.setTypePlanObject(ebt.getTypePlanobject().value());
-        if(ebt.getVerwijzingNaarTekstInfo() != null){
-            mv.setVerwijzing(ebt.getVerwijzingNaarTekstInfo().getTekstReferentieBP().getVerwijzingNaarTekst());
+        mv.setNaam(mvt.getNaam().getValue());
+        mv.setTypePlanObject(mvt.getTypePlanobject().value());
+        if(mvt.getVerwijzingNaarTekstInfo() != null){
+            mv.setVerwijzing(mvt.getVerwijzingNaarTekstInfo().getTekstReferentieBP().getVerwijzingNaarTekst());
         }
-        for (WaardeEnTypePropertyType maatvoeringInfo : ebt.getMaatvoeringInfo()) {
+        for (WaardeEnTypePropertyType maatvoeringInfo : mvt.getMaatvoeringInfo()) {
             WaardeEnTypeType wett = maatvoeringInfo.getWaardeEnType();
-            WaardeEnType wet = new WaardeEnType(wett.getWaarde(),wett.getWaardeType(), wett.getWaarde(), mv);
+            WaardeEnType wet = new WaardeEnType(wett.getWaarde(),wett.getWaardeType(), symboolcode, mv);
             mv.getWaardeEnType().add(wet);
         }
         
         try {
-            MultiPolygon g = gc.convertMultiPolygonGeometry(ebt.getPlangebied());
+            MultiPolygon g = gc.convertMultiPolygonGeometry(mvt.getPlangebied());
             mv.setGeometrie(g);
         } catch (Exception e) {
         }

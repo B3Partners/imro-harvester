@@ -178,6 +178,9 @@ public class IMROParser2012_10Test {
         assertEquals("6", mv.getWaardeEnType().get(0).getWaarde());
         assertEquals("12", mv.getWaardeEnType().get(1).getWaarde());
         assertEquals("maximum bouwhoogte (m)", mv.getWaardeEnType().get(1).getWaardeType());
+        
+        assertEquals("s111",mv.getWaardeEnType().get(0).getSymboolCode());
+        assertEquals("s111",mv.getWaardeEnType().get(1).getSymboolCode());
     }
 
     @Test

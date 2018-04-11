@@ -335,27 +335,29 @@ public class IMROParser2008 implements IMROParser{
 
     @Override
     public Maatvoering parseImroMaatvoering(Object o) {
-       Maatvoering mv = new Maatvoering();
-        MaatvoeringType ebt = (MaatvoeringType) o;
-        String identificatie = getIdentificatie(ebt.getIdentificatie());
+        Maatvoering mv = new Maatvoering();
+        MaatvoeringType mvt = (MaatvoeringType) o;
+        String identificatie = getIdentificatie(mvt.getIdentificatie());
+        String symboolcode = mvt.getSymboolInfo() != null ? mvt.getSymboolInfo().getSymboolEnPositie().getSymboolCode().value() : null;
 
         mv.setIdentificatie(identificatie);
-        mv.setNaam(ebt.getNaam());
-        mv.setTypePlanObject(ebt.getTypePlanobject().value());
-        mv.setVerwijzing(ebt.getVerwijzingNaarObjectgerichteTekst());
-        
-        for (WaardeEnTypePropertyType maatvoeringInfo : ebt.getMaatvoeringInfo()) {
+        mv.setNaam(mvt.getNaam());
+        mv.setTypePlanObject(mvt.getTypePlanobject().value());
+        mv.setVerwijzing(mvt.getVerwijzingNaarObjectgerichteTekst());
+
+        for (WaardeEnTypePropertyType maatvoeringInfo : mvt.getMaatvoeringInfo()) {
             WaardeEnTypeType wett = maatvoeringInfo.getWaardeEnType();
-            WaardeEnType wet = new WaardeEnType(wett.getWaarde(),wett.getWaardeType(), wett.getWaarde(), mv);
+            WaardeEnType wet = new WaardeEnType(wett.getWaarde(), wett.getWaardeType(), symboolcode, mv);
             mv.getWaardeEnType().add(wet);
         }
 
         try {
-            MultiPolygon g = gc.convertMultiPolygonGeometry(ebt.getPlangebied());
+            MultiPolygon g = gc.convertMultiPolygonGeometry(mvt.getPlangebied());
             mv.setGeometrie(g);
         } catch (Exception e) {
         }
-        return mv;   }
+        return mv;
+    }
 
     @Override
     public String getIdentificatie(Object id) {
