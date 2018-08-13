@@ -44,7 +44,7 @@ public class STRIParser2012 implements STRIParser{
 
     @Override
     public List<URL> getGeleideformulierURLSFromManifest(URL manifestUrl) throws JAXBException, MalformedURLException {
-        List<URL> geleideformulieren = new ArrayList<URL>();
+        List<URL> geleideformulieren = new ArrayList<>();
 
         Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
         Object m = jaxbUnmarshaller.unmarshal(manifestUrl);
@@ -76,7 +76,7 @@ public class STRIParser2012 implements STRIParser{
 
     @Override
     public List<Geleideformulier> retrieveGeleideformulieren(List<URL> geleideformulieren, StatusReport report) throws MalformedURLException, JAXBException {
-        List<Geleideformulier> urls = new ArrayList<Geleideformulier>();
+        List<Geleideformulier> urls = new ArrayList<>();
 
         Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
         for (URL geleideformulierURL : geleideformulieren) {
