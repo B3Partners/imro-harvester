@@ -54,6 +54,11 @@
             <artifactId>hibernate-core</artifactId>
         </dependency>
         <dependency>
+            <!-- override the version provided by hibernate -->
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <exclusions>
@@ -111,10 +116,30 @@
         <dependency>
             <groupId>org.hibernatespatial</groupId>
             <artifactId>hibernate-spatial</artifactId>
+            <exclusions>
+                <exclusion>
+                    <!--
+                    exclude old javassist so we can use 3.22.0-CR2, see issue #5
+                    when upgrading hibernate this should be removed
+                    -->
+                    <groupId>javassist</groupId>
+                    <artifactId>javassist</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.hibernatespatial</groupId>
             <artifactId>hibernate-spatial-postgis</artifactId>
+            <exclusions>
+                <exclusion>
+                    <!--
+                    exclude old javassist so we can use 3.22.0-CR2, see issue #5
+                    when upgrading hibernate this should be removed
+                    -->
+                    <groupId>javassist</groupId>
+                    <artifactId>javassist</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.postgis</groupId>
