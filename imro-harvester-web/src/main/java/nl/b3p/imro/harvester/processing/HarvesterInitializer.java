@@ -31,7 +31,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import nl.b3p.imro.harvester.entities.Configuration;
 import nl.b3p.imro.harvester.stripes.AdminActionBean;
-import nl.b3p.stri._2008._1.TypePlan;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.CronScheduleBuilder;
@@ -118,12 +117,13 @@ public class HarvesterInitializer implements Servlet {
     }
 
     public static void initPlantypes(){
-        SUPPORTED_PLAN_TYPES.add(TypePlan.BESTEMMINGSPLAN.value());
-        SUPPORTED_PLAN_TYPES.add(TypePlan.PROJECTBESLUIT.value());
-        SUPPORTED_PLAN_TYPES.add(TypePlan.WIJZIGINGSPLAN.value());
-        SUPPORTED_PLAN_TYPES.add(nl.geonovum.stri._2012._1.TypePlan.OMGEVINGSVERGUNNING.value());
         SUPPORTED_PLAN_TYPES.add(nl.b3p.stri._2006._12b.TypePlan.GEMEENTELIJK_PLAN_BESTEMMINGSPLAN_ARTIKEL_10.value());
         SUPPORTED_PLAN_TYPES.add(nl.b3p.stri._2006._12b.TypePlan.GEMEENTELIJK_PLAN_WIJZIGINGSPLAN_ARTIKEL_11.value());
+        SUPPORTED_PLAN_TYPES.add(nl.b3p.stri._2008._1.TypePlan.BESTEMMINGSPLAN.value());
+        SUPPORTED_PLAN_TYPES.add(nl.b3p.stri._2008._1.TypePlan.PROJECTBESLUIT.value());
+        SUPPORTED_PLAN_TYPES.add(nl.b3p.stri._2008._1.TypePlan.WIJZIGINGSPLAN.value());
+        SUPPORTED_PLAN_TYPES.add(nl.geonovum.stri._2012._1.TypePlan.OMGEVINGSVERGUNNING.value());
+        SUPPORTED_PLAN_TYPES.add(nl.geonovum.stri._2012._1.TypePlan.UITWERKINGSPLAN.value());
     }
 
     @Override
