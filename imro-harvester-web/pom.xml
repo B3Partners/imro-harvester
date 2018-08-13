@@ -142,7 +142,7 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.postgis</groupId>
+            <groupId>net.postgis</groupId>
             <artifactId>postgis-jdbc</artifactId>
             <scope>provided</scope>
         </dependency>
