@@ -50,3 +50,8 @@ os:
 
 matrix:
   fast_finish: true
+
+  
+cache:
+  directories:
+  - $HOME/.m2
