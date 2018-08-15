@@ -169,7 +169,7 @@
             <dependency>
                 <groupId>org.hibernatespatial</groupId>
                 <artifactId>hibernate-spatial-postgis</artifactId>
-                <version>1.1</version>
+                <version>1.1.1</version>
             </dependency>
             <dependency>
                 <groupId>net.postgis</groupId>
