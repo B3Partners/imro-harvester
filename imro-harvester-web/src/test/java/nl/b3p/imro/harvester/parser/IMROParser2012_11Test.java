@@ -16,7 +16,7 @@
  */
 package nl.b3p.imro.harvester.parser;
 
-import com.vividsolutions.jts.geom.MultiPolygon;
+import org.locationtech.jts.geom.MultiPolygon;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;

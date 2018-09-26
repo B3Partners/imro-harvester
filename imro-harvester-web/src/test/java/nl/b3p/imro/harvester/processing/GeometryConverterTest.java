@@ -17,7 +17,7 @@
 package nl.b3p.imro.harvester.processing;
 
 import nl.b3p.imro.harvester.parser.IMROParser2012_11;
-import com.vividsolutions.jts.geom.MultiPolygon;
+import org.locationtech.jts.geom.MultiPolygon;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
