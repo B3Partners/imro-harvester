@@ -114,45 +114,50 @@ public class ParserFactory {
     }
 
     public static ROType getROType(URL inputXmlFullPath) throws IOException, JDOMException, URISyntaxException {
-        
-        HttpClient client =  HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
-       
-        HttpGet httpGet = new HttpGet(inputXmlFullPath.toURI());
-        HttpResponse response = client.execute(httpGet);
-        int statuscode = response.getStatusLine().getStatusCode();
+        Document inputXml = null;
 
-        if (statuscode >= 200 && statuscode <= 299) {
-            HttpEntity entity = response.getEntity();
+        if (!inputXmlFullPath.toExternalForm().startsWith("file:")) {
 
-            Document inputXml = new SAXBuilder().build(entity.getContent());
+            HttpClient client = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
 
-            if (!inputXml.hasRootElement()) {
-                throw new IllegalArgumentException("Document contains no root element");
-            }
-            Element rootElem = inputXml.getRootElement();
+            HttpGet httpGet = new HttpGet(inputXmlFullPath.toURI());
+            HttpResponse response = client.execute(httpGet);
+            int statuscode = response.getStatusLine().getStatusCode();
 
-            if (isElementEqual(rootElem, IMRO2006_ROOTELEMENT)) {// || isElementEqual(rootElem, IMRO2008_PCPROOTELEMENT)) {
-                return ROType.IMRO2006;
-            } else if (isElementEqual(rootElem, IMRO2008_ROOTELEMENT)) {// || isElementEqual(rootElem, IMRO2008_PCPROOTELEMENT)) {
-                return ROType.IMRO2008;
-            } else if (isElementEqual(rootElem, IMRO2012V10_ROOTELEMENT)) {
-                return ROType.IMRO2012V10;
-            } else if (isElementEqual(rootElem, IMRO2012V11_ROOTELEMENT)) {
-                return ROType.IMRO2012V11;
-            } else if (isElementEqual(rootElem, STRI2012V1_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2012V1_ROOTELEMENT_MANIFEST)
-                    || isElementEqual(rootElem, STRI2012V2_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2012V2_ROOTELEMENT_MANIFEST)) {
-                return ROType.STRI2012;
-            } else if (isElementEqual(rootElem, STRI2008_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2008_ROOTELEMENT_MANIFEST)) {
-                return ROType.STRI2008;
-            } else if (isElementEqual(rootElem, STRI2006_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2006_ROOTELEMENT_MANIFEST)) {
-                return ROType.STRI2006;
+            if (statuscode >= 200 && statuscode <= 299) {
+                HttpEntity entity = response.getEntity();
+
+                inputXml = new SAXBuilder().build(entity.getContent());
             } else {
-                log.error("Unrecognized root element: " + rootElem);
-                return ROType.UNKNOWN;
+                String statusLine = response.getStatusLine().getReasonPhrase();
+                throw new IOException(statuscode + ": " + statusLine);
             }
         }else{
-            String statusLine = response.getStatusLine().getReasonPhrase();
-            throw new IOException( statuscode +": " + statusLine);
+            inputXml = new SAXBuilder().build(inputXmlFullPath);
+        }
+        if (!inputXml.hasRootElement()) {
+            throw new IllegalArgumentException("Document contains no root element");
+        }
+        Element rootElem = inputXml.getRootElement();
+
+        if (isElementEqual(rootElem, IMRO2006_ROOTELEMENT)) {// || isElementEqual(rootElem, IMRO2008_PCPROOTELEMENT)) {
+            return ROType.IMRO2006;
+        } else if (isElementEqual(rootElem, IMRO2008_ROOTELEMENT)) {// || isElementEqual(rootElem, IMRO2008_PCPROOTELEMENT)) {
+            return ROType.IMRO2008;
+        } else if (isElementEqual(rootElem, IMRO2012V10_ROOTELEMENT)) {
+            return ROType.IMRO2012V10;
+        } else if (isElementEqual(rootElem, IMRO2012V11_ROOTELEMENT)) {
+            return ROType.IMRO2012V11;
+        } else if (isElementEqual(rootElem, STRI2012V1_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2012V1_ROOTELEMENT_MANIFEST)
+                || isElementEqual(rootElem, STRI2012V2_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2012V2_ROOTELEMENT_MANIFEST)) {
+            return ROType.STRI2012;
+        } else if (isElementEqual(rootElem, STRI2008_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2008_ROOTELEMENT_MANIFEST)) {
+            return ROType.STRI2008;
+        } else if (isElementEqual(rootElem, STRI2006_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2006_ROOTELEMENT_MANIFEST)) {
+            return ROType.STRI2006;
+        } else {
+            log.error("Unrecognized root element: " + rootElem);
+            return ROType.UNKNOWN;
         }
     }
 
