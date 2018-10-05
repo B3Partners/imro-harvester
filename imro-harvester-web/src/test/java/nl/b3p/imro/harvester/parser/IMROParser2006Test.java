@@ -5,6 +5,8 @@
  */
 package nl.b3p.imro.harvester.parser;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -67,7 +69,7 @@ public class IMROParser2006Test {
     }
 
     @Test
-    public void testParseImroBestemmingsplan() throws JAXBException {
+    public void testParseImroBestemmingsplan() throws JAXBException, URISyntaxException, IOException {
         System.out.println("testParsePlanInhoudBestemmingsplan");
 
         URL u = this.getClass().getResource("bestemmingsplangebied2006.xml");
@@ -91,7 +93,7 @@ public class IMROParser2006Test {
     }
 
     @Test
-    public void testParseImroDubbelbestemming() throws JAXBException {
+    public void testParseImroDubbelbestemming() throws JAXBException, URISyntaxException, IOException {
         URL u = this.getClass().getResource("dubbelbestemming2006.xml");
 
         Object gba = instance.unmarshalUrl(u);
@@ -110,7 +112,7 @@ public class IMROParser2006Test {
     }
 
     @Test
-    public void testParseImroGebiedsaanduiding() throws JAXBException {
+    public void testParseImroGebiedsaanduiding() throws JAXBException, URISyntaxException, IOException {
         System.out.println("testParseGebiedsaanduidingInhoud");
         URL u = this.getClass().getResource("gebiedsaanduiding2006.xml");
 
@@ -128,7 +130,7 @@ public class IMROParser2006Test {
     }
 
     @Test
-    public void testParseImroBouwvlak() throws JAXBException {
+    public void testParseImroBouwvlak() throws JAXBException, URISyntaxException, IOException {
         System.out.println("testParseMaatvoeringInhoud");
         URL u = this.getClass().getResource("bouwvlak2006.xml");
         Object gba = instance.unmarshalUrl(u);
@@ -143,7 +145,7 @@ public class IMROParser2006Test {
     }
 
     @Test
-    public void testParseImroFunctieaanduiding() throws JAXBException {
+    public void testParseImroFunctieaanduiding() throws JAXBException, URISyntaxException, IOException {
         System.out.println("testParseFunctieaanduidingInhoud");
         URL u = this.getClass().getResource("lettertekenaanduiding2006.xml");
         Object gba = instance.unmarshalUrl(u);
@@ -160,7 +162,7 @@ public class IMROParser2006Test {
     }
 
     @Test
-    public void testParseImroFiguur() throws JAXBException {
+    public void testParseImroFiguur() throws JAXBException, URISyntaxException, IOException {
         System.out.println("testParseFiguurInhoud");
         URL u = this.getClass().getResource("figuur2006.xml");
         Object gba = instance.unmarshalUrl(u);
@@ -183,7 +185,7 @@ public class IMROParser2006Test {
 
     
     @Test
-    public void testParseImroEnkelbestemming() throws JAXBException {
+    public void testParseImroEnkelbestemming() throws JAXBException, URISyntaxException, IOException {
         System.out.println("parseImroEnkelbestemming");
         URL u = this.getClass().getResource("enkelbestemming2006.xml");
         Object gba = instance.unmarshalUrl(u);
@@ -205,7 +207,7 @@ public class IMROParser2006Test {
 
     
     @Test
-    public void testParseImroMaatvoering() throws JAXBException {
+    public void testParseImroMaatvoering() throws JAXBException, URISyntaxException, IOException {
         System.out.println("testParseMaatvoeringInhoud");
         URL u = this.getClass().getResource("maatvoering2006.xml");
         Object gba = instance.unmarshalUrl(u);
@@ -226,7 +228,7 @@ public class IMROParser2006Test {
     }
 
     @Test
-    public void testGetIdentificatie() throws JAXBException {
+    public void testGetIdentificatie() throws JAXBException, URISyntaxException, IOException {
         System.out.println("getIdentificatie");
         URL u = this.getClass().getResource("bestemmingsplangebied2006.xml");
 
@@ -255,7 +257,7 @@ public class IMROParser2006Test {
     }
 
     //@Test
-    public void testParseBesluitgebiedInhoud() throws JAXBException {
+    public void testParseBesluitgebiedInhoud() throws JAXBException, URISyntaxException, IOException {
         // Geen besluitgebied voorbeeld gevonden
         URL u = this.getClass().getResource("besluitgebied2006.xml");
 

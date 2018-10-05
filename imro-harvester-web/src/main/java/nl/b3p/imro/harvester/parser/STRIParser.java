@@ -21,8 +21,6 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import nl.b3p.imro.harvester.processing.StatusReport;
@@ -55,11 +53,11 @@ public interface STRIParser {
         int statuscode = response.getStatusLine().getStatusCode();
 
         if (statuscode >= 200 && statuscode <= 299) {
-            Object geleideformulierObject = unmarshaller.unmarshal(response.getEntity().getContent());
-            return geleideformulierObject;
+            Object xmlObject = unmarshaller.unmarshal(response.getEntity().getContent());
+            return xmlObject;
         } else {
             String statusLine = response.getStatusLine().getReasonPhrase();
-            throw new IOException("Cannot retrieve geleideformulier: " + statuscode  + " - " + statusLine);
+            throw new IOException("Cannot retrieve xmlobject: " + statuscode  + " - " + statusLine);
         }
     }
 }

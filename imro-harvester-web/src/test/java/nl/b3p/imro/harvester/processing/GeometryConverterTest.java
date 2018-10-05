@@ -20,6 +20,7 @@ import nl.b3p.imro.harvester.parser.IMROParser2012_11;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import javax.xml.bind.JAXBException;
@@ -94,7 +95,7 @@ public class GeometryConverterTest {
     }
 
     @Test
-    public void testGebiedsaanduidingViaParser() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException, JAXBException {
+    public void testGebiedsaanduidingViaParser() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException, JAXBException, URISyntaxException {
         URL url = this.getClass().getResource("2012.gml");
 
         IMROParser2012_11 p = new IMROParser2012_11();
@@ -109,7 +110,7 @@ public class GeometryConverterTest {
     }
 
     @Test
-    public void testDubbelbestemmingViaParser() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException, JAXBException {
+    public void testDubbelbestemmingViaParser() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, URISyntaxException, TransformerException, JAXBException {
         URL url = this.getClass().getResource("2012.gml");
 
         IMROParser2012_11 p = new IMROParser2012_11();

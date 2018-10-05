@@ -85,7 +85,7 @@ public class IMROParser2008 implements IMROParser{
     }
 
     @Override
-    public List<Object> parseGML(URL u) throws JAXBException, IOException, ParserConfigurationException, SAXException, TransformerException{
+    public List<Object> parseGML(URL u) throws JAXBException, IOException, ParserConfigurationException, SAXException, TransformerException,URISyntaxException{
         Object value = unmarshalUrl(u);
 
         FeatureCollectionIMROType fc = (FeatureCollectionIMROType) value;
@@ -94,10 +94,9 @@ public class IMROParser2008 implements IMROParser{
     }
 
     @Override
-    public Object unmarshalUrl(URL u) throws JAXBException {
+    public Object unmarshalUrl(URL u) throws JAXBException, IOException,URISyntaxException {
         Unmarshaller jaxbUnmarshaller = context.createUnmarshaller();
-        JAXBElement o = (JAXBElement) jaxbUnmarshaller.unmarshal(u);
-
+        JAXBElement o = (JAXBElement) retrieveXMLObjectFromURL(u, jaxbUnmarshaller);
         Object value = o.getValue();
 
         return value;
