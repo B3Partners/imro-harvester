@@ -45,19 +45,23 @@ public interface STRIParser {
     List<Geleideformulier> retrieveGeleideformulieren(List<URL> geleideformulieren, StatusReport report) throws MalformedURLException, JAXBException;
 
     default public Object retrieveXMLObjectFromURL(URL url, Unmarshaller unmarshaller) throws IOException, JAXBException, URISyntaxException {
-        HttpClient client = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
+        if (!url.toExternalForm().startsWith("file:")) {
+            HttpClient client = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
 
-        HttpGet httpGet = new HttpGet(url.toURI());
-        HttpResponse response = client.execute(httpGet);
+            HttpGet httpGet = new HttpGet(url.toURI());
+            HttpResponse response = client.execute(httpGet);
 
-        int statuscode = response.getStatusLine().getStatusCode();
+            int statuscode = response.getStatusLine().getStatusCode();
 
-        if (statuscode >= 200 && statuscode <= 299) {
-            Object xmlObject = unmarshaller.unmarshal(response.getEntity().getContent());
-            return xmlObject;
+            if (statuscode >= 200 && statuscode <= 299) {
+                Object xmlObject = unmarshaller.unmarshal(response.getEntity().getContent());
+                return xmlObject;
+            } else {
+                String statusLine = response.getStatusLine().getReasonPhrase();
+                throw new IOException("Cannot retrieve xmlobject: " + statuscode + " - " + statusLine);
+            }
         } else {
-            String statusLine = response.getStatusLine().getReasonPhrase();
-            throw new IOException("Cannot retrieve xmlobject: " + statuscode  + " - " + statusLine);
+            return unmarshaller.unmarshal(url);
         }
     }
 }

@@ -24,6 +24,7 @@ import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.ImroEntity;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.junit.Test;
@@ -40,14 +41,14 @@ public class IMROParser2006Test {
         instance = new IMROParser2006();
         
         Logger root = Logger.getRootLogger();
-        root.addAppender(new ConsoleAppender(
-                new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
+        root.addAppender(new ConsoleAppender(new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
+        Logger.getLogger("org.apache.http").setLevel(Level.OFF);
     }
 
     /**
      * Test of parseGML method, of class IMROParser2006.
      */
-   @Test
+    @Test
     public void testParseGML_Geleideformulier() throws Exception {
         System.out.println("parseGML");
 
