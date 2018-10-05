@@ -71,12 +71,12 @@ public class IMROParser2012_10 implements IMROParser{
 
 
     @Override
-    public List<Object> parseGML(Geleideformulier geleideformulier) throws JAXBException, URISyntaxException, MalformedURLException {
+    public List<Object> parseGML(Geleideformulier geleideformulier) throws JAXBException, URISyntaxException, MalformedURLException, IOException {
         return parseGML(geleideformulier.getGML());
     }
 
     @Override
-    public List<Object> parseGML(URL u) throws JAXBException {
+    public List<Object> parseGML(URL u) throws JAXBException, IOException, URISyntaxException {
         Object value = unmarshalUrl(u);
 
         FeatureCollectionIMROType fc = (FeatureCollectionIMROType) value;
@@ -85,9 +85,9 @@ public class IMROParser2012_10 implements IMROParser{
     }
 
     @Override
-    public Object unmarshalUrl(URL u) throws JAXBException{
+    public Object unmarshalUrl(URL u) throws JAXBException, IOException, URISyntaxException{
         Unmarshaller jaxbUnmarshaller = context.createUnmarshaller();
-        JAXBElement o = (JAXBElement) jaxbUnmarshaller.unmarshal(u);
+        JAXBElement o = (JAXBElement) retrieveXMLObjectFromURL(u, jaxbUnmarshaller);
 
         Object value = o.getValue();
         

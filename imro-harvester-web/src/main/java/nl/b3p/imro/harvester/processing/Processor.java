@@ -306,15 +306,15 @@ public class Processor {
             }
         }
 
-    public List<Geleideformulier> getGeleideformulierenFromManifestURL(URL manifest, StatusReport report) throws IOException, JDOMException, JAXBException {
-        List<Geleideformulier> forms = new ArrayList<Geleideformulier>();
+    public List<Geleideformulier> getGeleideformulierenFromManifestURL(URL manifest, StatusReport report) throws IOException, JDOMException, JAXBException, URISyntaxException {
+        List<Geleideformulier> forms = new ArrayList<>();
         STRIParser striParser = factory.getSTRIParser(manifest);
         List<URL> geleideformulierenURLS = striParser.getGeleideformulierURLSFromManifest(manifest);
         for (URL geleideformulierURL : geleideformulierenURLS) {
             try{
                 striParser = factory.getSTRIParser(geleideformulierURL);
                 forms.addAll(striParser.retrieveGeleideformulieren(Collections.singletonList(geleideformulierURL), report));
-            }catch (IOException ex){
+            }catch (IOException | URISyntaxException ex){
                 log.debug("Cannot retrieve geleideformulier: " +geleideformulierURL + " " +  ex.getLocalizedMessage());
                 report.addErrored(geleideformulierURL.toExternalForm(), ex);
             }catch(JAXBException  | JDOMException ex) {

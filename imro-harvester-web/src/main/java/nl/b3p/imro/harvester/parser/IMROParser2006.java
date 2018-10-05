@@ -5,7 +5,6 @@
  */
 package nl.b3p.imro.harvester.parser;
 
-import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import java.io.IOException;
@@ -76,7 +75,7 @@ public class IMROParser2006 implements IMROParser{
     }
 
     @Override
-    public List<Object> parseGML(URL u) throws JAXBException, IOException, ParserConfigurationException, SAXException, TransformerException{
+    public List<Object> parseGML(URL u) throws JAXBException, IOException, ParserConfigurationException, SAXException, TransformerException, URISyntaxException{
         Object value = unmarshalUrl(u);
 
       //  FeatureCollection fc = (FeatureCollection) value;
@@ -85,9 +84,9 @@ public class IMROParser2006 implements IMROParser{
     }
 
     @Override
-    public Object unmarshalUrl(URL u) throws JAXBException {
+    public Object unmarshalUrl(URL u) throws JAXBException, IOException, URISyntaxException {
         Unmarshaller jaxbUnmarshaller = context.createUnmarshaller();
-        JAXBElement o = (JAXBElement) jaxbUnmarshaller.unmarshal(u);
+        JAXBElement o = (JAXBElement) retrieveXMLObjectFromURL(u, jaxbUnmarshaller);
 
         Object value = o.getValue();
 

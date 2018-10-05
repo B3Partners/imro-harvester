@@ -5,6 +5,8 @@
  */
 package nl.b3p.imro.harvester.parser;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -22,6 +24,7 @@ import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.ImroEntity;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.junit.Test;
@@ -38,14 +41,14 @@ public class IMROParser2006Test {
         instance = new IMROParser2006();
         
         Logger root = Logger.getRootLogger();
-        root.addAppender(new ConsoleAppender(
-                new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
+        root.addAppender(new ConsoleAppender(new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
+        Logger.getLogger("org.apache.http").setLevel(Level.OFF);
     }
 
     /**
      * Test of parseGML method, of class IMROParser2006.
      */
-   @Test
+    @Test
     public void testParseGML_Geleideformulier() throws Exception {
         System.out.println("parseGML");
 
@@ -67,7 +70,7 @@ public class IMROParser2006Test {
     }
 
     @Test
-    public void testParseImroBestemmingsplan() throws JAXBException {
+    public void testParseImroBestemmingsplan() throws JAXBException, URISyntaxException, IOException {
         System.out.println("testParsePlanInhoudBestemmingsplan");
 
         URL u = this.getClass().getResource("bestemmingsplangebied2006.xml");
@@ -91,7 +94,7 @@ public class IMROParser2006Test {
     }
 
     @Test
-    public void testParseImroDubbelbestemming() throws JAXBException {
+    public void testParseImroDubbelbestemming() throws JAXBException, URISyntaxException, IOException {
         URL u = this.getClass().getResource("dubbelbestemming2006.xml");
 
         Object gba = instance.unmarshalUrl(u);
@@ -110,7 +113,7 @@ public class IMROParser2006Test {
     }
 
     @Test
-    public void testParseImroGebiedsaanduiding() throws JAXBException {
+    public void testParseImroGebiedsaanduiding() throws JAXBException, URISyntaxException, IOException {
         System.out.println("testParseGebiedsaanduidingInhoud");
         URL u = this.getClass().getResource("gebiedsaanduiding2006.xml");
 
@@ -128,7 +131,7 @@ public class IMROParser2006Test {
     }
 
     @Test
-    public void testParseImroBouwvlak() throws JAXBException {
+    public void testParseImroBouwvlak() throws JAXBException, URISyntaxException, IOException {
         System.out.println("testParseMaatvoeringInhoud");
         URL u = this.getClass().getResource("bouwvlak2006.xml");
         Object gba = instance.unmarshalUrl(u);
@@ -143,7 +146,7 @@ public class IMROParser2006Test {
     }
 
     @Test
-    public void testParseImroFunctieaanduiding() throws JAXBException {
+    public void testParseImroFunctieaanduiding() throws JAXBException, URISyntaxException, IOException {
         System.out.println("testParseFunctieaanduidingInhoud");
         URL u = this.getClass().getResource("lettertekenaanduiding2006.xml");
         Object gba = instance.unmarshalUrl(u);
@@ -160,7 +163,7 @@ public class IMROParser2006Test {
     }
 
     @Test
-    public void testParseImroFiguur() throws JAXBException {
+    public void testParseImroFiguur() throws JAXBException, URISyntaxException, IOException {
         System.out.println("testParseFiguurInhoud");
         URL u = this.getClass().getResource("figuur2006.xml");
         Object gba = instance.unmarshalUrl(u);
@@ -183,7 +186,7 @@ public class IMROParser2006Test {
 
     
     @Test
-    public void testParseImroEnkelbestemming() throws JAXBException {
+    public void testParseImroEnkelbestemming() throws JAXBException, URISyntaxException, IOException {
         System.out.println("parseImroEnkelbestemming");
         URL u = this.getClass().getResource("enkelbestemming2006.xml");
         Object gba = instance.unmarshalUrl(u);
@@ -205,7 +208,7 @@ public class IMROParser2006Test {
 
     
     @Test
-    public void testParseImroMaatvoering() throws JAXBException {
+    public void testParseImroMaatvoering() throws JAXBException, URISyntaxException, IOException {
         System.out.println("testParseMaatvoeringInhoud");
         URL u = this.getClass().getResource("maatvoering2006.xml");
         Object gba = instance.unmarshalUrl(u);
@@ -226,7 +229,7 @@ public class IMROParser2006Test {
     }
 
     @Test
-    public void testGetIdentificatie() throws JAXBException {
+    public void testGetIdentificatie() throws JAXBException, URISyntaxException, IOException {
         System.out.println("getIdentificatie");
         URL u = this.getClass().getResource("bestemmingsplangebied2006.xml");
 
@@ -255,7 +258,7 @@ public class IMROParser2006Test {
     }
 
     //@Test
-    public void testParseBesluitgebiedInhoud() throws JAXBException {
+    public void testParseBesluitgebiedInhoud() throws JAXBException, URISyntaxException, IOException {
         // Geen besluitgebied voorbeeld gevonden
         URL u = this.getClass().getResource("besluitgebied2006.xml");
 

@@ -16,10 +16,11 @@
  */
 package nl.b3p.imro.harvester.parser;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -30,7 +31,8 @@ import nl.b3p.stri._2008._1.Manifest;
 import nl.b3p.stri._2008._1.Plan;
 import nl.b3p.stri._2008._1.Plan.Eigenschappen;
 import nl.b3p.stri._2008._1.Plan.Onderdelen;
-import nl.b3p.stri._2008._1.TypePlan;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  *
@@ -38,6 +40,7 @@ import nl.b3p.stri._2008._1.TypePlan;
  */
 public class STRIParser2008 implements STRIParser {
 
+    private static final Log log = LogFactory.getLog(STRIParser2008.class);
     private final JAXBContext jaxbSTRIContext;
 
     public STRIParser2008() throws JAXBException {
@@ -46,113 +49,123 @@ public class STRIParser2008 implements STRIParser {
 
     @Override
     public List<URL> getGeleideformulierURLSFromManifest(URL manifestURL) throws JAXBException, MalformedURLException {
-        List<URL> geleideformulieren = new ArrayList<URL>();
-        Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
-        Manifest manifest = (Manifest) jaxbUnmarshaller.unmarshal(manifestURL);
-        List<Plan> plannen = manifest.getPlan();
-        for (Plan plan : plannen) {
+        List<URL> geleideformulieren = new ArrayList<>();
+        try {
+            Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
+            Manifest manifest = (Manifest) retrieveXMLObjectFromURL(manifestURL, jaxbUnmarshaller);
+            List<Plan> plannen = manifest.getPlan();
+            for (Plan plan : plannen) {
 
-            geleideformulieren.add(new URL(plan.getOnderdelen().getBasisURL() + plan.getOnderdelen().getGeleideFormulier()));
+                geleideformulieren.add(new URL(plan.getOnderdelen().getBasisURL() + plan.getOnderdelen().getGeleideFormulier()));
+            }
+        } catch (URISyntaxException | IOException ex) {
+            log.error("Cannot retrieve geleideformulieren from manifest: " + manifestURL.toExternalForm());
         }
         return geleideformulieren;
     }
 
     @Override
     public List<Geleideformulier> retrieveGeleideformulieren(List<URL> geleideformulieren, StatusReport report) throws MalformedURLException, JAXBException {
-        List<Geleideformulier> formulieren = new ArrayList<Geleideformulier>();
+        List<Geleideformulier> formulieren = new ArrayList<>();
 
         Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
         for (URL formulierURL : geleideformulieren) {
+            try {
 
-            nl.b3p.stri._2008._1.GeleideFormulier striGeleideform = (nl.b3p.stri._2008._1.GeleideFormulier) jaxbUnmarshaller.unmarshal(formulierURL);
-            Plan plan = striGeleideform.getPlan();
+                nl.b3p.stri._2008._1.GeleideFormulier striGeleideform = (nl.b3p.stri._2008._1.GeleideFormulier) retrieveXMLObjectFromURL(formulierURL, jaxbUnmarshaller);
+                Plan plan = striGeleideform.getPlan();
 
-            Eigenschappen eigenschappen = plan.getEigenschappen();
-            if (eigenschappen.getType() != null && HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())){
-                Geleideformulier geleideformulier = new Geleideformulier();
-                Onderdelen onderdelen = plan.getOnderdelen();
-                Plan.Supplementen supplementen = plan.getSupplementen();
-                String identificatie = plan.getId();
-                String basisURL = onderdelen.getBasisURL();
+                Eigenschappen eigenschappen = plan.getEigenschappen();
+                if (eigenschappen.getType() != null && HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())) {
+                    Geleideformulier geleideformulier = new Geleideformulier();
+                    Onderdelen onderdelen = plan.getOnderdelen();
+                    Plan.Supplementen supplementen = plan.getSupplementen();
+                    String identificatie = plan.getId();
+                    String basisURL = onderdelen.getBasisURL();
 
-                geleideformulier.setIdentificatie(identificatie);
-                geleideformulier.setNaam(eigenschappen.getNaam());
-                geleideformulier.setType(eigenschappen.getType().value());
-                geleideformulier.setStatus(eigenschappen.getStatus().value());
-                geleideformulier.setDatum(eigenschappen.getDatum().toString());
-                geleideformulier.setVersie(eigenschappen.getVersieIMRO());
-                geleideformulier.setBasisURL(basisURL);
-                geleideformulier.setImro(onderdelen.getIMRO());
+                    geleideformulier.setIdentificatie(identificatie);
+                    geleideformulier.setNaam(eigenschappen.getNaam());
+                    geleideformulier.setType(eigenschappen.getType().value());
+                    geleideformulier.setStatus(eigenschappen.getStatus().value());
+                    geleideformulier.setDatum(eigenschappen.getDatum().toString());
+                    geleideformulier.setVersie(eigenschappen.getVersieIMRO());
+                    geleideformulier.setBasisURL(basisURL);
+                    geleideformulier.setImro(onderdelen.getIMRO());
 
-                for (String regel : onderdelen.getRegels()) {
-                    geleideformulier.getBijlages().add(new URL(basisURL + regel));
+                    for (String regel : onderdelen.getRegels()) {
+                        geleideformulier.getBijlages().add(new URL(basisURL + regel));
+                    }
+
+                    for (String regelsBijlage : onderdelen.getRegelsBijlage()) {
+                        geleideformulier.getBijlages().add(new URL(basisURL + regelsBijlage));
+                    }
+
+                    for (String toelichting : onderdelen.getToelichting()) {
+                        geleideformulier.getBijlages().add(new URL(basisURL + toelichting));
+                    }
+
+                    for (String toelichtingBijlage : onderdelen.getToelichtingBijlage()) {
+                        geleideformulier.getBijlages().add(new URL(basisURL + toelichtingBijlage));
+                    }
+
+                    if (onderdelen.getGeleideFormulier() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getGeleideFormulier()));
+                    }
+
+                    if (onderdelen.getVaststellingsBesluit() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getVaststellingsBesluit()));
+                    }
+
+                    if (onderdelen.getPlanTeksten() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getPlanTeksten()));
+                    }
+
+                    for (String beleidsDocument : onderdelen.getBeleidsDocument()) {
+                        geleideformulier.getBijlages().add(new URL(basisURL + beleidsDocument));
+                    }
+
+                    for (String beleidsDocumentBijlage : onderdelen.getBeleidsDocumentBijlage()) {
+                        geleideformulier.getBijlages().add(new URL(basisURL + beleidsDocumentBijlage));
+                    }
+
+                    if (onderdelen.getBesluitDocument() != null) {
+                        geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getBesluitDocument()));
+                    }
+
+                    for (String besldocbijl : onderdelen.getBesluitDocumentBijlage()) {
+                        geleideformulier.getBijlages().add(new URL(basisURL + besldocbijl));
+                    }
+
+                    for (String beleidsTekst : onderdelen.getBeleidsTekst()) {
+                        geleideformulier.getBijlages().add(new URL(basisURL + beleidsTekst));
+                    }
+
+                    for (String beleidsTekstBijlage : onderdelen.getBeleidsTekstBijlage()) {
+                        geleideformulier.getBijlages().add(new URL(basisURL + beleidsTekstBijlage));
+                    }
+
+                    for (String illustratie : onderdelen.getIllustratie()) {
+                        geleideformulier.getBijlages().add(new URL(basisURL + illustratie));
+                    }
+
+                    geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getIMRO()));
+                    formulieren.add(geleideformulier);
+                } else {
+                    String message = "Type niet ondersteund: " + eigenschappen.getType();
+                    if (eigenschappen.getType() != null) {
+                        message += " - " + eigenschappen.getType().value();
+                        report.addSkipped(message);
+                        throw new IllegalArgumentException(message);
+                    } else {
+                        IllegalArgumentException e = new IllegalArgumentException(message);
+                        report.addErrored(plan.getId(), e);
+                        throw e;
+                    }
                 }
 
-                for (String regelsBijlage : onderdelen.getRegelsBijlage()) {
-                    geleideformulier.getBijlages().add(new URL(basisURL + regelsBijlage));
-                }
-
-                for (String toelichting : onderdelen.getToelichting()) {
-                    geleideformulier.getBijlages().add(new URL(basisURL + toelichting));
-                }
-
-                for (String toelichtingBijlage : onderdelen.getToelichtingBijlage()) {
-                    geleideformulier.getBijlages().add(new URL(basisURL + toelichtingBijlage));
-                }
-
-                if (onderdelen.getGeleideFormulier() != null) {
-                    geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getGeleideFormulier()));
-                }
-
-                if (onderdelen.getVaststellingsBesluit() != null) {
-                    geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getVaststellingsBesluit()));
-                }
-
-                if (onderdelen.getPlanTeksten() != null) {
-                    geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getPlanTeksten()));
-                }
-
-                for (String beleidsDocument : onderdelen.getBeleidsDocument()) {
-                    geleideformulier.getBijlages().add(new URL(basisURL + beleidsDocument));
-                }
-
-                for (String beleidsDocumentBijlage : onderdelen.getBeleidsDocumentBijlage()) {
-                    geleideformulier.getBijlages().add(new URL(basisURL + beleidsDocumentBijlage));
-                }
-
-                if (onderdelen.getBesluitDocument() != null) {
-                    geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getBesluitDocument()));
-                }
-
-                for (String besldocbijl : onderdelen.getBesluitDocumentBijlage()) {
-                    geleideformulier.getBijlages().add(new URL(basisURL + besldocbijl));
-                }
-
-                for (String beleidsTekst : onderdelen.getBeleidsTekst()) {
-                    geleideformulier.getBijlages().add(new URL(basisURL + beleidsTekst));
-                }
-
-                for (String beleidsTekstBijlage : onderdelen.getBeleidsTekstBijlage()) {
-                    geleideformulier.getBijlages().add(new URL(basisURL + beleidsTekstBijlage));
-                }
-
-                for (String illustratie : onderdelen.getIllustratie()) {
-                    geleideformulier.getBijlages().add(new URL(basisURL + illustratie));
-                }
-
-                geleideformulier.getBijlages().add(new URL(basisURL + onderdelen.getIMRO()));
-                formulieren.add(geleideformulier);
-            }else {
-                String message = "Type niet ondersteund: " + eigenschappen.getType();
-                if(eigenschappen.getType() != null){
-                    message +=  " - " + eigenschappen.getType().value();
-                    report.addSkipped( message);
-                    throw new IllegalArgumentException(message);
-                }else{
-                    IllegalArgumentException e = new IllegalArgumentException(message);
-                    report.addErrored(plan.getId(), e);
-                    throw e;
-                }
+            } catch (URISyntaxException | IOException ex) {
+                log.error("Cannot retrieve manifest: ",ex);
+                report.addSkipped( "Cannot retrieve manifest: " + formulierURL.toExternalForm());
             }
         }
         return formulieren;

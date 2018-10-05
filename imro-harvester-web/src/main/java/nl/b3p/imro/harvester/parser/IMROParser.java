@@ -22,6 +22,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
@@ -37,6 +38,11 @@ import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
 import nl.b3p.imro.harvester.processing.GeometryConverter;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.xml.sax.SAXException;
 
 /**
@@ -47,15 +53,15 @@ public interface IMROParser {
 
     static GeometryConverter gc = new GeometryConverter();
 
-    List<Object> parseGML(Geleideformulier geleideformulier) throws JAXBException, URISyntaxException, MalformedURLException, IOException, ParserConfigurationException, SAXException, TransformerException ;
+    List<Object> parseGML(Geleideformulier geleideformulier) throws JAXBException, URISyntaxException, MalformedURLException, IOException, ParserConfigurationException, SAXException, TransformerException;
 
-    List<Object> parseGML(URL u) throws JAXBException, IOException, ParserConfigurationException, SAXException, TransformerException;
+    List<Object> parseGML(URL u) throws JAXBException, IOException, ParserConfigurationException, SAXException, TransformerException, URISyntaxException;
 
-    Object unmarshalUrl(URL u) throws JAXBException ;
+    Object unmarshalUrl(URL u) throws JAXBException, IOException, URISyntaxException;
 
-    List<Object> processFeatureCollection(Object fc) throws  IOException, ParserConfigurationException, SAXException, TransformerException;
+    List<Object> processFeatureCollection(Object fc) throws IOException, ParserConfigurationException, SAXException, TransformerException;
 
-    Object parseFeatureMember(Object o) throws  IOException, ParserConfigurationException, SAXException, TransformerException;
+    Object parseFeatureMember(Object o) throws IOException, ParserConfigurationException, SAXException, TransformerException;
 
     Bestemmingsplan parseImroBestemmingsplan(Object o);
 
@@ -75,12 +81,32 @@ public interface IMROParser {
 
     Maatvoering parseImroMaatvoering(Object o);
 
-    Besluitvlak parseImroBesluitvlak(Object o) throws  IOException, ParserConfigurationException, SAXException, TransformerException, NoSuchMethodException;
+    Besluitvlak parseImroBesluitvlak(Object o) throws IOException, ParserConfigurationException, SAXException, TransformerException, NoSuchMethodException;
 
-    Besluitsubvlak parseImroBesluitsubvlak(Object o) throws  IOException, ParserConfigurationException, SAXException, TransformerException, NoSuchMethodException;
+    Besluitsubvlak parseImroBesluitsubvlak(Object o) throws IOException, ParserConfigurationException, SAXException, TransformerException, NoSuchMethodException;
 
     Besluitgebied parseImroBesluitgebied(Object o);
 
     String getIdentificatie(Object id);
 
+    default public Object retrieveXMLObjectFromURL(URL url, Unmarshaller unmarshaller) throws IOException, JAXBException, URISyntaxException {
+        if (!url.toExternalForm().startsWith("file:")) {
+            HttpClient client = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
+
+            HttpGet httpGet = new HttpGet(url.toURI());
+            HttpResponse response = client.execute(httpGet);
+
+            int statuscode = response.getStatusLine().getStatusCode();
+
+            if (statuscode >= 200 && statuscode <= 299) {
+                Object xmlObject = unmarshaller.unmarshal(response.getEntity().getContent());
+                return xmlObject;
+            } else {
+                String statusLine = response.getStatusLine().getReasonPhrase();
+                throw new IOException("Cannot retrieve xmlobject: " + statuscode + " - " + statusLine);
+            }
+        } else {
+            return unmarshaller.unmarshal(url);
+        }
+    }
 }
