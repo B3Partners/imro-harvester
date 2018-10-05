@@ -16,11 +16,23 @@
  */
 package nl.b3p.imro.harvester.parser;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import nl.b3p.imro.harvester.processing.StatusReport;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.LaxRedirectStrategy;
 
 /**
  *
@@ -28,7 +40,26 @@ import nl.b3p.imro.harvester.processing.StatusReport;
  */
 public interface STRIParser {
 
+    public static final Log log = LogFactory.getLog(STRIParser.class);
+
     List<URL> getGeleideformulierURLSFromManifest(URL manifestURL) throws JAXBException, MalformedURLException;
+
     List<Geleideformulier> retrieveGeleideformulieren(List<URL> geleideformulieren, StatusReport report) throws MalformedURLException, JAXBException;
 
+    default public Object retrieveXMLObjectFromURL(URL url, Unmarshaller unmarshaller) throws IOException, JAXBException, URISyntaxException {
+        HttpClient client = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
+
+        HttpGet httpGet = new HttpGet(url.toURI());
+        HttpResponse response = client.execute(httpGet);
+
+        int statuscode = response.getStatusLine().getStatusCode();
+
+        if (statuscode >= 200 && statuscode <= 299) {
+            Object geleideformulierObject = unmarshaller.unmarshal(response.getEntity().getContent());
+            return geleideformulierObject;
+        } else {
+            String statusLine = response.getStatusLine().getReasonPhrase();
+            throw new IOException("Cannot retrieve geleideformulier: " + statuscode  + " - " + statusLine);
+        }
+    }
 }

@@ -70,7 +70,9 @@
             var currentpage = 'harvestjobs';
             var url = "<stripes:url beanclass="nl.b3p.imro.harvester.stripes.HarvestJobActionBean" event="viewLog"/>";
             function openLog(id){
+            
                 $( "#modal-body" ).load( url + "&job=" + id);
+                
                 $('#myModal').modal('show');
             }
         </script>

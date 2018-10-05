@@ -16,6 +16,7 @@
         <geotools.version>19.2</geotools.version>
         <hsqldb.version>2.4.1</hsqldb.version>
         <maven.surefire.version>2.22.0</maven.surefire.version>
+        <apache.httpcomponents.version>4.5.6</apache.httpcomponents.version>
     </properties>
     <scm>
         <connection>scm:git:git@github.com:B3Partners/imro-harvester.git</connection>
@@ -206,12 +207,24 @@
                 <artifactId>commons-io</artifactId>
                 <version>2.6</version>
             </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.2.5</version>
-            <scope>provided</scope>
-        </dependency>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>42.2.5</version>
+                <scope>provided</scope>
+            </dependency> 
+            
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${apache.httpcomponents.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>xerces</groupId>
+                <artifactId>xercesImpl</artifactId>
+                <version>2.12.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>

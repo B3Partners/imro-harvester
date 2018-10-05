@@ -17,11 +17,18 @@
 package nl.b3p.imro.harvester.parser;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.processing.ROType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -76,7 +83,7 @@ public class ParserFactory {
     
     protected final static Element IMRO2012V11_ROOTELEMENT = new Element("FeatureCollectionIMRO", Namespace.getNamespace("http://www.geonovum.nl/imro/2012/1.1"));
 
-    public STRIParser getSTRIParser(URL u) throws IOException, JDOMException {
+    public STRIParser getSTRIParser(URL u) throws IOException, JDOMException, URISyntaxException {
         ROType type = getROType(u);
 
         if (type.equals(ROType.STRI2012)) {
@@ -90,7 +97,7 @@ public class ParserFactory {
         }
     }
 
-    public IMROParser getIMROParser(Geleideformulier geleideformulier) throws IOException, JDOMException, JAXBException {
+    public IMROParser getIMROParser(Geleideformulier geleideformulier) throws IOException, JDOMException, JAXBException, URISyntaxException {
 
         ROType type = getROType(geleideformulier.getGML());
          if (type.equals(ROType.IMRO2006)) {
@@ -106,32 +113,46 @@ public class ParserFactory {
         }
     }
 
-    public static ROType getROType(URL inputXmlFullPath) throws IOException, JDOMException {
-        Document inputXml = new SAXBuilder().build(inputXmlFullPath);
+    public static ROType getROType(URL inputXmlFullPath) throws IOException, JDOMException, URISyntaxException {
+        
+        HttpClient client =  HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
+       
+        HttpGet httpGet = new HttpGet(inputXmlFullPath.toURI());
+        HttpResponse response = client.execute(httpGet);
+        int statuscode = response.getStatusLine().getStatusCode();
 
-        if (!inputXml.hasRootElement()) {
-            throw new IllegalArgumentException("Document contains no root element");
-        }
-        Element rootElem = inputXml.getRootElement();
+        if (statuscode >= 200 && statuscode <= 299) {
+            HttpEntity entity = response.getEntity();
 
-        if (isElementEqual(rootElem, IMRO2006_ROOTELEMENT)){// || isElementEqual(rootElem, IMRO2008_PCPROOTELEMENT)) {
-            return ROType.IMRO2006;
-        } else if (isElementEqual(rootElem, IMRO2008_ROOTELEMENT)){// || isElementEqual(rootElem, IMRO2008_PCPROOTELEMENT)) {
-            return ROType.IMRO2008;
-        } else if (isElementEqual(rootElem, IMRO2012V10_ROOTELEMENT)) {
-            return ROType.IMRO2012V10;
-        } else if (isElementEqual(rootElem, IMRO2012V11_ROOTELEMENT)) {
-            return ROType.IMRO2012V11;
-        } else if (isElementEqual(rootElem, STRI2012V1_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2012V1_ROOTELEMENT_MANIFEST)
-                || isElementEqual(rootElem, STRI2012V2_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2012V2_ROOTELEMENT_MANIFEST)) {
-            return ROType.STRI2012;
-        } else if (isElementEqual(rootElem, STRI2008_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2008_ROOTELEMENT_MANIFEST)) {
-            return ROType.STRI2008;
-        } else if (isElementEqual(rootElem, STRI2006_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2006_ROOTELEMENT_MANIFEST)) {
-            return ROType.STRI2006;
-        } else {
-            log.error("Unrecognized root element: " + rootElem);
-            return ROType.UNKNOWN;
+            Document inputXml = new SAXBuilder().build(entity.getContent());
+
+            if (!inputXml.hasRootElement()) {
+                throw new IllegalArgumentException("Document contains no root element");
+            }
+            Element rootElem = inputXml.getRootElement();
+
+            if (isElementEqual(rootElem, IMRO2006_ROOTELEMENT)) {// || isElementEqual(rootElem, IMRO2008_PCPROOTELEMENT)) {
+                return ROType.IMRO2006;
+            } else if (isElementEqual(rootElem, IMRO2008_ROOTELEMENT)) {// || isElementEqual(rootElem, IMRO2008_PCPROOTELEMENT)) {
+                return ROType.IMRO2008;
+            } else if (isElementEqual(rootElem, IMRO2012V10_ROOTELEMENT)) {
+                return ROType.IMRO2012V10;
+            } else if (isElementEqual(rootElem, IMRO2012V11_ROOTELEMENT)) {
+                return ROType.IMRO2012V11;
+            } else if (isElementEqual(rootElem, STRI2012V1_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2012V1_ROOTELEMENT_MANIFEST)
+                    || isElementEqual(rootElem, STRI2012V2_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2012V2_ROOTELEMENT_MANIFEST)) {
+                return ROType.STRI2012;
+            } else if (isElementEqual(rootElem, STRI2008_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2008_ROOTELEMENT_MANIFEST)) {
+                return ROType.STRI2008;
+            } else if (isElementEqual(rootElem, STRI2006_ROOTELEMENT_GELEIDEFORMULIER) || isElementEqual(rootElem, STRI2006_ROOTELEMENT_MANIFEST)) {
+                return ROType.STRI2006;
+            } else {
+                log.error("Unrecognized root element: " + rootElem);
+                return ROType.UNKNOWN;
+            }
+        }else{
+            String statusLine = response.getStatusLine().getReasonPhrase();
+            throw new IOException( statuscode +": " + statusLine);
         }
     }
 

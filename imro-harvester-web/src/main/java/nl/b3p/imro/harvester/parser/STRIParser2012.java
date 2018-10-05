@@ -16,7 +16,9 @@
  */
 package nl.b3p.imro.harvester.parser;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,32 +47,38 @@ public class STRIParser2012 implements STRIParser{
     @Override
     public List<URL> getGeleideformulierURLSFromManifest(URL manifestUrl) throws JAXBException, MalformedURLException {
         List<URL> geleideformulieren = new ArrayList<>();
+        try {
 
-        Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
-        Object m = jaxbUnmarshaller.unmarshal(manifestUrl);
+            Unmarshaller jaxbUnmarshaller = jaxbSTRIContext.createUnmarshaller();
+            Object m = retrieveXMLObjectFromURL(manifestUrl, jaxbUnmarshaller);
 
-        // Support two versions of the manifest. Sadly, almost the same, but namespaces in xsd differ.
-        if (m instanceof nl.geonovum.stri._2012._1.Manifest) {
-            nl.geonovum.stri._2012._1.Manifest manifest = (nl.geonovum.stri._2012._1.Manifest) m;
-            List<nl.geonovum.stri._2012._1.Dossier> dossiers = manifest.getDossier();
-            for (nl.geonovum.stri._2012._1.Dossier dossier : dossiers) {
-                List<nl.geonovum.stri._2012._1.Dossier.Plan> plannen = dossier.getPlan();
-                for (nl.geonovum.stri._2012._1.Dossier.Plan plan : plannen) {
-                    geleideformulieren.add(new URL(plan.getGeleideFormulier()));
+            // Support two versions of the manifest. Sadly, almost the same, but namespaces in xsd differ.
+            if (m instanceof nl.geonovum.stri._2012._1.Manifest) {
+                nl.geonovum.stri._2012._1.Manifest manifest = (nl.geonovum.stri._2012._1.Manifest) m;
+                List<nl.geonovum.stri._2012._1.Dossier> dossiers = manifest.getDossier();
+                for (nl.geonovum.stri._2012._1.Dossier dossier : dossiers) {
+                    List<nl.geonovum.stri._2012._1.Dossier.Plan> plannen = dossier.getPlan();
+                    for (nl.geonovum.stri._2012._1.Dossier.Plan plan : plannen) {
+                        geleideformulieren.add(new URL(plan.getGeleideFormulier()));
+                    }
                 }
-            }
-        } else if (m instanceof nl.geonovum.stri._2012._2.Manifest) {
-            nl.geonovum.stri._2012._2.Manifest manifest = (nl.geonovum.stri._2012._2.Manifest) m;
-            List<nl.geonovum.stri._2012._2.Dossier> dossiers = manifest.getDossier();
-            for (nl.geonovum.stri._2012._2.Dossier dossier : dossiers) {
-                List<nl.geonovum.stri._2012._2.Dossier.Plan> plannen = dossier.getPlan();
-                for (nl.geonovum.stri._2012._2.Dossier.Plan plan : plannen) {
-                    geleideformulieren.add(new URL(plan.getGeleideFormulier()));
+            } else if (m instanceof nl.geonovum.stri._2012._2.Manifest) {
+                nl.geonovum.stri._2012._2.Manifest manifest = (nl.geonovum.stri._2012._2.Manifest) m;
+                List<nl.geonovum.stri._2012._2.Dossier> dossiers = manifest.getDossier();
+                for (nl.geonovum.stri._2012._2.Dossier dossier : dossiers) {
+                    List<nl.geonovum.stri._2012._2.Dossier.Plan> plannen = dossier.getPlan();
+                    for (nl.geonovum.stri._2012._2.Dossier.Plan plan : plannen) {
+                        geleideformulieren.add(new URL(plan.getGeleideFormulier()));
+                    }
                 }
+            } else {
+                log.error("Manifest of unknown version. Object: " + m.getClass());
             }
-        }else{
-            log.error("Manifest of unknown version. Object: " + m.getClass());
+
+        } catch (URISyntaxException | IOException ex) {
+            log.error("Cannot get manifest url: ", ex);
         }
+        
         return geleideformulieren;
     }
 
@@ -82,13 +90,14 @@ public class STRIParser2012 implements STRIParser{
         for (URL geleideformulierURL : geleideformulieren) {
             try {
                 Geleideformulier geleideformulier = null;
-                Object geleideformulierObject = jaxbUnmarshaller.unmarshal(geleideformulierURL);
+
+                Object geleideformulierObject = retrieveXMLObjectFromURL(geleideformulierURL, jaxbUnmarshaller);
                 // Support two versions of the manifest. Sadly, almost the same, but namespaces in xsd differ.
                 if (geleideformulierObject instanceof nl.geonovum.stri._2012._1.GeleideFormulier) {
                     nl.geonovum.stri._2012._1.GeleideFormulier gf = (nl.geonovum.stri._2012._1.GeleideFormulier) geleideformulierObject;
                     nl.geonovum.stri._2012._1.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
 
-                if (HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())){
+                    if (HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())) {
                         geleideformulier = new Geleideformulier();
                         nl.geonovum.stri._2012._1.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
 
@@ -139,7 +148,7 @@ public class STRIParser2012 implements STRIParser{
                         geleideformulier.setVersie(eigenschappen.getVersieIMRO());
                         geleideformulier.setType(eigenschappen.getType().value());
                         geleideformulier.setImro(onderdelen.getIMRO());
-                    }else{
+                    } else {
                         report.addSkipped("Type niet ondersteund: " + eigenschappen.getType().value());
                         throw new IllegalArgumentException("Type onbekend: " + eigenschappen.getType());
                     }
@@ -147,8 +156,7 @@ public class STRIParser2012 implements STRIParser{
                     nl.geonovum.stri._2012._2.GeleideFormulier gf = (nl.geonovum.stri._2012._2.GeleideFormulier) geleideformulierObject;
                     nl.geonovum.stri._2012._2.Plan.Eigenschappen eigenschappen = gf.getPlan().getEigenschappen();
 
-
-                    if (HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())){
+                    if (HarvesterInitializer.canProcessPlantype(eigenschappen.getType().value())) {
                         geleideformulier = new Geleideformulier();
                         nl.geonovum.stri._2012._2.Plan.Onderdelen onderdelen = gf.getPlan().getOnderdelen();
                         String basisurl = onderdelen.getBasisURL();
@@ -199,16 +207,18 @@ public class STRIParser2012 implements STRIParser{
                         geleideformulier.setVersie(eigenschappen.getVersieGML());
                         geleideformulier.setType(eigenschappen.getType().value());
                         geleideformulier.setImro(onderdelen.getGML());
-                    }else{
+                    } else {
                         report.addSkipped("Type niet ondersteund: " + eigenschappen.getType().value());
                         throw new IllegalArgumentException("Type onbekend: " + eigenschappen.getType());
                     }
                 }
-                if(geleideformulier != null){
+                if (geleideformulier != null) {
                     urls.add(geleideformulier);
                 }
-            } catch (JAXBException ex) {
-                log.debug("Cannot unmarshal geleideformulier" + geleideformulierURL);
+
+            } catch (JAXBException | URISyntaxException | IOException ex) {
+                log.debug("Cannot unmarshal geleideformulier" + geleideformulierURL + ex.getLocalizedMessage());
+                report.addSkipped( "Cannot retrieve manifest: " + geleideformulierURL.toExternalForm());
             }
         }
 
