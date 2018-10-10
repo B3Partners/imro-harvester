@@ -253,11 +253,11 @@
                         <id>schema-export</id>
                         <phase>process-classes</phase>
                         <configuration>
-                            <hibernatetool destdir="${project.build.directory}/ddlscripts">
+                            <hibernatetool destdir="${project.build.outputDirectory}/db">
                                 <classpath>
                                     <path location="target" />
                                 </classpath>
-                                <hbm2ddl export="false" drop="false" create="true" outputfilename="schemaexport.sql" format="true">
+                                <hbm2ddl export="false" drop="false" create="true" outputfilename="0.schemaexport.sql" format="true">
                                     <jpaconfiguration persistenceUnit="imroPU" />
                                 </hbm2ddl>
                             </hibernatetool>
