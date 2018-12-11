@@ -19,6 +19,10 @@ package nl.b3p.imro.harvester.parser;
 import java.net.URL;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.processing.ROType;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.mockito.Mockito;
@@ -35,6 +39,9 @@ public class ParserFactoryTest {
 
     public ParserFactoryTest() throws JAXBException {
         instance = new ParserFactory();
+        Logger root = Logger.getRootLogger();
+        root.addAppender(new ConsoleAppender(new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
+        Logger.getLogger("org.apache.http").setLevel(Level.OFF);
     }
 
     /**

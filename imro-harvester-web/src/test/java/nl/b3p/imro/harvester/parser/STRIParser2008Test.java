@@ -22,6 +22,10 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.processing.HarvesterInitializer;
 import nl.b3p.imro.harvester.processing.StatusReport;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
@@ -35,6 +39,10 @@ public class STRIParser2008Test {
     private StatusReport report = new StatusReport();
     private static STRIParser2008 instance;
     public STRIParser2008Test() {
+        
+        Logger root = Logger.getRootLogger();
+        root.addAppender(new ConsoleAppender(new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
+        Logger.getLogger("org.apache.http").setLevel(Level.OFF);
     }
 
     @BeforeClass

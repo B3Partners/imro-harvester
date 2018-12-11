@@ -35,6 +35,10 @@ import nl.b3p.imro.harvester.entities.imro.Enkelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Figuur;
 import nl.b3p.imro.harvester.parser.Geleideformulier;
 import nl.b3p.imro.harvester.parser.STRIParser2012;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 import org.jdom2.JDOMException;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -48,6 +52,10 @@ import org.mockito.Mockito;
 public class ProcessorTest {
 
     public ProcessorTest() {
+        
+        Logger root = Logger.getRootLogger();
+        root.addAppender(new ConsoleAppender(new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
+        Logger.getLogger("org.apache.http").setLevel(Level.OFF);
     }
 
     private Processor instance = null;
