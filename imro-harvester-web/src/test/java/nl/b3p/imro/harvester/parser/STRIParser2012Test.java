@@ -24,6 +24,10 @@ import javax.xml.bind.JAXBException;
 import nl.b3p.imro.harvester.entities.HarvestJob;
 import nl.b3p.imro.harvester.processing.HarvesterInitializer;
 import nl.b3p.imro.harvester.processing.StatusReport;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -37,6 +41,10 @@ public class STRIParser2012Test {
     private HarvestJob job = null;
     private StatusReport report = new StatusReport();
     public STRIParser2012Test() throws JAXBException, MalformedURLException {
+        
+        Logger root = Logger.getRootLogger();
+        root.addAppender(new ConsoleAppender(new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
+        Logger.getLogger("org.apache.http").setLevel(Level.OFF);
         instance = new STRIParser2012();
 
         job = new HarvestJob();

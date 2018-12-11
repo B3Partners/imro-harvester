@@ -32,6 +32,10 @@ import nl.b3p.imro.harvester.entities.imro.Figuur;
 import nl.b3p.imro.harvester.entities.imro.Functieaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import nl.b3p.imro.harvester.entities.imro.Maatvoering;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.mockito.Mockito;
@@ -46,6 +50,9 @@ public class IMROParser2012_10Test {
     private IMROParser2012_10 instance ;
     public IMROParser2012_10Test() throws JAXBException, URISyntaxException, IOException {
         instance = new IMROParser2012_10();
+        Logger root = Logger.getRootLogger();
+        root.addAppender(new ConsoleAppender(new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
+        Logger.getLogger("org.apache.http").setLevel(Level.OFF);
     }
 
     /**

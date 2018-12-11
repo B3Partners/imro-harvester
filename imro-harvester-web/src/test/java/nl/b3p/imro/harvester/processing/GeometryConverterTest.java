@@ -35,6 +35,7 @@ import javax.xml.xpath.XPathFactory;
 import nl.b3p.imro.harvester.entities.imro.Dubbelbestemming;
 import nl.b3p.imro.harvester.entities.imro.Gebiedsaanduiding;
 import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.junit.After;
@@ -57,6 +58,10 @@ public class GeometryConverterTest {
     private GeometryConverter instance = new GeometryConverter();
 
     public GeometryConverterTest() {
+        
+        Logger root = Logger.getRootLogger();
+        root.addAppender(new ConsoleAppender(new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
+        Logger.getLogger("org.apache.http").setLevel(Level.OFF);
     }
 
     @BeforeClass
