@@ -22,9 +22,10 @@ De sld's om de bestemmingsplannen te verbeelden in bijvoorbeeld geoserver.
 # Installatie
 * Maak imro database aan
 * create extension postgis
+* Maak war, en uit de war haal de volgende bestanden:
 * Met de correcte user:
-  * voer uit imro-harvester-web/target/ddlscripts het bestand schemaexport.sql uit
-  * voer uit imro-harvester-web/src/main/resources/db 1.geometrycolumns.sql en 2.inserts.sql uit
+  * voer uit imro-harvester/WEB-INF/classes/db/ het bestand 0.schemaexport.sql uit
+  * voer uit imro-harvester/WEB-INF/classes/db/ 1.geometrycolumns.sql en 2.inserts.sql uit
 * Pas in de .war de persistence.xml aan met de juiste db gegevens
 * Maak een map aan voor alle te downloaden bestanden
 * Configureer de harvester: https://github.com/B3Partners/imro-harvester/wiki/Howto
