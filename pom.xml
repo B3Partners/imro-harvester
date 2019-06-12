@@ -16,7 +16,7 @@
         <geotools.version>19.2</geotools.version>
         <hsqldb.version>2.4.1</hsqldb.version>
         <maven.surefire.version>2.22.1</maven.surefire.version>
-        <apache.httpcomponents.version>4.5.6</apache.httpcomponents.version>
+        <apache.httpcomponents.version>4.5.9</apache.httpcomponents.version>
     </properties>
     <scm>
         <connection>scm:git:git@github.com:B3Partners/imro-harvester.git</connection>
