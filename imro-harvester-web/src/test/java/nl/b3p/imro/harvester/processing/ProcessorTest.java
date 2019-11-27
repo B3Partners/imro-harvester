@@ -73,6 +73,7 @@ public class ProcessorTest {
         //"https://www.ruimtelijkeplannen.nl/web-roi/index/showManifest?organizationId=aaenhunze&striVersion=STRI2008"
         job.setUrl(u.toString());
         instance = new Processor(Collections.singletonList(job), downloadfolder);
+        HarvesterInitializer.initPlantypes();
 
     }
 
@@ -83,7 +84,7 @@ public class ProcessorTest {
         job.setUrl("https://www.ruimtelijkeplannen.nl/web-roi/index/showManifest?organizationId=zaltbommel&striVersion=STRI2008");
         instance = new Processor(Collections.singletonList(job), downloadfolder);
         URL u = instance.getManifestURL(job);
-        assertEquals(new URL("http://ruimtelijkeplannen.zaltbommel.nl/manifest.xml"), u);
+        assertEquals(new URL("https://digitaleplannen.nl/0297/manifest_STRI2012_0297.xml"), u);
     }
 
     @Test
