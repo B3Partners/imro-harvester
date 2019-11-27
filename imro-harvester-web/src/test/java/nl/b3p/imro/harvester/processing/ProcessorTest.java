@@ -217,4 +217,15 @@ public class ProcessorTest {
         assertEquals(new URL("http://ro.middelburg.nl/70BB02BE-C637-4335-9CE4-59D3E447D8AC/NL.IMRO.0687.BPMOR-VW02.gml"), forms.get(0).getGML());
         assertEquals(new URL("http://files.b3p.nl/imroharvester/1.txt"), forms.get(1).getGML());
     }
+    
+    @Test
+    public void testBeheersverordeningen() throws IOException, JDOMException, JAXBException, URISyntaxException {
+        //https://www.tynaarlo.nl/ruimtelijkeplannen/manifest2008.xml
+        final URL inputXmlFullPath = this.getClass().getResource("manifest2008_tynaarlo.xml");
+
+        List<Geleideformulier> forms = instance.getGeleideformulierenFromManifestURL(inputXmlFullPath, new StatusReport());
+        assertEquals(1, forms.size());
+        assertEquals(new URL("http://www.tynaarlo.nl/ruimtelijkeplannen/NL.IMRO.1730.BVVriesKern-0401/NL.IMRO.1730.BVVriesKern-0401.gml"), forms.get(0).getGML());
+        //assertEquals(new URL("http://files.b3p.nl/imroharvester/1.txt"), forms.get(1).getGML());
+    }
 }

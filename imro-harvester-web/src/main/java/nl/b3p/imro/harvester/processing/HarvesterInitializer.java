@@ -122,8 +122,10 @@ public class HarvesterInitializer implements Servlet {
         SUPPORTED_PLAN_TYPES.add(nl.b3p.stri._2008._1.TypePlan.BESTEMMINGSPLAN.value());
         SUPPORTED_PLAN_TYPES.add(nl.b3p.stri._2008._1.TypePlan.PROJECTBESLUIT.value());
         SUPPORTED_PLAN_TYPES.add(nl.b3p.stri._2008._1.TypePlan.WIJZIGINGSPLAN.value());
+        SUPPORTED_PLAN_TYPES.add(nl.b3p.stri._2008._1.TypePlan.BEHEERSVERORDENING.value());
         SUPPORTED_PLAN_TYPES.add(nl.geonovum.stri._2012._1.TypePlan.OMGEVINGSVERGUNNING.value());
         SUPPORTED_PLAN_TYPES.add(nl.geonovum.stri._2012._1.TypePlan.UITWERKINGSPLAN.value());
+        SUPPORTED_PLAN_TYPES.add(nl.geonovum.stri._2012._1.TypePlan.BEHEERSVERORDENING.value());
     }
 
     @Override

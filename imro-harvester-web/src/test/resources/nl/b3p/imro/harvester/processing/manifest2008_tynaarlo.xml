@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Manifest Datum="2019-11-22" NaamOverheid="Tynaarlo" OverheidsCode="1730" xmlns="http://www.geonovum.nl/stri/2012/1.0" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:stri="http://www.geonovum.nl/stri/2012/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geonovum.nl/stri/2012/1.0 http://schemas.geonovum.nl/stri/2012/1.0/STRI2012.xsd">
+	<Dossier Id="NL.IMRO.1730.BVVriesKern" Status="geheel onherroepelijk in werking">
+		<Plan Id="NL.IMRO.1730.BVVriesKern-0401">
+			<Naam>Beheersverordening Vries</Naam>
+			<Datum>2017-03-21</Datum>
+			<GeleideFormulier>http://www.tynaarlo.nl/ruimtelijkeplannen/NL.IMRO.1730.BVVriesKern-0401/g_NL.IMRO.1730.BVVriesKern-0401.xml</GeleideFormulier>
+		</Plan>
+	</Dossier>
+	<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+		<SignedInfo>
+			<CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+			<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+			<Reference URI="">
+				<Transforms>
+					<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+				</Transforms>
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>4PxG9Up2l/0UTrffQg3Pyc/Zl1g=</DigestValue>
+			</Reference>
+		</SignedInfo>
+		<SignatureValue>M/3fj7xF4zq0VFQ3ezOmnyYL80LTZUgU0BHO/SxIpJ4Ff1rGZNefkFKdCoKcRHm85s5Udhcy93ZkYP6RBgo3G7IKty/Mpgies0THx/z/N+X74zYB/5Zbj08k44U+AUNNUNvKw5r7/JZN9H7brlF0AUSQjLRkKYGPfhas8H5XdEYSCHXybLZUu8pDEjTOYZRwL+y/MtJMhpIi/Ii9O68p41VoouNxqKz3ftooGGLrviLS3iZYKF2mip3HGMbKCsnm7C/NsFIH0xkzvN8r0VmEA2BD+SC5HzuhRYcZ5DwhBn1mvKzA4o6BV/pimbQK0A237A3nqdzRF8GfIA2Ta//JUA==</SignatureValue>
+		<KeyInfo>
+			<X509Data>
+				<X509Certificate>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</X509Certificate>
+			</X509Data>
+		</KeyInfo>
+	</Signature>
+</Manifest>
