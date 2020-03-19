@@ -16,7 +16,7 @@
  */
 package nl.b3p.imro.harvester.entities.imro;
 
-import com.vividsolutions.jts.geom.MultiPolygon;
+import org.locationtech.jts.geom.MultiPolygon;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

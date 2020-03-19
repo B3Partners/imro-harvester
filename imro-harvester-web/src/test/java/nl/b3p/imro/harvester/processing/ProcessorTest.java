@@ -63,7 +63,7 @@ public class ProcessorTest {
     private File downloadfolder = null;
 
     @Before
-    public void initTests() throws MalformedURLException, JAXBException {
+    public void initTests() throws IOException, JAXBException {
         job = new HarvestJob();
         downloadfolder = new File("target");
 

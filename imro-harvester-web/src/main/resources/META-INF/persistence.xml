@@ -27,6 +27,7 @@
             <property name="hibernate.connection.username" value="imro"/>
             <property name="hibernate.connection.password" value="imro"/>
             <property name="hibernate.default_schema" value="public"/>
+            <property name="javax.persistence.validation.mode" value="none"/>
 
             <!--property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/-->
             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>

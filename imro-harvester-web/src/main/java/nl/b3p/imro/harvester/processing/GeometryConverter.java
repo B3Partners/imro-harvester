@@ -16,29 +16,23 @@
  */
 package nl.b3p.imro.harvester.processing;
 
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.LineString;
-import com.vividsolutions.jts.geom.MultiLineString;
-import com.vividsolutions.jts.geom.MultiPolygon;
-import com.vividsolutions.jts.geom.Polygon;
-import com.vividsolutions.jts.geom.PrecisionModel;
-import com.vividsolutions.jts.simplify.DouglasPeuckerSimplifier;
-import java.io.IOException;
-import java.io.InvalidClassException;
-import java.io.StringReader;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.geotools.gml3.ArcParameters;
 import org.geotools.gml3.CircleRadiusTolerance;
-import org.geotools.gml3.GMLConfiguration;
-import org.geotools.xml.Parser;
+import org.geotools.xsd.Parser;
 import org.jdom2.input.DOMBuilder;
 import org.jdom2.output.XMLOutputter;
+import org.locationtech.jts.geom.*;
+import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import java.io.IOException;
+import java.io.InvalidClassException;
+import java.io.StringReader;
 
 /**
  *
@@ -66,11 +60,11 @@ public class GeometryConverter {
 
         ArcParameters arcParameters = new ArcParameters(new CircleRadiusTolerance(LINEARIZATION_TOLERANCE_MULTIPLIER));//new AbsoluteTolerance(LINEARIZATION_TOLERANCE));
 
-        org.geotools.gml3.GMLConfiguration gml3Config = new org.geotools.gml3.GMLConfiguration();
-        gml3Config.setExtendedArcSurfaceSupport(true);
-        gml3Config.getContext().registerComponentInstance(gf);
-        gml3Config.getContext().registerComponentInstance(arcParameters);
-        parser = new Parser(gml3Config);
+        org.geotools.xsd.Configuration configuration = new org.geotools.gml3.GMLConfiguration();
+        ((org.geotools.gml3.GMLConfiguration)configuration).setExtendedArcSurfaceSupport(true);
+        configuration.getContext().registerComponentInstance(gf);
+        configuration.getContext().registerComponentInstance(arcParameters);
+        this.parser = new org.geotools.xsd.Parser( configuration );
         this.geometryFactory = gf;
     }
 
