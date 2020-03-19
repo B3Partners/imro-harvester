@@ -14,7 +14,7 @@
         <harvester.version>1.8-SNAPSHOT</harvester.version>
         <hibernate.version>3.6.10.Final</hibernate.version>
         <geotools.version>22.2</geotools.version>
-        <hsqldb.version>2.4.1</hsqldb.version>
+        <hsqldb.version>2.5.0</hsqldb.version>
         <maven.surefire.version>2.22.2</maven.surefire.version>
         <apache.httpcomponents.version>4.5.9</apache.httpcomponents.version>
     </properties>
