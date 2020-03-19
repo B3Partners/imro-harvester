@@ -16,7 +16,7 @@
         <geotools.version>22.2</geotools.version>
         <hsqldb.version>2.5.0</hsqldb.version>
         <maven.surefire.version>2.22.2</maven.surefire.version>
-        <apache.httpcomponents.version>4.5.9</apache.httpcomponents.version>
+        <apache.httpcomponents.version>4.5.12</apache.httpcomponents.version>
     </properties>
     <scm>
         <connection>scm:git:git@github.com:B3Partners/imro-harvester.git</connection>
@@ -36,7 +36,7 @@
                 <!-- nodig voor hibernate -->
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.25</version>
+                <version>1.7.30</version>
             </dependency>
             <dependency>
                 <groupId>log4j</groupId>
@@ -145,7 +145,7 @@
             <dependency>
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
-                <version>1.11.3</version>
+                <version>1.13.1</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
