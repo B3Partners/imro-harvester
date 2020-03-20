@@ -38,7 +38,6 @@ public class Figuur{
 
     protected String naam;
 
-    @org.hibernate.annotations.Type(type = "org.hibernatespatial.GeometryUserType")
     protected MultiLineString geometrie;
 
     protected String artikelnummer;

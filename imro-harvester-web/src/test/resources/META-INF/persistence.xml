@@ -3,7 +3,8 @@
 
      <persistence-unit name="imro-hsqldb" transaction-type="RESOURCE_LOCAL">
         <!-- de hsqldb in-memory of file database wordt gebruikt voor unit tests. -->
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <!--mapping-file>META-INF/orm-hsqldb.xml</mapping-file-->
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>

@@ -41,7 +41,6 @@ public class Besluitsubvlak {
 
     private String naam;
 
-    @org.hibernate.annotations.Type(type = "org.hibernatespatial.GeometryUserType")
     private MultiPolygon geometrie;
 
     private String verwijzing;

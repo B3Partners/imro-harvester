@@ -40,7 +40,6 @@ public class Bestemmingsplan {
 
     protected String naam;
 
-    @org.hibernate.annotations.Type(type = "org.hibernatespatial.GeometryUserType")
     protected MultiPolygon geometrie;
 
     private String typePlan;

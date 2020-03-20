@@ -41,7 +41,6 @@ public abstract class ImroEntity {
     
     protected String naam;
 
-    @org.hibernate.annotations.Type(type = "org.hibernatespatial.GeometryUserType")
     protected MultiPolygon geometrie;
 
     protected String artikelnummer;
