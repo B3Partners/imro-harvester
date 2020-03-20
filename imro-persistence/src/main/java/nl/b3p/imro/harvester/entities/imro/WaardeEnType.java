@@ -46,7 +46,7 @@ public class WaardeEnType {
     protected int id;
     
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "maatvoering")
     private Maatvoering maatvoering;
 
     private String waarde;

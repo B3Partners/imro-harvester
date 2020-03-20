@@ -17,11 +17,8 @@
 package nl.b3p.imro.harvester.entities.imro;
 
 import org.locationtech.jts.geom.MultiLineString;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+
+import javax.persistence.*;
 
 /**
  * Does not extend from ImroEntity, because it has a linestring as geometrytype
@@ -59,6 +56,7 @@ public class Figuur{
     }
 
     @ManyToOne
+    @JoinColumn(name = "bestemmingsplan")
     private Bestemmingsplan bestemmingsplan;
 
     public Bestemmingsplan getBestemmingsplan() {

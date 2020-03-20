@@ -17,13 +17,8 @@
 package nl.b3p.imro.harvester.entities.imro;
 
 import org.locationtech.jts.geom.MultiPolygon;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
+
+import javax.persistence.*;
 
 /**
  *
@@ -53,6 +48,7 @@ public abstract class ImroEntity {
 
 
     @ManyToOne
+    @JoinColumn(name = "bestemmingsplan")
     private Bestemmingsplan bestemmingsplan;
 
     public Bestemmingsplan getBestemmingsplan() {
