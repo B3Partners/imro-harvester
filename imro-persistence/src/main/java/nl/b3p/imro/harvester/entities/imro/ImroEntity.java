@@ -24,7 +24,7 @@ import javax.persistence.*;
  *
  * @author Meine Toonen meinetoonen@b3partners.nl
  */
-@MappedSuperclass
+@Entity()
 @Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class ImroEntity {
 

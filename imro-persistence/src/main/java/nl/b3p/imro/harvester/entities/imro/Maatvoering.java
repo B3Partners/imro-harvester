@@ -18,8 +18,7 @@ package nl.b3p.imro.harvester.entities.imro;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 /**
  *
@@ -27,6 +26,10 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Maatvoering extends ImroEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected int id;
 
     @OneToMany(mappedBy = "maatvoering")
     private List<WaardeEnType> waardeEnType = new ArrayList<WaardeEnType>();
@@ -39,4 +42,13 @@ public class Maatvoering extends ImroEntity {
         this.waardeEnType = waardeEnType;
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
 }

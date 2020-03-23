@@ -17,6 +17,9 @@
 package nl.b3p.imro.harvester.entities.imro;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
@@ -25,6 +28,9 @@ import javax.persistence.Entity;
 @Entity
 public class Gebiedsaanduiding extends ImroEntity{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected int id;
 
     private String gebiedsaanduidinggroep;
 
@@ -36,4 +42,13 @@ public class Gebiedsaanduiding extends ImroEntity{
         this.gebiedsaanduidinggroep = gebiedsaanduidinggroep;
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
 }

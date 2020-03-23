@@ -17,6 +17,9 @@
 package nl.b3p.imro.harvester.entities.imro;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
@@ -25,8 +28,21 @@ import javax.persistence.Entity;
 @Entity
 public class Enkelbestemming extends ImroEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected int id;
+
     private String bestemmingshoofdgroep;
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getBestemmingshoofdgroep() {
         return bestemmingshoofdgroep;
