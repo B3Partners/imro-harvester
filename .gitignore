@@ -3,3 +3,6 @@
 /imro-persistence/target/
 /target/
 */src/main/resources/git.properties
+*.iml
+.idea/
+*/*.iml
