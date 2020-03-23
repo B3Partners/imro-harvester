@@ -43,13 +43,23 @@ public class Besluitsubvlak {
     private String typePlanObject;
 
     @ManyToOne
-    @JoinColumn(name = "bestemmingsplan")
+    @JoinColumn(name = "besluitgebied")
     private Besluitgebied besluitgebied;
 
-    @ElementCollection
+    @ElementCollection()
+    @CollectionTable(
+            name = "besluitsubvlak_besluitvlakken",
+            joinColumns=@JoinColumn(name = "besluitsubvlak", referencedColumnName = "id")
+    )
+    @Column(name="besluitvlakken")
     private List<String> besluitvlakken = new ArrayList<>();
 
     @ElementCollection
+    @CollectionTable(
+            name = "besluitsubvlak_besluitsubvlakken",
+            joinColumns=@JoinColumn(name = "besluitsubvlak", referencedColumnName = "id")
+    )
+    @Column(name="besluitsubvlakken")
     private List<String> besluitsubvlakken = new ArrayList<>();;
 
     protected String parentIdentificatie;

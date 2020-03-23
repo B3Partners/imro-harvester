@@ -1,0 +1,57 @@
+<imro:Besluitsubvlak_X gml:id="NL.IMRO.1730.BG36363889107-00" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:imro="http://www.geonovum.nl/imro/2012/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geonovum.nl/imro/2012/1.1 http://schemas.geonovum.nl/imro/2012/1.1/IMRO2012.xsd">
+	<imro:identificatie>
+		<imro:NEN3610ID>
+			<imro:namespace>NL.IMRO</imro:namespace>
+			<imro:lokaalID>1730.BG36363889107-00</imro:lokaalID>
+		</imro:NEN3610ID>
+	</imro:identificatie>
+	<imro:typePlanobject>besluitsubvlak_X</imro:typePlanobject>
+	<imro:naam>specifieke bouwaanduiding - beeldbepalend</imro:naam>
+	<imro:verwijzingNaarTekstInfo>
+		<imro:TekstReferentie_XGB>
+			<imro:verwijzingNaarTekst>r_NL.IMRO.1730.BVVriesKern-0401.html</imro:verwijzingNaarTekst>
+			<imro:typeTekst>voorschriften/regels</imro:typeTekst>
+		</imro:TekstReferentie_XGB>
+	</imro:verwijzingNaarTekstInfo>
+	<imro:geometrie>
+		<gml:Surface gml:id="id1" srsName="urn:ogc:def:crs:EPSG::28992">
+			<gml:patches>
+				<gml:PolygonPatch>
+					<gml:exterior>
+						<gml:Ring>
+							<gml:curveMember>
+								<gml:Curve gml:id="id2">
+									<gml:segments>
+										<gml:LineStringSegment>
+											<gml:posList>234854.35 566398.24 234847.49 566426.9</gml:posList>
+										</gml:LineStringSegment>
+										<gml:LineStringSegment>
+											<gml:posList>234847.49 566426.9 234832.21 566423.25</gml:posList>
+										</gml:LineStringSegment>
+										<gml:LineStringSegment>
+											<gml:posList>234832.21 566423.25 234837.32 566400.69</gml:posList>
+										</gml:LineStringSegment>
+										<gml:LineStringSegment>
+											<gml:posList>234837.32 566400.69 234841.73 566401.75</gml:posList>
+										</gml:LineStringSegment>
+										<gml:LineStringSegment>
+											<gml:posList>234841.73 566401.75 234843.29 566395.32</gml:posList>
+										</gml:LineStringSegment>
+										<gml:LineStringSegment>
+											<gml:posList>234843.29 566395.32 234854.35 566398.24</gml:posList>
+										</gml:LineStringSegment>
+									</gml:segments>
+								</gml:Curve>
+							</gml:curveMember>
+						</gml:Ring>
+					</gml:exterior>
+				</gml:PolygonPatch>
+			</gml:patches>
+		</gml:Surface>
+	</imro:geometrie>
+	<imro:besluitgebied xlink:href="#NL.IMRO.1730.BVVriesKern-0401"/>
+	<imro:besluitvlak xlink:href="#NL.IMRO.1730.BG19364063231-00"/>
+	<imro:besluitvlak xlink:href="#NL.IMRO.1730.BG1363692187-00"/>
+	<imro:besluitvlak xlink:href="#NL.IMRO.1730.BG33363628783-00"/>
+	<imro:besluitvlak xlink:href="#NL.IMRO.1730.BG1363890153-00"/>
+</imro:Besluitsubvlak_X>

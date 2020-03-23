@@ -135,6 +135,8 @@ public class IMROParser2012_11 implements IMROParser{
             obj = parseImroBesluitvlak(o);
         } else if ( o instanceof nl.b3p.imro._2012._11.BesluitgebiedXType){
             obj = parseImroBesluitgebied(o);
+        }else if(o instanceof nl.b3p.imro._2012._11.BesluitsubvlakXType){
+            obj = parseImroBesluitsubvlak(o);
         }else if(o instanceof nl.b3p.imro._2012._11.MetadataIMRObestandType){
             // do nothing
         }else{
@@ -430,7 +432,7 @@ public class IMROParser2012_11 implements IMROParser{
     }
 
     @Override
-    public Besluitsubvlak parseImroBesluitsubvlak(Object o) throws IOException, ParserConfigurationException, SAXException, TransformerException, NoSuchMethodException {
+    public Besluitsubvlak parseImroBesluitsubvlak(Object o){
         Besluitsubvlak bsv = new Besluitsubvlak();
 
         BesluitsubvlakXType bs = (BesluitsubvlakXType)o;
@@ -440,7 +442,12 @@ public class IMROParser2012_11 implements IMROParser{
         bsv.setIdentificatie(identificatie);
         bsv.setNaam(bs.getNaam().getValue());
 
-        MultiPolygon g = gc.convertMultiPolygonGeometry(bs.getGeometrie());
+        MultiPolygon g = null;
+        try {
+            g = gc.convertMultiPolygonGeometry(bs.getGeometrie());
+        } catch (Exception e) {
+            log.error("Cannot parse geometry", e);
+        }
         bsv.setGeometrie(g);
 
         bsv.setTypePlanObject(bs.getTypePlanobject().value());
