@@ -24,10 +24,11 @@ import javax.persistence.*;
  *
  * @author Meine Toonen meinetoonen@b3partners.nl
  */
-@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public abstract class ImroEntity {
+
     protected String identificatie;
-    
+
     protected String naam;
 
     protected MultiPolygon geometrie;
@@ -39,7 +40,6 @@ public abstract class ImroEntity {
     protected String typePlanObject;
     
     protected String parentIdentificatie;
-
 
     @ManyToOne
     @JoinColumn(name = "bestemmingsplan")
