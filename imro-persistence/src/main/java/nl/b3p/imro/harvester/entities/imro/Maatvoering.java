@@ -42,12 +42,10 @@ public class Maatvoering extends ImroEntity {
         this.waardeEnType = waardeEnType;
     }
 
-    @Override
     public int getId() {
         return id;
     }
 
-    @Override
     public void setId(int id) {
         this.id = id;
     }

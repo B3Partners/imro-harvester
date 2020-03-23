@@ -42,12 +42,10 @@ public class Dubbelbestemming extends ImroEntity{
         this.bestemmingshoofdgroep = bestemmingshoofdgroep;
     }
 
-    @Override
     public int getId() {
         return id;
     }
 
-    @Override
     public void setId(int id) {
         this.id = id;
     }

@@ -42,12 +42,10 @@ public class Gebiedsaanduiding extends ImroEntity{
         this.gebiedsaanduidinggroep = gebiedsaanduidinggroep;
     }
 
-    @Override
     public int getId() {
         return id;
     }
 
-    @Override
     public void setId(int id) {
         this.id = id;
     }

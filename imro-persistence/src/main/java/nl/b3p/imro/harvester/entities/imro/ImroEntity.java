@@ -24,14 +24,8 @@ import javax.persistence.*;
  *
  * @author Meine Toonen meinetoonen@b3partners.nl
  */
-@Entity()
 @Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class ImroEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;
-
     protected String identificatie;
     
     protected String naam;
@@ -57,14 +51,6 @@ public abstract class ImroEntity {
 
     public void setBestemmingsplan(Bestemmingsplan bestemmingsplan) {
         this.bestemmingsplan = bestemmingsplan;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getIdentificatie() {
