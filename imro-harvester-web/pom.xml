@@ -59,24 +59,15 @@
             <artifactId>hibernate-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
+        <dependency>
             <!-- override the version provided by hibernate -->
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <exclusions>
-                <exclusion>
-                    <!--
-                    exclude old javassist so we can use 3.22.0-CR2, see issue #5
-                    when upgrading hibernate this should be removed
-                    -->
-                    <groupId>javassist</groupId>
-                    <artifactId>javassist</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+
         <dependency>
             <groupId>org.stripesstuff</groupId>
             <artifactId>stripersist</artifactId>
@@ -119,32 +110,14 @@
             <artifactId>hsqldb</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernatespatial</groupId>
+            <groupId>org.hibernate</groupId>
             <artifactId>hibernate-spatial</artifactId>
-            <exclusions>
-                <exclusion>
-                    <!--
-                    exclude old javassist so we can use 3.22.0-CR2, see issue #5
-                    when upgrading hibernate this should be removed
-                    -->
-                    <groupId>javassist</groupId>
-                    <artifactId>javassist</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.hibernatespatial</groupId>
-            <artifactId>hibernate-spatial-postgis</artifactId>
-            <exclusions>
-                <exclusion>
-                    <!--
-                    exclude old javassist so we can use 3.22.0-CR2, see issue #5
-                    when upgrading hibernate this should be removed
-                    -->
-                    <groupId>javassist</groupId>
-                    <artifactId>javassist</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>net.postgis</groupId>
@@ -245,7 +218,7 @@
                 </executions>
             </plugin>
 
-            <plugin>
+            <!--plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>hibernate3-maven-plugin</artifactId>
                 <version>3.0</version>
@@ -275,7 +248,7 @@
                         <version>1.1.6</version>
                     </dependency>
                 </dependencies>
-            </plugin>
+            </plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

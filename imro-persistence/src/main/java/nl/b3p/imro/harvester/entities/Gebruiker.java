@@ -46,7 +46,7 @@ public class Gebruiker implements Principal{
     private String passwordhash;
 
     @ManyToMany
-    @JoinTable(joinColumns=@JoinColumn(name="gebruiker"), inverseJoinColumns=@JoinColumn(name="role"))
+    @JoinTable(name="gebruiker_roles", joinColumns=@JoinColumn(name="gebruiker"), inverseJoinColumns=@JoinColumn(name="role"))
     private Set<Role> roles = new HashSet();
 
     public Set<Role> getRoles() {

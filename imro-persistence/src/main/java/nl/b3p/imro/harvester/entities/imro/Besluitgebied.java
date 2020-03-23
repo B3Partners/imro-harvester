@@ -56,7 +56,6 @@ public class Besluitgebied {
     private String verwijzingNaarExternPlanInfo;
     private String verwijzingNorm;
 
-    @org.hibernate.annotations.Type(type = "org.hibernatespatial.GeometryUserType")
     private MultiPolygon geometrie;
 
     public String getTypePlan() {

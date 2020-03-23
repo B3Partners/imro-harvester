@@ -1,0 +1,875 @@
+	<imro:Besluitvlak_X gml:id="NL.IMRO.1730.BG12363361383-00" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:imro="http://www.geonovum.nl/imro/2012/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geonovum.nl/imro/2012/1.1 http://schemas.geonovum.nl/imro/2012/1.1/IMRO2012.xsd">
+			<imro:identificatie>
+				<imro:NEN3610ID>
+					<imro:namespace>NL.IMRO</imro:namespace>
+					<imro:lokaalID>1730.BG12363361383-00</imro:lokaalID>
+				</imro:NEN3610ID>
+			</imro:identificatie>
+			<imro:typePlanobject>besluitvlak_X</imro:typePlanobject>
+			<imro:naam>Groen</imro:naam>
+			<imro:verwijzingNaarTekstInfo>
+				<imro:TekstReferentie_XGB>
+					<imro:verwijzingNaarTekst>r_NL.IMRO.1730.BVVriesKern-0401.html#80efb249-f74a-461f-b3d1-71f7c75e6e62</imro:verwijzingNaarTekst>
+					<imro:typeTekst>voorschriften/regels</imro:typeTekst>
+				</imro:TekstReferentie_XGB>
+			</imro:verwijzingNaarTekstInfo>
+			<imro:geometrie>
+				<gml:Surface gml:id="id3" srsName="urn:ogc:def:crs:EPSG::28992">
+					<gml:patches>
+						<gml:PolygonPatch>
+							<gml:exterior>
+								<gml:Ring>
+									<gml:curveMember>
+										<gml:Curve gml:id="id4">
+											<gml:segments>
+												<gml:LineStringSegment>
+													<gml:posList>234556.137 565227.275 234557.525 565247.227</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234557.525 565247.227 234559.12 565268.084</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234559.12 565268.084 234559.609 565273.865</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234559.609 565273.865 234561.574 565273.735</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234561.574 565273.735 234564.463 565326.446</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234564.463 565326.446 234563.195 565326.502</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234563.195 565326.502 234560.626 565326.616</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234560.626 565326.616 234562.394 565355.91</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234562.394 565355.91 234564.068 565355.828</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234564.068 565355.828 234564.618 565362.984</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234564.618 565362.984 234565.208 565370.636</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234565.208 565370.636 234565.693 565376.936</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234565.693 565376.936 234566.187 565383.349</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234566.187 565383.349 234566.848 565391.924</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234566.848 565391.924 234566.917 565392.821</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234566.917 565392.821 234567.57 565401.303</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234567.57 565401.303 234568.108 565408.283</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234568.108 565408.283 234568.173 565409.123</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234568.173 565409.123 234568.832 565409.096</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234568.832 565409.096 234569.846 565424.454</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234569.846 565424.454 234569.853 565424.553</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234569.853 565424.553 234569.905 565425.352</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234569.905 565425.352 234569.912 565425.452</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234569.912 565425.452 234571.817 565454.299</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234571.817 565454.299 234559.235 565447.175</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234559.235 565447.175 234559.07 565447.081</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234559.07 565447.081 234532.956 565432.237</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234532.956 565432.237 234530.584 565430.721</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234530.584 565430.721 234529.536 565430.051</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234529.536 565430.051 234526.821 565428.281</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234526.821 565428.281 234524.412 565426.414</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234524.412 565426.414 234522.109 565424.245</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234522.109 565424.245 234518.906 565421.146</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234518.906 565421.146 234515.216 565416.719</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234515.216 565416.719 234513.326 565414.149</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234513.326 565414.149 234511.475 565411.957</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234511.475 565411.957 234510.838 565410.757</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234510.838 565410.757 234510.44 565410.008</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234510.44 565410.008 234509.259 565407.785</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234509.259 565407.785 234507.885 565404.613</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234507.885 565404.613 234506.71 565401.749</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234506.71 565401.749 234506.251 565398.591</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234506.251 565398.591 234506.011 565394.319</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234506.011 565394.319 234506.059 565391.169</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234506.059 565391.169 234506.63 565387.01</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234506.63 565387.01 234507.738 565380.929</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234507.738 565380.929 234510.831 565371.219</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234510.831 565371.219 234513.397 565362.822</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234513.397 565362.822 234513.43 565362.69</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234513.43 565362.69 234514.037 565360.258</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234514.037 565360.258 234514.154 565359.785</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234514.154 565359.785 234514.803 565357.152</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234514.803 565357.152 234515.356 565354.213</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234515.356 565354.213 234516.239 565349.551</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234516.239 565349.551 234516.917 565345.089</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234516.917 565345.089 234517.166 565342.044</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234517.166 565342.044 234517.42 565338.694</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234517.42 565338.694 234517.43 565331.376</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234517.43 565331.376 234512.065 565262.287</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234512.065 565262.287 234500.898 565115.844</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234500.898 565115.844 234493.221 565021.727</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234493.221 565021.727 234491.48 565000</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234491.48 565000 234491.1 564995.211</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234491.1 564995.211 234486.006 564931.011</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234486.006 564931.011 234485.443 564926.719</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234485.443 564926.719 234484.595 564923.491</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234484.595 564923.491 234484.202 564922.386</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234484.202 564922.386 234483.805 564921.268</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234483.805 564921.268 234483.267 564919.753</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234483.267 564919.753 234482.045 564916.379</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234482.045 564916.379 234481.664 564915.329</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234481.664 564915.329 234480.482 564912.912</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234480.482 564912.912 234478.946 564910.341</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234478.946 564910.341 234477.584 564908.38</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234477.584 564908.38 234475.818 564906.113</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234475.818 564906.113 234473.37 564903.031</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234473.37 564903.031 234470.67 564899.643</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234470.67 564899.643 234468.727 564897.07</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234468.727 564897.07 234467.619 564895.212</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234467.619 564895.212 234466.009 564892.209</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234466.009 564892.209 234464.653 564889.131</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234464.653 564889.131 234463.474 564886.156</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234463.474 564886.156 234462.421 564883.308</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234462.421 564883.308 234462.148 564882.012</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234462.148 564882.012 234460.631 564862.168</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234460.631 564862.168 234493.826 564859.638</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234493.826 564859.638 234511.153 564858.289</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234511.153 564858.289 234508.815 564823.878</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234508.815 564823.878 234505.833 564824.178</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234505.833 564824.178 234505.727 564822.717</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234505.727 564822.717 234501.86 564788.936</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234501.86 564788.936 234513.289 564783.961</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234513.289 564783.961 234514.774 564783.315</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234514.774 564783.315 234516.346 564782.682</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234516.346 564782.682 234517.547 564785.452</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234517.547 564785.452 234517.54 564786.874</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234517.54 564786.874 234517.119 564789.969</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234517.119 564789.969 234517.314 564791.645</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234517.314 564791.645 234519.718 564819.722</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234519.718 564819.722 234519.853 564821.293</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234519.853 564821.293 234520.633 564830.401</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234520.633 564830.401 234522.537 564857.449</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234522.537 564857.449 234526.385 564912.147</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234526.385 564912.147 234526.527 564914.157</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234526.527 564914.157 234573.632 564912.069</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234573.632 564912.069 234573.682 564914.004</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234573.682 564914.004 234573.836 564919.91</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234573.836 564919.91 234571.84 564919.93</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234571.84 564919.93 234551.178 564920.584</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234551.178 564920.584 234534.86 564921.1</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234534.86 564921.1 234538.07 564978.19</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234538.07 564978.19 234538.62 564978.15</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234538.62 564978.15 234540.42 564990.99</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234540.42 564990.99 234541.52 564998.81</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234541.52 564998.81 234546.71 564998.23</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234546.71 564998.23 234546.892 565000</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234546.892 565000 234547.65 565007.38</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234547.65 565007.38 234548.27 565013.49</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234548.27 565013.49 234549.209 565022.65</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234549.209 565022.65 234543.441 565020.583</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234543.441 565020.583 234542.61 565025.27</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234542.61 565025.27 234541.124 565033.652</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234541.124 565033.652 234540.68 565036.16</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234540.68 565036.16 234541.029 565039.42</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234541.029 565039.42 234541.977 565048.291</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234541.977 565048.291 234543.113 565058.914</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234543.113 565058.914 234543.755 565064.92</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234543.755 565064.92 234545.44 565080.67</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234545.44 565080.67 234548.47 565105.65</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234548.47 565105.65 234548.957 565110.698</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234548.957 565110.698 234549.538 565116.718</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234549.538 565116.718 234550.111 565122.651</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234550.111 565122.651 234551.18 565133.72</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234551.18 565133.72 234551.661 565138.697</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234551.661 565138.697 234555.493 565188.046</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234555.493 565188.046 234557.617 565227.208</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234557.617 565227.208 234556.137 565227.275</gml:posList>
+												</gml:LineStringSegment>
+											</gml:segments>
+										</gml:Curve>
+									</gml:curveMember>
+								</gml:Ring>
+							</gml:exterior>
+							<gml:interior>
+								<gml:Ring>
+									<gml:curveMember>
+										<gml:Curve gml:id="id5">
+											<gml:segments>
+												<gml:LineStringSegment>
+													<gml:posList>234508.053 564995.976 234508.337 565000</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234508.337 565000 234508.354 565000.245</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234508.354 565000.245 234509.932 565020.264</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234509.932 565020.264 234505.053 565028.577</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234505.053 565028.577 234506.126 565047.502</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234506.126 565047.502 234506.527 565049.23</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234506.527 565049.23 234507.132 565050.426</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234507.132 565050.426 234507.663 565050.884</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234507.663 565050.884 234523.657 565050.38</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234523.657 565050.38 234524.216 565050.05</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234524.216 565050.05 234524.651 565049.443</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234524.651 565049.443 234524.856 565048.86</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234524.856 565048.86 234524.935 565047.895</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234524.935 565047.895 234524.766 565045.456</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234524.766 565045.456 234523.897 565033.135 234521.681 565000.238</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234521.681 565000.238 234521.662 565000</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234521.662 565000 234520.002 564979.488</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234520.002 564979.488 234518.878 564965.424</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234518.878 564965.424 234518.293 564962.809</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234518.293 564962.809 234517.86 564961.896</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234517.86 564961.896 234515.016 564959.232</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234515.016 564959.232 234514.505 564952.48</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234514.505 564952.48 234514.377 564950.931</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234514.377 564950.931 234514.58 564949.915 234516.127 564946.638 234515.566 564941.714</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234515.566 564941.714 234515.031 564939.632</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234515.031 564939.632 234514.346 564938.592</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234514.346 564938.592 234513.635 564938.186</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234513.635 564938.186 234506.146 564938.523</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234506.146 564938.523 234499.774 564938.782</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234499.774 564938.782 234498.353 564938.936</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234498.353 564938.936 234497.439 564939.317</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234497.439 564939.317 234496.88 564940.029</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234496.88 564940.029 234496.805 564940.587</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234496.805 564940.587 234497.929 564956.15</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234497.929 564956.15 234498.387 564957.724 234499.353 564960.236</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234499.353 564960.236 234500.039 564962.292</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234500.039 564962.292 234500.447 564965.11</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234500.447 564965.11 234501.264 564974.224</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234501.264 564974.224 234502.158 564984.607</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234502.158 564984.607 234502.183 564986.155</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234502.183 564986.155 234503.175 564987.882</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234503.175 564987.882 234507.189 564993.387</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234507.189 564993.387 234507.926 564994.782</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234507.926 564994.782 234508.053 564995.976</gml:posList>
+												</gml:LineStringSegment>
+											</gml:segments>
+										</gml:Curve>
+									</gml:curveMember>
+								</gml:Ring>
+							</gml:interior>
+							<gml:interior>
+								<gml:Ring>
+									<gml:curveMember>
+										<gml:Curve gml:id="id6">
+											<gml:segments>
+												<gml:LineStringSegment>
+													<gml:posList>234530.049 565367.562 234523.456 565372.365</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234523.456 565372.365 234521.942 565384.826</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234521.942 565384.826 234521.801 565385.981 234520.448 565397.117 234520.797 565398.794</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234520.797 565398.794 234521.401 565400.371</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234521.401 565400.371 234522.486 565402.026 234523.497 565403.324</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234523.497 565403.324 234531.254 565413.255</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234531.254 565413.255 234532.494 565414.071 234534.32 565414.788 234535.892 565415.226</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234535.892 565415.226 234537.364 565415.307</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234537.364 565415.307 234538.557 565415.362 234539.928 565415.265 234541.63 565414.89</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234541.63 565414.89 234543.307 565414.336</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234543.307 565414.336 234544.528 565413.68 234545.827 565412.643</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234545.827 565412.643 234546.719 565411.554</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234546.719 565411.554 234547.281 565410.539 234547.565 565409.271</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234547.565 565409.271 234547.67 565408.281</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234547.67 565408.281 234547.478 565405.283</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234547.478 565405.283 234546.668 565390.525 234546.599 565388.467</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234546.599 565388.467 234546.124 565386.662</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234546.124 565386.662 234545.369 565384.933</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234545.369 565384.933 234544.738 565383.788</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234544.738 565383.788 234544.132 565383.101</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234544.132 565383.101 234543.474 565382.539</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234543.474 565382.539 234542.157 565381.697</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234542.157 565381.697 234541.067 565381.058</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234541.067 565381.058 234540.435 565380.396</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234540.435 565380.396 234539.527 565378.742</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234539.527 565378.742 234538.747 565376.835</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234538.747 565376.835 234538.396 565375.64 234538.274 565374.395</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234538.274 565374.395 234537.718 565359.406</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234537.718 565359.406 234533.555 565359.431</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234533.555 565359.431 234533.316 565362.619</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234533.316 565362.619 234532.7 565364.497 234532.213 565365.511 234531.27 565366.727</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234531.27 565366.727 234530.049 565367.562</gml:posList>
+												</gml:LineStringSegment>
+											</gml:segments>
+										</gml:Curve>
+									</gml:curveMember>
+								</gml:Ring>
+							</gml:interior>
+							<gml:interior>
+								<gml:Ring>
+									<gml:curveMember>
+										<gml:Curve gml:id="id7">
+											<gml:segments>
+												<gml:LineStringSegment>
+													<gml:posList>234537.457 565354.379 234537.265 565351.559</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234537.265 565351.559 234537.396 565350.392</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234537.396 565350.392 234537.73 565349.275</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234537.73 565349.275 234543.828 565340.559</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234543.828 565340.559 234542.128 565319.473</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234542.128 565319.473 234541.578 565316.881</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234541.578 565316.881 234541.281 565314.899 234540.83 565313.349 234540.277 565312.026</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234540.277 565312.026 234538.685 565309.685</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234538.685 565309.685 234535.401 565305.153</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234535.401 565305.153 234533.786 565302.887</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234533.786 565302.887 234532.775 565301.284</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234532.775 565301.284 234532.02 565299.731</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234532.02 565299.731 234531.67 565298.384</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234531.67 565298.384 234531.446 565296.885</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234531.446 565296.885 234531.427 565295.336</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234531.427 565295.336 234531.661 565293.635 234532.099 565291.885</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234532.099 565291.885 234532.941 565290.591 234535.467 565286.943</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234535.467 565286.943 234536.492 565284.559</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234536.492 565284.559 234537.437 565282.962</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234537.437 565282.962 234537.846 565281.948</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234537.846 565281.948 234538.001 565281.237</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234538.001 565281.237 234537.852 565280.45 234537.297 565279.559 234535.651 565278.435</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234535.651 565278.435 234534.687 565278.153 234533.926 565278.252</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234533.926 565278.252 234533.087 565278.554</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234533.087 565278.554 234532.78 565279.087</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234532.78 565279.087 234532.804 565279.671</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234532.804 565279.671 234533.13 565280.713</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234533.13 565280.713 234533.076 565281.526 234532.741 565282.845</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234532.741 565282.845 234531.488 565285.405</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234531.488 565285.405 234530.035 565287.154</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234530.035 565287.154 234527.538 565289.837</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234527.538 565289.837 234527.255 565290.496</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234527.255 565290.496 234527.253 565291.03</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234527.253 565291.03 234527.752 565300.479</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234527.752 565300.479 234528.002 565301.801</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234528.002 565301.801 234528.478 565303.479</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234528.478 565303.479 234529.234 565305.056</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234529.234 565305.056 234530.697 565307.575 234533.927 565313.123</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234533.927 565313.123 234536.048 565316.101</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234536.048 565316.101 234536.851 565318.44</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234536.851 565318.44 234537.88 565321.923</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234537.88 565321.923 234538.958 565325.355</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234538.958 565325.355 234539.384 565327.16</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234539.384 565327.16 234539.603 565329.7</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234539.603 565329.7 234539.824 565331.733 234540.021 565333.358</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234540.021 565333.358 234540.044 565334.095</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234540.044 565334.095 234539.66 565334.932</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234539.66 565334.932 234539.123 565335.971</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234539.123 565335.971 234536.402 565337.461</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234536.402 565337.461 234534.775 565338.04 234534.215 565338.495</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234534.215 565338.495 234533.806 565339.256</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234533.806 565339.256 234533.778 565340.043</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234533.778 565340.043 234533.766 565345.297</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234533.766 565345.297 234533.763 565346.761</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234533.763 565346.761 234533.738 565358.037</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234533.738 565358.037 234537.597 565357.924</gml:posList>
+												</gml:LineStringSegment>
+												<gml:LineStringSegment>
+													<gml:posList>234537.597 565357.924 234537.457 565354.379</gml:posList>
+												</gml:LineStringSegment>
+											</gml:segments>
+										</gml:Curve>
+									</gml:curveMember>
+								</gml:Ring>
+							</gml:interior>
+						</gml:PolygonPatch>
+					</gml:patches>
+				</gml:Surface>
+			</imro:geometrie>
+			<imro:besluitgebied xlink:href="#NL.IMRO.1730.BVVriesKern-0401"/>
+		</imro:Besluitvlak_X>

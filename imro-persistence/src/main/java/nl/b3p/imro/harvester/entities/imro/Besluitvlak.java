@@ -17,11 +17,8 @@
 package nl.b3p.imro.harvester.entities.imro;
 
 import org.locationtech.jts.geom.MultiPolygon;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+
+import javax.persistence.*;
 
 /**
  *
@@ -39,7 +36,6 @@ public class Besluitvlak {
 
     private String naam;
 
-    @org.hibernate.annotations.Type(type = "org.hibernatespatial.GeometryUserType")
     private MultiPolygon geometrie;
 
     private String artikelnummer;
@@ -49,6 +45,7 @@ public class Besluitvlak {
     private String typePlanObject;
 
     @ManyToOne
+    @JoinColumn(name = "besluitgebied")
     private Besluitgebied besluitgebied;
     
         protected String parentIdentificatie;

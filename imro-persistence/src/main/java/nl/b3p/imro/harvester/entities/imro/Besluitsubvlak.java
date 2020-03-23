@@ -19,12 +19,7 @@ package nl.b3p.imro.harvester.entities.imro;
 import org.locationtech.jts.geom.MultiPolygon;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  *
@@ -41,7 +36,6 @@ public class Besluitsubvlak {
 
     private String naam;
 
-    @org.hibernate.annotations.Type(type = "org.hibernatespatial.GeometryUserType")
     private MultiPolygon geometrie;
 
     private String verwijzing;
@@ -49,12 +43,23 @@ public class Besluitsubvlak {
     private String typePlanObject;
 
     @ManyToOne
+    @JoinColumn(name = "besluitgebied")
     private Besluitgebied besluitgebied;
 
-    @ElementCollection
+    @ElementCollection()
+    @CollectionTable(
+            name = "besluitsubvlak_besluitvlakken",
+            joinColumns=@JoinColumn(name = "besluitsubvlak", referencedColumnName = "id")
+    )
+    @Column(name="besluitvlakken")
     private List<String> besluitvlakken = new ArrayList<>();
 
     @ElementCollection
+    @CollectionTable(
+            name = "besluitsubvlak_besluitsubvlakken",
+            joinColumns=@JoinColumn(name = "besluitsubvlak", referencedColumnName = "id")
+    )
+    @Column(name="besluitsubvlakken")
     private List<String> besluitsubvlakken = new ArrayList<>();;
 
     protected String parentIdentificatie;

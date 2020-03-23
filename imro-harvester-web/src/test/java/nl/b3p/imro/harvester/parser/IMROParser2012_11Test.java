@@ -24,6 +24,9 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
 import nl.b3p.imro.harvester.entities.imro.Besluitgebied;
 import nl.b3p.imro.harvester.entities.imro.Besluitsubvlak;
 import nl.b3p.imro.harvester.entities.imro.Besluitvlak;
@@ -43,6 +46,7 @@ import org.apache.log4j.PatternLayout;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -397,8 +401,51 @@ public class IMROParser2012_11Test {
         assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
     }
 
+    @Test
+    public void testParseBeheersverordening() throws JAXBException, URISyntaxException, IOException {
+        URL u = this.getClass().getResource("beheersverordening2012_11.gml");
 
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        List<Object> o = instance.parseGML(u);
+        assertEquals(458, o.size());
+    }
 
+    @Test
+    public void testParseBesluitvlakXInhoud() throws JAXBException, URISyntaxException, IOException {
+        URL u = this.getClass().getResource("besluitvlakx201211.xml");
+
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Besluitvlak bv = instance.parseImroBesluitvlak(gba);
+
+        assertNotNull(bv);
+        assertEquals("besluitvlak_X", bv.getTypePlanObject());
+        assertEquals("NL.IMRO.1730.BG12363361383-00", bv.getIdentificatie());
+        assertEquals("Groen", bv.getNaam());
+        assertNull(bv.getArtikelnummer());
+        assertEquals("r_NL.IMRO.1730.BVVriesKern-0401.html#80efb249-f74a-461f-b3d1-71f7c75e6e62", bv.getVerwijzing());
+        assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
+    }
+
+    @Test
+    public void testParseBesluitsubvlakXInhoud() throws JAXBException, URISyntaxException, IOException, ParserConfigurationException, NoSuchMethodException, SAXException, TransformerException {
+        URL u = this.getClass().getResource("besluitsubvlakx201211.xml");
+
+        Object gba = instance.unmarshalUrl(u);
+        assertNotNull(gba);
+        Besluitsubvlak bv = instance.parseImroBesluitsubvlak(gba);
+
+        assertNotNull(bv);
+        assertEquals("besluitsubvlak_X", bv.getTypePlanObject());
+        assertEquals("NL.IMRO.1730.BG36363889107-00", bv.getIdentificatie());
+        assertEquals("specifieke bouwaanduiding - beeldbepalend", bv.getNaam());
+        assertEquals(4, bv.getBesluitvlakken().size());
+        assertEquals("r_NL.IMRO.1730.BVVriesKern-0401.html", bv.getVerwijzing());
+        assertNotNull("Geometrie moet gevuld zijn",bv.getGeometrie());
+        assertFalse("Geometrie moet gevuld zijn",bv.getGeometrie().isEmpty());
+    }
     @Test
     public void testGeomCollections2() throws JAXBException, URISyntaxException, IOException{
 
