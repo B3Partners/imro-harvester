@@ -15,7 +15,7 @@
         <hibernate.version>5.4.12.Final</hibernate.version>
         <geotools.version>22.2</geotools.version>
         <hsqldb.version>2.5.0</hsqldb.version>
-        <postgresql.version>42.1.4</postgresql.version>
+        <postgresql.version>42.2.16</postgresql.version>
         <postgresql.postgis-jdbc.version>2.2.1</postgresql.postgis-jdbc.version>
         <maven.surefire.version>2.22.2</maven.surefire.version>
         <apache.httpcomponents.version>4.5.12</apache.httpcomponents.version>
