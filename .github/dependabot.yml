@@ -1,0 +1,20 @@
+version: 2
+updates:
+- package-ecosystem: maven
+  directory: "/"
+  schedule:
+    interval: weekly
+    day: sunday
+    time: "06:00"
+    timezone: Europe/Amsterdam
+  open-pull-requests-limit: 25
+  ignore:
+  - dependency-name: org.hibernatespatial:hibernate-spatial
+    versions:
+    - "> 1.1"
+  - dependency-name: org.hibernatespatial:hibernate-spatial-postgis
+    versions:
+    - "> 1.1"
+  - dependency-name: org.postgis:postgis-jdbc
+    versions:
+    - "> 1.1.6"
